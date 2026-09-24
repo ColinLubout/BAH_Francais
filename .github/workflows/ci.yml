@@ -48,6 +48,9 @@ jobs:
       - name: Test
         run: flutter test --coverage
 
+      - name: Domain coverage at least 90%
+        run: dart run tool/check_domain_coverage.dart coverage/lcov.info
+
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v5
         with:

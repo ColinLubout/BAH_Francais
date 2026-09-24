@@ -1,6 +1,6 @@
-# Coverage is reported on every PR. The spec's target (at least 90%) applies
-# to the domain layer, which arrives in milestone 1; until then the checks are
-# informational and never block a PR.
+# Coverage is reported on every PR. The spec's target, at least 90%, applies to
+# the domain layer: CI enforces it (tool/check_domain_coverage.dart) and the
+# domain component below reports it. Overall coverage is informational.
 coverage:
   status:
     project:
@@ -9,6 +9,16 @@ coverage:
     patch:
       default:
         informational: true
+
+component_management:
+  individual_components:
+    - component_id: domain
+      name: Domain layer
+      paths:
+        - lib/features/**/domain/**
+      statuses:
+        - type: project
+          target: 90%
 
 ignore:
   - "**/*.g.dart"

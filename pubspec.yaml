@@ -17,6 +17,7 @@ dependencies:
     sdk: flutter
   flutter_riverpod: ^3.4.3
   go_router: ^18.0.1
+  meta: ^1.19.0
   riverpod_annotation: ^4.0.7
 
 dev_dependencies:
@@ -34,8 +35,9 @@ flutter:
   uses-material-design: true
 
   assets:
-    # Registered with the licence page at start-up (see lib/main.dart).
+    # Registered with the licence page at start-up (see lib/app/licences.dart).
     - assets/fonts/OFL.txt
+    - assets/licences/py-fsrs.txt
 
   # Bundled, never fetched at runtime, so the app stays offline.
   # Only these three weights exist: the theme never asks for any other.
