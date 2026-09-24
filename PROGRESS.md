@@ -2,8 +2,9 @@
 
 ## Current milestone: 0 — Project setup
 
-**Status:** built on branch `milestone-0`, waiting for the owner's review. Milestone 1
-does not start until this is merged.
+**Status:** merged (PR #1). Two follow-ups from the owner's answers are on branch
+`milestone-0-followups`: the navigation label *Stats* and no gradient on the Welcome
+screen.
 
 ### Done
 
@@ -33,24 +34,10 @@ does not start until this is merged.
 
 ### Left for the owner
 
-- Push `milestone-0`, open the PR and check CI is green. The iOS build has only ever
-  run in CI: it can't be built on Windows.
-- Add the Codecov upload token as the GitHub Actions secret `CODECOV_TOKEN`.
-- Turn on branch protection for `main`, requiring the three CI jobs.
+- Add the Codecov upload token as the GitHub Actions secret `CODECOV_TOKEN`, if not
+  done yet.
+- Turn on branch protection for `main`, requiring the three CI jobs, if not done yet.
 - Supply the real logo and app icon (files and sizes in `assets/branding/README.md`).
-- Answer the open questions below.
-
-### Open questions
-
-1. **"Statistiques" in the navigation bar.**
-   - It fits on one line at default text size on phones about 380 dp wide or more
-     (for example the Pixel 8, 411 dp).
-   - It breaks mid-word on narrower phones (360 dp) and whenever the text size is
-     raised. The bar caps its labels at 1.3×.
-   - Options: (a) a shorter bar label you write, as a new key; (b) a smaller label
-     style, which fits 360 dp phones at default size only; (c) accept it.
-2. **Welcome gradient.** The Layouts gradient ends in a dark purple that isn't in the
-   spec, which names only teal and blue. Which is right? This is needed for milestone 6.
 
 ### Spotted for later milestones
 
@@ -85,8 +72,8 @@ document.
    - On Android 12+, the system crops the launch image to a circle, so it shows the
      character alone.
    - *Replaces* Logo, icon and splash → "the logo centred on the teal-to-blue gradient".
-3. **Welcome gradient:** top-left to bottom-right, teal #6EC9C8 to blue #5172A1. See
-   open question 2 about the purple.
+3. ~~**Welcome gradient:** top-left to bottom-right, teal #6EC9C8 to blue #5172A1.~~
+   *Superseded on 2026-09-24:* the Welcome screen has no gradient (decision 18).
 4. **Placeholders until the real assets arrive:** the app icon and launch logo are a
    plain teal square.
 5. **Poppins** comes from Google Fonts' repository (google/fonts), with its SIL OFL
@@ -154,6 +141,17 @@ document.
     transparent, with icons that follow the theme. Android 15+ requires this anyway.
 17. **`.gitignore` replaced** with Flutter's app template. The one the repo started
     with was the Flutter framework's own, which ignores `pubspec.lock`.
+
+### 2026-09-24 (milestone 0 follow-ups, agreed with the owner)
+
+18. **No gradients anywhere.** The Welcome screen has the same plain background as
+    every other screen: white in light mode, navy in dark mode.
+    - *Replaces* Logo, icon and splash → "with the same gradient behind the Welcome
+      screen". Together with decisions 1 and 2, the Layouts gradients are no longer
+      used.
+19. **The navigation bar says *Stats*** (`navigation.stats`), because *Statistiques*
+    broke mid-word on narrow phones and at larger text sizes. The screen's own title
+    stays *Statistiques* (`stats.title`).
 
 ### Notes
 

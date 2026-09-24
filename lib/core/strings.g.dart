@@ -67,8 +67,8 @@ abstract final class Strings {
   /// Verbes
   static const navigationVerbs = 'Verbes';
 
-  /// Statistiques
-  static const navigationStats = 'Statistiques';
+  /// Stats
+  static const navigationStats = 'Stats';
 
   /// Réglages
   static const navigationSettings = 'Réglages';
