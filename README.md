@@ -6,8 +6,9 @@ Everything after the welcome screen is in French.
 
 Flutter, for iOS 15+ and Android 8.0+ (API 26). MIT licence.
 
-**Status:** milestone 0 of 8 (project setup). See [PROGRESS.md](PROGRESS.md) for where
-things stand, and [docs/SPEC.md](docs/SPEC.md) for the full specification.
+**Status:** milestone 1 of 8 (the domain core: scheduling, grading, the card queue).
+See [PROGRESS.md](PROGRESS.md) for where things stand, and
+[docs/SPEC.md](docs/SPEC.md) for the full specification.
 
 ## Setup
 
@@ -32,14 +33,16 @@ dart run tool/gen_strings.dart                # strings/*.json -> lib/core/strin
 flutter analyze
 dart format --set-exit-if-changed .
 flutter test --coverage
+dart run tool/check_domain_coverage.dart     # domain layer coverage must be at least 90%
 dart run flutter_launcher_icons               # regenerate app icons
 dart run flutter_native_splash:create         # regenerate launch screens
 ```
 
 CI (`.github/workflows/ci.yml`) runs on every pull request and every push to `main`.
 It checks that `strings.g.dart` is up to date and runs the format check, the analyzer
-and the tests with coverage (uploaded to Codecov). It also makes a debug Android
-build and an unsigned iOS build.
+and the tests with coverage (uploaded to Codecov), then fails if the domain layer
+is under 90% coverage. It also makes a debug Android build and an unsigned iOS
+build.
 
 ## Architecture
 
