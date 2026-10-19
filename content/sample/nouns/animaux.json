@@ -1,0 +1,105 @@
+{
+  "category": {
+    "id": "cat.animaux",
+    "name": "Les animaux",
+    "kind": "noun",
+    "sort_order": 3
+  },
+  "nouns": [
+    {
+      "id": "n.chien",
+      "word": "chien",
+      "gender": "m",
+      "level": "debutant",
+      "rank": 300,
+      "examples": ["Le chien dort devant la porte."],
+      "images": ["chien-1.svg"]
+    },
+    {
+      "id": "n.chat",
+      "word": "chat",
+      "gender": "m",
+      "level": "debutant",
+      "rank": 320,
+      "examples": ["Mon chat aime dormir au soleil."],
+      "images": ["chat-1.svg"]
+    },
+    {
+      "id": "n.oiseau",
+      "word": "oiseau",
+      "gender": "m",
+      "elides": true,
+      "level": "debutant",
+      "rank": 800,
+      "definition": "Animal qui a des plumes et des ailes.",
+      "examples": ["Un oiseau chante dans l’arbre."]
+    },
+    {
+      "id": "n.vache",
+      "word": "vache",
+      "gender": "f",
+      "level": "debutant",
+      "rank": 1300,
+      "definition": "Grand animal de la ferme qui donne du lait.",
+      "examples": ["La vache mange de l’herbe."]
+    },
+    {
+      "id": "n.cheval",
+      "word": "cheval",
+      "gender": "m",
+      "level": "debutant",
+      "rank": 1000,
+      "definition": "Grand animal que l’on peut monter.",
+      "examples": ["Elle monte à cheval le samedi."]
+    },
+    {
+      "id": "n.souris",
+      "word": "souris",
+      "gender": "f",
+      "level": "intermediaire",
+      "rank": 1600,
+      "definition": "Petit animal gris qui a peur des chats.",
+      "examples": ["Une souris est entrée dans la cuisine."]
+    },
+    {
+      "id": "n.abeille",
+      "word": "abeille",
+      "gender": "f",
+      "elides": true,
+      "level": "intermediaire",
+      "rank": 2400,
+      "definition": "Insecte qui fabrique le miel.",
+      "examples": ["L’abeille vole de fleur en fleur."]
+    },
+    {
+      "id": "n.hibou",
+      "word": "hibou",
+      "gender": "m",
+      "elides": false,
+      "level": "avance",
+      "rank": 4800,
+      "definition": "Oiseau de nuit aux grands yeux.",
+      "examples": ["Le hibou chasse la nuit."]
+    },
+    {
+      "id": "n.poisson",
+      "word": "poisson",
+      "gender": "m",
+      "level": "debutant",
+      "rank": 900,
+      "definition": "Animal qui vit dans l’eau et qui nage.",
+      "examples": ["Il y a un poisson rouge dans le bocal."],
+      "also_in": ["cat.cuisine"]
+    },
+    {
+      "id": "n.escargot",
+      "word": "escargot",
+      "gender": "m",
+      "elides": true,
+      "level": "avance",
+      "rank": 5200,
+      "definition": "Petit animal lent qui porte sa coquille.",
+      "examples": ["L’escargot avance lentement."]
+    }
+  ]
+}

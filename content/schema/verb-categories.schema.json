@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "verb-categories.schema.json",
+  "title": "Verb categories",
+  "description": "Every verb category: content/verb-categories.json. Noun categories are in their own files.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["categories"],
+  "properties": {
+    "categories": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "name", "kind", "sort_order"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^cat\\.[a-z0-9]+(-[a-z0-9]+)*$"
+          },
+          "name": { "type": "string", "pattern": "\\S" },
+          "kind": { "const": "verb" },
+          "sort_order": { "type": "integer" },
+          "everyday": {
+            "description": "The universally useful verbs, whose new cards come first. At most one verb category.",
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  }
+}

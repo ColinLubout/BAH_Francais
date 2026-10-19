@@ -1,0 +1,107 @@
+{
+  "category": {
+    "id": "cat.cuisine",
+    "name": "La cuisine et les repas",
+    "kind": "noun",
+    "sort_order": 2
+  },
+  "nouns": [
+    {
+      "id": "n.fourchette",
+      "word": "fourchette",
+      "gender": "f",
+      "elides": false,
+      "level": "debutant",
+      "rank": 412,
+      "definition": "Couvert à dents pour piquer les aliments.",
+      "synonyms": [],
+      "examples": ["Il mange ses pâtes avec une fourchette."],
+      "images": ["fourchette-1.svg", "fourchette-2.svg"]
+    },
+    {
+      "id": "n.couteau",
+      "word": "couteau",
+      "gender": "m",
+      "level": "debutant",
+      "rank": 520,
+      "definition": "Couvert qui sert à couper.",
+      "examples": ["Passe-moi le couteau, s’il te plaît."]
+    },
+    {
+      "id": "n.assiette",
+      "word": "assiette",
+      "gender": "f",
+      "elides": true,
+      "level": "debutant",
+      "rank": 600,
+      "definition": "Pièce de vaisselle dans laquelle on sert les aliments.",
+      "examples": ["Son assiette est vide."]
+    },
+    {
+      "id": "n.verre",
+      "word": "verre",
+      "gender": "m",
+      "level": "debutant",
+      "rank": 450,
+      "definition": "Récipient dans lequel on boit.",
+      "examples": ["Je voudrais un verre de lait."]
+    },
+    {
+      "id": "n.haricot",
+      "word": "haricot",
+      "gender": "m",
+      "elides": false,
+      "level": "intermediaire",
+      "rank": 3400,
+      "definition": "Légume long et fin, souvent vert.",
+      "examples": ["Il reste un haricot dans l’assiette."]
+    },
+    {
+      "id": "n.petit-dejeuner",
+      "word": "petit-déjeuner",
+      "gender": "m",
+      "level": "debutant",
+      "rank": 2100,
+      "definition": "Premier repas de la journée.",
+      "examples": ["Je prends mon petit-déjeuner à sept heures."]
+    },
+    {
+      "id": "n.recette",
+      "word": "recette",
+      "gender": "f",
+      "level": "intermediaire",
+      "rank": 1900,
+      "definition": "Explication pour préparer un plat.",
+      "examples": ["Ma grand-mère m’a donné sa recette de gâteau."]
+    },
+    {
+      "id": "n.casserole",
+      "word": "casserole",
+      "gender": "f",
+      "level": "intermediaire",
+      "rank": 4200,
+      "definition": "Récipient rond à manche, pour faire cuire les aliments.",
+      "examples": ["L’eau bout dans la casserole."]
+    },
+    {
+      "id": "n.oeuf",
+      "word": "œuf",
+      "gender": "m",
+      "elides": true,
+      "level": "debutant",
+      "rank": 1500,
+      "definition": "Aliment pondu par la poule.",
+      "examples": ["Je mange un œuf à la coque."]
+    },
+    {
+      "id": "n.preparation",
+      "word": "préparation",
+      "gender": "f",
+      "level": "avance",
+      "rank": 2800,
+      "definition": "Action de préparer quelque chose.",
+      "ending_hint": "-tion → féminin",
+      "examples": ["La préparation de ce plat est longue."]
+    }
+  ]
+}

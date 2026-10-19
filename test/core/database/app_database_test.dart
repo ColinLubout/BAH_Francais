@@ -3,12 +3,34 @@ import 'package:drift/native.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  test('opens and runs a query', () async {
+  test('opens with every table and foreign keys on', () async {
     final database = AppDatabase(NativeDatabase.memory());
     addTearDown(database.close);
 
-    expect(database.schemaVersion, 1);
-    final row = await database.customSelect('SELECT 1 AS one').getSingle();
-    expect(row.read<int>('one'), 1);
+    final keys = await database.customSelect('PRAGMA foreign_keys').getSingle();
+    expect(keys.read<int>('foreign_keys'), 1);
+
+    final tables = await database
+        .customSelect("SELECT name FROM sqlite_master WHERE type = 'table'")
+        .get();
+    expect(
+      tables.map((t) => t.read<String>('name')),
+      containsAll([
+        'categories',
+        'nouns',
+        'noun_categories',
+        'noun_examples',
+        'verbs',
+        'verb_categories',
+        'verb_forms',
+        'sentences',
+        'images',
+        'content_meta',
+        'cards',
+        'review_logs',
+        'sessions',
+        'category_weights',
+      ]),
+    );
   });
 }

@@ -1,21 +1,55 @@
 # Progress
 
-## Current milestone: 1 follow-ups
+## Current milestone: 2 — Data layer
 
-**Status:** built on branch `milestone-1-followups`, waiting for the owner's review.
-Milestone 2, the data layer, comes next, on a branch built on this one.
+**Status:** built on branch `milestone-2`, waiting for the owner's review. The branch
+starts from `milestone-1-followups`, so merge that PR first. Milestone 3 doesn't start
+until this is merged.
 
 ### Done
 
-- **Synonyms with their own gender and elision** (decision 42): the Vocabulaire drill
-  accepts each synonym with its own articles.
-- **The order of new cards** (decisions 40 and 41): the user's own words first, then
-  the everyday category, then the topics by their weights.
-- **Tests:** 334, all passing. Domain coverage is 99.5%.
+- **Tables** (Drift, schema version 1): the content tables of Content → Content
+  model, each with `source` and `retired`; Image; Card, ReviewLog and Session;
+  CategoryWeight; ContentMeta.
+  - Times are stored in UTC, as microseconds, so they read back exactly. Enums are
+    stored by their ids (`passe_compose`, `new`).
+  - Foreign keys are on. Review logs have none to cards, since a deleted word's cards
+    go and their logs stay.
+  - Drift's modular code generation, so the app database and the content pack share
+    the same table code.
+- **Data access, with streams:**
+  - `ContentStore`: content and its version, in the app's database or a pack;
+    categories, everyday categories, an item's images.
+  - `CardsDao`: cards and queue cards; an answer saved with its review-log row and
+    session counts in one transaction; overrides replacing that row; known marks;
+    the day's counts from the review log.
+  - `SessionsDao` and `CategoryWeightsDao`.
+- **Import** of a content pack into an empty database (`ContentImporter`): read-only,
+  in one transaction, with New cards for every noun and verb. It refuses a missing
+  file, a file that isn't a pack, and a pack needing a newer app, and leaves nothing
+  behind when it fails.
+- **Migrations:** schema version 1 dumped in `drift_schemas/`, a test that the tables
+  match it, and `make-migrations` set up for the next versions.
+- **Content tool** (`tool/content_build.dart`): a JSON Schema per kind of file in
+  `content/schema/`, the validator (the schema, then every rule beyond it), and the
+  pack builder. CI runs it on the sample on every PR.
+- **Sample set** (`content/sample/`): 3 noun categories of 10 nouns, 5 verbs with
+  all 24 forms and a sentence for each, and 6 placeholder SVGs. Marked as samples;
+  it never ships.
+- **Tests:** 448, all passing. Domain coverage is 99.5%; the DAOs, the content store
+  and the converters are fully covered.
+
+**The milestone's "done when" and its tests:**
+
+| Check | Tests |
+| --- | --- |
+| The sample pack builds, imports and reads back unchanged | `sample_pack_test.dart` |
+| The validator rejects each rule it enforces, with a test per rule | `content_validator_test.dart` (schema and rules), `svg_rules_test.dart` (SVG rules) |
 
 ### Left for the owner
 
-- Review and merge the `milestone-1-followups` PR.
+- Review and merge the `milestone-1-followups` PR, then the `milestone-2` PR.
+- Confirm or change the proposed decisions 51–55.
 - Add the Codecov upload token as the GitHub Actions secret `CODECOV_TOKEN`, if not
   done yet.
 - Turn on branch protection for `main`, requiring the three CI jobs, if not done yet.
@@ -32,14 +66,26 @@ Milestone 2, the data layer, comes next, on a branch built on this one.
    graded Hard because a letter went red or orange while typing: does the feedback
    panel say *Correct* or *Presque*? Grading gives Hard with no error, and the panel
    (milestone 3) needs the word.
+3. **Nouns spelled with a leading article.** Should the validator reject a noun
+   spelled starting with *le, la, les, un, une* or *des* and a space, or with *l’*?
+   Grading always reads that start as an article (decision 38), so such a noun could
+   never be answered right. It isn't built, since it was only a suggestion.
 
 ### Spotted for later milestones
 
-- M2: the content validator could reject a noun spelled starting with *le, la, les,
-  un, une* or *des* and a space, or with *l’*. Grading reads that start as an article
-  (decision 38), so the noun could never be answered right.
+- M3: the build plan doesn't say which milestone bundles a content pack and imports
+  it on first launch, and M3 needs content to run a drill. `ContentImporter` is
+  ready; M3 could bundle the sample pack in development builds and run it at start.
 - M3: `drill.leaveSession` ("Terminer la session ?") implies a confirmation dialog, but
   the spec says × goes straight to the summary.
+- M4: the word before the blank changes as the user types (decision 43), in the
+  Conjugaison drill.
+- M4: a sentence accepts its own alternatives only. The sample repeats a form's
+  alternatives on each of its sentences (*paie* / *paye*); the drill could add them
+  by itself.
+- M5: compound forms are stored with the masculine singular participle for every
+  person, as the spec says (*sommes allé*). The Fiche verbe may need to show them
+  differently.
 - M4: the selected gender tile puts a yellow symbol on teal, which measures 1.28:1,
   under the 3:1 minimum for meaningful graphics.
 - M5: form validation errors use Material's red, but the spec keeps red for wrong
@@ -49,6 +95,15 @@ Milestone 2, the data layer, comes next, on a branch built on this one.
 - M6: for the everyday and Perso categories, only Jamais changes anything (decisions
   40 and 41): Moins, Normal and Plus all behave the same. Their weight setting may
   need to be just on or Jamais.
+
+## Milestone 1 follow-ups
+
+On branch `milestone-1-followups`, waiting for the owner's review.
+
+- **Synonyms with their own gender and elision** (decision 42): the Vocabulaire drill
+  accepts each synonym with its own articles.
+- **The order of new cards** (decisions 40 and 41): the user's own words first, then
+  the everyday category, then the topics by their weights.
 
 ## Milestone 1 — Domain core (merged, PR #3)
 
@@ -341,7 +396,75 @@ document.
     - A plural-only noun's synonyms are plural-only too.
     - *Replaces* decision 28's "synonyms share the noun's gender and elision".
 
+### 2026-10-19 (milestone 2, agreed with the owner)
+
+43. **Conjugation answers and elision:**
+    - Sentences write every word before the blank in full: *Je ___ le chocolat*,
+      never *J’___*. The validator rejects an apostrophe just before the blank.
+    - The answer is only the verb: *aime*, *suis allé*. Typing the subject pronoun
+      too (*j’aime*) is wrong. Reflexive verbs keep their pronoun in the answer
+      (*me lève*, *m’appelle*), and so do their stored forms.
+    - As the user types, the word before the blank adjusts: if what they type starts
+      with a vowel or a silent *h*, *je* → *j’*, *me* → *m’*, *te* → *t’*,
+      *se* → *s’*, *ne* → *n’*, *le* / *la* → *l’*, *ce* → *c’* (milestone 4).
+    - *Replaces* Activities → Conjugation drill → "When je elides, the blank covers
+      the subject and the answer includes it (\_\_\_\_ le chocolat → j’aime)".
+44. **Words starting with *h*:** a verb with a form starting with *h* states
+    `h_aspire` (false for *j’habite*, true for *je hais*), and a noun starting with
+    *h* states `elides`. The validator rejects either one missing, so the setting is
+    confirmed for each such word, and rejects `h_aspire` on any other verb.
+45. **Verb categories** are in `content/verb-categories.json`: id, name, sort order
+    and everyday. Noun categories stay in their noun files.
+46. **Images in content files:**
+    - a noun's SVGs are in `content/images/<noun id without n.>/`;
+    - an image's id is `i.` and its file name without `.svg` (`i.fourchette-1`), so
+      file names are unique across the content;
+    - a noun lists an image by its file name, or as `{ "file": …, "source": … }`
+      when it has a credit.
+    - *Resolves* the spec's two folder names: `<noun id without n.>` under Content
+      files and `<item_id>` under Where content comes from.
+47. **Image size:** over 20 KB is a warning, not an error, until the owner sets the
+    real limit after drawing some images. "Readable at 160 px" and "legible on light
+    and dark" can't be checked by a program, so they are left to whoever reviews the
+    artwork.
+48. **The Image table** has an `svg` text column and a `bytes` blob column instead
+    of one `data` column, since a Drift column has one type. Exactly one is set, to
+    match the format. Its `source` column is the credit.
+49. **Example sentence ids** are the noun's id and their position:
+    `n.fourchette.ex01`. A content update replaces a noun's examples as a set.
+50. **The sample set** is written by Claude Code, as CLAUDE.md allows for
+    `content/sample/` only, and is marked as samples. It has an everyday category of
+    each kind.
+
+### 2026-10-19 (milestone 2, proposed, waiting for the owner)
+
+51. **Review logs store the card's drill** (`drill_type`). Deleting a word deletes
+    its cards but keeps their logs, and the Stats screen filters by drill. Without
+    the drill in the log, a deleted word's answers couldn't be counted by drill.
+    - *Adds to* Data model → ReviewLog.
+52. **Sessions:** a mixed session has no drill (`drill_type` is null). A session's row
+    is written with its first answer, and its end time moves to each answer's time,
+    so a session cut short by a force-close still has a duration.
+53. **Correct means anything but Again**, for a session's counts and % correct.
+    *Presque* (Hard, *Faute de frappe* included) counts as correct, since FSRS counts
+    Hard as remembered, which keeps % correct in line with the real retention figures.
+54. **Agreement in the validator:** a sentence's answer is its form or one of the
+    form's alternatives; in a compound tense, it may also end in an extra *e*, *s* or
+    *es* (*allé* → *allées*). Compound forms store the masculine singular participle
+    for every person, as the spec says (*sommes allé*).
+55. **Ids and names:**
+    - ids are lowercase ASCII letters, digits and hyphens after their prefix
+      (`n.petit-dejeuner`, `cat.vie-quotidienne`); sentence ids add parts after
+      dots (`s.aller.pc.1p.01`); image file names follow the same pattern and end
+      in `.svg`. The schemas enforce it, and the image folders depend on it.
+    - noun examples and sentences store their text in `example_text` and
+      `sentence_text`: a column called `text` breaks Drift's generated migration
+      test code.
+
 ### Notes
 
 - `build_runner` 2.16 no longer has `--delete-conflicting-outputs`. The CLAUDE.md
   command still works (the flag is ignored with a warning), but it could drop the flag.
+- `sqlite3` stays at 3.6.0 for now: on this Windows machine, Application Control
+  blocks the SQLite library that 3.7.1 downloads, which breaks the tests and the
+  content tool. CI on Linux would be fine with either.

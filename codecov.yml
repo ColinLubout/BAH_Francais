@@ -22,3 +22,6 @@ component_management:
 
 ignore:
   - "**/*.g.dart"
+  - "**/*.drift.dart"
+  # Drift table definitions: read by the code generator, never run.
+  - "lib/features/*/data/*_tables.dart"

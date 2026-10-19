@@ -65,6 +65,7 @@ dart format --set-exit-if-changed .
 flutter test --coverage
 flutter test integration_test
 dart run tool/content_build.dart content/sample             # validate + build a content pack
+dart run drift_dev make-migrations                          # after a schema change: dump it + migration tests
 ```
 
 Run `flutter analyze`, the format check and the full test suite before calling anything done.
