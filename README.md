@@ -35,17 +35,17 @@ flutter analyze
 dart format --set-exit-if-changed .
 flutter test --coverage
 dart run tool/check_domain_coverage.dart     # domain layer coverage must be at least 90%
-dart run tool/content_build.dart content/sample  # validate content and build its pack
+dart run tool/content_build.dart content     # validate the content and build its pack
 dart run drift_dev make-migrations            # after a schema change: dump it, add migration tests
 dart run flutter_launcher_icons               # regenerate app icons
 dart run flutter_native_splash:create         # regenerate launch screens
 ```
 
 CI (`.github/workflows/ci.yml`) runs on every pull request and every push to `main`.
-It checks that `strings.g.dart` is up to date, validates the sample content and builds
-its pack, and runs the format check, the analyzer and the tests with coverage
-(uploaded to Codecov), then fails if the domain layer is under 90% coverage. It also
-makes a debug Android build and an unsigned iOS build.
+It checks that `strings.g.dart` is up to date, validates the content and the sample
+set and builds their packs, and runs the format check, the analyzer and the tests
+with coverage (uploaded to Codecov), then fails if the domain layer is under 90%
+coverage. It also makes a debug Android build and an unsigned iOS build.
 
 ## Architecture
 
@@ -63,7 +63,7 @@ lib/
       domain/          pure Dart: scheduling, grading, queue building (no Flutter imports)
       presentation/    widgets and Riverpod providers (no business logic)
 tool/                  command-line tools: strings generator, content validator and pack builder
-content/
+content/               the words, verbs and sentences (see content/README.md)
   schema/              the JSON Schema of each kind of content file
   sample/              a small sample set for development and tests; never shipped
 drift_schemas/         every version of the database schema, for migration tests

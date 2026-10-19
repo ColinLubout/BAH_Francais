@@ -1,0 +1,11 @@
+{
+  "categories": [
+    {
+      "id": "cat.verbes-essentiels",
+      "name": "Les verbes essentiels",
+      "kind": "verb",
+      "sort_order": 0,
+      "everyday": true
+    }
+  ]
+}

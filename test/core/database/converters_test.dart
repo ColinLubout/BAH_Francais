@@ -12,6 +12,10 @@ void main() {
     expect(tenseConverter.fromSql('futur_simple'), Tense.futurSimple);
     expect(cardStateConverter.toSql(CardState.newCard), 'new');
     expect(drillConverter.toSql(DrillType.conjugation), 'conjugation');
+    expect(sessionDrillConverter.toSql(null), 'mixed');
+    expect(sessionDrillConverter.fromSql('mixed'), isNull);
+    expect(sessionDrillConverter.toSql(DrillType.gender), 'gender');
+    expect(sessionDrillConverter.fromSql('vocabulary'), DrillType.vocabulary);
     expect(genderConverter.fromSql('both'), Gender.both);
   });
 

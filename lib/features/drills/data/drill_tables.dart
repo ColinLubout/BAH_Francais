@@ -44,19 +44,15 @@ class Cards extends Table {
   IntColumn get createdAt => integer().map(utcConverter)();
 }
 
-/// One row per answer, never deleted.
+/// One row per answer. Deleting a word deletes its cards, and their rows
+/// with them.
 @DataClassName('ReviewLogRow')
 @TableIndex(name: 'review_logs_card', columns: {#cardId})
-@TableIndex(name: 'review_logs_day', columns: {#drillType, #studyDay})
+@TableIndex(name: 'review_logs_day', columns: {#studyDay})
 class ReviewLogs extends Table {
   IntColumn get id => integer().autoIncrement()();
-
-  /// No foreign key: deleting a word deletes its cards but keeps their logs.
-  IntColumn get cardId => integer()();
-
-  /// The card's drill, kept here so the log still says it once the card is
-  /// gone.
-  TextColumn get drillType => text().map(drillConverter)();
+  IntColumn get cardId =>
+      integer().references(Cards, #id, onDelete: KeyAction.cascade)();
   IntColumn get sessionId => integer().references(Sessions, #id)();
   IntColumn get timestamp => integer().map(utcConverter)();
 
@@ -83,8 +79,8 @@ class ReviewLogs extends Table {
 class Sessions extends Table {
   IntColumn get id => integer().autoIncrement()();
 
-  /// Null for a mixed session.
-  TextColumn get drillType => text().map(drillConverter).nullable()();
+  /// The drill, or `mixed` for a mixed session (null in Dart).
+  TextColumn get drillType => text().map(sessionDrillConverter)();
   IntColumn get startTime => integer().map(utcConverter)();
 
   /// The time of the last answer so far, so a session cut short by a

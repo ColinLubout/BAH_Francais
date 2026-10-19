@@ -13,8 +13,7 @@ until this is merged.
   CategoryWeight; ContentMeta.
   - Times are stored in UTC, as microseconds, so they read back exactly. Enums are
     stored by their ids (`passe_compose`, `new`).
-  - Foreign keys are on. Review logs have none to cards, since a deleted word's cards
-    go and their logs stay.
+  - Foreign keys are on. A card's review-log rows go with it (decision 51).
   - Drift's modular code generation, so the app database and the content pack share
     the same table code.
 - **Data access, with streams:**
@@ -32,11 +31,14 @@ until this is merged.
   match it, and `make-migrations` set up for the next versions.
 - **Content tool** (`tool/content_build.dart`): a JSON Schema per kind of file in
   `content/schema/`, the validator (the schema, then every rule beyond it), and the
-  pack builder. CI runs it on the sample on every PR.
+  pack builder. CI runs it on the content and the sample on every PR.
+- **Everyday content, a draft to check** (`content/`, decision 57): *Les essentiels*,
+  30 nouns with definitions, and *Les verbes essentiels*, 10 verbs with all 24 forms
+  and a sentence for each tense and person.
 - **Sample set** (`content/sample/`): 3 noun categories of 10 nouns, 5 verbs with
   all 24 forms and a sentence for each, and 6 placeholder SVGs. Marked as samples;
   it never ships.
-- **Tests:** 448, all passing. Domain coverage is 99.5%; the DAOs, the content store
+- **Tests:** 455, all passing. Domain coverage is 99.5%; the DAOs, the content store
   and the converters are fully covered.
 
 **The milestone's "done when" and its tests:**
@@ -49,7 +51,8 @@ until this is merged.
 ### Left for the owner
 
 - Review and merge the `milestone-1-followups` PR, then the `milestone-2` PR.
-- Confirm or change the proposed decisions 51–55.
+- Check the everyday content in `content/` (decision 57): every word, gender,
+  definition, example, form and sentence, and the order of the ranks.
 - Add the Codecov upload token as the GitHub Actions secret `CODECOV_TOKEN`, if not
   done yet.
 - Turn on branch protection for `main`, requiring the three CI jobs, if not done yet.
@@ -66,16 +69,11 @@ until this is merged.
    graded Hard because a letter went red or orange while typing: does the feedback
    panel say *Correct* or *Presque*? Grading gives Hard with no error, and the panel
    (milestone 3) needs the word.
-3. **Nouns spelled with a leading article.** Should the validator reject a noun
-   spelled starting with *le, la, les, un, une* or *des* and a space, or with *l’*?
-   Grading always reads that start as an article (decision 38), so such a noun could
-   never be answered right. It isn't built, since it was only a suggestion.
 
 ### Spotted for later milestones
 
-- M3: the build plan doesn't say which milestone bundles a content pack and imports
-  it on first launch, and M3 needs content to run a drill. `ContentImporter` is
-  ready; M3 could bundle the sample pack in development builds and run it at start.
+- M3: bundle the everyday pack and import it on first launch with
+  `ContentImporter` (decision 58).
 - M3: `drill.leaveSession` ("Terminer la session ?") implies a confirmation dialog, but
   the spec says × goes straight to the summary.
 - M4: the word before the blank changes as the user types (decision 43), in the
@@ -83,11 +81,11 @@ until this is merged.
 - M4: a sentence accepts its own alternatives only. The sample repeats a form's
   alternatives on each of its sentences (*paie* / *paye*); the drill could add them
   by itself.
+- M4: the selected gender tile puts a yellow symbol on teal, which measures 1.28:1,
+  under the 3:1 minimum for meaningful graphics.
 - M5: compound forms are stored with the masculine singular participle for every
   person, as the spec says (*sommes allé*). The Fiche verbe may need to show them
   differently.
-- M4: the selected gender tile puts a yellow symbol on teal, which measures 1.28:1,
-  under the 3:1 minimum for meaningful graphics.
 - M5: form validation errors use Material's red, but the spec keeps red for wrong
   answers only.
 - M6: `drillSettings.title` ("Réglages – {drill}") doesn't match the spec's
@@ -436,15 +434,18 @@ document.
     `content/sample/` only, and is marked as samples. It has an everyday category of
     each kind.
 
-### 2026-10-19 (milestone 2, proposed, waiting for the owner)
+### 2026-10-19 (milestone 2, proposed by Claude Code, agreed with the owner)
 
-51. **Review logs store the card's drill** (`drill_type`). Deleting a word deletes
-    its cards but keeps their logs, and the Stats screen filters by drill. Without
-    the drill in the log, a deleted word's answers couldn't be counted by drill.
-    - *Adds to* Data model → ReviewLog.
-52. **Sessions:** a mixed session has no drill (`drill_type` is null). A session's row
-    is written with its first answer, and its end time moves to each answer's time,
-    so a session cut short by a force-close still has a duration.
+51. **Deleting a word deletes its review-log rows too**, along with its cards. The
+    rows go with their card through a foreign key, so every row has its card, and
+    the card gives its drill (review logs store no drill of their own).
+    - Its answers drop out of Statistiques and of the later FSRS tuning; the totals
+      of past sessions still count them.
+    - *Replaces* Data model → ReviewLog "(one row per answer, never deleted)" and
+      Fiche mot "Deleting a word deletes its cards; its review log rows are kept".
+52. **Sessions:** a mixed session's drill type is `mixed`. A session's row is written
+    with its first answer, and its end time moves to each answer's time, so a
+    session cut short by a force-close still has a duration.
 53. **Correct means anything but Again**, for a session's counts and % correct.
     *Presque* (Hard, *Faute de frappe* included) counts as correct, since FSRS counts
     Hard as remembered, which keeps % correct in line with the real retention figures.
@@ -460,6 +461,26 @@ document.
     - noun examples and sentences store their text in `example_text` and
       `sentence_text`: a column called `text` breaks Drift's generated migration
       test code.
+
+### 2026-10-19 (milestone 2, agreed with the owner)
+
+56. **A noun is written without its article.** The validator rejects a noun or
+    synonym whose word starts with *le, la, les, un, une* or *des* and a space, or
+    with *l’* (*"la fourchette"*), since its article comes from its gender. A noun
+    is right typed with or without its article, unless Article obligatoire is on.
+57. **The everyday categories are part of this milestone, drafted by Claude Code.**
+    *Les essentiels* (30 nouns) and *Les verbes essentiels* (10 verbs: être, avoir,
+    faire, dire, aller, voir, pouvoir, savoir, vouloir, venir) are in `content/`.
+    The owner, or a fluent speaker, checks every word, gender, form and sentence
+    before they ship.
+    - *Changes* Phase 1 content → "Claude Code does not write the real word list",
+      for the everyday categories only; CLAUDE.md says the same.
+    - Their `rank` is an estimated order within the set, not a corpus frequency.
+    - The nouns have definitions and no images yet.
+58. **The app bundles the everyday pack from milestone 3**, and imports it on first
+    launch, so the drills have real words early. The rest of the content comes in
+    the final milestone.
+    - *Adds to* Build plan → milestones 3 and 8.
 
 ### Notes
 

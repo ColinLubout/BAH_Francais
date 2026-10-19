@@ -1390,14 +1390,14 @@
             "name": "drill_type",
             "getter_name": "drillType",
             "moor_type": "string",
-            "nullable": true,
+            "nullable": false,
             "customConstraints": null,
             "default_dart": null,
             "default_client_dart": null,
             "dsl_features": [],
             "type_converter": {
-              "dart_expr": "drillConverter",
-              "dart_type_name": "DrillType"
+              "dart_expr": "sessionDrillConverter",
+              "dart_type_name": "DrillType?"
             }
           },
           {
@@ -1467,6 +1467,7 @@
     {
       "id": 12,
       "references": [
+        10,
         11
       ],
       "type": "table",
@@ -1496,23 +1497,25 @@
             "moor_type": "int",
             "nullable": false,
             "customConstraints": null,
+            "defaultConstraints": "REFERENCES cards (id) ON DELETE CASCADE",
+            "dialectAwareDefaultConstraints": {
+              "sqlite": "REFERENCES cards (id) ON DELETE CASCADE"
+            },
             "default_dart": null,
             "default_client_dart": null,
-            "dsl_features": []
-          },
-          {
-            "name": "drill_type",
-            "getter_name": "drillType",
-            "moor_type": "string",
-            "nullable": false,
-            "customConstraints": null,
-            "default_dart": null,
-            "default_client_dart": null,
-            "dsl_features": [],
-            "type_converter": {
-              "dart_expr": "drillConverter",
-              "dart_type_name": "DrillType"
-            }
+            "dsl_features": [
+              {
+                "foreign_key": {
+                  "to": {
+                    "table": "cards",
+                    "column": "id"
+                  },
+                  "initially_deferred": false,
+                  "on_update": null,
+                  "on_delete": "cascade"
+                }
+              }
+            ]
           },
           {
             "name": "session_id",
@@ -1754,10 +1757,6 @@
         "unique": false,
         "columns": [
           {
-            "column": "drill_type",
-            "order_by": null
-          },
-          {
             "column": "study_day",
             "order_by": null
           }
@@ -1870,7 +1869,7 @@
       "sql": [
         {
           "dialect": "sqlite",
-          "sql": "CREATE TABLE IF NOT EXISTS \"sessions\" (\"id\" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, \"drill_type\" TEXT NULL, \"start_time\" INTEGER NOT NULL, \"end_time\" INTEGER NOT NULL, \"answered\" INTEGER NOT NULL DEFAULT 0, \"correct\" INTEGER NOT NULL DEFAULT 0, \"incorrect\" INTEGER NOT NULL DEFAULT 0);"
+          "sql": "CREATE TABLE IF NOT EXISTS \"sessions\" (\"id\" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, \"drill_type\" TEXT NOT NULL, \"start_time\" INTEGER NOT NULL, \"end_time\" INTEGER NOT NULL, \"answered\" INTEGER NOT NULL DEFAULT 0, \"correct\" INTEGER NOT NULL DEFAULT 0, \"incorrect\" INTEGER NOT NULL DEFAULT 0);"
         }
       ]
     },
@@ -1879,7 +1878,7 @@
       "sql": [
         {
           "dialect": "sqlite",
-          "sql": "CREATE TABLE IF NOT EXISTS \"review_logs\" (\"id\" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, \"card_id\" INTEGER NOT NULL, \"drill_type\" TEXT NOT NULL, \"session_id\" INTEGER NOT NULL REFERENCES sessions (id), \"timestamp\" INTEGER NOT NULL, \"study_day\" INTEGER NOT NULL, \"rating\" INTEGER NOT NULL, \"state_before\" TEXT NOT NULL, \"elapsed_days\" INTEGER NULL, \"scheduled_days\" INTEGER NOT NULL, \"response_time_ms\" INTEGER NOT NULL, \"typed_answer\" TEXT NULL, \"error_type\" TEXT NOT NULL);"
+          "sql": "CREATE TABLE IF NOT EXISTS \"review_logs\" (\"id\" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, \"card_id\" INTEGER NOT NULL REFERENCES cards (id) ON DELETE CASCADE, \"session_id\" INTEGER NOT NULL REFERENCES sessions (id), \"timestamp\" INTEGER NOT NULL, \"study_day\" INTEGER NOT NULL, \"rating\" INTEGER NOT NULL, \"state_before\" TEXT NOT NULL, \"elapsed_days\" INTEGER NULL, \"scheduled_days\" INTEGER NOT NULL, \"response_time_ms\" INTEGER NOT NULL, \"typed_answer\" TEXT NULL, \"error_type\" TEXT NOT NULL);"
         }
       ]
     },
@@ -1915,7 +1914,7 @@
       "sql": [
         {
           "dialect": "sqlite",
-          "sql": "CREATE INDEX review_logs_day ON review_logs (drill_type, study_day)"
+          "sql": "CREATE INDEX review_logs_day ON review_logs (study_day)"
         }
       ]
     }

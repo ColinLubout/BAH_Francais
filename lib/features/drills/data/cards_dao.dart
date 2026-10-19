@@ -171,20 +171,28 @@ class CardsDao {
   /// What [day]'s answers in [drill] have used of the daily limits, counted
   /// from the review log by the study day each answer stored.
   Future<DayCounts> dayCounts(DrillType drill, StudyDay day) async {
-    final count = _db.reviewLogs.id.count();
+    final logs = _db.reviewLogs;
+    final count = logs.id.count();
     final rows =
-        await (_db.selectOnly(_db.reviewLogs)
-              ..addColumns([_db.reviewLogs.stateBefore, count])
+        await (_db.selectOnly(logs)
+              ..join([
+                innerJoin(
+                  _db.cards,
+                  _db.cards.id.equalsExp(logs.cardId),
+                  useColumns: false,
+                ),
+              ])
+              ..addColumns([logs.stateBefore, count])
               ..where(
-                _db.reviewLogs.drillType.equalsValue(drill) &
-                    _db.reviewLogs.studyDay.equals(day.key),
+                _db.cards.drillType.equalsValue(drill) &
+                    logs.studyDay.equals(day.key),
               )
-              ..groupBy([_db.reviewLogs.stateBefore]))
+              ..groupBy([logs.stateBefore]))
             .get();
     var newCards = 0;
     var reviews = 0;
     for (final row in rows) {
-      final state = row.readWithConverter(_db.reviewLogs.stateBefore);
+      final state = row.readWithConverter(logs.stateBefore);
       final n = row.read(count) ?? 0;
       if (state == CardState.newCard) newCards += n;
       if (state == CardState.review) reviews += n;
@@ -218,7 +226,6 @@ class CardsDao {
     final outcome = answer.outcome;
     return ReviewLogsCompanion.insert(
       cardId: outcome.after.id,
-      drillType: outcome.after.drill,
       sessionId: answer.sessionId,
       timestamp: outcome.reviewedAt,
       studyDay: outcome.studyDay.key,

@@ -91,7 +91,6 @@ void main() {
       db.reviewLogs,
     )..where((l) => l.id.equals(logId))).getSingle();
     expect(log.cardId, card.id);
-    expect(log.drillType, DrillType.vocabulary);
     expect(log.sessionId, session);
     expect(log.timestamp, noon);
     expect(log.studyDay, today.key);
@@ -282,29 +281,29 @@ void main() {
     expect(verbs.first.rank, 7);
   });
 
-  test(
-    'deleting a word deletes its cards and keeps their review log',
-    () async {
-      final (:db, :dao, :session) = await setUpCards();
-      final card = await cardOf(dao, DrillType.vocabulary, 'n.bb');
+  test('deleting a word’s cards deletes their review log too', () async {
+    final (:db, :dao, :session) = await setUpCards();
+    final kept = await cardOf(dao, DrillType.vocabulary, 'n.aa');
+    final deleted = await cardOf(dao, DrillType.vocabulary, 'n.bb');
+    for (final card in [kept, deleted]) {
       await dao.recordAnswer(
         answer(
           scheduler.review(card, Rating.good, at: noon, day: today),
           session,
         ),
       );
+    }
 
-      await (db.delete(db.cards)..where((c) => c.itemId.equals('n.bb'))).go();
-      await (db.delete(db.nouns)..where((n) => n.id.equals('n.bb'))).go();
+    await (db.delete(db.cards)..where((c) => c.itemId.equals('n.bb'))).go();
+    await (db.delete(db.nouns)..where((n) => n.id.equals('n.bb'))).go();
 
-      expect(await dao.card(card.id), isNull);
-      expect((await db.select(db.reviewLogs).get()).single.cardId, card.id);
-      expect(
-        (await dao.queueCards(DrillType.vocabulary)).map((q) => q.card.itemId),
-        ['n.aa'],
-      );
-    },
-  );
+    expect(await dao.card(deleted.id), isNull);
+    expect((await db.select(db.reviewLogs).get()).single.cardId, kept.id);
+    expect(
+      (await dao.queueCards(DrillType.vocabulary)).map((q) => q.card.itemId),
+      ['n.aa'],
+    );
+  });
 
   test('cards stream as answers change them', () async {
     final (:dao, db: _, :session) = await setUpCards();

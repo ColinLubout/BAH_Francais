@@ -34,7 +34,9 @@ what you built.
   in a widget, and never invent French wording.
 - **Never invent French content** — words, genders, conjugations or example sentences. Only
   `content/sample/` may contain any, clearly marked as samples. The real content comes from
-  the project owner.
+  the project owner. The one exception, agreed with the owner (decision 57 in `PROGRESS.md`),
+  is the everyday categories in `content/`: Claude Code drafts them and the owner checks
+  them before they ship.
 - **Tests ship with the code**, in the same PR, never in a later clean-up pass.
 - **Update `PROGRESS.md`** at the end of every session: the milestone, what is done, what is
   left, and any decision taken. Keep a "Decisions" section for anything that changes or adds

@@ -1,0 +1,32 @@
+# Content
+
+The words, verbs and sentences the app teaches, as JSON files that
+`tool/content_build.dart` validates and turns into a content pack.
+
+- `verb-categories.json`: every verb category.
+- `nouns/<category>.json`: one noun category and its nouns.
+- `verbs/<verb>.json`: one verb, its 24 forms and its sentences.
+- `images/<noun id without n.>/`: a noun's SVG images.
+- `schema/`: the JSON Schema of each kind of file. The validator checks the
+  files against them first, then the rules beyond them (see
+  `tool/src/content/content_validator.dart`).
+- `sample/`: a small sample set for development and tests. It never ships.
+
+Validate the content and build its pack (from the repo root):
+
+```bash
+dart run tool/content_build.dart content
+```
+
+## Status
+
+**Draft, not yet checked.** The everyday categories, *Les essentiels* (30 nouns)
+and *Les verbes essentiels* (10 verbs), were drafted by Claude Code for the
+owner to check (decision 57 in `PROGRESS.md`). Every word, gender, form and
+sentence must be checked by a fluent French speaker before it ships.
+
+- The nouns have definitions and no images yet.
+- `rank` orders the words within the everyday set, most useful first. It is an
+  estimate, not a corpus frequency rank.
+
+The topic categories come with the rest of the content in the final milestone.

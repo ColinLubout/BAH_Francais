@@ -1146,10 +1146,10 @@ class Sessions extends Table with TableInfo {
   late final GeneratedColumn<String> drillType = GeneratedColumn<String>(
     'drill_type',
     aliasedName,
-    true,
+    false,
     type: DriftSqlType.string,
-    requiredDuringInsert: false,
-    $customConstraints: 'NULL',
+    requiredDuringInsert: true,
+    $customConstraints: 'NOT NULL',
   );
   late final GeneratedColumn<int> startTime = GeneratedColumn<int>(
     'start_time',
@@ -1245,15 +1245,7 @@ class ReviewLogs extends Table with TableInfo {
     false,
     type: DriftSqlType.int,
     requiredDuringInsert: true,
-    $customConstraints: 'NOT NULL',
-  );
-  late final GeneratedColumn<String> drillType = GeneratedColumn<String>(
-    'drill_type',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-    $customConstraints: 'NOT NULL',
+    $customConstraints: 'NOT NULL REFERENCES cards(id)ON DELETE CASCADE',
   );
   late final GeneratedColumn<int> sessionId = GeneratedColumn<int>(
     'session_id',
@@ -1339,7 +1331,6 @@ class ReviewLogs extends Table with TableInfo {
   List<GeneratedColumn> get $columns => [
     id,
     cardId,
-    drillType,
     sessionId,
     timestamp,
     studyDay,
@@ -1454,7 +1445,7 @@ class DatabaseAtV1 extends GeneratedDatabase {
   );
   late final Index reviewLogsDay = Index(
     'review_logs_day',
-    'CREATE INDEX review_logs_day ON review_logs (drill_type, study_day)',
+    'CREATE INDEX review_logs_day ON review_logs (study_day)',
   );
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
@@ -1522,6 +1513,13 @@ class DatabaseAtV1 extends GeneratedDatabase {
         limitUpdateKind: UpdateKind.delete,
       ),
       result: [TableUpdate('images', kind: UpdateKind.delete)],
+    ),
+    WritePropagation(
+      on: TableUpdateQuery.onTableName(
+        'cards',
+        limitUpdateKind: UpdateKind.delete,
+      ),
+      result: [TableUpdate('review_logs', kind: UpdateKind.delete)],
     ),
   ]);
   @override

@@ -16,11 +16,7 @@ class SessionsDao {
   Future<int> start({required DrillType? drill, required DateTime at}) => _db
       .into(_db.sessions)
       .insert(
-        SessionsCompanion.insert(
-          drillType: Value(drill),
-          startTime: at,
-          endTime: at,
-        ),
+        SessionsCompanion.insert(drillType: drill, startTime: at, endTime: at),
       );
 
   Future<SessionRow?> session(int id) => (_db.select(

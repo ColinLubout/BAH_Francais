@@ -6,6 +6,7 @@
 ///
 /// - every id is unique, and so is every image file name;
 /// - every noun has an image or a definition;
+/// - a noun or synonym is written without its article;
 /// - categories a noun or verb is in exist, and are of the right kind;
 /// - at most one everyday category of each kind;
 /// - a noun starting with *h* states `elides`, and a verb with a form
@@ -23,6 +24,7 @@ import 'dart:convert';
 import 'package:bah_francais/features/content/domain/content.dart';
 import 'package:bah_francais/features/content/domain/content_types.dart';
 import 'package:bah_francais/features/content/domain/synonym.dart';
+import 'package:bah_francais/features/drills/domain/grading/answer_forms.dart';
 import 'package:bah_francais/features/drills/domain/grading/normalise.dart';
 import 'package:json_schema/json_schema.dart';
 
@@ -316,6 +318,16 @@ class _Validation {
       final noun = n.value;
       if (noun.definition == null && _imageEntries(n.json).isEmpty) {
         _error(n.file, noun.id, 'has neither an image nor a definition');
+      }
+      for (final word in [noun.word, ...noun.synonyms.map((s) => s.word)]) {
+        if (splitArticle(normalise(word)).article != null) {
+          _error(
+            n.file,
+            noun.id,
+            '"$word" starts with an article: write the noun alone, since '
+            'its article comes from its gender',
+          );
+        }
       }
       if (_startsWithH(noun.word) && !n.json.containsKey('elides')) {
         _error(

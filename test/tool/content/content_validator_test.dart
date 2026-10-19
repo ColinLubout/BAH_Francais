@@ -250,6 +250,39 @@ void main() {
     );
   });
 
+  group('a noun is written without its article', () {
+    test('the noun', () {
+      expectError(
+        edited(cuisine, (j) => noun(j, 'n.couteau')['word'] = 'le couteau'),
+        ['n.couteau', '"le couteau" starts with an article'],
+      );
+      expectError(
+        edited(cuisine, (j) => noun(j, 'n.assiette')['word'] = 'l’assiette'),
+        ['"l’assiette" starts with an article'],
+      );
+    });
+
+    test('its synonyms', () {
+      expectError(
+        edited(
+          essentiels,
+          (j) => noun(j, 'n.voiture')['synonyms'] = ['une auto'],
+        ),
+        ['n.voiture', '"une auto" starts with an article'],
+      );
+    });
+
+    test('letters that only look like an article are part of the word', () {
+      // No space or apostrophe after them: not an article (decision 38).
+      expect(
+        errorsOf(
+          edited(cuisine, (j) => noun(j, 'n.couteau')['word'] = 'lecouteau'),
+        ),
+        isEmpty,
+      );
+    });
+  });
+
   group('categories', () {
     test('also_in names a noun category that exists', () {
       expectError(

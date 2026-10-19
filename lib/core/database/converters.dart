@@ -91,6 +91,24 @@ const IdConverter<CategoryWeight> weightConverter = IdConverter(
   _weightId,
 );
 
+/// Stores a session's drill: its id, or `mixed` for a mixed session, which
+/// has no drill (null).
+class SessionDrillConverter extends TypeConverter<DrillType?, String> {
+  const SessionDrillConverter();
+
+  static const mixed = 'mixed';
+
+  @override
+  DrillType? fromSql(String fromDb) =>
+      fromDb == mixed ? null : drillConverter.fromSql(fromDb);
+
+  @override
+  String toSql(DrillType? value) =>
+      value == null ? mixed : drillConverter.toSql(value);
+}
+
+const sessionDrillConverter = SessionDrillConverter();
+
 /// Stores a rating as its FSRS number, 1 to 4.
 class RatingConverter extends TypeConverter<Rating, int> {
   const RatingConverter();

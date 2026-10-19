@@ -18,10 +18,16 @@ void main() {
     expect((row.answered, row.correct, row.incorrect), (0, 0, 0));
   });
 
-  test('a mixed session has no drill', () async {
-    final dao = SessionsDao(openDatabase());
+  test('a mixed session has no drill, stored as mixed', () async {
+    final db = openDatabase();
+    final dao = SessionsDao(db);
     final id = await dao.start(drill: null, at: start);
     expect((await dao.session(id))!.drillType, isNull);
+
+    final stored = await db
+        .customSelect('SELECT drill_type FROM sessions')
+        .getSingle();
+    expect(stored.read<String>('drill_type'), 'mixed');
   });
 
   test('there is no session for an unknown id', () async {
