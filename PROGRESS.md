@@ -2,9 +2,8 @@
 
 ## Current milestone: 1 — Domain core
 
-**Status:** built on branch `milestone-1`, waiting for the owner's review. The branch
-starts from `milestone-0-followups`, so merge that PR first. Milestone 2 doesn't start
-until this is merged.
+**Status:** built on branch `milestone-1`, pushed, and waiting for the owner's review.
+Milestone 2 doesn't start until it's merged.
 
 ### Done
 
@@ -42,7 +41,7 @@ until this is merged.
   a domain component in Codecov.
 - **Purity test:** `test/domain_purity_test.dart` fails if any domain file imports
   Flutter, `dart:ui`, `dart:io`, networking or the database.
-- **Tests:** 322, all passing. Domain coverage is 99.2%.
+- **Tests:** 324, all passing. Domain coverage is 99.5%.
 
 **The Spaced Repetition acceptance criteria and their tests:**
 
@@ -61,8 +60,7 @@ until this is merged.
 
 ### Left for the owner
 
-- Merge `milestone-0-followups` (the *Stats* label and no Welcome gradient), then push
-  `milestone-1` and open its PR.
+- Review and merge the `milestone-1` PR.
 - Add the Codecov upload token as the GitHub Actions secret `CODECOV_TOKEN`, if not
   done yet.
 - Turn on branch protection for `main`, requiring the three CI jobs, if not done yet.
@@ -86,6 +84,9 @@ until this is merged.
 
 ### Spotted for later milestones
 
+- M2: the content validator could reject a noun spelled starting with *le, la, les,
+  un, une* or *des* and a space, or with *l’*. Grading reads that start as an article
+  (decision 38), so the noun could never be answered right.
 - M3: `drill.leaveSession` ("Terminer la session ?") implies a confirmation dialog, but
   the spec says × goes straight to the summary.
 - M4: the selected gender tile puts a yellow symbol on teal, which measures 1.28:1,
@@ -104,8 +105,8 @@ until this is merged.
 - The strings generator.
 - A placeholder app icon and launch screen.
 - An empty Accueil with the bottom navigation bar, in both themes.
-- Follow-ups on `milestone-0-followups`: the navigation label *Stats*, and no gradient
-  on the Welcome screen.
+- Follow-ups (merged, PR #2): the navigation label *Stats*, and no gradient on the
+  Welcome screen.
 
 ## Decisions
 
@@ -298,6 +299,14 @@ document.
     cards entirely, reviews included, as Jamais does.
 37. **Mastery:** a card reset to New by a content update shows *Nouveau*. A stability
     of exactly 7 or exactly 90 days counts as *Acquis*.
+
+### 2026-10-19 (milestone 1 review, agreed with the owner)
+
+38. **An article is known by the space or apostrophe after it.** In the Vocabulaire
+    drill, an answer starting with *le, la, les, un, une* or *des* and a space, or with
+    *l’*, always has that article split off before the word is compared. No noun is
+    spelled starting with one, so the word is never tried again with the article as
+    part of it. Without the space or apostrophe, those letters are part of the word.
 
 ### Notes
 

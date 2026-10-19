@@ -182,6 +182,15 @@ void main() {
       expect(vocab('   ', chien).rating, Rating.again);
     });
 
+    test('an article in front of a wrong word is still wrong', () {
+      for (final typed in ['une fourchette', 'l’école']) {
+        final g = vocab(typed, chien);
+        expect(g.rating, Rating.again, reason: typed);
+        expect(g.errorType, ErrorType.wrong, reason: typed);
+        expect(g.answer, 'chien', reason: typed);
+      }
+    });
+
     test(
       'a Vocabulary answer shows the noun, with an article if mandatory',
       () {

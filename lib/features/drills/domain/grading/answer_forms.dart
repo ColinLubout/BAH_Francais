@@ -77,6 +77,10 @@ class VocabularyAnswer {
 
 /// Splits a normalised answer into its leading article, if any, and the
 /// rest.
+///
+/// An article is known by what follows it: *le, la, les, un, une* or *des*
+/// and a space, or *l’*. Such a start is always the article, since no noun is
+/// spelled with one; without the space or apostrophe, it is part of the word.
 ({String? article, String rest}) splitArticle(String normalised) {
   if (normalised.startsWith(_elided)) {
     return (article: _elided, rest: normalised.substring(_elided.length));

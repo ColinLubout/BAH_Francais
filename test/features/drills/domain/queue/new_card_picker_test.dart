@@ -167,6 +167,13 @@ void main() {
       );
     });
 
+    test('the order is the same whichever card is compared first', () {
+      final ranked = noun('a');
+      final unranked = noun('b', rank: null);
+      expect(compareNewCards(ranked, unranked), isNegative);
+      expect(compareNewCards(unranked, ranked), isPositive);
+    });
+
     test('conjugation: level, then tense, then rank', () {
       expect(
         drain([

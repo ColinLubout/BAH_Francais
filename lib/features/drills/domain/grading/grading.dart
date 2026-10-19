@@ -48,14 +48,8 @@ Grade gradeVocabulary({
   required bool articleMandatory,
   bool flaggedWhileTyping = false,
 }) {
-  final normalised = normalise(typed);
-  var (:article, :rest) = splitArticle(normalised);
-  var match = _matchWord(rest, noun.words);
-  if (match == null && article != null) {
-    // Perhaps what looked like an article is part of the word.
-    match = _matchWord(normalised, noun.words);
-    if (match != null) (article, rest) = (null, normalised);
-  }
+  final (:article, :rest) = splitArticle(normalise(typed));
+  final match = _matchWord(rest, noun.words);
   if (match == null) {
     final grade = Grade(
       rating: Rating.again,
