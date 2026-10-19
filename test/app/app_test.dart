@@ -1,5 +1,5 @@
 import 'package:bah_francais/app/app.dart';
-import 'package:bah_francais/app/font_licences.dart';
+import 'package:bah_francais/app/licences.dart';
 import 'package:bah_francais/app/phone_layout.dart';
 import 'package:bah_francais/core/strings.g.dart';
 import 'package:bah_francais/core/theme/app_theme.dart';
@@ -152,15 +152,15 @@ void main() {
     }
   });
 
-  test('the Poppins licence is on the licence page', () async {
+  test('Poppins and py-fsrs are on the licence page', () async {
     TestWidgetsFlutterBinding.ensureInitialized();
-    registerFontLicences();
+    registerLicences();
 
     final entries = await LicenseRegistry.licenses.toList();
-    final poppins = entries.where(
-      (e) => e.packages.contains(AppTheme.fontFamily),
-    );
-    expect(poppins, hasLength(1));
-    expect(poppins.single.paragraphs, isNotEmpty);
+    for (final package in [AppTheme.fontFamily, 'py-fsrs']) {
+      final matching = entries.where((e) => e.packages.contains(package));
+      expect(matching, hasLength(1), reason: package);
+      expect(matching.single.paragraphs, isNotEmpty, reason: package);
+    }
   });
 }
