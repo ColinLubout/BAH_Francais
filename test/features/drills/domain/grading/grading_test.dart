@@ -1,9 +1,11 @@
 // The words and forms here are the spec's own examples (fourchette, chien,
 // élève, l’école, voiture/auto, les ciseaux, aller, je paie/paye, me lève,
 // j’aime), with their real gender and elision. No French is invented; where a
-// test needs a letter no example has (œ), it uses a made-up token.
+// test needs something no example has (œ, a synonym of the other gender), it
+// uses a made-up token.
 
 import 'package:bah_francais/features/content/domain/content_types.dart';
+import 'package:bah_francais/features/content/domain/synonym.dart';
 import 'package:bah_francais/features/drills/domain/grading/answer_forms.dart';
 import 'package:bah_francais/features/drills/domain/grading/grade.dart';
 import 'package:bah_francais/features/drills/domain/grading/grading.dart';
@@ -28,7 +30,13 @@ const ecole = VocabularyAnswer(
 const voiture = VocabularyAnswer(
   word: 'voiture',
   gender: Gender.feminine,
-  synonyms: ['auto'],
+  synonyms: [Synonym('auto', elides: true)],
+);
+// Made up: a synonym of the other gender.
+const mixed = VocabularyAnswer(
+  word: 'voiture',
+  gender: Gender.feminine,
+  synonyms: [Synonym('zib', gender: Gender.masculine)],
 );
 const ciseaux = VocabularyAnswer(
   word: 'ciseaux',
@@ -214,9 +222,32 @@ void main() {
       expect(g.answer, 'auto');
     });
 
-    test('a synonym takes the noun’s articles', () {
+    test('a synonym takes the noun’s gender unless it has its own', () {
       expect(vocab('une auto', voiture, mandatory: true).rating, Rating.good);
       expect(vocab('un auto', voiture, mandatory: true).rating, Rating.hard);
+
+      expect(vocab('un zib', mixed, mandatory: true).rating, Rating.good);
+      expect(vocab('le zib', mixed).rating, Rating.good);
+      final g = vocab('une zib', mixed, mandatory: true);
+      expect(g.rating, Rating.hard);
+      expect(g.errorType, ErrorType.article);
+      expect(g.answer, 'un zib');
+      // The noun keeps its own gender.
+      expect(vocab('la voiture', mixed).rating, Rating.good);
+      expect(vocab('le voiture', mixed).rating, Rating.hard);
+    });
+
+    test('a synonym can take l’ when its noun does not', () {
+      final g = vocab('l’auto', voiture);
+      expect(g.rating, Rating.good);
+      expect(g.answer, 'l’auto');
+      expect(vocab('la auto', voiture).rating, Rating.hard);
+      expect(vocab('la voiture', voiture).rating, Rating.good);
+      expect(vocab('l’voiture', voiture).rating, Rating.hard);
+    });
+
+    test('Je ne sais pas shows the noun, not a synonym', () {
+      expect(mixed.displayAnswer(mandatory: true), 'une voiture');
     });
 
     test('an exact match wins over an accent match on another form', () {

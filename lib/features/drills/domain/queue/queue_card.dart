@@ -27,7 +27,7 @@ class QueueCard {
   /// Frequency rank, 1 the most common; official items only.
   final int? rank;
 
-  /// The user's own word. Perso words come first among new cards, oldest
+  /// The user's own word. Perso words come first among all new cards, oldest
   /// first, since the user added them to learn them.
   final bool isPerso;
 

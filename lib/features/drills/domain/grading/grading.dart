@@ -49,7 +49,8 @@ Grade gradeVocabulary({
   bool flaggedWhileTyping = false,
 }) {
   final (:article, :rest) = splitArticle(normalise(typed));
-  final match = _matchWord(rest, noun.words);
+  final accepted = noun.accepted;
+  final match = _matchWord(rest, [for (final w in accepted) w.word]);
   if (match == null) {
     final grade = Grade(
       rating: Rating.again,
@@ -59,7 +60,9 @@ Grade gradeVocabulary({
     return flaggedWhileTyping ? grade.capAtHard() : grade;
   }
 
-  final valid = noun.validArticles(mandatory: articleMandatory);
+  // The articles go by the word typed: a synonym has its own.
+  final matched = accepted[match.index];
+  final valid = matched.validArticles(mandatory: articleMandatory);
   final articleOk = article == null
       ? !articleMandatory
       : valid.contains(article);
@@ -68,12 +71,12 @@ Grade gradeVocabulary({
   final errors = <Span>[];
   String shown;
   if (showArticle) {
-    final shownArticle = noun.displayArticle(
+    final shownArticle = matched.displayArticle(
       mandatory: articleMandatory,
       typed: article,
     );
-    shown = joinArticle(shownArticle, match.word);
-    final wordStart = shown.length - match.word.length;
+    shown = joinArticle(shownArticle, matched.word);
+    final wordStart = shown.length - matched.word.length;
     // Highlight the article itself, not the space after it.
     if (!articleOk) errors.add(Span(0, shownArticle.length));
     errors.addAll([
@@ -81,7 +84,7 @@ Grade gradeVocabulary({
         Span(span.start + wordStart, span.end + wordStart),
     ]);
   } else {
-    shown = match.word;
+    shown = matched.word;
     errors.addAll(match.accentErrors);
   }
 
@@ -114,25 +117,25 @@ Grade _gradeWords(String typed, List<String> forms) {
   return Grade(
     rating: exact ? Rating.good : Rating.hard,
     errorType: exact ? ErrorType.none : ErrorType.accent,
-    answer: match.word,
+    answer: forms[match.index],
     errors: match.accentErrors,
   );
 }
 
-/// The accepted form [typed] matches, exactly if possible, else apart from
-/// accents; null if none.
-({String word, List<Span> accentErrors})? _matchWord(
+/// The index of the accepted form [typed] matches, exactly if possible, else
+/// apart from accents; null if none.
+({int index, List<Span> accentErrors})? _matchWord(
   String typed,
   List<String> forms,
 ) {
-  for (final form in forms) {
-    if (normalise(form) == typed) return (word: form, accentErrors: const []);
+  for (final (index, form) in forms.indexed) {
+    if (normalise(form) == typed) return (index: index, accentErrors: const []);
   }
   final folded = foldAccents(typed);
-  for (final form in forms) {
+  for (final (index, form) in forms.indexed) {
     final expected = normalise(form);
     if (foldAccents(expected) == folded) {
-      return (word: form, accentErrors: accentSpans(expected, typed));
+      return (index: index, accentErrors: accentSpans(expected, typed));
     }
   }
   return null;

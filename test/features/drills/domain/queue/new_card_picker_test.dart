@@ -41,8 +41,12 @@ String label(QueueCard c) {
 }
 
 /// The items the picker gives, one after another, taking each out.
-List<String> drain(List<QueueCard> cards, {QueueSettings? settings}) {
-  final picker = NewCardPicker(() => 0);
+List<String> drain(
+  List<QueueCard> cards, {
+  QueueSettings? settings,
+  Set<String> everyday = const {},
+}) {
+  final picker = NewCardPicker(() => 0, everydayCategoryIds: everyday);
   final left = [...cards];
   final order = <String>[];
   while (true) {
@@ -116,6 +120,73 @@ void main() {
 
     test('items with no category still come up', () {
       expect(drain([noun('x', categories: [])]), ['x']);
+    });
+  });
+
+  group('Perso words, then the everyday set, then the topics', () {
+    // With a roll of 0, the weighted draw would take cat.a first: these tests
+    // put what should come first in a category sorting after it.
+    QueueCard perso(String item, {String category = 'cat.z'}) => noun(
+      item,
+      categories: [category],
+      perso: true,
+      level: null,
+      rank: null,
+      added: DateTime.utc(2026, 10),
+    );
+    const everyday = {'cat.everyday'};
+
+    test('Perso words come before any other category’s', () {
+      expect(drain([noun('a1'), perso('p1')]), ['p1', 'a1']);
+    });
+
+    test('the everyday set comes before the topics, while it lasts', () {
+      expect(
+        drain(everyday: everyday, [
+          noun('t1'),
+          noun('e2', categories: ['cat.everyday'], rank: 2),
+          noun('e1', categories: ['cat.everyday']),
+          noun('t2', categories: ['cat.b']),
+        ]),
+        ['e1', 'e2', 't1', 't2'],
+      );
+    });
+
+    test('a noun also in a topic comes through the everyday set', () {
+      expect(
+        drain(everyday: everyday, [
+          noun('t1'),
+          noun('shared', categories: ['cat.b', 'cat.everyday'], rank: 9),
+        ]),
+        ['shared', 't1'],
+      );
+    });
+
+    test('Perso words come before the everyday set', () {
+      expect(
+        drain(everyday: everyday, [
+          noun('e1', categories: ['cat.everyday']),
+          perso('p1'),
+        ]),
+        ['p1', 'e1'],
+      );
+    });
+
+    test('Jamais pauses Perso words and the everyday set too', () {
+      const settings = QueueSettings(
+        categoryWeights: {
+          'cat.everyday': CategoryWeight.jamais,
+          'cat.z': CategoryWeight.jamais,
+        },
+      );
+      expect(
+        drain(settings: settings, everyday: everyday, [
+          noun('t1'),
+          noun('e1', categories: ['cat.everyday']),
+          perso('p1'),
+        ]),
+        ['t1'],
+      );
     });
   });
 

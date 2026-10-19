@@ -40,6 +40,7 @@ class Session {
     Map<StudyDay, DayCounts> counts = const {},
     Duration offset = paris,
     DateTime? now,
+    Set<String> everyday = const {},
   }) : clock = FakeClock(now ?? noon, offset: offset),
        queue = SessionQueue(
          cards: cards,
@@ -47,6 +48,7 @@ class Session {
          countsOn: (day) => counts[day] ?? const DayCounts(),
          scheduler: scheduler,
          random: () => 0,
+         everydayCategoryIds: everyday,
        );
 
   final SessionQueue queue;
@@ -108,6 +110,13 @@ void main() {
       final third = s.show();
       expect(third.card.itemId, 'new');
       expect(third.source, CardSource.newCard);
+    });
+
+    test('new cards from the everyday set come first', () {
+      final topic = q(newCard(itemId: 'topic'));
+      final everyday = q(newCard(itemId: 'everyday'), categories: ['cat.e']);
+      final s = Session([topic, everyday], everyday: {'cat.e'});
+      expect(s.show().card.itemId, 'everyday');
     });
 
     test('learning steps come in the order they fall due', () {
