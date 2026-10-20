@@ -36,6 +36,7 @@ dart format --set-exit-if-changed .
 flutter test --coverage
 dart run tool/check_domain_coverage.dart     # domain layer coverage must be at least 90%
 dart run tool/content_build.dart content     # validate the content and build its pack
+dart run tool/dictionary_check.dart content  # check it against Wiktionary (see content/README.md)
 dart run drift_dev make-migrations            # after a schema change: dump it, add migration tests
 dart run flutter_launcher_icons               # regenerate app icons
 dart run flutter_native_splash:create         # regenerate launch screens

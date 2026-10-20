@@ -34,6 +34,10 @@ until this is merged.
 - **Content tool** (`tool/content_build.dart`): a JSON Schema per kind of file in
   `content/schema/`, the validator (the schema, then every rule beyond it), and the
   pack builder. CI runs it on the content and the sample on every PR.
+- **Dictionary check** (`tool/dictionary_check.dart`, decision 60): compares the
+  content with Wiktionary through Kaikki.org's French data, kept in `data/kaikki/`
+  and out of git. Both the everyday draft and the sample agree with it on every
+  gender, plural-only noun, auxiliary and conjugated form.
 - **Conjugation prompts** (`sentence_prompt.dart`): a sentence with its verb blanked
   and an elided word before it written in full (*J’habite* → *Je ___*), shared by
   the validator and, later, the Conjugaison drill.
@@ -43,7 +47,7 @@ until this is merged.
 - **Sample set** (`content/sample/`): 3 noun categories of 10 nouns, 5 verbs with
   all 24 forms, 151 sentences and 6 placeholder SVGs. Marked as samples; it never
   ships.
-- **Tests:** 479, all passing. Domain coverage is 99.4%; the DAOs, the content store,
+- **Tests:** 497, all passing. Domain coverage is 99.4%; the DAOs, the content store,
   the converters and the prompt logic are fully covered.
 
 **The milestone's "done when" and its tests:**
@@ -96,6 +100,8 @@ until this is merged.
   differently.
 - M5: form validation errors use Material's red, but the spec keeps red for wrong
   answers only.
+- M6: À propos / Crédits credits Wiktionary (CC BY-SA 4.0) and Kaikki.org /
+  wiktextract (decision 60), with French wording from the owner.
 - M6: `drillSettings.title` ("Réglages – {drill}") doesn't match the spec's
   *Réglages de l'exercice*.
 - M6: for the everyday and Perso categories, only Jamais changes anything (decisions
@@ -518,6 +524,21 @@ document.
       sentences in the verb file and the examples in the noun file, and the
       validator rule "every sentence has exactly one ___"; *supersedes* decisions
       43 (first point) and 49.
+
+60. **Content is checked against Wiktionary.** `tool/dictionary_check.dart` compares
+    each noun's gender and plural-only, each synonym's gender, and each verb's
+    auxiliary and 24 forms with Kaikki.org's machine-readable French dictionary
+    (from the English Wiktionary, extracted with wiktextract).
+    - Wiktionary is used to check and draft only: no definition or sentence is
+      copied from it.
+    - It is credited all the same: on À propos / Crédits (milestone 6) and in
+      `content/README.md`. Wiktionary's text is CC BY-SA 4.0.
+    - The data, about 580 MB, stays out of the repo, in `data/kaikki/`, which git
+      ignores. The tool only advises, and CI doesn't run it.
+    - It can't check *h aspiré*, which the data doesn't mark. Reflexive verbs
+      without their own table are checked from the plain verb's forms.
+    - *Adds to* Phase 1 content → what Claude Code builds (the schema, validator
+      and pack builder).
 
 ### Notes
 

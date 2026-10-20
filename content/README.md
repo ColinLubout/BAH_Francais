@@ -21,6 +21,35 @@ Validate the content and build its pack (from the repo root):
 dart run tool/content_build.dart content
 ```
 
+## Checking against Wiktionary
+
+`tool/dictionary_check.dart` compares the content with Wiktionary: each
+noun's gender and plural-only, each synonym's gender, and each verb's
+auxiliary and 24 forms. It lists where they disagree, and notes such as a
+variant form the content doesn't accept. Wiktionary can be wrong too, so a
+disagreement is something to look at, not an automatic fix. It can't check
+*h aspiré*, which this data doesn't mark.
+
+It needs Kaikki.org's French dictionary, a large download kept out of the
+repo:
+
+```bash
+mkdir -p data/kaikki
+curl -L -o data/kaikki/kaikki.org-dictionary-French.jsonl \
+  https://kaikki.org/dictionary/French/kaikki.org-dictionary-French.jsonl
+dart run tool/dictionary_check.dart content
+```
+
+## Sources and credits
+
+The content is checked, and drafted, against
+[Wiktionary](https://www.wiktionary.org), whose text is available under the
+[Creative Commons Attribution-ShareAlike licence](https://creativecommons.org/licenses/by-sa/4.0/),
+through the machine-readable [French dictionary at Kaikki.org](https://kaikki.org/dictionary/French/),
+extracted with wiktextract (Tatu Ylonen, *Wiktextract: Wiktionary as
+Machine-Readable Structured Data*, LREC 2022). Nothing is copied from it:
+definitions and sentences are written for this app.
+
 ## Status
 
 **Draft, not yet checked.** The everyday categories, *Les essentiels* (30 nouns)
