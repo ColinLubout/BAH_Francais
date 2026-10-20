@@ -11,6 +11,8 @@ until this is merged.
 - **Tables** (Drift, schema version 1): the content tables of Content → Content
   model, each with `source` and `retired`; Image; Card, ReviewLog and Session;
   CategoryWeight; ContentMeta.
+  - Sentences are their own table, linked to the verbs they are prompts for and
+    the nouns they are examples of (decision 59).
   - Times are stored in UTC, as microseconds, so they read back exactly. Enums are
     stored by their ids (`passe_compose`, `new`).
   - Foreign keys are on. A card's review-log rows go with it (decision 51).
@@ -32,14 +34,17 @@ until this is merged.
 - **Content tool** (`tool/content_build.dart`): a JSON Schema per kind of file in
   `content/schema/`, the validator (the schema, then every rule beyond it), and the
   pack builder. CI runs it on the content and the sample on every PR.
+- **Conjugation prompts** (`sentence_prompt.dart`): a sentence with its verb blanked
+  and an elided word before it written in full (*J’habite* → *Je ___*), shared by
+  the validator and, later, the Conjugaison drill.
 - **Everyday content, a draft to check** (`content/`, decision 57): *Les essentiels*,
-  30 nouns with definitions, and *Les verbes essentiels*, 10 verbs with all 24 forms
-  and a sentence for each tense and person.
+  30 nouns with definitions, and *Les verbes essentiels*, 10 verbs with all 24 forms;
+  269 sentences, some serving several verbs and nouns.
 - **Sample set** (`content/sample/`): 3 noun categories of 10 nouns, 5 verbs with
-  all 24 forms and a sentence for each, and 6 placeholder SVGs. Marked as samples;
-  it never ships.
-- **Tests:** 455, all passing. Domain coverage is 99.5%; the DAOs, the content store
-  and the converters are fully covered.
+  all 24 forms, 151 sentences and 6 placeholder SVGs. Marked as samples; it never
+  ships.
+- **Tests:** 479, all passing. Domain coverage is 99.4%; the DAOs, the content store,
+  the converters and the prompt logic are fully covered.
 
 **The milestone's "done when" and its tests:**
 
@@ -76,11 +81,14 @@ until this is merged.
   `ContentImporter` (decision 58).
 - M3: `drill.leaveSession` ("Terminer la session ?") implies a confirmation dialog, but
   the spec says × goes straight to the summary.
-- M4: the word before the blank changes as the user types (decision 43), in the
-  Conjugaison drill.
+- M4: the Conjugaison prompt comes from `conjugationPrompt` (decision 59), and the
+  word before the blank changes as the user types (decision 43).
 - M4: a sentence accepts its own alternatives only. The sample repeats a form's
   alternatives on each of its sentences (*paie* / *paye*); the drill could add them
   by itself.
+- M5: *Ajouter une phrase* and the *Phrase d’exemple* of *Ajouter un mot* now store a
+  sentence in full with its link (decision 59): the blank the user leaves is
+  filled with the answer, eliding the word before it where French does.
 - M4: the selected gender tile puts a yellow symbol on teal, which measures 1.28:1,
   under the 3:1 minimum for meaningful graphics.
 - M5: compound forms are stored with the masculine singular participle for every
@@ -397,8 +405,10 @@ document.
 ### 2026-10-19 (milestone 2, agreed with the owner)
 
 43. **Conjugation answers and elision:**
-    - Sentences write every word before the blank in full: *Je ___ le chocolat*,
-      never *J’___*. The validator rejects an apostrophe just before the blank.
+    - ~~Sentences write every word before the blank in full: *Je ___ le chocolat*,
+      never *J’___*. The validator rejects an apostrophe just before the blank.~~
+      *Superseded by decision 59:* sentences are written in plain French, and the
+      prompt writes the elided word in full.
     - The answer is only the verb: *aime*, *suis allé*. Typing the subject pronoun
       too (*j’aime*) is wrong. Reflexive verbs keep their pronoun in the answer
       (*me lève*, *m’appelle*), and so do their stored forms.
@@ -428,8 +438,9 @@ document.
 48. **The Image table** has an `svg` text column and a `bytes` blob column instead
     of one `data` column, since a Drift column has one type. Exactly one is set, to
     match the format. Its `source` column is the credit.
-49. **Example sentence ids** are the noun's id and their position:
-    `n.fourchette.ex01`. A content update replaces a noun's examples as a set.
+49. ~~**Example sentence ids** are the noun's id and their position:
+    `n.fourchette.ex01`. A content update replaces a noun's examples as a set.~~
+    *Superseded by decision 59:* examples are sentences, with their own ids.
 50. **The sample set** is written by Claude Code, as CLAUDE.md allows for
     `content/sample/` only, and is marked as samples. It has an everyday category of
     each kind.
@@ -481,6 +492,32 @@ document.
     launch, so the drills have real words early. The rest of the content comes in
     the final milestone.
     - *Adds to* Build plan → milestones 3 and 8.
+
+### 2026-10-20 (milestone 2, agreed with the owner)
+
+59. **Sentences are their own model**, so one sentence can serve several verbs and
+    nouns: *Tu pourras partir quand tu voudras* is a prompt for both *pouvoir* and
+    *vouloir*; *Les enfants vont à l’école à pied* is a prompt for *aller* and an
+    example of *enfant* and *école*.
+    - **Content files:** sentences are in `content/sentences/*.json`, written in
+      plain French with no blank. Each lists the verbs it is a prompt for (verb,
+      tense, person, the answer as the text has it, alternatives) and the nouns it
+      is an example of (noun, and the word as the text has it, which feedback shows
+      in bold). Noun files lose `examples`; verb files lose `sentences`.
+    - **Tables:** `sentences` (id, text), `sentence_verbs` and `sentence_nouns`, each
+      with `source` and `retired`. Deleting a word deletes its links, not the
+      sentences.
+    - **The prompt** blanks the answer and writes an elided word before it in full:
+      *j’, m’, t’, s’, n’, c’* by themselves; *l’* can be *le* or *la*, so its link
+      says which (`"before": "le"`).
+    - **Validator:** every noun has a sentence and every verb one per tense and
+      person; each answer and word is in the text exactly once, as whole words;
+      answers agree with the forms; an elided word before a verb can be written in
+      full; the text has no `___`.
+    - *Replaces* Content model → Sentence and NounExample, Content files → the
+      sentences in the verb file and the examples in the noun file, and the
+      validator rule "every sentence has exactly one ___"; *supersedes* decisions
+      43 (first point) and 49.
 
 ### Notes
 

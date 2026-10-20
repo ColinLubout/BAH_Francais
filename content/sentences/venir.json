@@ -1,0 +1,317 @@
+{
+  "sentences": [
+    {
+      "id": "s.venir.pr.1s.01",
+      "text": "Je viens de Montréal.",
+      "verbs": [
+        {
+          "verb": "v.venir",
+          "tense": "present",
+          "person": "1s",
+          "answer": "viens"
+        }
+      ]
+    },
+    {
+      "id": "s.venir.pr.2s.01",
+      "text": "Tu viens avec nous au cinéma ?",
+      "verbs": [
+        {
+          "verb": "v.venir",
+          "tense": "present",
+          "person": "2s",
+          "answer": "viens"
+        }
+      ]
+    },
+    {
+      "id": "s.venir.pr.3s.01",
+      "text": "Le bus vient toutes les dix minutes.",
+      "verbs": [
+        {
+          "verb": "v.venir",
+          "tense": "present",
+          "person": "3s",
+          "answer": "vient"
+        }
+      ]
+    },
+    {
+      "id": "s.venir.pr.1p.01",
+      "text": "Nous venons vous voir dimanche.",
+      "verbs": [
+        {
+          "verb": "v.venir",
+          "tense": "present",
+          "person": "1p",
+          "answer": "venons"
+        }
+      ]
+    },
+    {
+      "id": "s.venir.pr.2p.01",
+      "text": "Vous venez d’où ?",
+      "verbs": [
+        {
+          "verb": "v.venir",
+          "tense": "present",
+          "person": "2p",
+          "answer": "venez"
+        }
+      ]
+    },
+    {
+      "id": "s.venir.pr.3p.01",
+      "text": "Mes cousins viennent dîner ce soir.",
+      "verbs": [
+        {
+          "verb": "v.venir",
+          "tense": "present",
+          "person": "3p",
+          "answer": "viennent"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.soir",
+          "word": "soir"
+        }
+      ]
+    },
+    {
+      "id": "s.venir.pc.1s.01",
+      "text": "Je suis venu dès que j’ai pu.",
+      "verbs": [
+        {
+          "verb": "v.venir",
+          "tense": "passe_compose",
+          "person": "1s",
+          "answer": "suis venu",
+          "alternatives": [
+            "suis venue"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s.venir.pc.2s.01",
+      "text": "Tu es venu à pied ?",
+      "verbs": [
+        {
+          "verb": "v.venir",
+          "tense": "passe_compose",
+          "person": "2s",
+          "answer": "es venu",
+          "alternatives": [
+            "es venue"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s.venir.pc.3s.01",
+      "text": "Ma sœur est venue me voir hier.",
+      "verbs": [
+        {
+          "verb": "v.venir",
+          "tense": "passe_compose",
+          "person": "3s",
+          "answer": "est venue"
+        }
+      ]
+    },
+    {
+      "id": "s.venir.pc.1p.01",
+      "text": "Nous sommes venus en train.",
+      "verbs": [
+        {
+          "verb": "v.venir",
+          "tense": "passe_compose",
+          "person": "1p",
+          "answer": "sommes venus",
+          "alternatives": [
+            "sommes venues"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s.venir.pc.2p.01",
+      "text": "Les garçons, vous êtes venus en vélo ?",
+      "verbs": [
+        {
+          "verb": "v.venir",
+          "tense": "passe_compose",
+          "person": "2p",
+          "answer": "êtes venus"
+        }
+      ]
+    },
+    {
+      "id": "s.venir.pc.3p.01",
+      "text": "Beaucoup de gens sont venus à la fête.",
+      "verbs": [
+        {
+          "verb": "v.venir",
+          "tense": "passe_compose",
+          "person": "3p",
+          "answer": "sont venus"
+        }
+      ]
+    },
+    {
+      "id": "s.venir.im.1s.01",
+      "text": "Avant, je venais ici tous les étés.",
+      "verbs": [
+        {
+          "verb": "v.venir",
+          "tense": "imparfait",
+          "person": "1s",
+          "answer": "venais"
+        }
+      ]
+    },
+    {
+      "id": "s.venir.im.2s.01",
+      "text": "Tu venais souvent dans ce café ?",
+      "verbs": [
+        {
+          "verb": "v.venir",
+          "tense": "imparfait",
+          "person": "2s",
+          "answer": "venais"
+        }
+      ]
+    },
+    {
+      "id": "s.venir.im.3s.01",
+      "text": "Le facteur venait tous les matins à dix heures.",
+      "verbs": [
+        {
+          "verb": "v.venir",
+          "tense": "imparfait",
+          "person": "3s",
+          "answer": "venait"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.matin",
+          "word": "matins"
+        },
+        {
+          "noun": "n.heure",
+          "word": "heures"
+        }
+      ]
+    },
+    {
+      "id": "s.venir.im.1p.01",
+      "text": "Nous venions de finir quand il est arrivé.",
+      "verbs": [
+        {
+          "verb": "v.venir",
+          "tense": "imparfait",
+          "person": "1p",
+          "answer": "venions"
+        }
+      ]
+    },
+    {
+      "id": "s.venir.im.2p.01",
+      "text": "Vous veniez d’arriver quand j’ai appelé ?",
+      "verbs": [
+        {
+          "verb": "v.venir",
+          "tense": "imparfait",
+          "person": "2p",
+          "answer": "veniez"
+        }
+      ]
+    },
+    {
+      "id": "s.venir.im.3p.01",
+      "text": "Les touristes venaient de partout.",
+      "verbs": [
+        {
+          "verb": "v.venir",
+          "tense": "imparfait",
+          "person": "3p",
+          "answer": "venaient"
+        }
+      ]
+    },
+    {
+      "id": "s.venir.fs.1s.01",
+      "text": "Je viendrai te chercher à la gare.",
+      "verbs": [
+        {
+          "verb": "v.venir",
+          "tense": "futur_simple",
+          "person": "1s",
+          "answer": "viendrai"
+        }
+      ]
+    },
+    {
+      "id": "s.venir.fs.2s.01",
+      "text": "Tu viendras à mon anniversaire ?",
+      "verbs": [
+        {
+          "verb": "v.venir",
+          "tense": "futur_simple",
+          "person": "2s",
+          "answer": "viendras"
+        }
+      ]
+    },
+    {
+      "id": "s.venir.fs.3s.01",
+      "text": "Le printemps viendra bientôt.",
+      "verbs": [
+        {
+          "verb": "v.venir",
+          "tense": "futur_simple",
+          "person": "3s",
+          "answer": "viendra"
+        }
+      ]
+    },
+    {
+      "id": "s.venir.fs.1p.01",
+      "text": "Nous viendrons plus tôt la prochaine fois.",
+      "verbs": [
+        {
+          "verb": "v.venir",
+          "tense": "futur_simple",
+          "person": "1p",
+          "answer": "viendrons"
+        }
+      ]
+    },
+    {
+      "id": "s.venir.fs.2p.01",
+      "text": "Vous viendrez dîner samedi ?",
+      "verbs": [
+        {
+          "verb": "v.venir",
+          "tense": "futur_simple",
+          "person": "2p",
+          "answer": "viendrez"
+        }
+      ]
+    },
+    {
+      "id": "s.venir.fs.3p.01",
+      "text": "Ils viendront en voiture.",
+      "verbs": [
+        {
+          "verb": "v.venir",
+          "tense": "futur_simple",
+          "person": "3p",
+          "answer": "viendront"
+        }
+      ]
+    }
+  ]
+}

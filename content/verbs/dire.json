@@ -6,7 +6,9 @@
   "pronominal": false,
   "level": "debutant",
   "rank": 4,
-  "categories": ["cat.verbes-essentiels"],
+  "categories": [
+    "cat.verbes-essentiels"
+  ],
   "forms": {
     "present": {
       "1s": "dis",
@@ -40,62 +42,5 @@
       "2p": "direz",
       "3p": "diront"
     }
-  },
-  "sentences": [
-    { "id": "s.dire.pr.1s.01", "tense": "present", "person": "1s",
-      "text": "Je ___ toujours la vérité.", "answer": "dis" },
-    { "id": "s.dire.pr.2s.01", "tense": "present", "person": "2s",
-      "text": "Qu’est-ce que tu ___ ?", "answer": "dis" },
-    { "id": "s.dire.pr.3s.01", "tense": "present", "person": "3s",
-      "text": "Elle ___ bonjour à tout le monde.", "answer": "dit" },
-    { "id": "s.dire.pr.1p.01", "tense": "present", "person": "1p",
-      "text": "Nous ___ merci au chauffeur.", "answer": "disons" },
-    { "id": "s.dire.pr.2p.01", "tense": "present", "person": "2p",
-      "text": "Vous ___ ça pour me faire plaisir.", "answer": "dites" },
-    { "id": "s.dire.pr.3p.01", "tense": "present", "person": "3p",
-      "text": "Les gens ___ que ce restaurant est bon.", "answer": "disent" },
-
-    { "id": "s.dire.pc.1s.01", "tense": "passe_compose", "person": "1s",
-      "text": "Je ___ non à sa proposition.", "answer": "ai dit" },
-    { "id": "s.dire.pc.2s.01", "tense": "passe_compose", "person": "2s",
-      "text": "Tu ___ quelque chose ?", "answer": "as dit" },
-    { "id": "s.dire.pc.3s.01", "tense": "passe_compose", "person": "3s",
-      "text": "Il ___ qu’il viendrait demain.", "answer": "a dit" },
-    { "id": "s.dire.pc.1p.01", "tense": "passe_compose", "person": "1p",
-      "text": "Nous ___ au revoir à nos amis.", "answer": "avons dit" },
-    { "id": "s.dire.pc.2p.01", "tense": "passe_compose", "person": "2p",
-      "text": "Vous ___ la même chose hier.", "answer": "avez dit" },
-    { "id": "s.dire.pc.3p.01", "tense": "passe_compose", "person": "3p",
-      "text": "Ils ___ oui tout de suite.", "answer": "ont dit" },
-
-    { "id": "s.dire.im.1s.01", "tense": "imparfait", "person": "1s",
-      "text": "Quand j’étais petit, je ___ souvent des bêtises.",
-      "answer": "disais" },
-    { "id": "s.dire.im.2s.01", "tense": "imparfait", "person": "2s",
-      "text": "Tu ___ que tu aimais la montagne.", "answer": "disais" },
-    { "id": "s.dire.im.3s.01", "tense": "imparfait", "person": "3s",
-      "text": "Ma grand-mère ___ toujours la même chose.",
-      "answer": "disait" },
-    { "id": "s.dire.im.1p.01", "tense": "imparfait", "person": "1p",
-      "text": "Nous ___ bonjour aux voisins chaque matin.",
-      "answer": "disions" },
-    { "id": "s.dire.im.2p.01", "tense": "imparfait", "person": "2p",
-      "text": "Vous ___ que le film était bien ?", "answer": "disiez" },
-    { "id": "s.dire.im.3p.01", "tense": "imparfait", "person": "3p",
-      "text": "Ils ___ qu’il allait pleuvoir.", "answer": "disaient" },
-
-    { "id": "s.dire.fs.1s.01", "tense": "futur_simple", "person": "1s",
-      "text": "Je te ___ la réponse demain.", "answer": "dirai" },
-    { "id": "s.dire.fs.2s.01", "tense": "futur_simple", "person": "2s",
-      "text": "Tu me ___ ce que tu en penses.", "answer": "diras" },
-    { "id": "s.dire.fs.3s.01", "tense": "futur_simple", "person": "3s",
-      "text": "Elle ___ oui, j’en suis sûr.", "answer": "dira" },
-    { "id": "s.dire.fs.1p.01", "tense": "futur_simple", "person": "1p",
-      "text": "Nous ___ la vérité au professeur.", "answer": "dirons" },
-    { "id": "s.dire.fs.2p.01", "tense": "futur_simple", "person": "2p",
-      "text": "Vous ___ bonjour à votre mère de ma part.",
-      "answer": "direz" },
-    { "id": "s.dire.fs.3p.01", "tense": "futur_simple", "person": "3p",
-      "text": "Ils ___ ce qu’ils veulent.", "answer": "diront" }
-  ]
+  }
 }

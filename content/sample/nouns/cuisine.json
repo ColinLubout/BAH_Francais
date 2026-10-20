@@ -15,8 +15,10 @@
       "rank": 412,
       "definition": "Couvert à dents pour piquer les aliments.",
       "synonyms": [],
-      "examples": ["Il mange ses pâtes avec une fourchette."],
-      "images": ["fourchette-1.svg", "fourchette-2.svg"]
+      "images": [
+        "fourchette-1.svg",
+        "fourchette-2.svg"
+      ]
     },
     {
       "id": "n.couteau",
@@ -24,8 +26,7 @@
       "gender": "m",
       "level": "debutant",
       "rank": 520,
-      "definition": "Couvert qui sert à couper.",
-      "examples": ["Passe-moi le couteau, s’il te plaît."]
+      "definition": "Couvert qui sert à couper."
     },
     {
       "id": "n.assiette",
@@ -34,8 +35,7 @@
       "elides": true,
       "level": "debutant",
       "rank": 600,
-      "definition": "Pièce de vaisselle dans laquelle on sert les aliments.",
-      "examples": ["Son assiette est vide."]
+      "definition": "Pièce de vaisselle dans laquelle on sert les aliments."
     },
     {
       "id": "n.verre",
@@ -43,8 +43,7 @@
       "gender": "m",
       "level": "debutant",
       "rank": 450,
-      "definition": "Récipient dans lequel on boit.",
-      "examples": ["Je voudrais un verre de lait."]
+      "definition": "Récipient dans lequel on boit."
     },
     {
       "id": "n.haricot",
@@ -53,8 +52,7 @@
       "elides": false,
       "level": "intermediaire",
       "rank": 3400,
-      "definition": "Légume long et fin, souvent vert.",
-      "examples": ["Il reste un haricot dans l’assiette."]
+      "definition": "Légume long et fin, souvent vert."
     },
     {
       "id": "n.petit-dejeuner",
@@ -62,8 +60,7 @@
       "gender": "m",
       "level": "debutant",
       "rank": 2100,
-      "definition": "Premier repas de la journée.",
-      "examples": ["Je prends mon petit-déjeuner à sept heures."]
+      "definition": "Premier repas de la journée."
     },
     {
       "id": "n.recette",
@@ -71,8 +68,7 @@
       "gender": "f",
       "level": "intermediaire",
       "rank": 1900,
-      "definition": "Explication pour préparer un plat.",
-      "examples": ["Ma grand-mère m’a donné sa recette de gâteau."]
+      "definition": "Explication pour préparer un plat."
     },
     {
       "id": "n.casserole",
@@ -80,8 +76,7 @@
       "gender": "f",
       "level": "intermediaire",
       "rank": 4200,
-      "definition": "Récipient rond à manche, pour faire cuire les aliments.",
-      "examples": ["L’eau bout dans la casserole."]
+      "definition": "Récipient rond à manche, pour faire cuire les aliments."
     },
     {
       "id": "n.oeuf",
@@ -90,8 +85,7 @@
       "elides": true,
       "level": "debutant",
       "rank": 1500,
-      "definition": "Aliment pondu par la poule.",
-      "examples": ["Je mange un œuf à la coque."]
+      "definition": "Aliment pondu par la poule."
     },
     {
       "id": "n.preparation",
@@ -100,8 +94,7 @@
       "level": "avance",
       "rank": 2800,
       "definition": "Action de préparer quelque chose.",
-      "ending_hint": "-tion → féminin",
-      "examples": ["La préparation de ce plat est longue."]
+      "ending_hint": "-tion → féminin"
     }
   ]
 }

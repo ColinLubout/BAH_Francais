@@ -6,7 +6,9 @@
   "pronominal": false,
   "level": "debutant",
   "rank": 1,
-  "categories": ["cat.verbes-essentiels"],
+  "categories": [
+    "cat.verbes-essentiels"
+  ],
   "forms": {
     "present": {
       "1s": "suis",
@@ -40,62 +42,5 @@
       "2p": "serez",
       "3p": "seront"
     }
-  },
-  "sentences": [
-    { "id": "s.etre.pr.1s.01", "tense": "present", "person": "1s",
-      "text": "Je ___ fatigué ce soir.", "answer": "suis" },
-    { "id": "s.etre.pr.2s.01", "tense": "present", "person": "2s",
-      "text": "Tu ___ en retard !", "answer": "es" },
-    { "id": "s.etre.pr.3s.01", "tense": "present", "person": "3s",
-      "text": "Elle ___ professeure de français.", "answer": "est" },
-    { "id": "s.etre.pr.1p.01", "tense": "present", "person": "1p",
-      "text": "Nous ___ contents de vous voir.", "answer": "sommes" },
-    { "id": "s.etre.pr.2p.01", "tense": "present", "person": "2p",
-      "text": "Vous ___ prêts ?", "answer": "êtes" },
-    { "id": "s.etre.pr.3p.01", "tense": "present", "person": "3p",
-      "text": "Ils ___ dans le jardin.", "answer": "sont" },
-
-    { "id": "s.etre.pc.1s.01", "tense": "passe_compose", "person": "1s",
-      "text": "Je ___ malade toute la semaine dernière.",
-      "answer": "ai été" },
-    { "id": "s.etre.pc.2s.01", "tense": "passe_compose", "person": "2s",
-      "text": "Tu ___ très gentil avec moi hier.", "answer": "as été" },
-    { "id": "s.etre.pc.3s.01", "tense": "passe_compose", "person": "3s",
-      "text": "Le voyage ___ long et fatigant.", "answer": "a été" },
-    { "id": "s.etre.pc.1p.01", "tense": "passe_compose", "person": "1p",
-      "text": "Nous ___ surpris par la nouvelle.", "answer": "avons été" },
-    { "id": "s.etre.pc.2p.01", "tense": "passe_compose", "person": "2p",
-      "text": "Vous ___ très patients, merci.", "answer": "avez été" },
-    { "id": "s.etre.pc.3p.01", "tense": "passe_compose", "person": "3p",
-      "text": "Les enfants ___ sages aujourd’hui.", "answer": "ont été" },
-
-    { "id": "s.etre.im.1s.01", "tense": "imparfait", "person": "1s",
-      "text": "Quand je ___ petit, j’habitais à la campagne.",
-      "answer": "étais" },
-    { "id": "s.etre.im.2s.01", "tense": "imparfait", "person": "2s",
-      "text": "Avant, tu ___ toujours en retard.", "answer": "étais" },
-    { "id": "s.etre.im.3s.01", "tense": "imparfait", "person": "3s",
-      "text": "Il ___ tard quand nous sommes rentrés.", "answer": "était" },
-    { "id": "s.etre.im.1p.01", "tense": "imparfait", "person": "1p",
-      "text": "Nous ___ très heureux dans cette maison.",
-      "answer": "étions" },
-    { "id": "s.etre.im.2p.01", "tense": "imparfait", "person": "2p",
-      "text": "Vous ___ où hier soir ?", "answer": "étiez" },
-    { "id": "s.etre.im.3p.01", "tense": "imparfait", "person": "3p",
-      "text": "Les rues ___ vides ce matin-là.", "answer": "étaient" },
-
-    { "id": "s.etre.fs.1s.01", "tense": "futur_simple", "person": "1s",
-      "text": "Je ___ à Paris lundi prochain.", "answer": "serai" },
-    { "id": "s.etre.fs.2s.01", "tense": "futur_simple", "person": "2s",
-      "text": "Tu ___ là demain ?", "answer": "seras" },
-    { "id": "s.etre.fs.3s.01", "tense": "futur_simple", "person": "3s",
-      "text": "Le magasin ___ fermé dimanche.", "answer": "sera" },
-    { "id": "s.etre.fs.1p.01", "tense": "futur_simple", "person": "1p",
-      "text": "Nous ___ en vacances en août.", "answer": "serons" },
-    { "id": "s.etre.fs.2p.01", "tense": "futur_simple", "person": "2p",
-      "text": "Vous ___ toujours les bienvenus chez nous.",
-      "answer": "serez" },
-    { "id": "s.etre.fs.3p.01", "tense": "futur_simple", "person": "3p",
-      "text": "Ils ___ contents de te voir.", "answer": "seront" }
-  ]
+  }
 }

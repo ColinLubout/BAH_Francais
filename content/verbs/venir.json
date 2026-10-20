@@ -6,7 +6,9 @@
   "pronominal": false,
   "level": "debutant",
   "rank": 10,
-  "categories": ["cat.verbes-essentiels"],
+  "categories": [
+    "cat.verbes-essentiels"
+  ],
   "forms": {
     "present": {
       "1s": "viens",
@@ -40,62 +42,5 @@
       "2p": "viendrez",
       "3p": "viendront"
     }
-  },
-  "sentences": [
-    { "id": "s.venir.pr.1s.01", "tense": "present", "person": "1s",
-      "text": "Je ___ de Montréal.", "answer": "viens" },
-    { "id": "s.venir.pr.2s.01", "tense": "present", "person": "2s",
-      "text": "Tu ___ avec nous au cinéma ?", "answer": "viens" },
-    { "id": "s.venir.pr.3s.01", "tense": "present", "person": "3s",
-      "text": "Le bus ___ toutes les dix minutes.", "answer": "vient" },
-    { "id": "s.venir.pr.1p.01", "tense": "present", "person": "1p",
-      "text": "Nous ___ vous voir dimanche.", "answer": "venons" },
-    { "id": "s.venir.pr.2p.01", "tense": "present", "person": "2p",
-      "text": "Vous ___ d’où ?", "answer": "venez" },
-    { "id": "s.venir.pr.3p.01", "tense": "present", "person": "3p",
-      "text": "Mes cousins ___ dîner ce soir.", "answer": "viennent" },
-
-    { "id": "s.venir.pc.1s.01", "tense": "passe_compose", "person": "1s",
-      "text": "Je ___ dès que j’ai pu.", "answer": "suis venu",
-      "alternatives": ["suis venue"] },
-    { "id": "s.venir.pc.2s.01", "tense": "passe_compose", "person": "2s",
-      "text": "Tu ___ à pied ?", "answer": "es venu",
-      "alternatives": ["es venue"] },
-    { "id": "s.venir.pc.3s.01", "tense": "passe_compose", "person": "3s",
-      "text": "Ma sœur ___ me voir hier.", "answer": "est venue" },
-    { "id": "s.venir.pc.1p.01", "tense": "passe_compose", "person": "1p",
-      "text": "Nous ___ en train.", "answer": "sommes venus",
-      "alternatives": ["sommes venues"] },
-    { "id": "s.venir.pc.2p.01", "tense": "passe_compose", "person": "2p",
-      "text": "Les garçons, vous ___ en vélo ?", "answer": "êtes venus" },
-    { "id": "s.venir.pc.3p.01", "tense": "passe_compose", "person": "3p",
-      "text": "Beaucoup de gens ___ à la fête.", "answer": "sont venus" },
-
-    { "id": "s.venir.im.1s.01", "tense": "imparfait", "person": "1s",
-      "text": "Avant, je ___ ici tous les étés.", "answer": "venais" },
-    { "id": "s.venir.im.2s.01", "tense": "imparfait", "person": "2s",
-      "text": "Tu ___ souvent dans ce café ?", "answer": "venais" },
-    { "id": "s.venir.im.3s.01", "tense": "imparfait", "person": "3s",
-      "text": "Le facteur ___ tous les matins à dix heures.",
-      "answer": "venait" },
-    { "id": "s.venir.im.1p.01", "tense": "imparfait", "person": "1p",
-      "text": "Nous ___ de finir quand il est arrivé.", "answer": "venions" },
-    { "id": "s.venir.im.2p.01", "tense": "imparfait", "person": "2p",
-      "text": "Vous ___ d’arriver quand j’ai appelé ?", "answer": "veniez" },
-    { "id": "s.venir.im.3p.01", "tense": "imparfait", "person": "3p",
-      "text": "Les touristes ___ de partout.", "answer": "venaient" },
-
-    { "id": "s.venir.fs.1s.01", "tense": "futur_simple", "person": "1s",
-      "text": "Je ___ te chercher à la gare.", "answer": "viendrai" },
-    { "id": "s.venir.fs.2s.01", "tense": "futur_simple", "person": "2s",
-      "text": "Tu ___ à mon anniversaire ?", "answer": "viendras" },
-    { "id": "s.venir.fs.3s.01", "tense": "futur_simple", "person": "3s",
-      "text": "Le printemps ___ bientôt.", "answer": "viendra" },
-    { "id": "s.venir.fs.1p.01", "tense": "futur_simple", "person": "1p",
-      "text": "Nous ___ plus tôt la prochaine fois.", "answer": "viendrons" },
-    { "id": "s.venir.fs.2p.01", "tense": "futur_simple", "person": "2p",
-      "text": "Vous ___ dîner samedi ?", "answer": "viendrez" },
-    { "id": "s.venir.fs.3p.01", "tense": "futur_simple", "person": "3p",
-      "text": "Ils ___ en voiture.", "answer": "viendront" }
-  ]
+  }
 }

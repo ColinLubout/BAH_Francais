@@ -1,0 +1,292 @@
+{
+  "sentences": [
+    {
+      "id": "s.finir.pr.1s.01",
+      "text": "Je finis mon travail à dix-huit heures.",
+      "verbs": [
+        {
+          "verb": "v.finir",
+          "tense": "present",
+          "person": "1s",
+          "answer": "finis"
+        }
+      ]
+    },
+    {
+      "id": "s.finir.pr.2s.01",
+      "text": "Tu finis tes devoirs avant le dîner ?",
+      "verbs": [
+        {
+          "verb": "v.finir",
+          "tense": "present",
+          "person": "2s",
+          "answer": "finis"
+        }
+      ]
+    },
+    {
+      "id": "s.finir.pr.3s.01",
+      "text": "Le film finit à vingt-deux heures.",
+      "verbs": [
+        {
+          "verb": "v.finir",
+          "tense": "present",
+          "person": "3s",
+          "answer": "finit"
+        }
+      ]
+    },
+    {
+      "id": "s.finir.pr.1p.01",
+      "text": "Nous finissons toujours par un dessert.",
+      "verbs": [
+        {
+          "verb": "v.finir",
+          "tense": "present",
+          "person": "1p",
+          "answer": "finissons"
+        }
+      ]
+    },
+    {
+      "id": "s.finir.pr.2p.01",
+      "text": "Vous finissez à quelle heure ?",
+      "verbs": [
+        {
+          "verb": "v.finir",
+          "tense": "present",
+          "person": "2p",
+          "answer": "finissez"
+        }
+      ]
+    },
+    {
+      "id": "s.finir.pr.3p.01",
+      "text": "Les cours finissent en juin.",
+      "verbs": [
+        {
+          "verb": "v.finir",
+          "tense": "present",
+          "person": "3p",
+          "answer": "finissent"
+        }
+      ]
+    },
+    {
+      "id": "s.finir.pc.1s.01",
+      "text": "J’ai fini mon livre hier soir.",
+      "verbs": [
+        {
+          "verb": "v.finir",
+          "tense": "passe_compose",
+          "person": "1s",
+          "answer": "ai fini"
+        }
+      ]
+    },
+    {
+      "id": "s.finir.pc.2s.01",
+      "text": "Tu as fini ton assiette ?",
+      "verbs": [
+        {
+          "verb": "v.finir",
+          "tense": "passe_compose",
+          "person": "2s",
+          "answer": "as fini"
+        }
+      ]
+    },
+    {
+      "id": "s.finir.pc.3s.01",
+      "text": "Elle a fini ses études l’année dernière.",
+      "verbs": [
+        {
+          "verb": "v.finir",
+          "tense": "passe_compose",
+          "person": "3s",
+          "answer": "a fini"
+        }
+      ]
+    },
+    {
+      "id": "s.finir.pc.1p.01",
+      "text": "Nous avons fini le repas à minuit.",
+      "verbs": [
+        {
+          "verb": "v.finir",
+          "tense": "passe_compose",
+          "person": "1p",
+          "answer": "avons fini"
+        }
+      ]
+    },
+    {
+      "id": "s.finir.pc.2p.01",
+      "text": "Vous avez fini le rapport ?",
+      "verbs": [
+        {
+          "verb": "v.finir",
+          "tense": "passe_compose",
+          "person": "2p",
+          "answer": "avez fini"
+        }
+      ]
+    },
+    {
+      "id": "s.finir.pc.3p.01",
+      "text": "Ils ont fini les travaux de la maison.",
+      "verbs": [
+        {
+          "verb": "v.finir",
+          "tense": "passe_compose",
+          "person": "3p",
+          "answer": "ont fini"
+        }
+      ]
+    },
+    {
+      "id": "s.finir.im.1s.01",
+      "text": "Avant, je finissais toujours tard le vendredi.",
+      "verbs": [
+        {
+          "verb": "v.finir",
+          "tense": "imparfait",
+          "person": "1s",
+          "answer": "finissais"
+        }
+      ]
+    },
+    {
+      "id": "s.finir.im.2s.01",
+      "text": "Tu finissais toujours tes phrases par une question.",
+      "verbs": [
+        {
+          "verb": "v.finir",
+          "tense": "imparfait",
+          "person": "2s",
+          "answer": "finissais"
+        }
+      ]
+    },
+    {
+      "id": "s.finir.im.3s.01",
+      "text": "Le spectacle finissait vers minuit.",
+      "verbs": [
+        {
+          "verb": "v.finir",
+          "tense": "imparfait",
+          "person": "3s",
+          "answer": "finissait"
+        }
+      ]
+    },
+    {
+      "id": "s.finir.im.1p.01",
+      "text": "Nous finissions le travail à cinq heures.",
+      "verbs": [
+        {
+          "verb": "v.finir",
+          "tense": "imparfait",
+          "person": "1p",
+          "answer": "finissions"
+        }
+      ]
+    },
+    {
+      "id": "s.finir.im.2p.01",
+      "text": "Vous finissiez vos journées très tard.",
+      "verbs": [
+        {
+          "verb": "v.finir",
+          "tense": "imparfait",
+          "person": "2p",
+          "answer": "finissiez"
+        }
+      ]
+    },
+    {
+      "id": "s.finir.im.3p.01",
+      "text": "Les enfants finissaient leurs devoirs avant de jouer.",
+      "verbs": [
+        {
+          "verb": "v.finir",
+          "tense": "imparfait",
+          "person": "3p",
+          "answer": "finissaient"
+        }
+      ]
+    },
+    {
+      "id": "s.finir.fs.1s.01",
+      "text": "Je finirai ce projet la semaine prochaine.",
+      "verbs": [
+        {
+          "verb": "v.finir",
+          "tense": "futur_simple",
+          "person": "1s",
+          "answer": "finirai"
+        }
+      ]
+    },
+    {
+      "id": "s.finir.fs.2s.01",
+      "text": "Tu finiras par comprendre.",
+      "verbs": [
+        {
+          "verb": "v.finir",
+          "tense": "futur_simple",
+          "person": "2s",
+          "answer": "finiras"
+        }
+      ]
+    },
+    {
+      "id": "s.finir.fs.3s.01",
+      "text": "La réunion finira à midi.",
+      "verbs": [
+        {
+          "verb": "v.finir",
+          "tense": "futur_simple",
+          "person": "3s",
+          "answer": "finira"
+        }
+      ]
+    },
+    {
+      "id": "s.finir.fs.1p.01",
+      "text": "Nous finirons la peinture demain.",
+      "verbs": [
+        {
+          "verb": "v.finir",
+          "tense": "futur_simple",
+          "person": "1p",
+          "answer": "finirons"
+        }
+      ]
+    },
+    {
+      "id": "s.finir.fs.2p.01",
+      "text": "Vous finirez le gâteau ce soir ?",
+      "verbs": [
+        {
+          "verb": "v.finir",
+          "tense": "futur_simple",
+          "person": "2p",
+          "answer": "finirez"
+        }
+      ]
+    },
+    {
+      "id": "s.finir.fs.3p.01",
+      "text": "Ils finiront leurs études en juin.",
+      "verbs": [
+        {
+          "verb": "v.finir",
+          "tense": "futur_simple",
+          "person": "3p",
+          "answer": "finiront"
+        }
+      ]
+    }
+  ]
+}

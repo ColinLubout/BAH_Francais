@@ -1,0 +1,311 @@
+{
+  "sentences": [
+    {
+      "id": "s.se-lever.pr.1s.01",
+      "text": "Je me lève à sept heures tous les matins.",
+      "verbs": [
+        {
+          "verb": "v.se-lever",
+          "tense": "present",
+          "person": "1s",
+          "answer": "me lève"
+        }
+      ]
+    },
+    {
+      "id": "s.se-lever.pr.2s.01",
+      "text": "Tu te lèves tôt le dimanche ?",
+      "verbs": [
+        {
+          "verb": "v.se-lever",
+          "tense": "present",
+          "person": "2s",
+          "answer": "te lèves"
+        }
+      ]
+    },
+    {
+      "id": "s.se-lever.pr.3s.01",
+      "text": "Il se lève toujours avant le soleil.",
+      "verbs": [
+        {
+          "verb": "v.se-lever",
+          "tense": "present",
+          "person": "3s",
+          "answer": "se lève"
+        }
+      ]
+    },
+    {
+      "id": "s.se-lever.pr.1p.01",
+      "text": "Nous nous levons tard pendant les vacances.",
+      "verbs": [
+        {
+          "verb": "v.se-lever",
+          "tense": "present",
+          "person": "1p",
+          "answer": "nous levons"
+        }
+      ]
+    },
+    {
+      "id": "s.se-lever.pr.2p.01",
+      "text": "Vous vous levez à quelle heure ?",
+      "verbs": [
+        {
+          "verb": "v.se-lever",
+          "tense": "present",
+          "person": "2p",
+          "answer": "vous levez"
+        }
+      ]
+    },
+    {
+      "id": "s.se-lever.pr.3p.01",
+      "text": "Les enfants se lèvent à huit heures.",
+      "verbs": [
+        {
+          "verb": "v.se-lever",
+          "tense": "present",
+          "person": "3p",
+          "answer": "se lèvent"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.enfant",
+          "word": "enfants"
+        },
+        {
+          "noun": "n.heure",
+          "word": "heures"
+        }
+      ]
+    },
+    {
+      "id": "s.se-lever.pc.1s.01",
+      "text": "Ce matin, je me suis levé très tôt.",
+      "verbs": [
+        {
+          "verb": "v.se-lever",
+          "tense": "passe_compose",
+          "person": "1s",
+          "answer": "me suis levé",
+          "alternatives": [
+            "me suis levée"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s.se-lever.pc.2s.01",
+      "text": "Tu t’es levé à quelle heure hier ?",
+      "verbs": [
+        {
+          "verb": "v.se-lever",
+          "tense": "passe_compose",
+          "person": "2s",
+          "answer": "t’es levé",
+          "alternatives": [
+            "t’es levée"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s.se-lever.pc.3s.01",
+      "text": "Elle s’est levée avant tout le monde.",
+      "verbs": [
+        {
+          "verb": "v.se-lever",
+          "tense": "passe_compose",
+          "person": "3s",
+          "answer": "s’est levée"
+        }
+      ]
+    },
+    {
+      "id": "s.se-lever.pc.1p.01",
+      "text": "Nous nous sommes levés pour applaudir.",
+      "verbs": [
+        {
+          "verb": "v.se-lever",
+          "tense": "passe_compose",
+          "person": "1p",
+          "answer": "nous sommes levés",
+          "alternatives": [
+            "nous sommes levées"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s.se-lever.pc.2p.01",
+      "text": "Vous vous êtes levés tard ce matin, les garçons.",
+      "verbs": [
+        {
+          "verb": "v.se-lever",
+          "tense": "passe_compose",
+          "person": "2p",
+          "answer": "vous êtes levés"
+        }
+      ]
+    },
+    {
+      "id": "s.se-lever.pc.3p.01",
+      "text": "Elles se sont levées à six heures.",
+      "verbs": [
+        {
+          "verb": "v.se-lever",
+          "tense": "passe_compose",
+          "person": "3p",
+          "answer": "se sont levées"
+        }
+      ]
+    },
+    {
+      "id": "s.se-lever.im.1s.01",
+      "text": "Quand je travaillais, je me levais à cinq heures.",
+      "verbs": [
+        {
+          "verb": "v.se-lever",
+          "tense": "imparfait",
+          "person": "1s",
+          "answer": "me levais"
+        }
+      ]
+    },
+    {
+      "id": "s.se-lever.im.2s.01",
+      "text": "Tu te levais toujours en chantant.",
+      "verbs": [
+        {
+          "verb": "v.se-lever",
+          "tense": "imparfait",
+          "person": "2s",
+          "answer": "te levais"
+        }
+      ]
+    },
+    {
+      "id": "s.se-lever.im.3s.01",
+      "text": "Mon grand-père se levait avec le soleil.",
+      "verbs": [
+        {
+          "verb": "v.se-lever",
+          "tense": "imparfait",
+          "person": "3s",
+          "answer": "se levait"
+        }
+      ]
+    },
+    {
+      "id": "s.se-lever.im.1p.01",
+      "text": "Nous nous levions tôt pour aller à l’école.",
+      "verbs": [
+        {
+          "verb": "v.se-lever",
+          "tense": "imparfait",
+          "person": "1p",
+          "answer": "nous levions"
+        }
+      ]
+    },
+    {
+      "id": "s.se-lever.im.2p.01",
+      "text": "Vous vous leviez tard le samedi ?",
+      "verbs": [
+        {
+          "verb": "v.se-lever",
+          "tense": "imparfait",
+          "person": "2p",
+          "answer": "vous leviez"
+        }
+      ]
+    },
+    {
+      "id": "s.se-lever.im.3p.01",
+      "text": "Les fermiers se levaient avant l’aube.",
+      "verbs": [
+        {
+          "verb": "v.se-lever",
+          "tense": "imparfait",
+          "person": "3p",
+          "answer": "se levaient"
+        }
+      ]
+    },
+    {
+      "id": "s.se-lever.fs.1s.01",
+      "text": "Demain, je me lèverai à six heures.",
+      "verbs": [
+        {
+          "verb": "v.se-lever",
+          "tense": "futur_simple",
+          "person": "1s",
+          "answer": "me lèverai"
+        }
+      ]
+    },
+    {
+      "id": "s.se-lever.fs.2s.01",
+      "text": "Tu te lèveras tôt pour prendre le train.",
+      "verbs": [
+        {
+          "verb": "v.se-lever",
+          "tense": "futur_simple",
+          "person": "2s",
+          "answer": "te lèveras"
+        }
+      ]
+    },
+    {
+      "id": "s.se-lever.fs.3s.01",
+      "text": "Elle se lèvera quand le réveil sonnera.",
+      "verbs": [
+        {
+          "verb": "v.se-lever",
+          "tense": "futur_simple",
+          "person": "3s",
+          "answer": "se lèvera"
+        }
+      ]
+    },
+    {
+      "id": "s.se-lever.fs.1p.01",
+      "text": "Nous nous lèverons tard dimanche.",
+      "verbs": [
+        {
+          "verb": "v.se-lever",
+          "tense": "futur_simple",
+          "person": "1p",
+          "answer": "nous lèverons"
+        }
+      ]
+    },
+    {
+      "id": "s.se-lever.fs.2p.01",
+      "text": "Vous vous lèverez quand le professeur entrera.",
+      "verbs": [
+        {
+          "verb": "v.se-lever",
+          "tense": "futur_simple",
+          "person": "2p",
+          "answer": "vous lèverez"
+        }
+      ]
+    },
+    {
+      "id": "s.se-lever.fs.3p.01",
+      "text": "Ils se lèveront pour chanter l’hymne.",
+      "verbs": [
+        {
+          "verb": "v.se-lever",
+          "tense": "futur_simple",
+          "person": "3p",
+          "answer": "se lèveront"
+        }
+      ]
+    }
+  ]
+}

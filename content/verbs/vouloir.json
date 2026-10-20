@@ -6,7 +6,9 @@
   "pronominal": false,
   "level": "debutant",
   "rank": 9,
-  "categories": ["cat.verbes-essentiels"],
+  "categories": [
+    "cat.verbes-essentiels"
+  ],
   "forms": {
     "present": {
       "1s": "veux",
@@ -40,60 +42,5 @@
       "2p": "voudrez",
       "3p": "voudront"
     }
-  },
-  "sentences": [
-    { "id": "s.vouloir.pr.1s.01", "tense": "present", "person": "1s",
-      "text": "Je ___ un café, s’il vous plaît.", "answer": "veux" },
-    { "id": "s.vouloir.pr.2s.01", "tense": "present", "person": "2s",
-      "text": "Tu ___ venir avec nous ?", "answer": "veux" },
-    { "id": "s.vouloir.pr.3s.01", "tense": "present", "person": "3s",
-      "text": "Elle ___ apprendre le japonais.", "answer": "veut" },
-    { "id": "s.vouloir.pr.1p.01", "tense": "present", "person": "1p",
-      "text": "Nous ___ visiter Rome cet été.", "answer": "voulons" },
-    { "id": "s.vouloir.pr.2p.01", "tense": "present", "person": "2p",
-      "text": "Vous ___ du thé ou du café ?", "answer": "voulez" },
-    { "id": "s.vouloir.pr.3p.01", "tense": "present", "person": "3p",
-      "text": "Les enfants ___ aller au parc.", "answer": "veulent" },
-
-    { "id": "s.vouloir.pc.1s.01", "tense": "passe_compose", "person": "1s",
-      "text": "Je ___ t’appeler, mais j’ai oublié.", "answer": "ai voulu" },
-    { "id": "s.vouloir.pc.2s.01", "tense": "passe_compose", "person": "2s",
-      "text": "Tu ___ partir trop tôt.", "answer": "as voulu" },
-    { "id": "s.vouloir.pc.3s.01", "tense": "passe_compose", "person": "3s",
-      "text": "Il ___ voir la mer avant de partir.", "answer": "a voulu" },
-    { "id": "s.vouloir.pc.1p.01", "tense": "passe_compose", "person": "1p",
-      "text": "Nous ___ vous faire une surprise.", "answer": "avons voulu" },
-    { "id": "s.vouloir.pc.2p.01", "tense": "passe_compose", "person": "2p",
-      "text": "Vous ___ tout faire en un jour.", "answer": "avez voulu" },
-    { "id": "s.vouloir.pc.3p.01", "tense": "passe_compose", "person": "3p",
-      "text": "Ils ___ rester jusqu’à la fin.", "answer": "ont voulu" },
-
-    { "id": "s.vouloir.im.1s.01", "tense": "imparfait", "person": "1s",
-      "text": "Petit, je ___ devenir pompier.", "answer": "voulais" },
-    { "id": "s.vouloir.im.2s.01", "tense": "imparfait", "person": "2s",
-      "text": "Tu ___ me parler ?", "answer": "voulais" },
-    { "id": "s.vouloir.im.3s.01", "tense": "imparfait", "person": "3s",
-      "text": "Elle ___ toujours avoir raison.", "answer": "voulait" },
-    { "id": "s.vouloir.im.1p.01", "tense": "imparfait", "person": "1p",
-      "text": "Nous ___ acheter une maison à la campagne.",
-      "answer": "voulions" },
-    { "id": "s.vouloir.im.2p.01", "tense": "imparfait", "person": "2p",
-      "text": "Vous ___ voir le directeur ?", "answer": "vouliez" },
-    { "id": "s.vouloir.im.3p.01", "tense": "imparfait", "person": "3p",
-      "text": "Ils ___ partir en vacances en juillet.",
-      "answer": "voulaient" },
-
-    { "id": "s.vouloir.fs.1s.01", "tense": "futur_simple", "person": "1s",
-      "text": "Quand je ___ partir, je te le dirai.", "answer": "voudrai" },
-    { "id": "s.vouloir.fs.2s.01", "tense": "futur_simple", "person": "2s",
-      "text": "Tu pourras venir quand tu ___.", "answer": "voudras" },
-    { "id": "s.vouloir.fs.3s.01", "tense": "futur_simple", "person": "3s",
-      "text": "Elle ___ sûrement voir tes photos.", "answer": "voudra" },
-    { "id": "s.vouloir.fs.1p.01", "tense": "futur_simple", "person": "1p",
-      "text": "Nous ___ en savoir plus demain.", "answer": "voudrons" },
-    { "id": "s.vouloir.fs.2p.01", "tense": "futur_simple", "person": "2p",
-      "text": "Faites comme vous ___.", "answer": "voudrez" },
-    { "id": "s.vouloir.fs.3p.01", "tense": "futur_simple", "person": "3p",
-      "text": "Ils ___ sans doute venir avec nous.", "answer": "voudront" }
-  ]
+  }
 }

@@ -13,8 +13,7 @@
       "gender": "m",
       "level": "debutant",
       "rank": 1,
-      "definition": "Durée qui passe, en minutes, en heures, en jours.",
-      "examples": ["Je n’ai pas le temps aujourd’hui."]
+      "definition": "Durée qui passe, en minutes, en heures, en jours."
     },
     {
       "id": "n.jour",
@@ -22,8 +21,7 @@
       "gender": "m",
       "level": "debutant",
       "rank": 2,
-      "definition": "Période de vingt-quatre heures.",
-      "examples": ["Quel jour sommes-nous ?"]
+      "definition": "Période de vingt-quatre heures."
     },
     {
       "id": "n.homme",
@@ -32,8 +30,7 @@
       "elides": true,
       "level": "debutant",
       "rank": 3,
-      "definition": "Personne adulte de sexe masculin.",
-      "examples": ["Cet homme est mon voisin."]
+      "definition": "Personne adulte de sexe masculin."
     },
     {
       "id": "n.annee",
@@ -43,8 +40,12 @@
       "level": "debutant",
       "rank": 4,
       "definition": "Période de douze mois.",
-      "synonyms": [{ "word": "an", "gender": "m" }],
-      "examples": ["L’année prochaine, nous irons en Espagne."]
+      "synonyms": [
+        {
+          "word": "an",
+          "gender": "m"
+        }
+      ]
     },
     {
       "id": "n.chose",
@@ -52,8 +53,7 @@
       "gender": "f",
       "level": "debutant",
       "rank": 5,
-      "definition": "Objet ou idée dont on ne dit pas le nom.",
-      "examples": ["J’ai une chose à te dire."]
+      "definition": "Objet ou idée dont on ne dit pas le nom."
     },
     {
       "id": "n.femme",
@@ -61,8 +61,7 @@
       "gender": "f",
       "level": "debutant",
       "rank": 6,
-      "definition": "Personne adulte de sexe féminin.",
-      "examples": ["Cette femme parle trois langues."]
+      "definition": "Personne adulte de sexe féminin."
     },
     {
       "id": "n.enfant",
@@ -71,8 +70,7 @@
       "elides": true,
       "level": "debutant",
       "rank": 7,
-      "definition": "Garçon ou fille qui n’est pas encore adulte.",
-      "examples": ["L’enfant joue dans le jardin."]
+      "definition": "Garçon ou fille qui n’est pas encore adulte."
     },
     {
       "id": "n.personne",
@@ -80,8 +78,7 @@
       "gender": "f",
       "level": "debutant",
       "rank": 8,
-      "definition": "Être humain, homme ou femme.",
-      "examples": ["Cette personne attend le bus."]
+      "definition": "Être humain, homme ou femme."
     },
     {
       "id": "n.main",
@@ -89,8 +86,7 @@
       "gender": "f",
       "level": "debutant",
       "rank": 9,
-      "definition": "Partie du corps au bout du bras, avec cinq doigts.",
-      "examples": ["Lève la main pour répondre."]
+      "definition": "Partie du corps au bout du bras, avec cinq doigts."
     },
     {
       "id": "n.maison",
@@ -98,8 +94,7 @@
       "gender": "f",
       "level": "debutant",
       "rank": 10,
-      "definition": "Bâtiment où l’on habite.",
-      "examples": ["Ils habitent dans une grande maison."]
+      "definition": "Bâtiment où l’on habite."
     },
     {
       "id": "n.heure",
@@ -108,8 +103,7 @@
       "elides": true,
       "level": "debutant",
       "rank": 11,
-      "definition": "Période de soixante minutes.",
-      "examples": ["Le train part dans une heure."]
+      "definition": "Période de soixante minutes."
     },
     {
       "id": "n.nom",
@@ -117,8 +111,7 @@
       "gender": "m",
       "level": "debutant",
       "rank": 12,
-      "definition": "Mot qui sert à appeler une personne ou une chose.",
-      "examples": ["Quel est ton nom ?"]
+      "definition": "Mot qui sert à appeler une personne ou une chose."
     },
     {
       "id": "n.mot",
@@ -126,8 +119,7 @@
       "gender": "m",
       "level": "debutant",
       "rank": 13,
-      "definition": "Groupe de lettres qui a un sens.",
-      "examples": ["Je ne connais pas ce mot."]
+      "definition": "Groupe de lettres qui a un sens."
     },
     {
       "id": "n.travail",
@@ -135,8 +127,7 @@
       "gender": "m",
       "level": "debutant",
       "rank": 14,
-      "definition": "Activité que l’on fait pour gagner sa vie.",
-      "examples": ["Je vais au travail en métro."]
+      "definition": "Activité que l’on fait pour gagner sa vie."
     },
     {
       "id": "n.question",
@@ -145,8 +136,7 @@
       "level": "debutant",
       "rank": 15,
       "definition": "Phrase par laquelle on demande quelque chose.",
-      "ending_hint": "-tion → féminin",
-      "examples": ["Puis-je vous poser une question ?"]
+      "ending_hint": "-tion → féminin"
     },
     {
       "id": "n.ville",
@@ -154,8 +144,7 @@
       "gender": "f",
       "level": "debutant",
       "rank": 16,
-      "definition": "Grand lieu où vivent beaucoup de gens, avec des rues et des magasins.",
-      "examples": ["Marseille est une grande ville."]
+      "definition": "Grand lieu où vivent beaucoup de gens, avec des rues et des magasins."
     },
     {
       "id": "n.pays",
@@ -163,8 +152,7 @@
       "gender": "m",
       "level": "debutant",
       "rank": 17,
-      "definition": "Territoire d’une nation, avec ses frontières.",
-      "examples": ["La France est un beau pays."]
+      "definition": "Territoire d’une nation, avec ses frontières."
     },
     {
       "id": "n.nuit",
@@ -172,8 +160,7 @@
       "gender": "f",
       "level": "debutant",
       "rank": 18,
-      "definition": "Moment où il fait noir et où l’on dort.",
-      "examples": ["Bonne nuit, dors bien !"]
+      "definition": "Moment où il fait noir et où l’on dort."
     },
     {
       "id": "n.tete",
@@ -181,8 +168,7 @@
       "gender": "f",
       "level": "debutant",
       "rank": 19,
-      "definition": "Partie du corps au-dessus du cou.",
-      "examples": ["J’ai mal à la tête."]
+      "definition": "Partie du corps au-dessus du cou."
     },
     {
       "id": "n.famille",
@@ -190,8 +176,7 @@
       "gender": "f",
       "level": "debutant",
       "rank": 20,
-      "definition": "Les parents et leurs enfants.",
-      "examples": ["Ma famille habite à Lyon."]
+      "definition": "Les parents et leurs enfants."
     },
     {
       "id": "n.porte",
@@ -199,8 +184,7 @@
       "gender": "f",
       "level": "debutant",
       "rank": 21,
-      "definition": "Ce que l’on ouvre pour entrer dans une pièce ou une maison.",
-      "examples": ["Ferme la porte, s’il te plaît."]
+      "definition": "Ce que l’on ouvre pour entrer dans une pièce ou une maison."
     },
     {
       "id": "n.eau",
@@ -209,8 +193,7 @@
       "elides": true,
       "level": "debutant",
       "rank": 22,
-      "definition": "Liquide transparent que l’on boit.",
-      "examples": ["Je bois un verre d’eau."]
+      "definition": "Liquide transparent que l’on boit."
     },
     {
       "id": "n.argent",
@@ -219,8 +202,7 @@
       "elides": true,
       "level": "debutant",
       "rank": 23,
-      "definition": "Pièces et billets qui servent à payer.",
-      "examples": ["Il gagne beaucoup d’argent."]
+      "definition": "Pièces et billets qui servent à payer."
     },
     {
       "id": "n.probleme",
@@ -228,8 +210,7 @@
       "gender": "m",
       "level": "debutant",
       "rank": 24,
-      "definition": "Difficulté qu’il faut résoudre.",
-      "examples": ["Nous avons un problème avec la voiture."]
+      "definition": "Difficulté qu’il faut résoudre."
     },
     {
       "id": "n.semaine",
@@ -237,8 +218,7 @@
       "gender": "f",
       "level": "debutant",
       "rank": 25,
-      "definition": "Période de sept jours.",
-      "examples": ["Je travaille cinq jours par semaine."]
+      "definition": "Période de sept jours."
     },
     {
       "id": "n.soir",
@@ -246,8 +226,7 @@
       "gender": "m",
       "level": "debutant",
       "rank": 26,
-      "definition": "Fin de la journée, avant la nuit.",
-      "examples": ["Nous dînons à huit heures du soir."]
+      "definition": "Fin de la journée, avant la nuit."
     },
     {
       "id": "n.rue",
@@ -255,8 +234,7 @@
       "gender": "f",
       "level": "debutant",
       "rank": 27,
-      "definition": "Voie bordée de maisons, dans une ville ou un village.",
-      "examples": ["La boulangerie est au bout de la rue."]
+      "definition": "Voie bordée de maisons, dans une ville ou un village."
     },
     {
       "id": "n.matin",
@@ -264,8 +242,7 @@
       "gender": "m",
       "level": "debutant",
       "rank": 28,
-      "definition": "Début de la journée, après le lever du soleil.",
-      "examples": ["Je bois un café chaque matin."]
+      "definition": "Début de la journée, après le lever du soleil."
     },
     {
       "id": "n.ecole",
@@ -274,8 +251,7 @@
       "elides": true,
       "level": "debutant",
       "rank": 29,
-      "definition": "Lieu où les enfants apprennent à lire et à écrire.",
-      "examples": ["Les enfants vont à l’école à pied."]
+      "definition": "Lieu où les enfants apprennent à lire et à écrire."
     },
     {
       "id": "n.vacances",
@@ -284,8 +260,7 @@
       "plural_only": true,
       "level": "debutant",
       "rank": 30,
-      "definition": "Période où l’on ne travaille pas et où l’on ne va pas à l’école.",
-      "examples": ["Nous partons en vacances en août."]
+      "definition": "Période où l’on ne travaille pas et où l’on ne va pas à l’école."
     }
   ]
 }

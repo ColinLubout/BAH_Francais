@@ -1,0 +1,334 @@
+{
+  "sentences": [
+    {
+      "id": "s.avoir.pr.1s.01",
+      "text": "J’ai deux frères.",
+      "verbs": [
+        {
+          "verb": "v.avoir",
+          "tense": "present",
+          "person": "1s",
+          "answer": "ai"
+        }
+      ]
+    },
+    {
+      "id": "s.avoir.pr.2s.01",
+      "text": "Tu as quel âge ?",
+      "verbs": [
+        {
+          "verb": "v.avoir",
+          "tense": "present",
+          "person": "2s",
+          "answer": "as"
+        }
+      ]
+    },
+    {
+      "id": "s.avoir.pr.3s.01",
+      "text": "Elle a une nouvelle voiture.",
+      "verbs": [
+        {
+          "verb": "v.avoir",
+          "tense": "present",
+          "person": "3s",
+          "answer": "a"
+        }
+      ]
+    },
+    {
+      "id": "s.avoir.pr.1p.01",
+      "text": "Nous avons un chat et un chien.",
+      "verbs": [
+        {
+          "verb": "v.avoir",
+          "tense": "present",
+          "person": "1p",
+          "answer": "avons"
+        }
+      ]
+    },
+    {
+      "id": "s.avoir.pr.2p.01",
+      "text": "Vous avez des enfants ?",
+      "verbs": [
+        {
+          "verb": "v.avoir",
+          "tense": "present",
+          "person": "2p",
+          "answer": "avez"
+        }
+      ]
+    },
+    {
+      "id": "s.avoir.pr.3p.01",
+      "text": "Ils ont beaucoup de travail.",
+      "verbs": [
+        {
+          "verb": "v.avoir",
+          "tense": "present",
+          "person": "3p",
+          "answer": "ont"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.travail",
+          "word": "travail"
+        }
+      ]
+    },
+    {
+      "id": "s.avoir.pc.1s.01",
+      "text": "J’ai eu peur pendant l’orage.",
+      "verbs": [
+        {
+          "verb": "v.avoir",
+          "tense": "passe_compose",
+          "person": "1s",
+          "answer": "ai eu"
+        }
+      ]
+    },
+    {
+      "id": "s.avoir.pc.2s.01",
+      "text": "Tu as eu de la chance hier !",
+      "verbs": [
+        {
+          "verb": "v.avoir",
+          "tense": "passe_compose",
+          "person": "2s",
+          "answer": "as eu"
+        }
+      ]
+    },
+    {
+      "id": "s.avoir.pc.3s.01",
+      "text": "Elle a eu un bébé au printemps.",
+      "verbs": [
+        {
+          "verb": "v.avoir",
+          "tense": "passe_compose",
+          "person": "3s",
+          "answer": "a eu"
+        }
+      ]
+    },
+    {
+      "id": "s.avoir.pc.1p.01",
+      "text": "Nous avons eu froid pendant la nuit.",
+      "verbs": [
+        {
+          "verb": "v.avoir",
+          "tense": "passe_compose",
+          "person": "1p",
+          "answer": "avons eu"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.nuit",
+          "word": "nuit"
+        }
+      ]
+    },
+    {
+      "id": "s.avoir.pc.2p.01",
+      "text": "Vous avez eu raison de partir tôt.",
+      "verbs": [
+        {
+          "verb": "v.avoir",
+          "tense": "passe_compose",
+          "person": "2p",
+          "answer": "avez eu"
+        }
+      ]
+    },
+    {
+      "id": "s.avoir.pc.3p.01",
+      "text": "Ils ont eu un accident la semaine dernière.",
+      "verbs": [
+        {
+          "verb": "v.avoir",
+          "tense": "passe_compose",
+          "person": "3p",
+          "answer": "ont eu"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.semaine",
+          "word": "semaine"
+        }
+      ]
+    },
+    {
+      "id": "s.avoir.im.1s.01",
+      "text": "À dix ans, j’avais un vélo rouge.",
+      "verbs": [
+        {
+          "verb": "v.avoir",
+          "tense": "imparfait",
+          "person": "1s",
+          "answer": "avais"
+        }
+      ]
+    },
+    {
+      "id": "s.avoir.im.2s.01",
+      "text": "Avant, tu avais les cheveux longs.",
+      "verbs": [
+        {
+          "verb": "v.avoir",
+          "tense": "imparfait",
+          "person": "2s",
+          "answer": "avais"
+        }
+      ]
+    },
+    {
+      "id": "s.avoir.im.3s.01",
+      "text": "La maison avait un grand jardin.",
+      "verbs": [
+        {
+          "verb": "v.avoir",
+          "tense": "imparfait",
+          "person": "3s",
+          "answer": "avait"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.maison",
+          "word": "maison"
+        }
+      ]
+    },
+    {
+      "id": "s.avoir.im.1p.01",
+      "text": "Nous avions un petit appartement à Lyon.",
+      "verbs": [
+        {
+          "verb": "v.avoir",
+          "tense": "imparfait",
+          "person": "1p",
+          "answer": "avions"
+        }
+      ]
+    },
+    {
+      "id": "s.avoir.im.2p.01",
+      "text": "Vous aviez faim quand vous êtes arrivés ?",
+      "verbs": [
+        {
+          "verb": "v.avoir",
+          "tense": "imparfait",
+          "person": "2p",
+          "answer": "aviez"
+        }
+      ]
+    },
+    {
+      "id": "s.avoir.im.3p.01",
+      "text": "Mes grands-parents avaient une ferme.",
+      "verbs": [
+        {
+          "verb": "v.avoir",
+          "tense": "imparfait",
+          "person": "3p",
+          "answer": "avaient"
+        }
+      ]
+    },
+    {
+      "id": "s.avoir.fs.1s.01",
+      "text": "J’aurai trente ans en mai.",
+      "verbs": [
+        {
+          "verb": "v.avoir",
+          "tense": "futur_simple",
+          "person": "1s",
+          "answer": "aurai"
+        }
+      ]
+    },
+    {
+      "id": "s.avoir.fs.2s.01",
+      "text": "Tu auras le temps de m’appeler ?",
+      "verbs": [
+        {
+          "verb": "v.avoir",
+          "tense": "futur_simple",
+          "person": "2s",
+          "answer": "auras"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.temps",
+          "word": "temps"
+        }
+      ]
+    },
+    {
+      "id": "s.avoir.fs.3s.01",
+      "text": "Il aura son permis l’année prochaine.",
+      "verbs": [
+        {
+          "verb": "v.avoir",
+          "tense": "futur_simple",
+          "person": "3s",
+          "answer": "aura"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.annee",
+          "word": "année"
+        }
+      ]
+    },
+    {
+      "id": "s.avoir.fs.1p.01",
+      "text": "Nous aurons une réponse demain.",
+      "verbs": [
+        {
+          "verb": "v.avoir",
+          "tense": "futur_simple",
+          "person": "1p",
+          "answer": "aurons"
+        }
+      ]
+    },
+    {
+      "id": "s.avoir.fs.2p.01",
+      "text": "Vous aurez besoin d’un parapluie.",
+      "verbs": [
+        {
+          "verb": "v.avoir",
+          "tense": "futur_simple",
+          "person": "2p",
+          "answer": "aurez"
+        }
+      ]
+    },
+    {
+      "id": "s.avoir.fs.3p.01",
+      "text": "Elles auront beaucoup de choses à raconter.",
+      "verbs": [
+        {
+          "verb": "v.avoir",
+          "tense": "futur_simple",
+          "person": "3p",
+          "answer": "auront"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.chose",
+          "word": "choses"
+        }
+      ]
+    }
+  ]
+}

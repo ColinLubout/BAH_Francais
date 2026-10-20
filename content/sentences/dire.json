@@ -1,0 +1,328 @@
+{
+  "sentences": [
+    {
+      "id": "s.dire.pr.1s.01",
+      "text": "Je dis toujours la vérité.",
+      "verbs": [
+        {
+          "verb": "v.dire",
+          "tense": "present",
+          "person": "1s",
+          "answer": "dis"
+        }
+      ]
+    },
+    {
+      "id": "s.dire.pr.2s.01",
+      "text": "Qu’est-ce que tu dis ?",
+      "verbs": [
+        {
+          "verb": "v.dire",
+          "tense": "present",
+          "person": "2s",
+          "answer": "dis"
+        }
+      ]
+    },
+    {
+      "id": "s.dire.pr.3s.01",
+      "text": "Elle dit bonjour à tout le monde.",
+      "verbs": [
+        {
+          "verb": "v.dire",
+          "tense": "present",
+          "person": "3s",
+          "answer": "dit"
+        }
+      ]
+    },
+    {
+      "id": "s.dire.pr.1p.01",
+      "text": "Nous disons merci au chauffeur.",
+      "verbs": [
+        {
+          "verb": "v.dire",
+          "tense": "present",
+          "person": "1p",
+          "answer": "disons"
+        }
+      ]
+    },
+    {
+      "id": "s.dire.pr.2p.01",
+      "text": "Vous dites ça pour me faire plaisir.",
+      "verbs": [
+        {
+          "verb": "v.dire",
+          "tense": "present",
+          "person": "2p",
+          "answer": "dites"
+        }
+      ]
+    },
+    {
+      "id": "s.dire.pr.3p.01",
+      "text": "Les gens disent que ce restaurant est bon.",
+      "verbs": [
+        {
+          "verb": "v.dire",
+          "tense": "present",
+          "person": "3p",
+          "answer": "disent"
+        },
+        {
+          "verb": "v.etre",
+          "tense": "present",
+          "person": "3s",
+          "answer": "est"
+        }
+      ]
+    },
+    {
+      "id": "s.dire.pc.1s.01",
+      "text": "J’ai dit non à sa proposition.",
+      "verbs": [
+        {
+          "verb": "v.dire",
+          "tense": "passe_compose",
+          "person": "1s",
+          "answer": "ai dit"
+        }
+      ]
+    },
+    {
+      "id": "s.dire.pc.2s.01",
+      "text": "Tu as dit quelque chose ?",
+      "verbs": [
+        {
+          "verb": "v.dire",
+          "tense": "passe_compose",
+          "person": "2s",
+          "answer": "as dit"
+        }
+      ]
+    },
+    {
+      "id": "s.dire.pc.3s.01",
+      "text": "Il a dit qu’il viendrait demain.",
+      "verbs": [
+        {
+          "verb": "v.dire",
+          "tense": "passe_compose",
+          "person": "3s",
+          "answer": "a dit"
+        }
+      ]
+    },
+    {
+      "id": "s.dire.pc.1p.01",
+      "text": "Nous avons dit au revoir à nos amis.",
+      "verbs": [
+        {
+          "verb": "v.dire",
+          "tense": "passe_compose",
+          "person": "1p",
+          "answer": "avons dit"
+        }
+      ]
+    },
+    {
+      "id": "s.dire.pc.2p.01",
+      "text": "Vous avez dit la même chose hier.",
+      "verbs": [
+        {
+          "verb": "v.dire",
+          "tense": "passe_compose",
+          "person": "2p",
+          "answer": "avez dit"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.chose",
+          "word": "chose"
+        }
+      ]
+    },
+    {
+      "id": "s.dire.pc.3p.01",
+      "text": "Ils ont dit oui tout de suite.",
+      "verbs": [
+        {
+          "verb": "v.dire",
+          "tense": "passe_compose",
+          "person": "3p",
+          "answer": "ont dit"
+        }
+      ]
+    },
+    {
+      "id": "s.dire.im.1s.01",
+      "text": "Quand j’étais petit, je disais souvent des bêtises.",
+      "verbs": [
+        {
+          "verb": "v.dire",
+          "tense": "imparfait",
+          "person": "1s",
+          "answer": "disais"
+        },
+        {
+          "verb": "v.etre",
+          "tense": "imparfait",
+          "person": "1s",
+          "answer": "étais"
+        }
+      ]
+    },
+    {
+      "id": "s.dire.im.2s.01",
+      "text": "Tu disais que tu aimais la montagne.",
+      "verbs": [
+        {
+          "verb": "v.dire",
+          "tense": "imparfait",
+          "person": "2s",
+          "answer": "disais"
+        }
+      ]
+    },
+    {
+      "id": "s.dire.im.3s.01",
+      "text": "Ma grand-mère disait toujours la même chose.",
+      "verbs": [
+        {
+          "verb": "v.dire",
+          "tense": "imparfait",
+          "person": "3s",
+          "answer": "disait"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.chose",
+          "word": "chose"
+        }
+      ]
+    },
+    {
+      "id": "s.dire.im.1p.01",
+      "text": "Nous disions bonjour aux voisins chaque matin.",
+      "verbs": [
+        {
+          "verb": "v.dire",
+          "tense": "imparfait",
+          "person": "1p",
+          "answer": "disions"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.matin",
+          "word": "matin"
+        }
+      ]
+    },
+    {
+      "id": "s.dire.im.2p.01",
+      "text": "Vous disiez que le film était bien ?",
+      "verbs": [
+        {
+          "verb": "v.dire",
+          "tense": "imparfait",
+          "person": "2p",
+          "answer": "disiez"
+        }
+      ]
+    },
+    {
+      "id": "s.dire.im.3p.01",
+      "text": "Ils disaient qu’il allait pleuvoir.",
+      "verbs": [
+        {
+          "verb": "v.dire",
+          "tense": "imparfait",
+          "person": "3p",
+          "answer": "disaient"
+        },
+        {
+          "verb": "v.aller",
+          "tense": "imparfait",
+          "person": "3s",
+          "answer": "allait"
+        }
+      ]
+    },
+    {
+      "id": "s.dire.fs.1s.01",
+      "text": "Je te dirai la réponse demain.",
+      "verbs": [
+        {
+          "verb": "v.dire",
+          "tense": "futur_simple",
+          "person": "1s",
+          "answer": "dirai"
+        }
+      ]
+    },
+    {
+      "id": "s.dire.fs.2s.01",
+      "text": "Tu me diras ce que tu en penses.",
+      "verbs": [
+        {
+          "verb": "v.dire",
+          "tense": "futur_simple",
+          "person": "2s",
+          "answer": "diras"
+        }
+      ]
+    },
+    {
+      "id": "s.dire.fs.3s.01",
+      "text": "Elle dira oui, j’en suis sûr.",
+      "verbs": [
+        {
+          "verb": "v.dire",
+          "tense": "futur_simple",
+          "person": "3s",
+          "answer": "dira"
+        }
+      ]
+    },
+    {
+      "id": "s.dire.fs.1p.01",
+      "text": "Nous dirons la vérité au professeur.",
+      "verbs": [
+        {
+          "verb": "v.dire",
+          "tense": "futur_simple",
+          "person": "1p",
+          "answer": "dirons"
+        }
+      ]
+    },
+    {
+      "id": "s.dire.fs.2p.01",
+      "text": "Vous direz bonjour à votre mère de ma part.",
+      "verbs": [
+        {
+          "verb": "v.dire",
+          "tense": "futur_simple",
+          "person": "2p",
+          "answer": "direz"
+        }
+      ]
+    },
+    {
+      "id": "s.dire.fs.3p.01",
+      "text": "Ils diront ce qu’ils veulent.",
+      "verbs": [
+        {
+          "verb": "v.dire",
+          "tense": "futur_simple",
+          "person": "3p",
+          "answer": "diront"
+        }
+      ]
+    }
+  ]
+}

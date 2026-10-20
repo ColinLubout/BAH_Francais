@@ -6,7 +6,9 @@
   "pronominal": false,
   "level": "debutant",
   "rank": 8,
-  "categories": ["cat.verbes-essentiels"],
+  "categories": [
+    "cat.verbes-essentiels"
+  ],
   "forms": {
     "present": {
       "1s": "sais",
@@ -40,58 +42,5 @@
       "2p": "saurez",
       "3p": "sauront"
     }
-  },
-  "sentences": [
-    { "id": "s.savoir.pr.1s.01", "tense": "present", "person": "1s",
-      "text": "Je ne ___ pas où il habite.", "answer": "sais" },
-    { "id": "s.savoir.pr.2s.01", "tense": "present", "person": "2s",
-      "text": "Tu ___ nager ?", "answer": "sais" },
-    { "id": "s.savoir.pr.3s.01", "tense": "present", "person": "3s",
-      "text": "Elle ___ parler quatre langues.", "answer": "sait" },
-    { "id": "s.savoir.pr.1p.01", "tense": "present", "person": "1p",
-      "text": "Nous ___ que c’est difficile.", "answer": "savons" },
-    { "id": "s.savoir.pr.2p.01", "tense": "present", "person": "2p",
-      "text": "Vous ___ où est la gare ?", "answer": "savez" },
-    { "id": "s.savoir.pr.3p.01", "tense": "present", "person": "3p",
-      "text": "Ils ___ déjà la nouvelle.", "answer": "savent" },
-
-    { "id": "s.savoir.pc.1s.01", "tense": "passe_compose", "person": "1s",
-      "text": "Je ___ la réponse trop tard.", "answer": "ai su" },
-    { "id": "s.savoir.pc.2s.01", "tense": "passe_compose", "person": "2s",
-      "text": "Tu ___ ce qui s’est passé ?", "answer": "as su" },
-    { "id": "s.savoir.pc.3s.01", "tense": "passe_compose", "person": "3s",
-      "text": "Il ___ tout de suite que c’était grave.", "answer": "a su" },
-    { "id": "s.savoir.pc.1p.01", "tense": "passe_compose", "person": "1p",
-      "text": "Nous ___ la nouvelle ce matin.", "answer": "avons su" },
-    { "id": "s.savoir.pc.2p.01", "tense": "passe_compose", "person": "2p",
-      "text": "Vous ___ quoi répondre ?", "answer": "avez su" },
-    { "id": "s.savoir.pc.3p.01", "tense": "passe_compose", "person": "3p",
-      "text": "Ils ___ trouver la solution.", "answer": "ont su" },
-
-    { "id": "s.savoir.im.1s.01", "tense": "imparfait", "person": "1s",
-      "text": "Je ne ___ pas que tu étais là.", "answer": "savais" },
-    { "id": "s.savoir.im.2s.01", "tense": "imparfait", "person": "2s",
-      "text": "Tu ___ qu’il allait pleuvoir ?", "answer": "savais" },
-    { "id": "s.savoir.im.3s.01", "tense": "imparfait", "person": "3s",
-      "text": "Personne ne ___ son nom.", "answer": "savait" },
-    { "id": "s.savoir.im.1p.01", "tense": "imparfait", "person": "1p",
-      "text": "Nous ___ déjà lire à cinq ans.", "answer": "savions" },
-    { "id": "s.savoir.im.2p.01", "tense": "imparfait", "person": "2p",
-      "text": "Vous ___ que le magasin était fermé ?", "answer": "saviez" },
-    { "id": "s.savoir.im.3p.01", "tense": "imparfait", "person": "3p",
-      "text": "Ils ___ tous la chanson par cœur.", "answer": "savaient" },
-
-    { "id": "s.savoir.fs.1s.01", "tense": "futur_simple", "person": "1s",
-      "text": "Je ___ demain si j’ai le poste.", "answer": "saurai" },
-    { "id": "s.savoir.fs.2s.01", "tense": "futur_simple", "person": "2s",
-      "text": "Tu ___ la réponse bientôt.", "answer": "sauras" },
-    { "id": "s.savoir.fs.3s.01", "tense": "futur_simple", "person": "3s",
-      "text": "Elle ___ quoi faire.", "answer": "saura" },
-    { "id": "s.savoir.fs.1p.01", "tense": "futur_simple", "person": "1p",
-      "text": "Nous ___ vendredi qui a gagné.", "answer": "saurons" },
-    { "id": "s.savoir.fs.2p.01", "tense": "futur_simple", "person": "2p",
-      "text": "Vous ___ conduire après dix leçons.", "answer": "saurez" },
-    { "id": "s.savoir.fs.3p.01", "tense": "futur_simple", "person": "3p",
-      "text": "Ils ___ bientôt la vérité.", "answer": "sauront" }
-  ]
+  }
 }

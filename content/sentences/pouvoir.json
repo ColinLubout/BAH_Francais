@@ -1,0 +1,316 @@
+{
+  "sentences": [
+    {
+      "id": "s.pouvoir.pr.1s.01",
+      "text": "Je ne peux pas venir ce soir.",
+      "verbs": [
+        {
+          "verb": "v.pouvoir",
+          "tense": "present",
+          "person": "1s",
+          "answer": "peux"
+        }
+      ]
+    },
+    {
+      "id": "s.pouvoir.pr.2s.01",
+      "text": "Tu peux m’aider, s’il te plaît ?",
+      "verbs": [
+        {
+          "verb": "v.pouvoir",
+          "tense": "present",
+          "person": "2s",
+          "answer": "peux"
+        }
+      ]
+    },
+    {
+      "id": "s.pouvoir.pr.3s.01",
+      "text": "On peut entrer ?",
+      "verbs": [
+        {
+          "verb": "v.pouvoir",
+          "tense": "present",
+          "person": "3s",
+          "answer": "peut"
+        }
+      ]
+    },
+    {
+      "id": "s.pouvoir.pr.1p.01",
+      "text": "Nous pouvons partir maintenant.",
+      "verbs": [
+        {
+          "verb": "v.pouvoir",
+          "tense": "present",
+          "person": "1p",
+          "answer": "pouvons"
+        }
+      ]
+    },
+    {
+      "id": "s.pouvoir.pr.2p.01",
+      "text": "Vous pouvez répéter, s’il vous plaît ?",
+      "verbs": [
+        {
+          "verb": "v.pouvoir",
+          "tense": "present",
+          "person": "2p",
+          "answer": "pouvez"
+        }
+      ]
+    },
+    {
+      "id": "s.pouvoir.pr.3p.01",
+      "text": "Les enfants peuvent jouer dehors.",
+      "verbs": [
+        {
+          "verb": "v.pouvoir",
+          "tense": "present",
+          "person": "3p",
+          "answer": "peuvent"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.enfant",
+          "word": "enfants"
+        }
+      ]
+    },
+    {
+      "id": "s.pouvoir.pc.1s.01",
+      "text": "J’ai pu dormir un peu dans le train.",
+      "verbs": [
+        {
+          "verb": "v.pouvoir",
+          "tense": "passe_compose",
+          "person": "1s",
+          "answer": "ai pu"
+        }
+      ]
+    },
+    {
+      "id": "s.pouvoir.pc.2s.01",
+      "text": "Tu as pu finir ton travail ?",
+      "verbs": [
+        {
+          "verb": "v.pouvoir",
+          "tense": "passe_compose",
+          "person": "2s",
+          "answer": "as pu"
+        }
+      ]
+    },
+    {
+      "id": "s.pouvoir.pc.3s.01",
+      "text": "Elle a pu trouver une place pour se garer.",
+      "verbs": [
+        {
+          "verb": "v.pouvoir",
+          "tense": "passe_compose",
+          "person": "3s",
+          "answer": "a pu"
+        }
+      ]
+    },
+    {
+      "id": "s.pouvoir.pc.1p.01",
+      "text": "Nous avons pu voir la mer depuis l’hôtel.",
+      "verbs": [
+        {
+          "verb": "v.pouvoir",
+          "tense": "passe_compose",
+          "person": "1p",
+          "answer": "avons pu"
+        }
+      ]
+    },
+    {
+      "id": "s.pouvoir.pc.2p.01",
+      "text": "Vous avez pu parler au directeur ?",
+      "verbs": [
+        {
+          "verb": "v.pouvoir",
+          "tense": "passe_compose",
+          "person": "2p",
+          "answer": "avez pu"
+        }
+      ]
+    },
+    {
+      "id": "s.pouvoir.pc.3p.01",
+      "text": "Ils ont pu partir à l’heure.",
+      "verbs": [
+        {
+          "verb": "v.pouvoir",
+          "tense": "passe_compose",
+          "person": "3p",
+          "answer": "ont pu"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.heure",
+          "word": "heure"
+        }
+      ]
+    },
+    {
+      "id": "s.pouvoir.im.1s.01",
+      "text": "Avant, je pouvais courir dix kilomètres.",
+      "verbs": [
+        {
+          "verb": "v.pouvoir",
+          "tense": "imparfait",
+          "person": "1s",
+          "answer": "pouvais"
+        }
+      ]
+    },
+    {
+      "id": "s.pouvoir.im.2s.01",
+      "text": "Tu pouvais venir quand tu voulais.",
+      "verbs": [
+        {
+          "verb": "v.pouvoir",
+          "tense": "imparfait",
+          "person": "2s",
+          "answer": "pouvais"
+        },
+        {
+          "verb": "v.vouloir",
+          "tense": "imparfait",
+          "person": "2s",
+          "answer": "voulais"
+        }
+      ]
+    },
+    {
+      "id": "s.pouvoir.im.3s.01",
+      "text": "Il pouvait déjà lire à quatre ans.",
+      "verbs": [
+        {
+          "verb": "v.pouvoir",
+          "tense": "imparfait",
+          "person": "3s",
+          "answer": "pouvait"
+        }
+      ]
+    },
+    {
+      "id": "s.pouvoir.im.1p.01",
+      "text": "Nous pouvions voir la tour Eiffel de notre fenêtre.",
+      "verbs": [
+        {
+          "verb": "v.pouvoir",
+          "tense": "imparfait",
+          "person": "1p",
+          "answer": "pouvions"
+        }
+      ]
+    },
+    {
+      "id": "s.pouvoir.im.2p.01",
+      "text": "Vous pouviez dormir avec tout ce bruit ?",
+      "verbs": [
+        {
+          "verb": "v.pouvoir",
+          "tense": "imparfait",
+          "person": "2p",
+          "answer": "pouviez"
+        }
+      ]
+    },
+    {
+      "id": "s.pouvoir.im.3p.01",
+      "text": "Les élèves pouvaient sortir à midi.",
+      "verbs": [
+        {
+          "verb": "v.pouvoir",
+          "tense": "imparfait",
+          "person": "3p",
+          "answer": "pouvaient"
+        }
+      ]
+    },
+    {
+      "id": "s.pouvoir.fs.1s.01",
+      "text": "Je pourrai venir demain.",
+      "verbs": [
+        {
+          "verb": "v.pouvoir",
+          "tense": "futur_simple",
+          "person": "1s",
+          "answer": "pourrai"
+        }
+      ]
+    },
+    {
+      "id": "s.pouvoir.fs.2s.01",
+      "text": "Tu pourras partir quand tu voudras.",
+      "verbs": [
+        {
+          "verb": "v.pouvoir",
+          "tense": "futur_simple",
+          "person": "2s",
+          "answer": "pourras"
+        },
+        {
+          "verb": "v.vouloir",
+          "tense": "futur_simple",
+          "person": "2s",
+          "answer": "voudras"
+        }
+      ]
+    },
+    {
+      "id": "s.pouvoir.fs.3s.01",
+      "text": "Elle pourra conduire l’année prochaine.",
+      "verbs": [
+        {
+          "verb": "v.pouvoir",
+          "tense": "futur_simple",
+          "person": "3s",
+          "answer": "pourra"
+        }
+      ]
+    },
+    {
+      "id": "s.pouvoir.fs.1p.01",
+      "text": "Nous pourrons en parler ce soir.",
+      "verbs": [
+        {
+          "verb": "v.pouvoir",
+          "tense": "futur_simple",
+          "person": "1p",
+          "answer": "pourrons"
+        }
+      ]
+    },
+    {
+      "id": "s.pouvoir.fs.2p.01",
+      "text": "Vous pourrez visiter le musée gratuitement.",
+      "verbs": [
+        {
+          "verb": "v.pouvoir",
+          "tense": "futur_simple",
+          "person": "2p",
+          "answer": "pourrez"
+        }
+      ]
+    },
+    {
+      "id": "s.pouvoir.fs.3p.01",
+      "text": "Ils pourront rentrer plus tôt vendredi.",
+      "verbs": [
+        {
+          "verb": "v.pouvoir",
+          "tense": "futur_simple",
+          "person": "3p",
+          "answer": "pourront"
+        }
+      ]
+    }
+  ]
+}

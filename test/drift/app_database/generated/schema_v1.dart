@@ -322,84 +322,6 @@ class NounCategories extends Table with TableInfo {
   bool get dontWriteConstraints => true;
 }
 
-class NounExamples extends Table with TableInfo {
-  @override
-  final GeneratedDatabase attachedDatabase;
-  final String? _alias;
-  NounExamples(this.attachedDatabase, [this._alias]);
-  late final GeneratedColumn<String> source = GeneratedColumn<String>(
-    'source',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: false,
-    $customConstraints: 'NOT NULL DEFAULT \'official\'',
-    defaultValue: const CustomExpression('\'official\''),
-  );
-  late final GeneratedColumn<int> retired = GeneratedColumn<int>(
-    'retired',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: false,
-    $customConstraints: 'NOT NULL DEFAULT 0 CHECK (retired IN (0, 1))',
-    defaultValue: const CustomExpression('0'),
-  );
-  late final GeneratedColumn<String> id = GeneratedColumn<String>(
-    'id',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-    $customConstraints: 'NOT NULL',
-  );
-  late final GeneratedColumn<String> nounId = GeneratedColumn<String>(
-    'noun_id',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-    $customConstraints: 'NOT NULL REFERENCES nouns(id)ON DELETE CASCADE',
-  );
-  late final GeneratedColumn<String> exampleText = GeneratedColumn<String>(
-    'example_text',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-    $customConstraints: 'NOT NULL',
-  );
-  @override
-  List<GeneratedColumn> get $columns => [
-    source,
-    retired,
-    id,
-    nounId,
-    exampleText,
-  ];
-  @override
-  String get aliasedName => _alias ?? actualTableName;
-  @override
-  String get actualTableName => $name;
-  static const String $name = 'noun_examples';
-  @override
-  Set<GeneratedColumn> get $primaryKey => {id};
-  @override
-  Never map(Map<String, dynamic> data, {String? tablePrefix}) {
-    throw UnsupportedError('TableInfo.map in schema verification code');
-  }
-
-  @override
-  NounExamples createAlias(String alias) {
-    return NounExamples(attachedDatabase, alias);
-  }
-
-  @override
-  List<String> get customConstraints => const ['PRIMARY KEY(id)'];
-  @override
-  bool get dontWriteConstraints => true;
-}
-
 class Verbs extends Table with TableInfo {
   @override
   final GeneratedDatabase attachedDatabase;
@@ -721,6 +643,70 @@ class Sentences extends Table with TableInfo {
     requiredDuringInsert: true,
     $customConstraints: 'NOT NULL',
   );
+  late final GeneratedColumn<String> sentenceText = GeneratedColumn<String>(
+    'sentence_text',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+    $customConstraints: 'NOT NULL',
+  );
+  @override
+  List<GeneratedColumn> get $columns => [source, retired, id, sentenceText];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'sentences';
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  Never map(Map<String, dynamic> data, {String? tablePrefix}) {
+    throw UnsupportedError('TableInfo.map in schema verification code');
+  }
+
+  @override
+  Sentences createAlias(String alias) {
+    return Sentences(attachedDatabase, alias);
+  }
+
+  @override
+  List<String> get customConstraints => const ['PRIMARY KEY(id)'];
+  @override
+  bool get dontWriteConstraints => true;
+}
+
+class SentenceVerbs extends Table with TableInfo {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  SentenceVerbs(this.attachedDatabase, [this._alias]);
+  late final GeneratedColumn<String> source = GeneratedColumn<String>(
+    'source',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    $customConstraints: 'NOT NULL DEFAULT \'official\'',
+    defaultValue: const CustomExpression('\'official\''),
+  );
+  late final GeneratedColumn<int> retired = GeneratedColumn<int>(
+    'retired',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    $customConstraints: 'NOT NULL DEFAULT 0 CHECK (retired IN (0, 1))',
+    defaultValue: const CustomExpression('0'),
+  );
+  late final GeneratedColumn<String> sentenceId = GeneratedColumn<String>(
+    'sentence_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+    $customConstraints: 'NOT NULL REFERENCES sentences(id)ON DELETE CASCADE',
+  );
   late final GeneratedColumn<String> verbId = GeneratedColumn<String>(
     'verb_id',
     aliasedName,
@@ -745,14 +731,6 @@ class Sentences extends Table with TableInfo {
     requiredDuringInsert: true,
     $customConstraints: 'NOT NULL',
   );
-  late final GeneratedColumn<String> sentenceText = GeneratedColumn<String>(
-    'sentence_text',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-    $customConstraints: 'NOT NULL',
-  );
   late final GeneratedColumn<String> answer = GeneratedColumn<String>(
     'answer',
     aliasedName,
@@ -770,37 +748,127 @@ class Sentences extends Table with TableInfo {
     $customConstraints: 'NOT NULL DEFAULT \'[]\'',
     defaultValue: const CustomExpression('\'[]\''),
   );
+  late final GeneratedColumn<String> before = GeneratedColumn<String>(
+    'before',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    $customConstraints: 'NULL',
+  );
   @override
   List<GeneratedColumn> get $columns => [
     source,
     retired,
-    id,
+    sentenceId,
     verbId,
     tense,
     person,
-    sentenceText,
     answer,
     alternatives,
+    before,
   ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
   String get actualTableName => $name;
-  static const String $name = 'sentences';
+  static const String $name = 'sentence_verbs';
   @override
-  Set<GeneratedColumn> get $primaryKey => {id};
+  Set<GeneratedColumn> get $primaryKey => {sentenceId, verbId, tense, person};
   @override
   Never map(Map<String, dynamic> data, {String? tablePrefix}) {
     throw UnsupportedError('TableInfo.map in schema verification code');
   }
 
   @override
-  Sentences createAlias(String alias) {
-    return Sentences(attachedDatabase, alias);
+  SentenceVerbs createAlias(String alias) {
+    return SentenceVerbs(attachedDatabase, alias);
   }
 
   @override
-  List<String> get customConstraints => const ['PRIMARY KEY(id)'];
+  List<String> get customConstraints => const [
+    'PRIMARY KEY(sentence_id, verb_id, tense, person)',
+  ];
+  @override
+  bool get dontWriteConstraints => true;
+}
+
+class SentenceNouns extends Table with TableInfo {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  SentenceNouns(this.attachedDatabase, [this._alias]);
+  late final GeneratedColumn<String> source = GeneratedColumn<String>(
+    'source',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    $customConstraints: 'NOT NULL DEFAULT \'official\'',
+    defaultValue: const CustomExpression('\'official\''),
+  );
+  late final GeneratedColumn<int> retired = GeneratedColumn<int>(
+    'retired',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    $customConstraints: 'NOT NULL DEFAULT 0 CHECK (retired IN (0, 1))',
+    defaultValue: const CustomExpression('0'),
+  );
+  late final GeneratedColumn<String> sentenceId = GeneratedColumn<String>(
+    'sentence_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+    $customConstraints: 'NOT NULL REFERENCES sentences(id)ON DELETE CASCADE',
+  );
+  late final GeneratedColumn<String> nounId = GeneratedColumn<String>(
+    'noun_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+    $customConstraints: 'NOT NULL REFERENCES nouns(id)ON DELETE CASCADE',
+  );
+  late final GeneratedColumn<String> word = GeneratedColumn<String>(
+    'word',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+    $customConstraints: 'NOT NULL',
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    source,
+    retired,
+    sentenceId,
+    nounId,
+    word,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'sentence_nouns';
+  @override
+  Set<GeneratedColumn> get $primaryKey => {sentenceId, nounId};
+  @override
+  Never map(Map<String, dynamic> data, {String? tablePrefix}) {
+    throw UnsupportedError('TableInfo.map in schema verification code');
+  }
+
+  @override
+  SentenceNouns createAlias(String alias) {
+    return SentenceNouns(attachedDatabase, alias);
+  }
+
+  @override
+  List<String> get customConstraints => const [
+    'PRIMARY KEY(sentence_id, noun_id)',
+  ];
   @override
   bool get dontWriteConstraints => true;
 }
@@ -1424,11 +1492,12 @@ class DatabaseAtV1 extends GeneratedDatabase {
   late final Categories categories = Categories(this);
   late final Nouns nouns = Nouns(this);
   late final NounCategories nounCategories = NounCategories(this);
-  late final NounExamples nounExamples = NounExamples(this);
   late final Verbs verbs = Verbs(this);
   late final VerbCategories verbCategories = VerbCategories(this);
   late final VerbForms verbForms = VerbForms(this);
   late final Sentences sentences = Sentences(this);
+  late final SentenceVerbs sentenceVerbs = SentenceVerbs(this);
+  late final SentenceNouns sentenceNouns = SentenceNouns(this);
   late final Images images = Images(this);
   late final ContentMeta contentMeta = ContentMeta(this);
   late final Cards cards = Cards(this);
@@ -1455,11 +1524,12 @@ class DatabaseAtV1 extends GeneratedDatabase {
     categories,
     nouns,
     nounCategories,
-    nounExamples,
     verbs,
     verbCategories,
     verbForms,
     sentences,
+    sentenceVerbs,
+    sentenceNouns,
     images,
     contentMeta,
     cards,
@@ -1481,13 +1551,6 @@ class DatabaseAtV1 extends GeneratedDatabase {
     ),
     WritePropagation(
       on: TableUpdateQuery.onTableName(
-        'nouns',
-        limitUpdateKind: UpdateKind.delete,
-      ),
-      result: [TableUpdate('noun_examples', kind: UpdateKind.delete)],
-    ),
-    WritePropagation(
-      on: TableUpdateQuery.onTableName(
         'verbs',
         limitUpdateKind: UpdateKind.delete,
       ),
@@ -1502,10 +1565,31 @@ class DatabaseAtV1 extends GeneratedDatabase {
     ),
     WritePropagation(
       on: TableUpdateQuery.onTableName(
+        'sentences',
+        limitUpdateKind: UpdateKind.delete,
+      ),
+      result: [TableUpdate('sentence_verbs', kind: UpdateKind.delete)],
+    ),
+    WritePropagation(
+      on: TableUpdateQuery.onTableName(
         'verbs',
         limitUpdateKind: UpdateKind.delete,
       ),
-      result: [TableUpdate('sentences', kind: UpdateKind.delete)],
+      result: [TableUpdate('sentence_verbs', kind: UpdateKind.delete)],
+    ),
+    WritePropagation(
+      on: TableUpdateQuery.onTableName(
+        'sentences',
+        limitUpdateKind: UpdateKind.delete,
+      ),
+      result: [TableUpdate('sentence_nouns', kind: UpdateKind.delete)],
+    ),
+    WritePropagation(
+      on: TableUpdateQuery.onTableName(
+        'nouns',
+        limitUpdateKind: UpdateKind.delete,
+      ),
+      result: [TableUpdate('sentence_nouns', kind: UpdateKind.delete)],
     ),
     WritePropagation(
       on: TableUpdateQuery.onTableName(

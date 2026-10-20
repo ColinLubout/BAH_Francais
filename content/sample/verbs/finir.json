@@ -6,7 +6,9 @@
   "pronominal": false,
   "level": "debutant",
   "rank": 120,
-  "categories": ["cat.verbes-essentiels"],
+  "categories": [
+    "cat.verbes-essentiels"
+  ],
   "forms": {
     "present": {
       "1s": "finis",
@@ -40,61 +42,5 @@
       "2p": "finirez",
       "3p": "finiront"
     }
-  },
-  "sentences": [
-    { "id": "s.finir.pr.1s.01", "tense": "present", "person": "1s",
-      "text": "Je ___ mon travail à dix-huit heures.", "answer": "finis" },
-    { "id": "s.finir.pr.2s.01", "tense": "present", "person": "2s",
-      "text": "Tu ___ tes devoirs avant le dîner ?", "answer": "finis" },
-    { "id": "s.finir.pr.3s.01", "tense": "present", "person": "3s",
-      "text": "Le film ___ à vingt-deux heures.", "answer": "finit" },
-    { "id": "s.finir.pr.1p.01", "tense": "present", "person": "1p",
-      "text": "Nous ___ toujours par un dessert.", "answer": "finissons" },
-    { "id": "s.finir.pr.2p.01", "tense": "present", "person": "2p",
-      "text": "Vous ___ à quelle heure ?", "answer": "finissez" },
-    { "id": "s.finir.pr.3p.01", "tense": "present", "person": "3p",
-      "text": "Les cours ___ en juin.", "answer": "finissent" },
-
-    { "id": "s.finir.pc.1s.01", "tense": "passe_compose", "person": "1s",
-      "text": "Je ___ mon livre hier soir.", "answer": "ai fini" },
-    { "id": "s.finir.pc.2s.01", "tense": "passe_compose", "person": "2s",
-      "text": "Tu ___ ton assiette ?", "answer": "as fini" },
-    { "id": "s.finir.pc.3s.01", "tense": "passe_compose", "person": "3s",
-      "text": "Elle ___ ses études l’année dernière.", "answer": "a fini" },
-    { "id": "s.finir.pc.1p.01", "tense": "passe_compose", "person": "1p",
-      "text": "Nous ___ le repas à minuit.", "answer": "avons fini" },
-    { "id": "s.finir.pc.2p.01", "tense": "passe_compose", "person": "2p",
-      "text": "Vous ___ le rapport ?", "answer": "avez fini" },
-    { "id": "s.finir.pc.3p.01", "tense": "passe_compose", "person": "3p",
-      "text": "Ils ___ les travaux de la maison.", "answer": "ont fini" },
-
-    { "id": "s.finir.im.1s.01", "tense": "imparfait", "person": "1s",
-      "text": "Avant, je ___ toujours tard le vendredi.",
-      "answer": "finissais" },
-    { "id": "s.finir.im.2s.01", "tense": "imparfait", "person": "2s",
-      "text": "Tu ___ toujours tes phrases par une question.",
-      "answer": "finissais" },
-    { "id": "s.finir.im.3s.01", "tense": "imparfait", "person": "3s",
-      "text": "Le spectacle ___ vers minuit.", "answer": "finissait" },
-    { "id": "s.finir.im.1p.01", "tense": "imparfait", "person": "1p",
-      "text": "Nous ___ le travail à cinq heures.", "answer": "finissions" },
-    { "id": "s.finir.im.2p.01", "tense": "imparfait", "person": "2p",
-      "text": "Vous ___ vos journées très tard.", "answer": "finissiez" },
-    { "id": "s.finir.im.3p.01", "tense": "imparfait", "person": "3p",
-      "text": "Les enfants ___ leurs devoirs avant de jouer.",
-      "answer": "finissaient" },
-
-    { "id": "s.finir.fs.1s.01", "tense": "futur_simple", "person": "1s",
-      "text": "Je ___ ce projet la semaine prochaine.", "answer": "finirai" },
-    { "id": "s.finir.fs.2s.01", "tense": "futur_simple", "person": "2s",
-      "text": "Tu ___ par comprendre.", "answer": "finiras" },
-    { "id": "s.finir.fs.3s.01", "tense": "futur_simple", "person": "3s",
-      "text": "La réunion ___ à midi.", "answer": "finira" },
-    { "id": "s.finir.fs.1p.01", "tense": "futur_simple", "person": "1p",
-      "text": "Nous ___ la peinture demain.", "answer": "finirons" },
-    { "id": "s.finir.fs.2p.01", "tense": "futur_simple", "person": "2p",
-      "text": "Vous ___ le gâteau ce soir ?", "answer": "finirez" },
-    { "id": "s.finir.fs.3p.01", "tense": "futur_simple", "person": "3p",
-      "text": "Ils ___ leurs études en juin.", "answer": "finiront" }
-  ]
+  }
 }

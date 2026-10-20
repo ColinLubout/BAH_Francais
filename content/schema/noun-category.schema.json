@@ -37,7 +37,7 @@
     "noun": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["id", "word", "gender", "level", "examples"],
+      "required": ["id", "word", "gender", "level"],
       "properties": {
         "id": {
           "type": "string",
@@ -81,11 +81,6 @@
               }
             ]
           }
-        },
-        "examples": {
-          "type": "array",
-          "minItems": 1,
-          "items": { "$ref": "#/definitions/text" }
         },
         "images": {
           "description": "Files in content/images/<noun id without n.>/, as a name or with a credit.",

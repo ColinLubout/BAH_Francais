@@ -7,7 +7,9 @@
   "h_aspire": false,
   "level": "debutant",
   "rank": 400,
-  "categories": ["cat.vie-quotidienne"],
+  "categories": [
+    "cat.vie-quotidienne"
+  ],
   "forms": {
     "present": {
       "1s": "habite",
@@ -41,65 +43,5 @@
       "2p": "habiterez",
       "3p": "habiteront"
     }
-  },
-  "sentences": [
-    { "id": "s.habiter.pr.1s.01", "tense": "present", "person": "1s",
-      "text": "Je ___ à Marseille depuis deux ans.", "answer": "habite" },
-    { "id": "s.habiter.pr.2s.01", "tense": "present", "person": "2s",
-      "text": "Tu ___ loin d’ici ?", "answer": "habites" },
-    { "id": "s.habiter.pr.3s.01", "tense": "present", "person": "3s",
-      "text": "Ma sœur ___ à la campagne.", "answer": "habite" },
-    { "id": "s.habiter.pr.1p.01", "tense": "present", "person": "1p",
-      "text": "Nous ___ au troisième étage.", "answer": "habitons" },
-    { "id": "s.habiter.pr.2p.01", "tense": "present", "person": "2p",
-      "text": "Vous ___ en ville ?", "answer": "habitez" },
-    { "id": "s.habiter.pr.3p.01", "tense": "present", "person": "3p",
-      "text": "Ils ___ près de la gare.", "answer": "habitent" },
-
-    { "id": "s.habiter.pc.1s.01", "tense": "passe_compose", "person": "1s",
-      "text": "Je ___ dix ans à Montréal.", "answer": "ai habité" },
-    { "id": "s.habiter.pc.2s.01", "tense": "passe_compose", "person": "2s",
-      "text": "Tu ___ en Espagne, non ?", "answer": "as habité" },
-    { "id": "s.habiter.pc.3s.01", "tense": "passe_compose", "person": "3s",
-      "text": "Elle ___ dans cette rue pendant un an.",
-      "answer": "a habité" },
-    { "id": "s.habiter.pc.1p.01", "tense": "passe_compose", "person": "1p",
-      "text": "Nous ___ chez nos parents jusqu’à vingt ans.",
-      "answer": "avons habité" },
-    { "id": "s.habiter.pc.2p.01", "tense": "passe_compose", "person": "2p",
-      "text": "Vous ___ à l’étranger ?", "answer": "avez habité" },
-    { "id": "s.habiter.pc.3p.01", "tense": "passe_compose", "person": "3p",
-      "text": "Ils ___ ici pendant la guerre.", "answer": "ont habité" },
-
-    { "id": "s.habiter.im.1s.01", "tense": "imparfait", "person": "1s",
-      "text": "Quand j’étais enfant, je ___ près de la mer.",
-      "answer": "habitais" },
-    { "id": "s.habiter.im.2s.01", "tense": "imparfait", "person": "2s",
-      "text": "Tu ___ encore chez tes parents l’année dernière ?",
-      "answer": "habitais" },
-    { "id": "s.habiter.im.3s.01", "tense": "imparfait", "person": "3s",
-      "text": "Mon oncle ___ une grande maison.", "answer": "habitait" },
-    { "id": "s.habiter.im.1p.01", "tense": "imparfait", "person": "1p",
-      "text": "Nous ___ un petit appartement à Paris.",
-      "answer": "habitions" },
-    { "id": "s.habiter.im.2p.01", "tense": "imparfait", "person": "2p",
-      "text": "Vous ___ à côté de l’école ?", "answer": "habitiez" },
-    { "id": "s.habiter.im.3p.01", "tense": "imparfait", "person": "3p",
-      "text": "Mes grands-parents ___ à la campagne.",
-      "answer": "habitaient" },
-
-    { "id": "s.habiter.fs.1s.01", "tense": "futur_simple", "person": "1s",
-      "text": "L’année prochaine, je ___ à Bordeaux.",
-      "answer": "habiterai" },
-    { "id": "s.habiter.fs.2s.01", "tense": "futur_simple", "person": "2s",
-      "text": "Tu ___ avec nous cet été ?", "answer": "habiteras" },
-    { "id": "s.habiter.fs.3s.01", "tense": "futur_simple", "person": "3s",
-      "text": "Elle ___ dans le nouveau quartier.", "answer": "habitera" },
-    { "id": "s.habiter.fs.1p.01", "tense": "futur_simple", "person": "1p",
-      "text": "Nous ___ plus près du travail.", "answer": "habiterons" },
-    { "id": "s.habiter.fs.2p.01", "tense": "futur_simple", "person": "2p",
-      "text": "Vous ___ au centre-ville ?", "answer": "habiterez" },
-    { "id": "s.habiter.fs.3p.01", "tense": "futur_simple", "person": "3p",
-      "text": "Ils ___ dans une maison neuve.", "answer": "habiteront" }
-  ]
+  }
 }

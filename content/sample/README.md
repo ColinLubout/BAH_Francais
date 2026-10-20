@@ -12,9 +12,11 @@ It is small but uses every part of the content format:
   starting with *h muet* and *h aspiré*, synonyms with their own gender or
   elision, a noun in two categories, an ending hint, and images with and
   without a credit.
-- `verbs/`: five verbs with every form and a sentence for each tense and
-  person, including a reflexive verb, alternative forms (*paie* / *paye*), a
-  verb starting with *h*, and agreement in the passé composé.
+- `verbs/`: five verbs with every form, including a reflexive verb, alternative
+  forms (*paie* / *paye*) and a verb starting with *h*.
+- `sentences/`: a sentence for each noun and for each verb's tense and person,
+  with agreement in the passé composé, elided words before a verb (*j’*, and an
+  *l’* that says `le`), and sentences that serve both a verb and a noun.
 - `images/`: simple placeholder drawings, one folder per noun.
 
 Validate it and build its pack (from the repo root):

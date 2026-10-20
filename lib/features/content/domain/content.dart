@@ -14,12 +14,14 @@ class ContentSet {
     this.categories = const [],
     this.nouns = const [],
     this.verbs = const [],
+    this.sentences = const [],
     this.images = const [],
   });
 
   final List<ContentCategory> categories;
   final List<ContentNoun> nouns;
   final List<ContentVerb> verbs;
+  final List<ContentSentence> sentences;
   final List<ContentImage> images;
 
   /// Everything as plain values, each list in a fixed order, so two sets can
@@ -28,6 +30,7 @@ class ContentSet {
     'categories': _sortedById(categories, (c) => c.id, (c) => c.toJson()),
     'nouns': _sortedById(nouns, (n) => n.id, (n) => n.toJson()),
     'verbs': _sortedById(verbs, (v) => v.id, (v) => v.toJson()),
+    'sentences': _sortedById(sentences, (s) => s.id, (s) => s.toJson()),
     'images': _sortedById(images, (i) => i.id, (i) => i.toJson()),
   };
 }
@@ -87,7 +90,6 @@ class ContentNoun {
     required this.gender,
     required this.level,
     required this.categoryIds,
-    required this.examples,
     this.elides = false,
     this.pluralOnly = false,
     this.rank,
@@ -117,15 +119,8 @@ class ContentNoun {
   final List<Synonym> synonyms;
   final List<String> categoryIds;
 
-  /// Example sentences, in order.
-  final List<String> examples;
-
   /// Its images' ids, in order.
   final List<String> imageIds;
-
-  /// The id of example [index] (from 0): `n.fourchette.ex01`.
-  static String exampleId(String nounId, int index) =>
-      '$nounId.ex${(index + 1).toString().padLeft(2, '0')}';
 
   Map<String, Object?> toJson() => {
     'id': id,
@@ -140,7 +135,6 @@ class ContentNoun {
     'ending_hint': endingHint,
     'synonyms': [for (final s in synonyms) synonymToJson(s)],
     'categories': [...categoryIds]..sort(),
-    'examples': examples,
     'images': imageIds,
   };
 }
@@ -162,7 +156,6 @@ class ContentVerb {
     required this.level,
     required this.categoryIds,
     required this.forms,
-    required this.sentences,
     this.pronominal = false,
     this.hAspire = false,
     this.rank,
@@ -181,7 +174,6 @@ class ContentVerb {
   final int? rank;
   final List<String> categoryIds;
   final List<ContentVerbForm> forms;
-  final List<ContentSentence> sentences;
 
   /// The form for [tense] and [person], or null.
   ContentVerbForm? form(Tense tense, Person person) {
@@ -206,7 +198,6 @@ class ContentVerb {
         for (final person in Person.values)
           if (form(tense, person) case final f?) f.toJson(),
     ],
-    'sentences': _sortedById(sentences, (s) => s.id, (s) => s.toJson()),
   };
 }
 
@@ -236,35 +227,94 @@ class ContentVerbForm {
   };
 }
 
-/// A Conjugation prompt: [text] has `___` where the verb goes.
+/// A sentence, written in full, and the verbs and nouns it uses. One sentence
+/// can be a Conjugation prompt for each of its verbs and an example for each
+/// of its nouns.
 @immutable
 class ContentSentence {
   const ContentSentence({
     required this.id,
-    required this.tense,
-    required this.person,
     required this.text,
-    required this.answer,
-    this.alternatives = const [],
+    this.verbs = const [],
+    this.nouns = const [],
   });
 
   final String id;
-  final Tense tense;
-  final Person person;
-  final String text;
 
-  /// What fills the blank, with any agreement (*sommes allés*).
-  final String answer;
-  final List<String> alternatives;
+  /// Plain French, with no blank: *Hier, nous sommes allés au cinéma.*
+  final String text;
+  final List<SentenceVerb> verbs;
+  final List<SentenceNoun> nouns;
 
   Map<String, Object?> toJson() => {
     'id': id,
+    'text': text,
+    'verbs': [
+      for (final v in [...verbs]..sort(_byVerb)) v.toJson(),
+    ],
+    'nouns': [
+      for (final n in [...nouns]..sort((a, b) => a.nounId.compareTo(b.nounId)))
+        n.toJson(),
+    ],
+  };
+
+  static int _byVerb(SentenceVerb a, SentenceVerb b) {
+    final byVerb = a.verbId.compareTo(b.verbId);
+    if (byVerb != 0) return byVerb;
+    final byTense = a.tense.index.compareTo(b.tense.index);
+    if (byTense != 0) return byTense;
+    return a.person.index.compareTo(b.person.index);
+  }
+}
+
+/// A verb a sentence uses: the words its form takes there, which the
+/// Conjugation drill blanks out.
+@immutable
+class SentenceVerb {
+  const SentenceVerb({
+    required this.verbId,
+    required this.tense,
+    required this.person,
+    required this.answer,
+    this.alternatives = const [],
+    this.before,
+  });
+
+  final String verbId;
+  final Tense tense;
+  final Person person;
+
+  /// The words that fill the blank, as the sentence has them, with any
+  /// agreement (*sommes allés*).
+  final String answer;
+
+  /// Other right answers (*sommes allées*).
+  final List<String> alternatives;
+
+  /// *le* or *la*, when the word just before [answer] is an elided *l’*: the
+  /// prompt writes it in full and can't tell which it is.
+  final String? before;
+
+  Map<String, Object?> toJson() => {
+    'verb': verbId,
     'tense': tense.id,
     'person': person.id,
-    'text': text,
     'answer': answer,
     'alternatives': alternatives,
+    'before': before,
   };
+}
+
+/// A noun a sentence uses, and the words it takes there (*cinéma*,
+/// *haricots*), which feedback shows in bold.
+@immutable
+class SentenceNoun {
+  const SentenceNoun({required this.nounId, required this.word});
+
+  final String nounId;
+  final String word;
+
+  Map<String, Object?> toJson() => {'noun': nounId, 'word': word};
 }
 
 /// An image of a noun: SVG markup, or the encoded bytes of a PNG or JPEG.

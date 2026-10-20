@@ -1,3 +1,6 @@
+// Each test breaks one rule in the valid sample. Where a test needs a word
+// that no sample has (a made-up elided word), it uses a made-up token.
+
 import 'dart:convert';
 import 'dart:io';
 
@@ -26,6 +29,7 @@ ContentFiles edited(String path, void Function(Json json) change) {
     verbCategories: apply(sample.verbCategories!),
     nouns: [for (final f in sample.nouns) apply(f)],
     verbs: [for (final f in sample.verbs) apply(f)],
+    sentences: [for (final f in sample.sentences) apply(f)],
     images: sample.images,
   );
 }
@@ -35,6 +39,7 @@ ContentFiles withImage(String path, String svg) => ContentFiles(
   verbCategories: sample.verbCategories,
   nouns: sample.nouns,
   verbs: sample.verbs,
+  sentences: sample.sentences,
   images: {...sample.images, path: utf8.encode(svg)},
 );
 
@@ -42,9 +47,22 @@ ContentFiles withImage(String path, String svg) => ContentFiles(
 Json noun(Json json, String id) =>
     (json['nouns']! as List).cast<Json>().firstWhere((n) => n['id'] == id);
 
-/// The sentence [id] in a verb file's [json].
+/// The sentence [id] in a sentence file's [json].
 Json sentence(Json json, String id) =>
     (json['sentences']! as List).cast<Json>().firstWhere((s) => s['id'] == id);
+
+/// The sample with sentence [id] in the file at [path] changed by [change].
+ContentFiles editedSentence(
+  String path,
+  String id,
+  void Function(Json sentence) change,
+) => edited(path, (j) => change(sentence(j, id)));
+
+/// The first verb a sentence uses.
+Json firstVerb(Json sentence) => (sentence['verbs']! as List).cast<Json>()[0];
+
+/// The first noun a sentence uses.
+Json firstNoun(Json sentence) => (sentence['nouns']! as List).cast<Json>()[0];
 
 List<String> errorsOf(ContentFiles files) => [
   for (final e in validateContent(files, schemas).errors) e.toString(),
@@ -59,10 +77,19 @@ void expectError(ContentFiles files, List<String> fragments) {
   }
 }
 
+/// Expects one of [files]'s errors to contain every fragment.
+void expectAnError(ContentFiles files, List<String> fragments) => expect(
+  errorsOf(files),
+  contains(allOf([for (final f in fragments) contains(f)])),
+);
+
 const cuisine = 'nouns/cuisine.json';
 const animaux = 'nouns/animaux.json';
 const essentiels = 'nouns/essentiels.json';
 const aller = 'verbs/aller.json';
+const allerSentences = 'sentences/aller.json';
+const cuisineSentences = 'sentences/cuisine.json';
+const payerSentences = 'sentences/payer.json';
 
 void main() {
   group('the sample', () {
@@ -111,6 +138,19 @@ void main() {
         'cat.essentiels',
         'cat.verbes-essentiels',
       });
+
+      final sentences = {for (final s in content.sentences) s.id: s};
+      final house = sentences['s.maison.01']!;
+      expect(house.text, 'Ils habitent dans une grande maison.');
+      expect(house.nouns.single.nounId, 'n.maison');
+      expect(house.verbs.single.verbId, 'v.habiter');
+      expect(house.verbs.single.person, Person.thirdPlural);
+      final paid = sentences['s.payer.pc.1s.02']!.verbs.single;
+      expect(paid.answer, 'ai payé');
+      expect(paid.before, 'le');
+      expect(sentences['s.aller.pc.1s.01']!.verbs.single.alternatives, [
+        'suis allée',
+      ]);
     });
   });
 
@@ -120,10 +160,7 @@ void main() {
         verbCategories: sample.verbCategories,
         nouns: [const SourceFile(cuisine, '{"category": ')],
       );
-      expect(
-        errorsOf(files),
-        contains(allOf(contains(cuisine), contains('not valid JSON'))),
-      );
+      expectAnError(files, [cuisine, 'not valid JSON']);
     });
 
     test('a missing required field', () {
@@ -141,7 +178,7 @@ void main() {
     });
 
     test('a badly formed id', () {
-      expectError(
+      expectAnError(
         edited(cuisine, (j) => noun(j, 'n.couteau')['id'] = 'couteau'),
         ['/nouns/1/id'],
       );
@@ -151,13 +188,6 @@ void main() {
       expectError(
         edited(cuisine, (j) => noun(j, 'n.couteau')['colour'] = 'gris'),
         ['/nouns/1', 'colour'],
-      );
-    });
-
-    test('a noun with no example', () {
-      expectError(
-        edited(cuisine, (j) => noun(j, 'n.couteau')['examples'] = <String>[]),
-        ['/nouns/1/examples'],
       );
     });
 
@@ -194,32 +224,73 @@ void main() {
         [aller, '/forms', 'imparfait'],
       );
     });
+
+    test('a sentence that uses no verb and no noun', () {
+      expectAnError(
+        editedSentence(cuisineSentences, 's.couteau.01', (s) {
+          s.remove('nouns');
+        }),
+        [cuisineSentences, '/sentences/1'],
+      );
+    });
+
+    test('a sentence’s verb without an answer', () {
+      expectError(
+        editedSentence(
+          allerSentences,
+          's.aller.pr.1s.01',
+          (s) => firstVerb(s).remove('answer'),
+        ),
+        [allerSentences, '/sentences/0/verbs/0', 'answer'],
+      );
+    });
+
+    test('before is le or la', () {
+      expectError(
+        editedSentence(
+          payerSentences,
+          's.payer.pc.1s.02',
+          (s) => firstVerb(s)['before'] = 'les',
+        ),
+        [payerSentences, 'before'],
+      );
+    });
+
+    test('a refused sentence file says nothing about what lacks one', () {
+      final errors = errorsOf(
+        editedSentence(
+          allerSentences,
+          's.aller.pr.1s.01',
+          (s) => firstVerb(s)['tense'] = 'futur',
+        ),
+      );
+      expect(errors, isNotEmpty);
+      expect(errors, everyElement(startsWith(allerSentences)));
+    });
   });
 
   group('every id is unique', () {
     test('nouns', () {
       // Files are read in name order: the second use is the error.
-      expectError(
+      expectAnError(
         edited(animaux, (j) => noun(j, 'n.oiseau')['id'] = 'n.couteau'),
         [cuisine, 'noun id n.couteau is already used in $animaux'],
       );
     });
 
     test('categories', () {
-      final errors = errorsOf(
+      expectAnError(
         edited(animaux, (j) => (j['category']! as Json)['id'] = 'cat.cuisine'),
-      );
-      expect(
-        errors,
-        contains(contains('category id cat.cuisine is already used')),
+        ['category id cat.cuisine is already used'],
       );
     });
 
     test('sentences', () {
       expectError(
-        edited(
-          aller,
-          (j) => sentence(j, 's.aller.pr.2s.01')['id'] = 's.aller.pr.1s.01',
+        editedSentence(
+          allerSentences,
+          's.aller.pr.2s.01',
+          (s) => s['id'] = 's.aller.pr.1s.01',
         ),
         ['sentence id s.aller.pr.1s.01 is already used'],
       );
@@ -234,6 +305,7 @@ void main() {
         verbCategories: files.verbCategories,
         nouns: files.nouns,
         verbs: files.verbs,
+        sentences: files.sentences,
         images: {
           ...files.images,
           'images/chat/chien-1.svg': files.images['images/chien/chien-1.svg']!,
@@ -367,120 +439,210 @@ void main() {
     });
   });
 
-  group('sentences', () {
-    void editSentence(
-      String id,
-      void Function(Json s) change,
-      List<String> fragments,
-    ) => expectError(edited(aller, (j) => change(sentence(j, id))), [
-      aller,
-      id,
-      ...fragments,
-    ]);
-
-    test('every tense and person has one', () {
+  group('every item has its sentences', () {
+    test('a verb, one for each tense and person', () {
       expectError(
         edited(
-          aller,
+          allerSentences,
           (j) => (j['sentences']! as List).removeWhere(
             (s) => (s as Json)['id'] == 's.aller.im.2p.01',
           ),
         ),
-        ['v.aller', 'no sentence for imparfait 2p'],
+        [aller, 'v.aller', 'no sentence for imparfait 2p'],
       );
     });
 
-    test('has a blank', () {
-      editSentence(
-        's.aller.pr.1s.01',
-        (s) => s['text'] = 'Je vais au marché.',
-        ['has no ___'],
-      );
-    });
-
-    test('has the blank once', () {
-      editSentence('s.aller.pr.1s.01', (s) => s['text'] = 'Je ___ au ___.', [
-        'has ___ more than once',
-      ]);
-    });
-
-    test('has a blank of three underscores', () {
-      editSentence(
-        's.aller.pr.1s.01',
-        (s) => s['text'] = 'Je ____ au marché.',
-        ['three underscores'],
-      );
-    });
-
-    test('writes the word before the blank in full', () {
-      editSentence(
-        's.aller.fs.1s.01',
-        (s) => s['text'] = 'Demain, j’___ à la banque.',
-        ['the word before ___ is elided'],
-      );
-      editSentence(
-        's.aller.fs.1s.01',
-        (s) => s['text'] = "Demain, j' ___ à la banque.",
-        ['the word before ___ is elided'],
-      );
-    });
-
-    test('its answer is the stored form', () {
-      editSentence('s.aller.pr.1s.01', (s) => s['answer'] = 'va', [
-        '"va" is not the present 1s form, "vais"',
-      ]);
-    });
-
-    test('its answer includes nothing but the verb', () {
-      editSentence('s.aller.fs.1s.01', (s) => s['answer'] = 'j’irai', [
-        '"j’irai" is not the futur_simple 1s form',
-      ]);
-    });
-
-    test('its alternatives are stored forms too', () {
+    test('a noun, as an example', () {
       expectError(
         edited(
-          'verbs/payer.json',
-          (j) => sentence(j, 's.payer.pr.1s.01')['alternatives'] = ['payé'],
-        ),
-        ['"payé" is not the present 1s form, "paie" or "paye"'],
-      );
-    });
-
-    test('a form’s alternative is a right answer', () {
-      expect(
-        errorsOf(
-          edited(
-            'verbs/payer.json',
-            (j) => sentence(j, 's.payer.pr.1s.01')['answer'] = 'paye',
+          cuisineSentences,
+          (j) => (j['sentences']! as List).removeWhere(
+            (s) => (s as Json)['id'] == 's.couteau.01',
           ),
         ),
-        isEmpty,
+        [cuisine, 'n.couteau', 'no sentence uses it as an example'],
+      );
+    });
+  });
+
+  group('sentences', () {
+    void expectSentenceError(
+      String path,
+      String id,
+      void Function(Json s) change,
+      List<String> fragments,
+    ) =>
+        expectError(editedSentence(path, id, change), [path, id, ...fragments]);
+
+    test('are written in full', () {
+      expectSentenceError(
+        allerSentences,
+        's.aller.pr.1s.01',
+        (s) => s['text'] = 'Je vais au ___ le samedi.',
+        ['is written in full, with no ___'],
       );
     });
 
-    test('a compound tense allows agreement, and nothing else', () {
-      for (final agreed in ['est allé', 'est allée', 'est allés']) {
+    test('use verbs and nouns that exist', () {
+      expectSentenceError(
+        allerSentences,
+        's.aller.pr.1s.01',
+        (s) => (s['verbs']! as List).add({...firstVerb(s), 'verb': 'v.nulle'}),
+        ['no verb v.nulle'],
+      );
+      expectSentenceError(
+        cuisineSentences,
+        's.couteau.01',
+        (s) => (s['nouns']! as List).add({'noun': 'n.nulle', 'word': 'Passe'}),
+        ['no noun n.nulle'],
+      );
+    });
+
+    test('use each verb and noun once', () {
+      expectSentenceError(
+        allerSentences,
+        's.aller.pr.1s.01',
+        (s) => (s['verbs']! as List).add(firstVerb(s)),
+        ['uses v.aller present 1s twice'],
+      );
+      expectSentenceError(
+        cuisineSentences,
+        's.couteau.01',
+        (s) => (s['nouns']! as List).add(firstNoun(s)),
+        ['uses n.couteau twice'],
+      );
+    });
+
+    test('hold a verb’s answer exactly once, as whole words', () {
+      expectSentenceError(
+        allerSentences,
+        's.aller.pr.1s.01',
+        (s) => s['text'] = 'Je vais au marché, je vais au parc.',
+        ['the answer "vais" (v.aller) is not in the text exactly once'],
+      );
+      expectSentenceError(
+        allerSentences,
+        's.aller.pr.1s.01',
+        (s) => s['text'] = 'Je vaisselle.',
+        ['the answer "vais" (v.aller) is not in the text exactly once'],
+      );
+    });
+
+    test('hold a noun’s word exactly once, as whole words', () {
+      expectSentenceError(
+        cuisineSentences,
+        's.couteau.01',
+        (s) => firstNoun(s)['word'] = 'couteaux',
+        ['"couteaux" (n.couteau) is not in the text exactly once'],
+      );
+    });
+
+    group('the word before a verb', () {
+      test('says le or la after l’', () {
+        expectSentenceError(
+          payerSentences,
+          's.payer.pc.1s.02',
+          (s) => firstVerb(s).remove('before'),
+          ['"ai payé" follows l’: say whether it is le or la'],
+        );
+      });
+
+      test('is written in full by the app after j’, n’ and the others', () {
         expect(
           errorsOf(
-            edited(
-              aller,
-              (j) => sentence(j, 's.aller.pc.3s.01')['answer'] = agreed,
+            editedSentence(
+              allerSentences,
+              's.aller.fs.1s.01',
+              (s) => s['text'] = 'Demain, j’irai à la banque.',
             ),
           ),
           isEmpty,
-          reason: agreed,
         );
-      }
-      editSentence('s.aller.pc.3s.01', (s) => s['answer'] = 'est allées.', [
-        'allowing for agreement',
-      ]);
+      });
+
+      test('says nothing when it isn’t l’', () {
+        expectSentenceError(
+          allerSentences,
+          's.aller.pr.1s.01',
+          (s) => firstVerb(s)['before'] = 'le',
+          ['"before" only applies when the answer follows l’'],
+        );
+      });
+
+      test('can be written in full', () {
+        // A made-up word ending in an elided qu’.
+        expectSentenceError(
+          allerSentences,
+          's.aller.pr.1s.01',
+          (s) => s['text'] = 'Zibqu’vais au marché.',
+          ['"vais" follows zibqu’, which the prompt can’t write in full'],
+        );
+      });
     });
 
-    test('a simple tense allows no agreement', () {
-      editSentence('s.aller.pr.1p.01', (s) => s['answer'] = 'allonss', [
-        '"allons"',
-      ]);
+    group('answers', () {
+      test('are the stored form', () {
+        expectSentenceError(allerSentences, 's.aller.pr.1s.01', (s) {
+          s['text'] = 'Je va au marché le samedi.';
+          firstVerb(s)['answer'] = 'va';
+        }, ['"va" is not the v.aller present 1s form, "vais"']);
+      });
+
+      test('include nothing but the verb', () {
+        expectSentenceError(
+          allerSentences,
+          's.aller.fs.1s.01',
+          (s) => firstVerb(s)['answer'] = 'j’irai',
+          ['"j’irai" is not the v.aller futur_simple 1s form'],
+        );
+      });
+
+      test('alternatives are stored forms too', () {
+        expectSentenceError(
+          payerSentences,
+          's.payer.pr.1s.01',
+          (s) => firstVerb(s)['alternatives'] = ['payé'],
+          ['"payé" is not the v.payer present 1s form, "paie" or "paye"'],
+        );
+      });
+
+      test('a form’s alternative is a right answer', () {
+        expect(
+          errorsOf(
+            editedSentence(payerSentences, 's.payer.pr.1s.01', (s) {
+              s['text'] = 'Je paye toujours en espèces.';
+              firstVerb(s)['answer'] = 'paye';
+            }),
+          ),
+          isEmpty,
+        );
+      });
+
+      test('a compound tense allows agreement, and nothing else', () {
+        for (final agreed in ['est allé', 'est allée', 'est allés']) {
+          expect(
+            errorsOf(
+              editedSentence(allerSentences, 's.aller.pc.3s.01', (s) {
+                s['text'] = 'Elle $agreed au travail en bus.';
+                firstVerb(s)['answer'] = agreed;
+              }),
+            ),
+            isEmpty,
+            reason: agreed,
+          );
+        }
+        expectSentenceError(allerSentences, 's.aller.pc.3s.01', (s) {
+          s['text'] = 'Elle est allâs au travail en bus.';
+          firstVerb(s)['answer'] = 'est allâs';
+        }, ['allowing for agreement']);
+      });
+
+      test('a simple tense allows no agreement', () {
+        expectSentenceError(allerSentences, 's.aller.pr.1p.01', (s) {
+          s['text'] = 'Nous allonss souvent à la plage en été.';
+          firstVerb(s)['answer'] = 'allonss';
+        }, ['"allons"']);
+      });
     });
   });
 
@@ -500,6 +662,7 @@ void main() {
         verbCategories: sample.verbCategories,
         nouns: sample.nouns,
         verbs: sample.verbs,
+        sentences: sample.sentences,
         images: {
           ...sample.images,
           'images/chien/chien-1.svg': [0xff, 0xfe, 0x00],

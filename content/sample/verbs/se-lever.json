@@ -6,7 +6,9 @@
   "pronominal": true,
   "level": "intermediaire",
   "rank": 300,
-  "categories": ["cat.vie-quotidienne"],
+  "categories": [
+    "cat.vie-quotidienne"
+  ],
   "forms": {
     "present": {
       "1s": "me lève",
@@ -40,65 +42,5 @@
       "2p": "vous lèverez",
       "3p": "se lèveront"
     }
-  },
-  "sentences": [
-    { "id": "s.se-lever.pr.1s.01", "tense": "present", "person": "1s",
-      "text": "Je ___ à sept heures tous les matins.", "answer": "me lève" },
-    { "id": "s.se-lever.pr.2s.01", "tense": "present", "person": "2s",
-      "text": "Tu ___ tôt le dimanche ?", "answer": "te lèves" },
-    { "id": "s.se-lever.pr.3s.01", "tense": "present", "person": "3s",
-      "text": "Il ___ toujours avant le soleil.", "answer": "se lève" },
-    { "id": "s.se-lever.pr.1p.01", "tense": "present", "person": "1p",
-      "text": "Nous ___ tard pendant les vacances.", "answer": "nous levons" },
-    { "id": "s.se-lever.pr.2p.01", "tense": "present", "person": "2p",
-      "text": "Vous ___ à quelle heure ?", "answer": "vous levez" },
-    { "id": "s.se-lever.pr.3p.01", "tense": "present", "person": "3p",
-      "text": "Les enfants ___ à huit heures.", "answer": "se lèvent" },
-
-    { "id": "s.se-lever.pc.1s.01", "tense": "passe_compose", "person": "1s",
-      "text": "Ce matin, je ___ très tôt.", "answer": "me suis levé",
-      "alternatives": ["me suis levée"] },
-    { "id": "s.se-lever.pc.2s.01", "tense": "passe_compose", "person": "2s",
-      "text": "Tu ___ à quelle heure hier ?", "answer": "t’es levé",
-      "alternatives": ["t’es levée"] },
-    { "id": "s.se-lever.pc.3s.01", "tense": "passe_compose", "person": "3s",
-      "text": "Elle ___ avant tout le monde.", "answer": "s’est levée" },
-    { "id": "s.se-lever.pc.1p.01", "tense": "passe_compose", "person": "1p",
-      "text": "Nous ___ pour applaudir.", "answer": "nous sommes levés",
-      "alternatives": ["nous sommes levées"] },
-    { "id": "s.se-lever.pc.2p.01", "tense": "passe_compose", "person": "2p",
-      "text": "Vous ___ tard ce matin, les garçons.",
-      "answer": "vous êtes levés" },
-    { "id": "s.se-lever.pc.3p.01", "tense": "passe_compose", "person": "3p",
-      "text": "Elles ___ à six heures.", "answer": "se sont levées" },
-
-    { "id": "s.se-lever.im.1s.01", "tense": "imparfait", "person": "1s",
-      "text": "Quand je travaillais, je ___ à cinq heures.",
-      "answer": "me levais" },
-    { "id": "s.se-lever.im.2s.01", "tense": "imparfait", "person": "2s",
-      "text": "Tu ___ toujours en chantant.", "answer": "te levais" },
-    { "id": "s.se-lever.im.3s.01", "tense": "imparfait", "person": "3s",
-      "text": "Mon grand-père ___ avec le soleil.", "answer": "se levait" },
-    { "id": "s.se-lever.im.1p.01", "tense": "imparfait", "person": "1p",
-      "text": "Nous ___ tôt pour aller à l’école.",
-      "answer": "nous levions" },
-    { "id": "s.se-lever.im.2p.01", "tense": "imparfait", "person": "2p",
-      "text": "Vous ___ tard le samedi ?", "answer": "vous leviez" },
-    { "id": "s.se-lever.im.3p.01", "tense": "imparfait", "person": "3p",
-      "text": "Les fermiers ___ avant l’aube.", "answer": "se levaient" },
-
-    { "id": "s.se-lever.fs.1s.01", "tense": "futur_simple", "person": "1s",
-      "text": "Demain, je ___ à six heures.", "answer": "me lèverai" },
-    { "id": "s.se-lever.fs.2s.01", "tense": "futur_simple", "person": "2s",
-      "text": "Tu ___ tôt pour prendre le train.", "answer": "te lèveras" },
-    { "id": "s.se-lever.fs.3s.01", "tense": "futur_simple", "person": "3s",
-      "text": "Elle ___ quand le réveil sonnera.", "answer": "se lèvera" },
-    { "id": "s.se-lever.fs.1p.01", "tense": "futur_simple", "person": "1p",
-      "text": "Nous ___ tard dimanche.", "answer": "nous lèverons" },
-    { "id": "s.se-lever.fs.2p.01", "tense": "futur_simple", "person": "2p",
-      "text": "Vous ___ quand le professeur entrera.",
-      "answer": "vous lèverez" },
-    { "id": "s.se-lever.fs.3p.01", "tense": "futur_simple", "person": "3p",
-      "text": "Ils ___ pour chanter l’hymne.", "answer": "se lèveront" }
-  ]
+  }
 }

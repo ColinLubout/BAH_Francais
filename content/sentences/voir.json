@@ -1,0 +1,310 @@
+{
+  "sentences": [
+    {
+      "id": "s.voir.pr.1s.01",
+      "text": "Je vois la mer de ma fenêtre.",
+      "verbs": [
+        {
+          "verb": "v.voir",
+          "tense": "present",
+          "person": "1s",
+          "answer": "vois"
+        }
+      ]
+    },
+    {
+      "id": "s.voir.pr.2s.01",
+      "text": "Tu vois ce que je veux dire ?",
+      "verbs": [
+        {
+          "verb": "v.voir",
+          "tense": "present",
+          "person": "2s",
+          "answer": "vois"
+        }
+      ]
+    },
+    {
+      "id": "s.voir.pr.3s.01",
+      "text": "On voit la tour Eiffel d’ici.",
+      "verbs": [
+        {
+          "verb": "v.voir",
+          "tense": "present",
+          "person": "3s",
+          "answer": "voit"
+        }
+      ]
+    },
+    {
+      "id": "s.voir.pr.1p.01",
+      "text": "Nous voyons nos cousins chaque été.",
+      "verbs": [
+        {
+          "verb": "v.voir",
+          "tense": "present",
+          "person": "1p",
+          "answer": "voyons"
+        }
+      ]
+    },
+    {
+      "id": "s.voir.pr.2p.01",
+      "text": "Vous voyez le panneau là-bas ?",
+      "verbs": [
+        {
+          "verb": "v.voir",
+          "tense": "present",
+          "person": "2p",
+          "answer": "voyez"
+        }
+      ]
+    },
+    {
+      "id": "s.voir.pr.3p.01",
+      "text": "Les chats voient bien la nuit.",
+      "verbs": [
+        {
+          "verb": "v.voir",
+          "tense": "present",
+          "person": "3p",
+          "answer": "voient"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.nuit",
+          "word": "nuit"
+        }
+      ]
+    },
+    {
+      "id": "s.voir.pc.1s.01",
+      "text": "J’ai vu un bon film hier soir.",
+      "verbs": [
+        {
+          "verb": "v.voir",
+          "tense": "passe_compose",
+          "person": "1s",
+          "answer": "ai vu"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.soir",
+          "word": "soir"
+        }
+      ]
+    },
+    {
+      "id": "s.voir.pc.2s.01",
+      "text": "Tu as vu mes clés quelque part ?",
+      "verbs": [
+        {
+          "verb": "v.voir",
+          "tense": "passe_compose",
+          "person": "2s",
+          "answer": "as vu"
+        }
+      ]
+    },
+    {
+      "id": "s.voir.pc.3s.01",
+      "text": "Elle a vu son médecin ce matin.",
+      "verbs": [
+        {
+          "verb": "v.voir",
+          "tense": "passe_compose",
+          "person": "3s",
+          "answer": "a vu"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.matin",
+          "word": "matin"
+        }
+      ]
+    },
+    {
+      "id": "s.voir.pc.1p.01",
+      "text": "Nous avons vu un arc-en-ciel après la pluie.",
+      "verbs": [
+        {
+          "verb": "v.voir",
+          "tense": "passe_compose",
+          "person": "1p",
+          "answer": "avons vu"
+        }
+      ]
+    },
+    {
+      "id": "s.voir.pc.2p.01",
+      "text": "Vous avez vu la nouvelle exposition ?",
+      "verbs": [
+        {
+          "verb": "v.voir",
+          "tense": "passe_compose",
+          "person": "2p",
+          "answer": "avez vu"
+        }
+      ]
+    },
+    {
+      "id": "s.voir.pc.3p.01",
+      "text": "Ils ont vu un renard dans le jardin.",
+      "verbs": [
+        {
+          "verb": "v.voir",
+          "tense": "passe_compose",
+          "person": "3p",
+          "answer": "ont vu"
+        }
+      ]
+    },
+    {
+      "id": "s.voir.im.1s.01",
+      "text": "Enfant, je voyais mes grands-parents tous les dimanches.",
+      "verbs": [
+        {
+          "verb": "v.voir",
+          "tense": "imparfait",
+          "person": "1s",
+          "answer": "voyais"
+        }
+      ]
+    },
+    {
+      "id": "s.voir.im.2s.01",
+      "text": "Tu voyais souvent tes amis à l’époque ?",
+      "verbs": [
+        {
+          "verb": "v.voir",
+          "tense": "imparfait",
+          "person": "2s",
+          "answer": "voyais"
+        }
+      ]
+    },
+    {
+      "id": "s.voir.im.3s.01",
+      "text": "Il ne voyait rien sans ses lunettes.",
+      "verbs": [
+        {
+          "verb": "v.voir",
+          "tense": "imparfait",
+          "person": "3s",
+          "answer": "voyait"
+        }
+      ]
+    },
+    {
+      "id": "s.voir.im.1p.01",
+      "text": "Nous voyions les montagnes depuis le balcon.",
+      "verbs": [
+        {
+          "verb": "v.voir",
+          "tense": "imparfait",
+          "person": "1p",
+          "answer": "voyions"
+        }
+      ]
+    },
+    {
+      "id": "s.voir.im.2p.01",
+      "text": "Vous voyiez bien la scène de votre place ?",
+      "verbs": [
+        {
+          "verb": "v.voir",
+          "tense": "imparfait",
+          "person": "2p",
+          "answer": "voyiez"
+        }
+      ]
+    },
+    {
+      "id": "s.voir.im.3p.01",
+      "text": "Ils voyaient la mer depuis leur chambre.",
+      "verbs": [
+        {
+          "verb": "v.voir",
+          "tense": "imparfait",
+          "person": "3p",
+          "answer": "voyaient"
+        }
+      ]
+    },
+    {
+      "id": "s.voir.fs.1s.01",
+      "text": "Je verrai le médecin jeudi.",
+      "verbs": [
+        {
+          "verb": "v.voir",
+          "tense": "futur_simple",
+          "person": "1s",
+          "answer": "verrai"
+        }
+      ]
+    },
+    {
+      "id": "s.voir.fs.2s.01",
+      "text": "Tu verras, tout ira bien.",
+      "verbs": [
+        {
+          "verb": "v.voir",
+          "tense": "futur_simple",
+          "person": "2s",
+          "answer": "verras"
+        }
+      ]
+    },
+    {
+      "id": "s.voir.fs.3s.01",
+      "text": "Elle verra ses parents à Noël.",
+      "verbs": [
+        {
+          "verb": "v.voir",
+          "tense": "futur_simple",
+          "person": "3s",
+          "answer": "verra"
+        }
+      ]
+    },
+    {
+      "id": "s.voir.fs.1p.01",
+      "text": "Nous verrons bien demain.",
+      "verbs": [
+        {
+          "verb": "v.voir",
+          "tense": "futur_simple",
+          "person": "1p",
+          "answer": "verrons"
+        }
+      ]
+    },
+    {
+      "id": "s.voir.fs.2p.01",
+      "text": "Vous verrez la différence tout de suite.",
+      "verbs": [
+        {
+          "verb": "v.voir",
+          "tense": "futur_simple",
+          "person": "2p",
+          "answer": "verrez"
+        }
+      ]
+    },
+    {
+      "id": "s.voir.fs.3p.01",
+      "text": "Ils verront le résultat la semaine prochaine.",
+      "verbs": [
+        {
+          "verb": "v.voir",
+          "tense": "futur_simple",
+          "person": "3p",
+          "answer": "verront"
+        }
+      ]
+    }
+  ]
+}

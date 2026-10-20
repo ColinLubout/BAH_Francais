@@ -22,12 +22,13 @@ class ContentFiles {
     this.verbCategories,
     this.nouns = const [],
     this.verbs = const [],
+    this.sentences = const [],
     this.images = const {},
   });
 
-  /// Reads `verb-categories.json`, `nouns/*.json`, `verbs/*.json` and the
-  /// files under `images/` in [root]. Anything else there (such as a
-  /// `sample/` or `schema/` folder) is not content.
+  /// Reads `verb-categories.json`, `nouns/*.json`, `verbs/*.json`,
+  /// `sentences/*.json` and the files under `images/` in [root]. Anything
+  /// else there (such as a `sample/` or `schema/` folder) is not content.
   factory ContentFiles.read(Directory root) {
     String relative(File file) =>
         p.split(p.relative(file.path, from: root.path)).join('/');
@@ -55,6 +56,7 @@ class ContentFiles {
           : null,
       nouns: jsonFiles('nouns'),
       verbs: jsonFiles('verbs'),
+      sentences: jsonFiles('sentences'),
       images: {
         if (imagesDir.existsSync())
           for (final f in imagesDir.listSync(recursive: true).whereType<File>())
@@ -67,6 +69,7 @@ class ContentFiles {
   final SourceFile? verbCategories;
   final List<SourceFile> nouns;
   final List<SourceFile> verbs;
+  final List<SourceFile> sentences;
 
   /// Image files by path: `images/fourchette/fourchette-1.svg`.
   final Map<String, List<int>> images;
@@ -78,6 +81,7 @@ class ContentSchemas {
     required this.nounCategory,
     required this.verb,
     required this.verbCategories,
+    required this.sentences,
   });
 
   /// Reads the schemas from [dir].
@@ -88,10 +92,12 @@ class ContentSchemas {
       nounCategory: schema('noun-category.schema.json'),
       verb: schema('verb.schema.json'),
       verbCategories: schema('verb-categories.schema.json'),
+      sentences: schema('sentences.schema.json'),
     );
   }
 
   final JsonSchema nounCategory;
   final JsonSchema verb;
   final JsonSchema verbCategories;
+  final JsonSchema sentences;
 }

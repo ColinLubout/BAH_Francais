@@ -6,7 +6,9 @@
   "pronominal": false,
   "level": "debutant",
   "rank": 7,
-  "categories": ["cat.verbes-essentiels"],
+  "categories": [
+    "cat.verbes-essentiels"
+  ],
   "forms": {
     "present": {
       "1s": "peux",
@@ -40,60 +42,5 @@
       "2p": "pourrez",
       "3p": "pourront"
     }
-  },
-  "sentences": [
-    { "id": "s.pouvoir.pr.1s.01", "tense": "present", "person": "1s",
-      "text": "Je ne ___ pas venir ce soir.", "answer": "peux" },
-    { "id": "s.pouvoir.pr.2s.01", "tense": "present", "person": "2s",
-      "text": "Tu ___ m’aider, s’il te plaît ?", "answer": "peux" },
-    { "id": "s.pouvoir.pr.3s.01", "tense": "present", "person": "3s",
-      "text": "On ___ entrer ?", "answer": "peut" },
-    { "id": "s.pouvoir.pr.1p.01", "tense": "present", "person": "1p",
-      "text": "Nous ___ partir maintenant.", "answer": "pouvons" },
-    { "id": "s.pouvoir.pr.2p.01", "tense": "present", "person": "2p",
-      "text": "Vous ___ répéter, s’il vous plaît ?", "answer": "pouvez" },
-    { "id": "s.pouvoir.pr.3p.01", "tense": "present", "person": "3p",
-      "text": "Les enfants ___ jouer dehors.", "answer": "peuvent" },
-
-    { "id": "s.pouvoir.pc.1s.01", "tense": "passe_compose", "person": "1s",
-      "text": "Je ___ dormir un peu dans le train.", "answer": "ai pu" },
-    { "id": "s.pouvoir.pc.2s.01", "tense": "passe_compose", "person": "2s",
-      "text": "Tu ___ finir ton travail ?", "answer": "as pu" },
-    { "id": "s.pouvoir.pc.3s.01", "tense": "passe_compose", "person": "3s",
-      "text": "Elle ___ trouver une place pour se garer.", "answer": "a pu" },
-    { "id": "s.pouvoir.pc.1p.01", "tense": "passe_compose", "person": "1p",
-      "text": "Nous ___ voir la mer depuis l’hôtel.", "answer": "avons pu" },
-    { "id": "s.pouvoir.pc.2p.01", "tense": "passe_compose", "person": "2p",
-      "text": "Vous ___ parler au directeur ?", "answer": "avez pu" },
-    { "id": "s.pouvoir.pc.3p.01", "tense": "passe_compose", "person": "3p",
-      "text": "Ils ___ partir à l’heure.", "answer": "ont pu" },
-
-    { "id": "s.pouvoir.im.1s.01", "tense": "imparfait", "person": "1s",
-      "text": "Avant, je ___ courir dix kilomètres.", "answer": "pouvais" },
-    { "id": "s.pouvoir.im.2s.01", "tense": "imparfait", "person": "2s",
-      "text": "Tu ___ venir quand tu voulais.", "answer": "pouvais" },
-    { "id": "s.pouvoir.im.3s.01", "tense": "imparfait", "person": "3s",
-      "text": "Il ___ déjà lire à quatre ans.", "answer": "pouvait" },
-    { "id": "s.pouvoir.im.1p.01", "tense": "imparfait", "person": "1p",
-      "text": "Nous ___ voir la tour Eiffel de notre fenêtre.",
-      "answer": "pouvions" },
-    { "id": "s.pouvoir.im.2p.01", "tense": "imparfait", "person": "2p",
-      "text": "Vous ___ dormir avec tout ce bruit ?", "answer": "pouviez" },
-    { "id": "s.pouvoir.im.3p.01", "tense": "imparfait", "person": "3p",
-      "text": "Les élèves ___ sortir à midi.", "answer": "pouvaient" },
-
-    { "id": "s.pouvoir.fs.1s.01", "tense": "futur_simple", "person": "1s",
-      "text": "Je ___ venir demain.", "answer": "pourrai" },
-    { "id": "s.pouvoir.fs.2s.01", "tense": "futur_simple", "person": "2s",
-      "text": "Tu ___ partir quand tu voudras.", "answer": "pourras" },
-    { "id": "s.pouvoir.fs.3s.01", "tense": "futur_simple", "person": "3s",
-      "text": "Elle ___ conduire l’année prochaine.", "answer": "pourra" },
-    { "id": "s.pouvoir.fs.1p.01", "tense": "futur_simple", "person": "1p",
-      "text": "Nous ___ en parler ce soir.", "answer": "pourrons" },
-    { "id": "s.pouvoir.fs.2p.01", "tense": "futur_simple", "person": "2p",
-      "text": "Vous ___ visiter le musée gratuitement.",
-      "answer": "pourrez" },
-    { "id": "s.pouvoir.fs.3p.01", "tense": "futur_simple", "person": "3p",
-      "text": "Ils ___ rentrer plus tôt vendredi.", "answer": "pourront" }
-  ]
+  }
 }

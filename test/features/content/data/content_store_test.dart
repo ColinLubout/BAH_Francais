@@ -14,15 +14,30 @@ void main() {
     expect(read.toJson(), fixture.toJson());
   });
 
-  test('a noun’s categories, examples and images keep their order', () async {
+  test('a noun’s categories and images keep their order', () async {
     final db = await databaseWith(fixture);
     final noun = (await ContentStore(
       db,
       db,
     ).readOfficial()).nouns.firstWhere((n) => n.id == 'n.aa');
     expect(noun.categoryIds, ['cat.everyday', 'cat.topic']);
-    expect(noun.examples, ['aa one', 'aa two']);
     expect(noun.imageIds, ['i.aa-1', 'i.aa-2']);
+  });
+
+  test('a sentence reads back with its verbs and nouns', () async {
+    final db = await databaseWith(fixture);
+    final sentences = {
+      for (final s in (await ContentStore(db, db).readOfficial()).sentences)
+        s.id: s,
+    };
+    final one = sentences['s.one']!;
+    expect(one.text, 'one cc present 1s aa');
+    expect(one.verbs.single.answer, 'cc present 1s');
+    expect(one.verbs.single.alternatives, ['cc alt present']);
+    expect(one.nouns.single.nounId, 'n.aa');
+    expect(sentences['s.two']!.verbs.single.before, 'la');
+    expect(sentences['s.three']!.verbs, isEmpty);
+    expect(sentences['s.three']!.nouns.map((n) => n.word), ['aa', 'bbs']);
   });
 
   test('Perso and retired rows are not official content', () async {
@@ -40,23 +55,36 @@ void main() {
     await (db.update(db.nouns)..where((n) => n.id.equals('n.bb'))).write(
       const NounsCompanion(retired: Value(true)),
     );
+    // The user's own sentence, and their own use of an official one.
     await db
         .into(db.sentences)
         .insert(
           SentencesCompanion.insert(
             id: 'p.sentence',
+            sentenceText: 'mine cc present 1p',
+            source: const Value(ContentSource.perso),
+          ),
+        );
+    await db
+        .into(db.sentenceVerbs)
+        .insert(
+          SentenceVerbsCompanion.insert(
+            sentenceId: 's.three',
             verbId: 'v.cc',
-            tense: Tense.present,
+            tense: Tense.imparfait,
             person: Person.firstPlural,
-            sentenceText: 'mine ___',
-            answer: 'cc present 1p',
+            answer: 'cc imparfait 1p',
             source: const Value(ContentSource.perso),
           ),
         );
 
     final read = await ContentStore(db, db).readOfficial();
     expect([for (final n in read.nouns) n.id], ['n.aa']);
-    expect(read.verbs.single.sentences.map((s) => s.id), ['s.cc.1', 's.cc.2']);
+    expect(
+      read.sentences.map((s) => s.id),
+      unorderedEquals(['s.one', 's.two', 's.three']),
+    );
+    expect(read.sentences.firstWhere((s) => s.id == 's.three').verbs, isEmpty);
   });
 
   test('a database with no content has no content info', () async {
@@ -162,15 +190,29 @@ void main() {
     );
   });
 
-  test('deleting a noun deletes its links, examples and images', () async {
+  test('deleting a noun deletes its links and images', () async {
     final db = await databaseWith(fixture);
     await (db.delete(db.nouns)..where((n) => n.id.equals('n.aa'))).go();
     expect(await db.select(db.images).get(), isEmpty);
-    expect((await db.select(db.nounExamples).get()).map((e) => e.nounId), [
+    expect((await db.select(db.sentenceNouns).get()).map((l) => l.nounId), [
       'n.bb',
     ]);
     expect((await db.select(db.nounCategories).get()).map((l) => l.nounId), [
       'n.bb',
+    ]);
+    // The sentences stay: they can be used by other words.
+    expect(await db.select(db.sentences).get(), hasLength(3));
+  });
+
+  test('deleting a sentence deletes its links', () async {
+    final db = await databaseWith(fixture);
+    await (db.delete(db.sentences)..where((s) => s.id.equals('s.one'))).go();
+    expect((await db.select(db.sentenceVerbs).get()).map((l) => l.sentenceId), [
+      's.two',
+    ]);
+    expect((await db.select(db.sentenceNouns).get()).map((l) => l.sentenceId), [
+      's.three',
+      's.three',
     ]);
   });
 }

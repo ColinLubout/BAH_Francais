@@ -78,12 +78,11 @@ Future<void> main(List<String> args) async {
     now: now,
   );
 
-  final sentences = content.verbs.fold(0, (n, v) => n + v.sentences.length);
   stdout
     ..writeln(
       'Checked $dir: ${content.categories.length} categories, '
       '${content.nouns.length} nouns, ${content.verbs.length} verbs, '
-      '$sentences sentences, ${content.images.length} images.',
+      '${content.sentences.length} sentences, ${content.images.length} images.',
     )
     ..writeln('Wrote $out (content version $version).');
 }

@@ -1,0 +1,328 @@
+{
+  "sentences": [
+    {
+      "id": "s.savoir.pr.1s.01",
+      "text": "Je ne sais pas où il habite.",
+      "verbs": [
+        {
+          "verb": "v.savoir",
+          "tense": "present",
+          "person": "1s",
+          "answer": "sais"
+        }
+      ]
+    },
+    {
+      "id": "s.savoir.pr.2s.01",
+      "text": "Tu sais nager ?",
+      "verbs": [
+        {
+          "verb": "v.savoir",
+          "tense": "present",
+          "person": "2s",
+          "answer": "sais"
+        }
+      ]
+    },
+    {
+      "id": "s.savoir.pr.3s.01",
+      "text": "Elle sait parler quatre langues.",
+      "verbs": [
+        {
+          "verb": "v.savoir",
+          "tense": "present",
+          "person": "3s",
+          "answer": "sait"
+        }
+      ]
+    },
+    {
+      "id": "s.savoir.pr.1p.01",
+      "text": "Nous savons que c’est difficile.",
+      "verbs": [
+        {
+          "verb": "v.savoir",
+          "tense": "present",
+          "person": "1p",
+          "answer": "savons"
+        },
+        {
+          "verb": "v.etre",
+          "tense": "present",
+          "person": "3s",
+          "answer": "est"
+        }
+      ]
+    },
+    {
+      "id": "s.savoir.pr.2p.01",
+      "text": "Vous savez où est la gare ?",
+      "verbs": [
+        {
+          "verb": "v.savoir",
+          "tense": "present",
+          "person": "2p",
+          "answer": "savez"
+        }
+      ]
+    },
+    {
+      "id": "s.savoir.pr.3p.01",
+      "text": "Ils savent déjà la nouvelle.",
+      "verbs": [
+        {
+          "verb": "v.savoir",
+          "tense": "present",
+          "person": "3p",
+          "answer": "savent"
+        }
+      ]
+    },
+    {
+      "id": "s.savoir.pc.1s.01",
+      "text": "J’ai su la réponse trop tard.",
+      "verbs": [
+        {
+          "verb": "v.savoir",
+          "tense": "passe_compose",
+          "person": "1s",
+          "answer": "ai su"
+        }
+      ]
+    },
+    {
+      "id": "s.savoir.pc.2s.01",
+      "text": "Tu as su ce qui s’est passé ?",
+      "verbs": [
+        {
+          "verb": "v.savoir",
+          "tense": "passe_compose",
+          "person": "2s",
+          "answer": "as su"
+        }
+      ]
+    },
+    {
+      "id": "s.savoir.pc.3s.01",
+      "text": "Il a su tout de suite que c’était grave.",
+      "verbs": [
+        {
+          "verb": "v.savoir",
+          "tense": "passe_compose",
+          "person": "3s",
+          "answer": "a su"
+        },
+        {
+          "verb": "v.etre",
+          "tense": "imparfait",
+          "person": "3s",
+          "answer": "était"
+        }
+      ]
+    },
+    {
+      "id": "s.savoir.pc.1p.01",
+      "text": "Nous avons su la nouvelle ce matin.",
+      "verbs": [
+        {
+          "verb": "v.savoir",
+          "tense": "passe_compose",
+          "person": "1p",
+          "answer": "avons su"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.matin",
+          "word": "matin"
+        }
+      ]
+    },
+    {
+      "id": "s.savoir.pc.2p.01",
+      "text": "Vous avez su quoi répondre ?",
+      "verbs": [
+        {
+          "verb": "v.savoir",
+          "tense": "passe_compose",
+          "person": "2p",
+          "answer": "avez su"
+        }
+      ]
+    },
+    {
+      "id": "s.savoir.pc.3p.01",
+      "text": "Ils ont su trouver la solution.",
+      "verbs": [
+        {
+          "verb": "v.savoir",
+          "tense": "passe_compose",
+          "person": "3p",
+          "answer": "ont su"
+        }
+      ]
+    },
+    {
+      "id": "s.savoir.im.1s.01",
+      "text": "Je ne savais pas que tu étais là.",
+      "verbs": [
+        {
+          "verb": "v.savoir",
+          "tense": "imparfait",
+          "person": "1s",
+          "answer": "savais"
+        },
+        {
+          "verb": "v.etre",
+          "tense": "imparfait",
+          "person": "2s",
+          "answer": "étais"
+        }
+      ]
+    },
+    {
+      "id": "s.savoir.im.2s.01",
+      "text": "Tu savais qu’il allait pleuvoir ?",
+      "verbs": [
+        {
+          "verb": "v.savoir",
+          "tense": "imparfait",
+          "person": "2s",
+          "answer": "savais"
+        },
+        {
+          "verb": "v.aller",
+          "tense": "imparfait",
+          "person": "3s",
+          "answer": "allait"
+        }
+      ]
+    },
+    {
+      "id": "s.savoir.im.3s.01",
+      "text": "Personne ne savait son nom.",
+      "verbs": [
+        {
+          "verb": "v.savoir",
+          "tense": "imparfait",
+          "person": "3s",
+          "answer": "savait"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.nom",
+          "word": "nom"
+        }
+      ]
+    },
+    {
+      "id": "s.savoir.im.1p.01",
+      "text": "Nous savions déjà lire à cinq ans.",
+      "verbs": [
+        {
+          "verb": "v.savoir",
+          "tense": "imparfait",
+          "person": "1p",
+          "answer": "savions"
+        }
+      ]
+    },
+    {
+      "id": "s.savoir.im.2p.01",
+      "text": "Vous saviez que le magasin était fermé ?",
+      "verbs": [
+        {
+          "verb": "v.savoir",
+          "tense": "imparfait",
+          "person": "2p",
+          "answer": "saviez"
+        }
+      ]
+    },
+    {
+      "id": "s.savoir.im.3p.01",
+      "text": "Ils savaient tous la chanson par cœur.",
+      "verbs": [
+        {
+          "verb": "v.savoir",
+          "tense": "imparfait",
+          "person": "3p",
+          "answer": "savaient"
+        }
+      ]
+    },
+    {
+      "id": "s.savoir.fs.1s.01",
+      "text": "Je saurai demain si j’ai le poste.",
+      "verbs": [
+        {
+          "verb": "v.savoir",
+          "tense": "futur_simple",
+          "person": "1s",
+          "answer": "saurai"
+        }
+      ]
+    },
+    {
+      "id": "s.savoir.fs.2s.01",
+      "text": "Tu sauras la réponse bientôt.",
+      "verbs": [
+        {
+          "verb": "v.savoir",
+          "tense": "futur_simple",
+          "person": "2s",
+          "answer": "sauras"
+        }
+      ]
+    },
+    {
+      "id": "s.savoir.fs.3s.01",
+      "text": "Elle saura quoi faire.",
+      "verbs": [
+        {
+          "verb": "v.savoir",
+          "tense": "futur_simple",
+          "person": "3s",
+          "answer": "saura"
+        }
+      ]
+    },
+    {
+      "id": "s.savoir.fs.1p.01",
+      "text": "Nous saurons vendredi qui a gagné.",
+      "verbs": [
+        {
+          "verb": "v.savoir",
+          "tense": "futur_simple",
+          "person": "1p",
+          "answer": "saurons"
+        }
+      ]
+    },
+    {
+      "id": "s.savoir.fs.2p.01",
+      "text": "Vous saurez conduire après dix leçons.",
+      "verbs": [
+        {
+          "verb": "v.savoir",
+          "tense": "futur_simple",
+          "person": "2p",
+          "answer": "saurez"
+        }
+      ]
+    },
+    {
+      "id": "s.savoir.fs.3p.01",
+      "text": "Ils sauront bientôt la vérité.",
+      "verbs": [
+        {
+          "verb": "v.savoir",
+          "tense": "futur_simple",
+          "person": "3p",
+          "answer": "sauront"
+        }
+      ]
+    }
+  ]
+}

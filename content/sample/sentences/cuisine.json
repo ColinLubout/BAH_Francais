@@ -1,0 +1,104 @@
+{
+  "sentences": [
+    {
+      "id": "s.fourchette.01",
+      "text": "Il mange ses pâtes avec une fourchette.",
+      "nouns": [
+        {
+          "noun": "n.fourchette",
+          "word": "fourchette"
+        }
+      ]
+    },
+    {
+      "id": "s.couteau.01",
+      "text": "Passe-moi le couteau, s’il te plaît.",
+      "nouns": [
+        {
+          "noun": "n.couteau",
+          "word": "couteau"
+        }
+      ]
+    },
+    {
+      "id": "s.assiette.01",
+      "text": "Son assiette est vide.",
+      "nouns": [
+        {
+          "noun": "n.assiette",
+          "word": "assiette"
+        }
+      ]
+    },
+    {
+      "id": "s.verre.01",
+      "text": "Je voudrais un verre de lait.",
+      "nouns": [
+        {
+          "noun": "n.verre",
+          "word": "verre"
+        }
+      ]
+    },
+    {
+      "id": "s.haricot.01",
+      "text": "Il reste un haricot dans l’assiette.",
+      "nouns": [
+        {
+          "noun": "n.haricot",
+          "word": "haricot"
+        }
+      ]
+    },
+    {
+      "id": "s.petit-dejeuner.01",
+      "text": "Je prends mon petit-déjeuner à sept heures.",
+      "nouns": [
+        {
+          "noun": "n.petit-dejeuner",
+          "word": "petit-déjeuner"
+        }
+      ]
+    },
+    {
+      "id": "s.recette.01",
+      "text": "Ma grand-mère m’a donné sa recette de gâteau.",
+      "nouns": [
+        {
+          "noun": "n.recette",
+          "word": "recette"
+        }
+      ]
+    },
+    {
+      "id": "s.casserole.01",
+      "text": "L’eau bout dans la casserole.",
+      "nouns": [
+        {
+          "noun": "n.casserole",
+          "word": "casserole"
+        }
+      ]
+    },
+    {
+      "id": "s.oeuf.01",
+      "text": "Je mange un œuf à la coque.",
+      "nouns": [
+        {
+          "noun": "n.oeuf",
+          "word": "œuf"
+        }
+      ]
+    },
+    {
+      "id": "s.preparation.01",
+      "text": "La préparation de ce plat est longue.",
+      "nouns": [
+        {
+          "noun": "n.preparation",
+          "word": "préparation"
+        }
+      ]
+    }
+  ]
+}

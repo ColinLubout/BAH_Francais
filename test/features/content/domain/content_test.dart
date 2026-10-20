@@ -10,14 +10,54 @@ ContentNoun noun(String id, {List<String> categories = const ['cat.b']}) =>
       gender: Gender.masculine,
       level: Level.debutant,
       categoryIds: categories,
-      examples: const ['one'],
     );
 
 void main() {
-  test('example ids number the examples from 01', () {
-    expect(ContentNoun.exampleId('n.aa', 0), 'n.aa.ex01');
-    expect(ContentNoun.exampleId('n.aa', 11), 'n.aa.ex12');
-  });
+  test(
+    'a sentence compares the same whatever order its links were read in',
+    () {
+      const one = SentenceVerb(
+        verbId: 'v.b',
+        tense: Tense.present,
+        person: Person.firstSingular,
+        answer: 'b',
+      );
+      const two = SentenceVerb(
+        verbId: 'v.a',
+        tense: Tense.imparfait,
+        person: Person.firstSingular,
+        answer: 'a',
+      );
+      const three = SentenceVerb(
+        verbId: 'v.a',
+        tense: Tense.present,
+        person: Person.thirdPlural,
+        answer: 'a2',
+      );
+      const four = SentenceVerb(
+        verbId: 'v.a',
+        tense: Tense.present,
+        person: Person.firstSingular,
+        answer: 'a3',
+      );
+      const x = SentenceNoun(nounId: 'n.x', word: 'x');
+      const y = SentenceNoun(nounId: 'n.y', word: 'y');
+      expect(
+        const ContentSentence(
+          id: 's.a',
+          text: 'a b',
+          verbs: [one, two, three, four],
+          nouns: [y, x],
+        ).toJson(),
+        const ContentSentence(
+          id: 's.a',
+          text: 'a b',
+          verbs: [three, four, two, one],
+          nouns: [x, y],
+        ).toJson(),
+      );
+    },
+  );
 
   test('an official image’s id is its file name without the extension', () {
     expect(ContentImage.idFor('fourchette-1.svg'), 'i.fourchette-1');
@@ -59,7 +99,6 @@ void main() {
       level: Level.debutant,
       categoryIds: ['cat.v'],
       forms: [form],
-      sentences: [],
     );
     expect(verb.form(Tense.imparfait, Person.secondPlural), form);
     expect(verb.form(Tense.present, Person.secondPlural), isNull);

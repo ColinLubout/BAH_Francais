@@ -1,0 +1,104 @@
+{
+  "sentences": [
+    {
+      "id": "s.chien.01",
+      "text": "Le chien dort devant la porte.",
+      "nouns": [
+        {
+          "noun": "n.chien",
+          "word": "chien"
+        }
+      ]
+    },
+    {
+      "id": "s.chat.01",
+      "text": "Mon chat aime dormir au soleil.",
+      "nouns": [
+        {
+          "noun": "n.chat",
+          "word": "chat"
+        }
+      ]
+    },
+    {
+      "id": "s.oiseau.01",
+      "text": "Un oiseau chante dans l’arbre.",
+      "nouns": [
+        {
+          "noun": "n.oiseau",
+          "word": "oiseau"
+        }
+      ]
+    },
+    {
+      "id": "s.vache.01",
+      "text": "La vache mange de l’herbe.",
+      "nouns": [
+        {
+          "noun": "n.vache",
+          "word": "vache"
+        }
+      ]
+    },
+    {
+      "id": "s.cheval.01",
+      "text": "Elle monte à cheval le samedi.",
+      "nouns": [
+        {
+          "noun": "n.cheval",
+          "word": "cheval"
+        }
+      ]
+    },
+    {
+      "id": "s.souris.01",
+      "text": "Une souris est entrée dans la cuisine.",
+      "nouns": [
+        {
+          "noun": "n.souris",
+          "word": "souris"
+        }
+      ]
+    },
+    {
+      "id": "s.abeille.01",
+      "text": "L’abeille vole de fleur en fleur.",
+      "nouns": [
+        {
+          "noun": "n.abeille",
+          "word": "abeille"
+        }
+      ]
+    },
+    {
+      "id": "s.hibou.01",
+      "text": "Le hibou chasse la nuit.",
+      "nouns": [
+        {
+          "noun": "n.hibou",
+          "word": "hibou"
+        }
+      ]
+    },
+    {
+      "id": "s.poisson.01",
+      "text": "Il y a un poisson rouge dans le bocal.",
+      "nouns": [
+        {
+          "noun": "n.poisson",
+          "word": "poisson"
+        }
+      ]
+    },
+    {
+      "id": "s.escargot.01",
+      "text": "L’escargot avance lentement.",
+      "nouns": [
+        {
+          "noun": "n.escargot",
+          "word": "escargot"
+        }
+      ]
+    }
+  ]
+}

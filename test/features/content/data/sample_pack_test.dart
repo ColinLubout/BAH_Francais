@@ -40,8 +40,20 @@ void main() {
     expect(sample.verbs, hasLength(5));
     for (final verb in sample.verbs) {
       expect(verb.forms, hasLength(24));
-      expect(verb.sentences.length, greaterThanOrEqualTo(24));
+      final uses = {
+        for (final s in sample.sentences)
+          for (final v in s.verbs)
+            if (v.verbId == verb.id) (v.tense, v.person),
+      };
+      expect(uses, hasLength(24), reason: verb.id);
     }
+  });
+
+  test('some sentences serve several words', () {
+    expect(
+      sample.sentences.where((s) => s.verbs.length + s.nouns.length > 1),
+      isNotEmpty,
+    );
   });
 
   test('the sample pack builds, imports and reads back unchanged', () async {

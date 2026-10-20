@@ -14,8 +14,12 @@
       "level": "debutant",
       "rank": 120,
       "definition": "Bâtiment où l’on habite.",
-      "examples": ["Ils habitent dans une grande maison."],
-      "images": [{ "file": "maison-1.svg", "source": "Dessin d’exemple" }]
+      "images": [
+        {
+          "file": "maison-1.svg",
+          "source": "Dessin d’exemple"
+        }
+      ]
     },
     {
       "id": "n.homme",
@@ -24,8 +28,7 @@
       "elides": true,
       "level": "debutant",
       "rank": 60,
-      "definition": "Personne adulte de sexe masculin.",
-      "examples": ["Cet homme est mon voisin."]
+      "definition": "Personne adulte de sexe masculin."
     },
     {
       "id": "n.enfant",
@@ -34,8 +37,7 @@
       "elides": true,
       "level": "debutant",
       "rank": 80,
-      "definition": "Garçon ou fille qui n’est pas encore adulte.",
-      "examples": ["L’enfant joue dans le jardin."]
+      "definition": "Garçon ou fille qui n’est pas encore adulte."
     },
     {
       "id": "n.jour",
@@ -43,8 +45,7 @@
       "gender": "m",
       "level": "debutant",
       "rank": 40,
-      "definition": "Période de vingt-quatre heures.",
-      "examples": ["Quel jour sommes-nous ?"]
+      "definition": "Période de vingt-quatre heures."
     },
     {
       "id": "n.eau",
@@ -54,8 +55,9 @@
       "level": "debutant",
       "rank": 150,
       "definition": "Liquide transparent que l’on boit.",
-      "examples": ["Je bois un verre d’eau."],
-      "also_in": ["cat.cuisine"]
+      "also_in": [
+        "cat.cuisine"
+      ]
     },
     {
       "id": "n.heure",
@@ -64,8 +66,7 @@
       "elides": true,
       "level": "debutant",
       "rank": 90,
-      "definition": "Période de soixante minutes.",
-      "examples": ["Le train part dans une heure."]
+      "definition": "Période de soixante minutes."
     },
     {
       "id": "n.personne",
@@ -73,8 +74,7 @@
       "gender": "f",
       "level": "debutant",
       "rank": 100,
-      "definition": "Être humain, homme ou femme.",
-      "examples": ["Cette personne est très gentille."]
+      "definition": "Être humain, homme ou femme."
     },
     {
       "id": "n.lunettes",
@@ -83,8 +83,7 @@
       "plural_only": true,
       "level": "intermediaire",
       "rank": 2600,
-      "definition": "Deux verres dans une monture, que l’on porte pour mieux voir.",
-      "examples": ["Je ne trouve plus mes lunettes."]
+      "definition": "Deux verres dans une monture, que l’on porte pour mieux voir."
     },
     {
       "id": "n.voiture",
@@ -93,8 +92,12 @@
       "level": "debutant",
       "rank": 500,
       "definition": "Véhicule à quatre roues et à moteur.",
-      "synonyms": [{ "word": "auto", "elides": true }],
-      "examples": ["Nous allons au travail en voiture."]
+      "synonyms": [
+        {
+          "word": "auto",
+          "elides": true
+        }
+      ]
     },
     {
       "id": "n.velo",
@@ -103,9 +106,15 @@
       "level": "debutant",
       "rank": 1800,
       "definition": "Véhicule à deux roues qui avance quand on pédale.",
-      "synonyms": [{ "word": "bicyclette", "gender": "f" }],
-      "examples": ["Elle va à l’école à vélo."],
-      "images": ["velo-1.svg"]
+      "synonyms": [
+        {
+          "word": "bicyclette",
+          "gender": "f"
+        }
+      ],
+      "images": [
+        "velo-1.svg"
+      ]
     }
   ]
 }

@@ -1,0 +1,332 @@
+{
+  "sentences": [
+    {
+      "id": "s.etre.pr.1s.01",
+      "text": "Je suis fatigué ce soir.",
+      "verbs": [
+        {
+          "verb": "v.etre",
+          "tense": "present",
+          "person": "1s",
+          "answer": "suis"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.soir",
+          "word": "soir"
+        }
+      ]
+    },
+    {
+      "id": "s.etre.pr.2s.01",
+      "text": "Tu es en retard !",
+      "verbs": [
+        {
+          "verb": "v.etre",
+          "tense": "present",
+          "person": "2s",
+          "answer": "es"
+        }
+      ]
+    },
+    {
+      "id": "s.etre.pr.3s.01",
+      "text": "Elle est professeure de français.",
+      "verbs": [
+        {
+          "verb": "v.etre",
+          "tense": "present",
+          "person": "3s",
+          "answer": "est"
+        }
+      ]
+    },
+    {
+      "id": "s.etre.pr.1p.01",
+      "text": "Nous sommes contents de vous voir.",
+      "verbs": [
+        {
+          "verb": "v.etre",
+          "tense": "present",
+          "person": "1p",
+          "answer": "sommes"
+        }
+      ]
+    },
+    {
+      "id": "s.etre.pr.2p.01",
+      "text": "Vous êtes prêts ?",
+      "verbs": [
+        {
+          "verb": "v.etre",
+          "tense": "present",
+          "person": "2p",
+          "answer": "êtes"
+        }
+      ]
+    },
+    {
+      "id": "s.etre.pr.3p.01",
+      "text": "Ils sont dans le jardin.",
+      "verbs": [
+        {
+          "verb": "v.etre",
+          "tense": "present",
+          "person": "3p",
+          "answer": "sont"
+        }
+      ]
+    },
+    {
+      "id": "s.etre.pc.1s.01",
+      "text": "J’ai été malade toute la semaine dernière.",
+      "verbs": [
+        {
+          "verb": "v.etre",
+          "tense": "passe_compose",
+          "person": "1s",
+          "answer": "ai été"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.semaine",
+          "word": "semaine"
+        }
+      ]
+    },
+    {
+      "id": "s.etre.pc.2s.01",
+      "text": "Tu as été très gentil avec moi hier.",
+      "verbs": [
+        {
+          "verb": "v.etre",
+          "tense": "passe_compose",
+          "person": "2s",
+          "answer": "as été"
+        }
+      ]
+    },
+    {
+      "id": "s.etre.pc.3s.01",
+      "text": "Le voyage a été long et fatigant.",
+      "verbs": [
+        {
+          "verb": "v.etre",
+          "tense": "passe_compose",
+          "person": "3s",
+          "answer": "a été"
+        }
+      ]
+    },
+    {
+      "id": "s.etre.pc.1p.01",
+      "text": "Nous avons été surpris par la nouvelle.",
+      "verbs": [
+        {
+          "verb": "v.etre",
+          "tense": "passe_compose",
+          "person": "1p",
+          "answer": "avons été"
+        }
+      ]
+    },
+    {
+      "id": "s.etre.pc.2p.01",
+      "text": "Vous avez été très patients, merci.",
+      "verbs": [
+        {
+          "verb": "v.etre",
+          "tense": "passe_compose",
+          "person": "2p",
+          "answer": "avez été"
+        }
+      ]
+    },
+    {
+      "id": "s.etre.pc.3p.01",
+      "text": "Les enfants ont été sages aujourd’hui.",
+      "verbs": [
+        {
+          "verb": "v.etre",
+          "tense": "passe_compose",
+          "person": "3p",
+          "answer": "ont été"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.enfant",
+          "word": "enfants"
+        }
+      ]
+    },
+    {
+      "id": "s.etre.im.1s.01",
+      "text": "Quand j’étais petit, j’habitais à la campagne.",
+      "verbs": [
+        {
+          "verb": "v.etre",
+          "tense": "imparfait",
+          "person": "1s",
+          "answer": "étais"
+        }
+      ]
+    },
+    {
+      "id": "s.etre.im.2s.01",
+      "text": "Avant, tu étais toujours en retard.",
+      "verbs": [
+        {
+          "verb": "v.etre",
+          "tense": "imparfait",
+          "person": "2s",
+          "answer": "étais"
+        }
+      ]
+    },
+    {
+      "id": "s.etre.im.3s.01",
+      "text": "Il était tard quand nous sommes rentrés.",
+      "verbs": [
+        {
+          "verb": "v.etre",
+          "tense": "imparfait",
+          "person": "3s",
+          "answer": "était"
+        }
+      ]
+    },
+    {
+      "id": "s.etre.im.1p.01",
+      "text": "Nous étions très heureux dans cette maison.",
+      "verbs": [
+        {
+          "verb": "v.etre",
+          "tense": "imparfait",
+          "person": "1p",
+          "answer": "étions"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.maison",
+          "word": "maison"
+        }
+      ]
+    },
+    {
+      "id": "s.etre.im.2p.01",
+      "text": "Vous étiez où hier soir ?",
+      "verbs": [
+        {
+          "verb": "v.etre",
+          "tense": "imparfait",
+          "person": "2p",
+          "answer": "étiez"
+        }
+      ]
+    },
+    {
+      "id": "s.etre.im.3p.01",
+      "text": "Les rues étaient vides ce matin-là.",
+      "verbs": [
+        {
+          "verb": "v.etre",
+          "tense": "imparfait",
+          "person": "3p",
+          "answer": "étaient"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.rue",
+          "word": "rues"
+        },
+        {
+          "noun": "n.matin",
+          "word": "matin"
+        }
+      ]
+    },
+    {
+      "id": "s.etre.fs.1s.01",
+      "text": "Je serai à Paris lundi prochain.",
+      "verbs": [
+        {
+          "verb": "v.etre",
+          "tense": "futur_simple",
+          "person": "1s",
+          "answer": "serai"
+        }
+      ]
+    },
+    {
+      "id": "s.etre.fs.2s.01",
+      "text": "Tu seras là demain ?",
+      "verbs": [
+        {
+          "verb": "v.etre",
+          "tense": "futur_simple",
+          "person": "2s",
+          "answer": "seras"
+        }
+      ]
+    },
+    {
+      "id": "s.etre.fs.3s.01",
+      "text": "Le magasin sera fermé dimanche.",
+      "verbs": [
+        {
+          "verb": "v.etre",
+          "tense": "futur_simple",
+          "person": "3s",
+          "answer": "sera"
+        }
+      ]
+    },
+    {
+      "id": "s.etre.fs.1p.01",
+      "text": "Nous serons en vacances en août.",
+      "verbs": [
+        {
+          "verb": "v.etre",
+          "tense": "futur_simple",
+          "person": "1p",
+          "answer": "serons"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.vacances",
+          "word": "vacances"
+        }
+      ]
+    },
+    {
+      "id": "s.etre.fs.2p.01",
+      "text": "Vous serez toujours les bienvenus chez nous.",
+      "verbs": [
+        {
+          "verb": "v.etre",
+          "tense": "futur_simple",
+          "person": "2p",
+          "answer": "serez"
+        }
+      ]
+    },
+    {
+      "id": "s.etre.fs.3p.01",
+      "text": "Ils seront contents de te voir.",
+      "verbs": [
+        {
+          "verb": "v.etre",
+          "tense": "futur_simple",
+          "person": "3p",
+          "answer": "seront"
+        }
+      ]
+    }
+  ]
+}

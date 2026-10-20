@@ -79,15 +79,6 @@ class ContentStore {
             for (final id in n.categoryIds)
               NounCategoriesCompanion.insert(nounId: n.id, categoryId: id),
         ])
-        ..insertAll(t.nounExamples, [
-          for (final n in content.nouns)
-            for (final (i, text) in n.examples.indexed)
-              NounExamplesCompanion.insert(
-                id: ContentNoun.exampleId(n.id, i),
-                nounId: n.id,
-                exampleText: text,
-              ),
-        ])
         ..insertAll(t.verbs, [
           for (final v in content.verbs)
             VerbsCompanion.insert(
@@ -118,16 +109,29 @@ class ContentStore {
               ),
         ])
         ..insertAll(t.sentences, [
-          for (final v in content.verbs)
-            for (final s in v.sentences)
-              SentencesCompanion.insert(
-                id: s.id,
-                verbId: v.id,
-                tense: s.tense,
-                person: s.person,
-                sentenceText: s.text,
-                answer: s.answer,
-                alternatives: Value(s.alternatives),
+          for (final s in content.sentences)
+            SentencesCompanion.insert(id: s.id, sentenceText: s.text),
+        ])
+        ..insertAll(t.sentenceVerbs, [
+          for (final s in content.sentences)
+            for (final v in s.verbs)
+              SentenceVerbsCompanion.insert(
+                sentenceId: s.id,
+                verbId: v.verbId,
+                tense: v.tense,
+                person: v.person,
+                answer: v.answer,
+                alternatives: Value(v.alternatives),
+                before: Value(v.before),
+              ),
+        ])
+        ..insertAll(t.sentenceNouns, [
+          for (final s in content.sentences)
+            for (final n in s.nouns)
+              SentenceNounsCompanion.insert(
+                sentenceId: s.id,
+                nounId: n.nounId,
+                word: n.word,
               ),
         ])
         ..insertAll(t.images, [
@@ -164,11 +168,6 @@ class ContentStore {
               ..where((l) => l.source.equalsValue(official) & l.retired.not())
               ..orderBy([(l) => OrderingTerm(expression: l.rowId)]))
             .get();
-    final examples =
-        await (_db.select(t.nounExamples)
-              ..where((e) => e.source.equalsValue(official) & e.retired.not())
-              ..orderBy([(e) => OrderingTerm(expression: e.id)]))
-            .get();
     final images = await (_db.select(
       t.images,
     )..orderBy([(i) => OrderingTerm(expression: i.rowId)])).get();
@@ -186,6 +185,12 @@ class ContentStore {
     final sentences = await (_db.select(
       t.sentences,
     )..where((s) => s.source.equalsValue(official) & s.retired.not())).get();
+    final sentenceVerbs = await (_db.select(
+      t.sentenceVerbs,
+    )..where((l) => l.source.equalsValue(official) & l.retired.not())).get();
+    final sentenceNouns = await (_db.select(
+      t.sentenceNouns,
+    )..where((l) => l.source.equalsValue(official) & l.retired.not())).get();
 
     final nounIds = {for (final n in nouns) n.id};
     final officialImages = [
@@ -223,10 +228,6 @@ class ContentStore {
               for (final l in nounLinks)
                 if (l.nounId == n.id) l.categoryId,
             ],
-            examples: [
-              for (final e in examples)
-                if (e.nounId == n.id) e.exampleText,
-            ],
             imageIds: [
               for (final i in officialImages)
                 if (i.itemId == n.id) i.id,
@@ -258,17 +259,29 @@ class ContentStore {
                     alternatives: f.alternatives,
                   ),
             ],
-            sentences: [
-              for (final s in sentences)
-                if (s.verbId == v.id)
-                  ContentSentence(
-                    id: s.id,
-                    tense: s.tense,
-                    person: s.person,
-                    text: s.sentenceText,
-                    answer: s.answer,
-                    alternatives: s.alternatives,
+          ),
+      ],
+      sentences: [
+        for (final s in sentences)
+          ContentSentence(
+            id: s.id,
+            text: s.sentenceText,
+            verbs: [
+              for (final l in sentenceVerbs)
+                if (l.sentenceId == s.id)
+                  SentenceVerb(
+                    verbId: l.verbId,
+                    tense: l.tense,
+                    person: l.person,
+                    answer: l.answer,
+                    alternatives: l.alternatives,
+                    before: l.before,
                   ),
+            ],
+            nouns: [
+              for (final l in sentenceNouns)
+                if (l.sentenceId == s.id)
+                  SentenceNoun(nounId: l.nounId, word: l.word),
             ],
           ),
       ],

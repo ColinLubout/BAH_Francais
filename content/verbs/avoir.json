@@ -6,7 +6,9 @@
   "pronominal": false,
   "level": "debutant",
   "rank": 2,
-  "categories": ["cat.verbes-essentiels"],
+  "categories": [
+    "cat.verbes-essentiels"
+  ],
   "forms": {
     "present": {
       "1s": "ai",
@@ -40,60 +42,5 @@
       "2p": "aurez",
       "3p": "auront"
     }
-  },
-  "sentences": [
-    { "id": "s.avoir.pr.1s.01", "tense": "present", "person": "1s",
-      "text": "Je ___ deux frères.", "answer": "ai" },
-    { "id": "s.avoir.pr.2s.01", "tense": "present", "person": "2s",
-      "text": "Tu ___ quel âge ?", "answer": "as" },
-    { "id": "s.avoir.pr.3s.01", "tense": "present", "person": "3s",
-      "text": "Elle ___ une nouvelle voiture.", "answer": "a" },
-    { "id": "s.avoir.pr.1p.01", "tense": "present", "person": "1p",
-      "text": "Nous ___ un chat et un chien.", "answer": "avons" },
-    { "id": "s.avoir.pr.2p.01", "tense": "present", "person": "2p",
-      "text": "Vous ___ des enfants ?", "answer": "avez" },
-    { "id": "s.avoir.pr.3p.01", "tense": "present", "person": "3p",
-      "text": "Ils ___ beaucoup de travail.", "answer": "ont" },
-
-    { "id": "s.avoir.pc.1s.01", "tense": "passe_compose", "person": "1s",
-      "text": "Je ___ peur pendant l’orage.", "answer": "ai eu" },
-    { "id": "s.avoir.pc.2s.01", "tense": "passe_compose", "person": "2s",
-      "text": "Tu ___ de la chance hier !", "answer": "as eu" },
-    { "id": "s.avoir.pc.3s.01", "tense": "passe_compose", "person": "3s",
-      "text": "Elle ___ un bébé au printemps.", "answer": "a eu" },
-    { "id": "s.avoir.pc.1p.01", "tense": "passe_compose", "person": "1p",
-      "text": "Nous ___ froid pendant la nuit.", "answer": "avons eu" },
-    { "id": "s.avoir.pc.2p.01", "tense": "passe_compose", "person": "2p",
-      "text": "Vous ___ raison de partir tôt.", "answer": "avez eu" },
-    { "id": "s.avoir.pc.3p.01", "tense": "passe_compose", "person": "3p",
-      "text": "Ils ___ un accident la semaine dernière.",
-      "answer": "ont eu" },
-
-    { "id": "s.avoir.im.1s.01", "tense": "imparfait", "person": "1s",
-      "text": "À dix ans, je ___ un vélo rouge.", "answer": "avais" },
-    { "id": "s.avoir.im.2s.01", "tense": "imparfait", "person": "2s",
-      "text": "Avant, tu ___ les cheveux longs.", "answer": "avais" },
-    { "id": "s.avoir.im.3s.01", "tense": "imparfait", "person": "3s",
-      "text": "La maison ___ un grand jardin.", "answer": "avait" },
-    { "id": "s.avoir.im.1p.01", "tense": "imparfait", "person": "1p",
-      "text": "Nous ___ un petit appartement à Lyon.", "answer": "avions" },
-    { "id": "s.avoir.im.2p.01", "tense": "imparfait", "person": "2p",
-      "text": "Vous ___ faim quand vous êtes arrivés ?", "answer": "aviez" },
-    { "id": "s.avoir.im.3p.01", "tense": "imparfait", "person": "3p",
-      "text": "Mes grands-parents ___ une ferme.", "answer": "avaient" },
-
-    { "id": "s.avoir.fs.1s.01", "tense": "futur_simple", "person": "1s",
-      "text": "Je ___ trente ans en mai.", "answer": "aurai" },
-    { "id": "s.avoir.fs.2s.01", "tense": "futur_simple", "person": "2s",
-      "text": "Tu ___ le temps de m’appeler ?", "answer": "auras" },
-    { "id": "s.avoir.fs.3s.01", "tense": "futur_simple", "person": "3s",
-      "text": "Il ___ son permis l’année prochaine.", "answer": "aura" },
-    { "id": "s.avoir.fs.1p.01", "tense": "futur_simple", "person": "1p",
-      "text": "Nous ___ une réponse demain.", "answer": "aurons" },
-    { "id": "s.avoir.fs.2p.01", "tense": "futur_simple", "person": "2p",
-      "text": "Vous ___ besoin d’un parapluie.", "answer": "aurez" },
-    { "id": "s.avoir.fs.3p.01", "tense": "futur_simple", "person": "3p",
-      "text": "Elles ___ beaucoup de choses à raconter.",
-      "answer": "auront" }
-  ]
+  }
 }

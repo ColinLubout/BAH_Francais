@@ -6,7 +6,9 @@
   "pronominal": false,
   "level": "debutant",
   "rank": 6,
-  "categories": ["cat.verbes-essentiels"],
+  "categories": [
+    "cat.verbes-essentiels"
+  ],
   "forms": {
     "present": {
       "1s": "vois",
@@ -40,61 +42,5 @@
       "2p": "verrez",
       "3p": "verront"
     }
-  },
-  "sentences": [
-    { "id": "s.voir.pr.1s.01", "tense": "present", "person": "1s",
-      "text": "Je ___ la mer de ma fenêtre.", "answer": "vois" },
-    { "id": "s.voir.pr.2s.01", "tense": "present", "person": "2s",
-      "text": "Tu ___ ce que je veux dire ?", "answer": "vois" },
-    { "id": "s.voir.pr.3s.01", "tense": "present", "person": "3s",
-      "text": "On ___ la tour Eiffel d’ici.", "answer": "voit" },
-    { "id": "s.voir.pr.1p.01", "tense": "present", "person": "1p",
-      "text": "Nous ___ nos cousins chaque été.", "answer": "voyons" },
-    { "id": "s.voir.pr.2p.01", "tense": "present", "person": "2p",
-      "text": "Vous ___ le panneau là-bas ?", "answer": "voyez" },
-    { "id": "s.voir.pr.3p.01", "tense": "present", "person": "3p",
-      "text": "Les chats ___ bien la nuit.", "answer": "voient" },
-
-    { "id": "s.voir.pc.1s.01", "tense": "passe_compose", "person": "1s",
-      "text": "Je ___ un bon film hier soir.", "answer": "ai vu" },
-    { "id": "s.voir.pc.2s.01", "tense": "passe_compose", "person": "2s",
-      "text": "Tu ___ mes clés quelque part ?", "answer": "as vu" },
-    { "id": "s.voir.pc.3s.01", "tense": "passe_compose", "person": "3s",
-      "text": "Elle ___ son médecin ce matin.", "answer": "a vu" },
-    { "id": "s.voir.pc.1p.01", "tense": "passe_compose", "person": "1p",
-      "text": "Nous ___ un arc-en-ciel après la pluie.", "answer": "avons vu" },
-    { "id": "s.voir.pc.2p.01", "tense": "passe_compose", "person": "2p",
-      "text": "Vous ___ la nouvelle exposition ?", "answer": "avez vu" },
-    { "id": "s.voir.pc.3p.01", "tense": "passe_compose", "person": "3p",
-      "text": "Ils ___ un renard dans le jardin.", "answer": "ont vu" },
-
-    { "id": "s.voir.im.1s.01", "tense": "imparfait", "person": "1s",
-      "text": "Enfant, je ___ mes grands-parents tous les dimanches.",
-      "answer": "voyais" },
-    { "id": "s.voir.im.2s.01", "tense": "imparfait", "person": "2s",
-      "text": "Tu ___ souvent tes amis à l’époque ?", "answer": "voyais" },
-    { "id": "s.voir.im.3s.01", "tense": "imparfait", "person": "3s",
-      "text": "Il ne ___ rien sans ses lunettes.", "answer": "voyait" },
-    { "id": "s.voir.im.1p.01", "tense": "imparfait", "person": "1p",
-      "text": "Nous ___ les montagnes depuis le balcon.",
-      "answer": "voyions" },
-    { "id": "s.voir.im.2p.01", "tense": "imparfait", "person": "2p",
-      "text": "Vous ___ bien la scène de votre place ?", "answer": "voyiez" },
-    { "id": "s.voir.im.3p.01", "tense": "imparfait", "person": "3p",
-      "text": "Ils ___ la mer depuis leur chambre.", "answer": "voyaient" },
-
-    { "id": "s.voir.fs.1s.01", "tense": "futur_simple", "person": "1s",
-      "text": "Je ___ le médecin jeudi.", "answer": "verrai" },
-    { "id": "s.voir.fs.2s.01", "tense": "futur_simple", "person": "2s",
-      "text": "Tu ___, tout ira bien.", "answer": "verras" },
-    { "id": "s.voir.fs.3s.01", "tense": "futur_simple", "person": "3s",
-      "text": "Elle ___ ses parents à Noël.", "answer": "verra" },
-    { "id": "s.voir.fs.1p.01", "tense": "futur_simple", "person": "1p",
-      "text": "Nous ___ bien demain.", "answer": "verrons" },
-    { "id": "s.voir.fs.2p.01", "tense": "futur_simple", "person": "2p",
-      "text": "Vous ___ la différence tout de suite.", "answer": "verrez" },
-    { "id": "s.voir.fs.3p.01", "tense": "futur_simple", "person": "3p",
-      "text": "Ils ___ le résultat la semaine prochaine.",
-      "answer": "verront" }
-  ]
+  }
 }

@@ -11,11 +11,16 @@
 /// - at most one everyday category of each kind;
 /// - a noun starting with *h* states `elides`, and a verb with a form
 ///   starting with *h* states `h_aspire` (and no other verb does);
-/// - every verb has at least one sentence per tense and person;
-/// - every sentence has `___` exactly once, with the word before it written
-///   in full;
-/// - a sentence's answer and alternatives are the stored form or one of its
+/// - every noun has a sentence, and every verb a sentence per tense and
+///   person;
+/// - a sentence is written in full, with no `___`;
+/// - the verbs and nouns a sentence uses exist, and their words are in it
+///   exactly once, as whole words;
+/// - a verb's answer and alternatives are the stored form or one of its
 ///   alternatives, plus *e*, *s* or *es* in a compound tense for agreement;
+/// - an elided word just before a verb can be written in full in the prompt:
+///   *j’, m’, t’, s’, n’, c’* always, *l’* when the sentence says `le` or
+///   `la`;
 /// - every image exists and follows the SVG rules; a big one is a warning.
 library;
 
@@ -23,6 +28,7 @@ import 'dart:convert';
 
 import 'package:bah_francais/features/content/domain/content.dart';
 import 'package:bah_francais/features/content/domain/content_types.dart';
+import 'package:bah_francais/features/content/domain/sentence_prompt.dart';
 import 'package:bah_francais/features/content/domain/synonym.dart';
 import 'package:bah_francais/features/drills/domain/grading/answer_forms.dart';
 import 'package:bah_francais/features/drills/domain/grading/normalise.dart';
@@ -85,28 +91,36 @@ class _Validation {
   final categories = <_Parsed<ContentCategory>>[];
   final nouns = <_Parsed<ContentNoun>>[];
   final verbs = <_Parsed<ContentVerb>>[];
+  final sentences = <_Parsed<ContentSentence>>[];
   final images = <_Parsed<ContentImage>>[];
 
-  /// The categories of files their schema refused. They exist but weren't
-  /// read, so naming them elsewhere is not another mistake.
+  /// The ids in files their schema refused. They exist but weren't read, so
+  /// naming them elsewhere is not another mistake.
   final unread = <String>{};
+
+  /// Whether a sentence file was refused: what it holds is unknown, so no
+  /// noun or verb can be said to lack a sentence.
+  bool sentencesUnread = false;
 
   ContentReport run() {
     if (files.verbCategories case final file?) _readVerbCategories(file);
     files.nouns.forEach(_readNounFile);
     files.verbs.forEach(_readVerb);
+    files.sentences.forEach(_readSentenceFile);
     _readImages();
 
     _checkIds();
     _checkCategories();
     _checkNouns();
     _checkVerbs();
+    _checkSentences();
 
     return ContentReport(
       content: ContentSet(
         categories: [for (final c in categories) c.value],
         nouns: [for (final n in nouns) n.value],
         verbs: [for (final v in verbs) v.value],
+        sentences: [for (final s in sentences) s.value],
         images: [for (final i in images) i.value],
       ),
       errors: errors,
@@ -118,11 +132,11 @@ class _Validation {
       errors.add(ContentIssue(file, where, message));
 
   /// [file] decoded, if it is JSON that its schema accepts. If the schema
-  /// refuses it, the ids [categoriesIn] finds in it go to [unread].
+  /// refuses it, the ids [idsIn] finds in it go to [unread].
   Map<String, Object?>? _decode(
     SourceFile file,
     JsonSchema schema, {
-    Iterable<String> Function(Object? json)? categoriesIn,
+    Iterable<String> Function(Object? json)? idsIn,
   }) {
     final Object? json;
     try {
@@ -139,7 +153,7 @@ class _Validation {
       final (:path, :message) = _schemaIssue(e.instancePath, e.message);
       if (reported.add('$path $message')) _error(file.path, path, message);
     }
-    if (categoriesIn != null) unread.addAll(categoriesIn(json));
+    if (idsIn != null) unread.addAll(idsIn(json));
     return null;
   }
 
@@ -162,15 +176,20 @@ class _Validation {
     return (path: where, message: clean);
   }
 
+  /// The `id` of each object in the list at [key] of [json], however
+  /// malformed the rest is.
+  static List<String> _idsInList(Object? json, String key) => [
+    if (json is Map<String, Object?>)
+      if (json[key] case final List<Object?> list)
+        for (final item in list)
+          if (item case {'id': final String id}) id,
+  ];
+
   void _readVerbCategories(SourceFile file) {
     final json = _decode(
       file,
       schemas.verbCategories,
-      categoriesIn: (json) => [
-        if (json case {'categories': final List<Object?> list})
-          for (final c in list)
-            if (c case {'id': final String id}) id,
-      ],
+      idsIn: (json) => _idsInList(json, 'categories'),
     );
     if (json == null) return;
     for (final c in _listOfMaps(json['categories'])) {
@@ -182,8 +201,9 @@ class _Validation {
     final json = _decode(
       file,
       schemas.nounCategory,
-      categoriesIn: (json) => [
+      idsIn: (json) => [
         if (json case {'category': {'id': final String id}}) id,
+        ..._idsInList(json, 'nouns'),
       ],
     );
     if (json == null) return;
@@ -196,9 +216,24 @@ class _Validation {
   }
 
   void _readVerb(SourceFile file) {
-    final json = _decode(file, schemas.verb);
+    final json = _decode(
+      file,
+      schemas.verb,
+      idsIn: (json) => [if (json case {'id': final String id}) id],
+    );
     if (json == null) return;
     verbs.add(_Parsed(_verb(json), file.path, json));
+  }
+
+  void _readSentenceFile(SourceFile file) {
+    final json = _decode(file, schemas.sentences);
+    if (json == null) {
+      sentencesUnread = true;
+      return;
+    }
+    for (final s in _listOfMaps(json['sentences'])) {
+      sentences.add(_Parsed(_sentence(s), file.path, s));
+    }
   }
 
   void _readImages() {
@@ -267,9 +302,9 @@ class _Validation {
     }
     for (final v in verbs) {
       check(v.value.id, v.file, 'verb');
-      for (final s in v.value.sentences) {
-        check(s.id, v.file, 'sentence');
-      }
+    }
+    for (final s in sentences) {
+      check(s.value.id, s.file, 'sentence');
     }
     for (final i in images) {
       check(i.value.id, i.file, 'image');
@@ -314,10 +349,17 @@ class _Validation {
   }
 
   void _checkNouns() {
+    final inSentences = {
+      for (final s in sentences)
+        for (final n in s.value.nouns) n.nounId,
+    };
     for (final n in nouns) {
       final noun = n.value;
       if (noun.definition == null && _imageEntries(n.json).isEmpty) {
         _error(n.file, noun.id, 'has neither an image nor a definition');
+      }
+      if (!sentencesUnread && !inSentences.contains(noun.id)) {
+        _error(n.file, noun.id, 'no sentence uses it as an example');
       }
       for (final word in [noun.word, ...noun.synonyms.map((s) => s.word)]) {
         if (splitArticle(normalise(word)).article != null) {
@@ -340,6 +382,10 @@ class _Validation {
   }
 
   void _checkVerbs() {
+    final inSentences = {
+      for (final s in sentences)
+        for (final v in s.value.verbs) (v.verbId, v.tense, v.person),
+    };
     for (final v in verbs) {
       final verb = v.value;
       final startsWithH = verb.forms.any(
@@ -361,60 +407,120 @@ class _Validation {
         );
       }
 
+      if (sentencesUnread) continue;
       for (final tense in Tense.values) {
         for (final person in Person.values) {
-          if (!verb.sentences.any(
-            (s) => s.tense == tense && s.person == person,
-          )) {
+          if (!inSentences.contains((verb.id, tense, person))) {
             _error(v.file, verb.id, 'no sentence for ${tense.id} ${person.id}');
           }
         }
       }
+    }
+  }
 
-      for (final s in verb.sentences) {
-        _checkSentence(v.file, verb, s);
+  void _checkSentences() {
+    final verbsById = {for (final v in verbs) v.value.id: v.value};
+    final nounIds = {for (final n in nouns) n.value.id};
+
+    for (final parsed in sentences) {
+      final s = parsed.value;
+      void error(String message) => _error(parsed.file, s.id, message);
+
+      if (s.text.contains('_')) {
+        error(
+          'is written in full, with no ___: the drill blanks the verb '
+          'itself',
+        );
+      }
+
+      final linkedVerbs = <(String, Tense, Person)>{};
+      for (final link in s.verbs) {
+        final key = (link.verbId, link.tense, link.person);
+        if (!linkedVerbs.add(key)) {
+          error('uses ${link.verbId} ${link.tense.id} ${link.person.id} twice');
+        }
+        final verb = verbsById[link.verbId];
+        if (verb == null) {
+          if (!unread.contains(link.verbId)) error('no verb ${link.verbId}');
+        } else {
+          _checkAnswers(error, verb, link);
+        }
+        _checkPlace(error, s.text, link);
+      }
+
+      final linkedNouns = <String>{};
+      for (final link in s.nouns) {
+        if (!linkedNouns.add(link.nounId)) error('uses ${link.nounId} twice');
+        if (!nounIds.contains(link.nounId) && !unread.contains(link.nounId)) {
+          error('no noun ${link.nounId}');
+        }
+        if (findOnce(s.text, link.word) == null) {
+          error(
+            '"${link.word}" (${link.nounId}) is not in the text exactly '
+            'once, as whole words',
+          );
+        }
       }
     }
   }
 
-  void _checkSentence(String file, ContentVerb verb, ContentSentence s) {
-    final blanks = RegExp('_+').allMatches(s.text).toList();
-    if (blanks.isEmpty) {
-      _error(file, s.id, 'has no ___');
-    } else if (blanks.length > 1) {
-      _error(file, s.id, 'has ___ more than once');
-    } else if (blanks.single.group(0) != '___') {
-      _error(file, s.id, 'its blank must be three underscores, ___');
-    }
-    if (RegExp(r"[’']\s*_").hasMatch(s.text)) {
-      _error(
-        file,
-        s.id,
-        'the word before ___ is elided: write it in full (Je ___, not '
-        'J’___), since the app elides it as the user types',
-      );
-    }
-
-    final form = verb.form(s.tense, s.person)!;
+  /// A verb's answer and alternatives are its stored form, with agreement.
+  void _checkAnswers(
+    void Function(String) error,
+    ContentVerb verb,
+    SentenceVerb link,
+  ) {
+    final form = verb.form(link.tense, link.person)!;
     final accepted = {
       for (final base in [form.form, ...form.alternatives].map(normalise)) ...[
         base,
-        if (s.tense.isCompound) ...['${base}e', '${base}s', '${base}es'],
+        if (link.tense.isCompound) ...['${base}e', '${base}s', '${base}es'],
       ],
     };
-    for (final answer in [s.answer, ...s.alternatives]) {
+    for (final answer in [link.answer, ...link.alternatives]) {
       if (!accepted.contains(normalise(answer))) {
         final alternatives = form.alternatives.isEmpty
             ? ''
             : ' or ${form.alternatives.map((a) => '"$a"').join(', ')}';
-        _error(
-          file,
-          s.id,
-          '"$answer" is not the ${s.tense.id} ${s.person.id} form, '
-          '"${form.form}"$alternatives'
-          '${s.tense.isCompound ? ', allowing for agreement' : ''}',
+        error(
+          '"$answer" is not the ${verb.id} ${link.tense.id} '
+          '${link.person.id} form, "${form.form}"$alternatives'
+          '${link.tense.isCompound ? ', allowing for agreement' : ''}',
         );
       }
+    }
+  }
+
+  /// A verb's answer is in the text once, and the prompt can write the word
+  /// before it in full.
+  void _checkPlace(
+    void Function(String) error,
+    String text,
+    SentenceVerb link,
+  ) {
+    final at = findOnce(text, link.answer);
+    if (at == null) {
+      error(
+        'the answer "${link.answer}" (${link.verbId}) is not in the text '
+        'exactly once, as whole words',
+      );
+      return;
+    }
+    final elided = elidedBefore(text, at.start)?.toLowerCase();
+    if (elided == 'l') {
+      if (link.before == null) {
+        error(
+          '"${link.answer}" follows l’: say whether it is le or la, with '
+          '"before"',
+        );
+      }
+    } else if (link.before != null) {
+      error('"before" only applies when the answer follows l’');
+    } else if (elided != null && !fullForms.containsKey(elided)) {
+      error(
+        '"${link.answer}" follows $elided’, which the prompt can’t write '
+        'in full: reword the sentence',
+      );
     }
   }
 
@@ -470,7 +576,6 @@ class _Validation {
             },
         ],
         categoryIds: [categoryId, ..._strings(json['also_in'])],
-        examples: _strings(json['examples']),
         imageIds: [
           for (final entry in _imageEntries(json))
             ContentImage.idFor(entry.file),
@@ -501,19 +606,32 @@ class _Validation {
               ),
             ),
       ],
-      sentences: [
-        for (final s in _listOfMaps(json['sentences']))
-          ContentSentence(
-            id: s['id']! as String,
-            tense: _byId(Tense.values, s['tense'], (t) => t.id),
-            person: _byId(Person.values, s['person'], (p) => p.id),
-            text: s['text']! as String,
-            answer: s['answer']! as String,
-            alternatives: _strings(s['alternatives']),
-          ),
-      ],
     );
   }
+
+  static ContentSentence _sentence(Map<String, Object?> json) =>
+      ContentSentence(
+        id: json['id']! as String,
+        text: json['text']! as String,
+        verbs: [
+          for (final v in _listOfMaps(json['verbs']))
+            SentenceVerb(
+              verbId: v['verb']! as String,
+              tense: _byId(Tense.values, v['tense'], (t) => t.id),
+              person: _byId(Person.values, v['person'], (p) => p.id),
+              answer: v['answer']! as String,
+              alternatives: _strings(v['alternatives']),
+              before: v['before'] as String?,
+            ),
+        ],
+        nouns: [
+          for (final n in _listOfMaps(json['nouns']))
+            SentenceNoun(
+              nounId: n['noun']! as String,
+              word: n['word']! as String,
+            ),
+        ],
+      );
 
   static T _byId<T extends Enum>(
     List<T> values,

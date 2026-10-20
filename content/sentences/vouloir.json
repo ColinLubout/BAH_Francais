@@ -1,0 +1,292 @@
+{
+  "sentences": [
+    {
+      "id": "s.vouloir.pr.1s.01",
+      "text": "Je veux un café, s’il vous plaît.",
+      "verbs": [
+        {
+          "verb": "v.vouloir",
+          "tense": "present",
+          "person": "1s",
+          "answer": "veux"
+        }
+      ]
+    },
+    {
+      "id": "s.vouloir.pr.2s.01",
+      "text": "Tu veux venir avec nous ?",
+      "verbs": [
+        {
+          "verb": "v.vouloir",
+          "tense": "present",
+          "person": "2s",
+          "answer": "veux"
+        }
+      ]
+    },
+    {
+      "id": "s.vouloir.pr.3s.01",
+      "text": "Elle veut apprendre le japonais.",
+      "verbs": [
+        {
+          "verb": "v.vouloir",
+          "tense": "present",
+          "person": "3s",
+          "answer": "veut"
+        }
+      ]
+    },
+    {
+      "id": "s.vouloir.pr.1p.01",
+      "text": "Nous voulons visiter Rome cet été.",
+      "verbs": [
+        {
+          "verb": "v.vouloir",
+          "tense": "present",
+          "person": "1p",
+          "answer": "voulons"
+        }
+      ]
+    },
+    {
+      "id": "s.vouloir.pr.2p.01",
+      "text": "Vous voulez du thé ou du café ?",
+      "verbs": [
+        {
+          "verb": "v.vouloir",
+          "tense": "present",
+          "person": "2p",
+          "answer": "voulez"
+        }
+      ]
+    },
+    {
+      "id": "s.vouloir.pr.3p.01",
+      "text": "Les enfants veulent aller au parc.",
+      "verbs": [
+        {
+          "verb": "v.vouloir",
+          "tense": "present",
+          "person": "3p",
+          "answer": "veulent"
+        }
+      ]
+    },
+    {
+      "id": "s.vouloir.pc.1s.01",
+      "text": "J’ai voulu t’appeler, mais j’ai oublié.",
+      "verbs": [
+        {
+          "verb": "v.vouloir",
+          "tense": "passe_compose",
+          "person": "1s",
+          "answer": "ai voulu"
+        }
+      ]
+    },
+    {
+      "id": "s.vouloir.pc.2s.01",
+      "text": "Tu as voulu partir trop tôt.",
+      "verbs": [
+        {
+          "verb": "v.vouloir",
+          "tense": "passe_compose",
+          "person": "2s",
+          "answer": "as voulu"
+        }
+      ]
+    },
+    {
+      "id": "s.vouloir.pc.3s.01",
+      "text": "Il a voulu voir la mer avant de partir.",
+      "verbs": [
+        {
+          "verb": "v.vouloir",
+          "tense": "passe_compose",
+          "person": "3s",
+          "answer": "a voulu"
+        }
+      ]
+    },
+    {
+      "id": "s.vouloir.pc.1p.01",
+      "text": "Nous avons voulu vous faire une surprise.",
+      "verbs": [
+        {
+          "verb": "v.vouloir",
+          "tense": "passe_compose",
+          "person": "1p",
+          "answer": "avons voulu"
+        }
+      ]
+    },
+    {
+      "id": "s.vouloir.pc.2p.01",
+      "text": "Vous avez voulu tout faire en un jour.",
+      "verbs": [
+        {
+          "verb": "v.vouloir",
+          "tense": "passe_compose",
+          "person": "2p",
+          "answer": "avez voulu"
+        }
+      ]
+    },
+    {
+      "id": "s.vouloir.pc.3p.01",
+      "text": "Ils ont voulu rester jusqu’à la fin.",
+      "verbs": [
+        {
+          "verb": "v.vouloir",
+          "tense": "passe_compose",
+          "person": "3p",
+          "answer": "ont voulu"
+        }
+      ]
+    },
+    {
+      "id": "s.vouloir.im.1s.01",
+      "text": "Petit, je voulais devenir pompier.",
+      "verbs": [
+        {
+          "verb": "v.vouloir",
+          "tense": "imparfait",
+          "person": "1s",
+          "answer": "voulais"
+        }
+      ]
+    },
+    {
+      "id": "s.vouloir.im.2s.01",
+      "text": "Tu voulais me parler ?",
+      "verbs": [
+        {
+          "verb": "v.vouloir",
+          "tense": "imparfait",
+          "person": "2s",
+          "answer": "voulais"
+        }
+      ]
+    },
+    {
+      "id": "s.vouloir.im.3s.01",
+      "text": "Elle voulait toujours avoir raison.",
+      "verbs": [
+        {
+          "verb": "v.vouloir",
+          "tense": "imparfait",
+          "person": "3s",
+          "answer": "voulait"
+        }
+      ]
+    },
+    {
+      "id": "s.vouloir.im.1p.01",
+      "text": "Nous voulions acheter une maison à la campagne.",
+      "verbs": [
+        {
+          "verb": "v.vouloir",
+          "tense": "imparfait",
+          "person": "1p",
+          "answer": "voulions"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.maison",
+          "word": "maison"
+        }
+      ]
+    },
+    {
+      "id": "s.vouloir.im.2p.01",
+      "text": "Vous vouliez voir le directeur ?",
+      "verbs": [
+        {
+          "verb": "v.vouloir",
+          "tense": "imparfait",
+          "person": "2p",
+          "answer": "vouliez"
+        }
+      ]
+    },
+    {
+      "id": "s.vouloir.im.3p.01",
+      "text": "Ils voulaient partir en vacances en juillet.",
+      "verbs": [
+        {
+          "verb": "v.vouloir",
+          "tense": "imparfait",
+          "person": "3p",
+          "answer": "voulaient"
+        }
+      ]
+    },
+    {
+      "id": "s.vouloir.fs.1s.01",
+      "text": "Quand je voudrai partir, je te le dirai.",
+      "verbs": [
+        {
+          "verb": "v.vouloir",
+          "tense": "futur_simple",
+          "person": "1s",
+          "answer": "voudrai"
+        },
+        {
+          "verb": "v.dire",
+          "tense": "futur_simple",
+          "person": "1s",
+          "answer": "dirai"
+        }
+      ]
+    },
+    {
+      "id": "s.vouloir.fs.3s.01",
+      "text": "Elle voudra sûrement voir tes photos.",
+      "verbs": [
+        {
+          "verb": "v.vouloir",
+          "tense": "futur_simple",
+          "person": "3s",
+          "answer": "voudra"
+        }
+      ]
+    },
+    {
+      "id": "s.vouloir.fs.1p.01",
+      "text": "Nous voudrons en savoir plus demain.",
+      "verbs": [
+        {
+          "verb": "v.vouloir",
+          "tense": "futur_simple",
+          "person": "1p",
+          "answer": "voudrons"
+        }
+      ]
+    },
+    {
+      "id": "s.vouloir.fs.2p.01",
+      "text": "Faites comme vous voudrez.",
+      "verbs": [
+        {
+          "verb": "v.vouloir",
+          "tense": "futur_simple",
+          "person": "2p",
+          "answer": "voudrez"
+        }
+      ]
+    },
+    {
+      "id": "s.vouloir.fs.3p.01",
+      "text": "Ils voudront sans doute venir avec nous.",
+      "verbs": [
+        {
+          "verb": "v.vouloir",
+          "tense": "futur_simple",
+          "person": "3p",
+          "answer": "voudront"
+        }
+      ]
+    }
+  ]
+}

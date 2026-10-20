@@ -1,0 +1,326 @@
+{
+  "sentences": [
+    {
+      "id": "s.faire.pr.1s.01",
+      "text": "Je fais du sport le samedi.",
+      "verbs": [
+        {
+          "verb": "v.faire",
+          "tense": "present",
+          "person": "1s",
+          "answer": "fais"
+        }
+      ]
+    },
+    {
+      "id": "s.faire.pr.2s.01",
+      "text": "Qu’est-ce que tu fais ce soir ?",
+      "verbs": [
+        {
+          "verb": "v.faire",
+          "tense": "present",
+          "person": "2s",
+          "answer": "fais"
+        }
+      ]
+    },
+    {
+      "id": "s.faire.pr.3s.01",
+      "text": "Il fait beau aujourd’hui.",
+      "verbs": [
+        {
+          "verb": "v.faire",
+          "tense": "present",
+          "person": "3s",
+          "answer": "fait"
+        }
+      ]
+    },
+    {
+      "id": "s.faire.pr.1p.01",
+      "text": "Nous faisons les courses ensemble.",
+      "verbs": [
+        {
+          "verb": "v.faire",
+          "tense": "present",
+          "person": "1p",
+          "answer": "faisons"
+        }
+      ]
+    },
+    {
+      "id": "s.faire.pr.2p.01",
+      "text": "Vous faites quoi dans la vie ?",
+      "verbs": [
+        {
+          "verb": "v.faire",
+          "tense": "present",
+          "person": "2p",
+          "answer": "faites"
+        }
+      ]
+    },
+    {
+      "id": "s.faire.pr.3p.01",
+      "text": "Les enfants font leurs devoirs.",
+      "verbs": [
+        {
+          "verb": "v.faire",
+          "tense": "present",
+          "person": "3p",
+          "answer": "font"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.enfant",
+          "word": "enfants"
+        }
+      ]
+    },
+    {
+      "id": "s.faire.pc.1s.01",
+      "text": "J’ai fait un gâteau pour ton anniversaire.",
+      "verbs": [
+        {
+          "verb": "v.faire",
+          "tense": "passe_compose",
+          "person": "1s",
+          "answer": "ai fait"
+        }
+      ]
+    },
+    {
+      "id": "s.faire.pc.2s.01",
+      "text": "Tu as fait tes valises ?",
+      "verbs": [
+        {
+          "verb": "v.faire",
+          "tense": "passe_compose",
+          "person": "2s",
+          "answer": "as fait"
+        }
+      ]
+    },
+    {
+      "id": "s.faire.pc.3s.01",
+      "text": "Elle a fait une erreur dans le calcul.",
+      "verbs": [
+        {
+          "verb": "v.faire",
+          "tense": "passe_compose",
+          "person": "3s",
+          "answer": "a fait"
+        }
+      ]
+    },
+    {
+      "id": "s.faire.pc.1p.01",
+      "text": "Nous avons fait une longue promenade hier.",
+      "verbs": [
+        {
+          "verb": "v.faire",
+          "tense": "passe_compose",
+          "person": "1p",
+          "answer": "avons fait"
+        }
+      ]
+    },
+    {
+      "id": "s.faire.pc.2p.01",
+      "text": "Vous avez fait bon voyage ?",
+      "verbs": [
+        {
+          "verb": "v.faire",
+          "tense": "passe_compose",
+          "person": "2p",
+          "answer": "avez fait"
+        }
+      ]
+    },
+    {
+      "id": "s.faire.pc.3p.01",
+      "text": "Ils ont fait beaucoup de bruit cette nuit.",
+      "verbs": [
+        {
+          "verb": "v.faire",
+          "tense": "passe_compose",
+          "person": "3p",
+          "answer": "ont fait"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.nuit",
+          "word": "nuit"
+        }
+      ]
+    },
+    {
+      "id": "s.faire.im.1s.01",
+      "text": "Avant, je faisais du piano tous les jours.",
+      "verbs": [
+        {
+          "verb": "v.faire",
+          "tense": "imparfait",
+          "person": "1s",
+          "answer": "faisais"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.jour",
+          "word": "jours"
+        }
+      ]
+    },
+    {
+      "id": "s.faire.im.2s.01",
+      "text": "Avant, tu faisais souvent la cuisine.",
+      "verbs": [
+        {
+          "verb": "v.faire",
+          "tense": "imparfait",
+          "person": "2s",
+          "answer": "faisais"
+        }
+      ]
+    },
+    {
+      "id": "s.faire.im.3s.01",
+      "text": "Il faisait très froid cet hiver-là.",
+      "verbs": [
+        {
+          "verb": "v.faire",
+          "tense": "imparfait",
+          "person": "3s",
+          "answer": "faisait"
+        }
+      ]
+    },
+    {
+      "id": "s.faire.im.1p.01",
+      "text": "Nous faisions du camping chaque été.",
+      "verbs": [
+        {
+          "verb": "v.faire",
+          "tense": "imparfait",
+          "person": "1p",
+          "answer": "faisions"
+        }
+      ]
+    },
+    {
+      "id": "s.faire.im.2p.01",
+      "text": "Vous faisiez quoi quand je vous ai appelés ?",
+      "verbs": [
+        {
+          "verb": "v.faire",
+          "tense": "imparfait",
+          "person": "2p",
+          "answer": "faisiez"
+        }
+      ]
+    },
+    {
+      "id": "s.faire.im.3p.01",
+      "text": "Les voisins faisaient souvent la fête le samedi.",
+      "verbs": [
+        {
+          "verb": "v.faire",
+          "tense": "imparfait",
+          "person": "3p",
+          "answer": "faisaient"
+        }
+      ]
+    },
+    {
+      "id": "s.faire.fs.1s.01",
+      "text": "Je ferai attention, c’est promis.",
+      "verbs": [
+        {
+          "verb": "v.faire",
+          "tense": "futur_simple",
+          "person": "1s",
+          "answer": "ferai"
+        }
+      ]
+    },
+    {
+      "id": "s.faire.fs.2s.01",
+      "text": "Tu feras la vaisselle après le dîner.",
+      "verbs": [
+        {
+          "verb": "v.faire",
+          "tense": "futur_simple",
+          "person": "2s",
+          "answer": "feras"
+        }
+      ]
+    },
+    {
+      "id": "s.faire.fs.3s.01",
+      "text": "Il fera chaud demain.",
+      "verbs": [
+        {
+          "verb": "v.faire",
+          "tense": "futur_simple",
+          "person": "3s",
+          "answer": "fera"
+        }
+      ]
+    },
+    {
+      "id": "s.faire.fs.1p.01",
+      "text": "Nous ferons un pique-nique dimanche.",
+      "verbs": [
+        {
+          "verb": "v.faire",
+          "tense": "futur_simple",
+          "person": "1p",
+          "answer": "ferons"
+        }
+      ]
+    },
+    {
+      "id": "s.faire.fs.2p.01",
+      "text": "Vous ferez ce travail la semaine prochaine.",
+      "verbs": [
+        {
+          "verb": "v.faire",
+          "tense": "futur_simple",
+          "person": "2p",
+          "answer": "ferez"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.travail",
+          "word": "travail"
+        },
+        {
+          "noun": "n.semaine",
+          "word": "semaine"
+        }
+      ]
+    },
+    {
+      "id": "s.faire.fs.3p.01",
+      "text": "Ils feront des progrès avec le temps.",
+      "verbs": [
+        {
+          "verb": "v.faire",
+          "tense": "futur_simple",
+          "person": "3p",
+          "answer": "feront"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.temps",
+          "word": "temps"
+        }
+      ]
+    }
+  ]
+}

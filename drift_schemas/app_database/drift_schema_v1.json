@@ -388,99 +388,6 @@
     },
     {
       "id": 3,
-      "references": [
-        1
-      ],
-      "type": "table",
-      "data": {
-        "name": "noun_examples",
-        "was_declared_in_moor": false,
-        "columns": [
-          {
-            "name": "source",
-            "getter_name": "source",
-            "moor_type": "string",
-            "nullable": false,
-            "customConstraints": null,
-            "default_dart": "const CustomExpression('\\'official\\'')",
-            "default_client_dart": null,
-            "dsl_features": [],
-            "type_converter": {
-              "dart_expr": "sourceConverter",
-              "dart_type_name": "ContentSource"
-            }
-          },
-          {
-            "name": "retired",
-            "getter_name": "retired",
-            "moor_type": "bool",
-            "nullable": false,
-            "customConstraints": null,
-            "defaultConstraints": "CHECK (\"retired\" IN (0, 1))",
-            "dialectAwareDefaultConstraints": {
-              "sqlite": "CHECK (\"retired\" IN (0, 1))"
-            },
-            "default_dart": "const CustomExpression('0')",
-            "default_client_dart": null,
-            "dsl_features": []
-          },
-          {
-            "name": "id",
-            "getter_name": "id",
-            "moor_type": "string",
-            "nullable": false,
-            "customConstraints": null,
-            "default_dart": null,
-            "default_client_dart": null,
-            "dsl_features": []
-          },
-          {
-            "name": "noun_id",
-            "getter_name": "nounId",
-            "moor_type": "string",
-            "nullable": false,
-            "customConstraints": null,
-            "defaultConstraints": "REFERENCES nouns (id) ON DELETE CASCADE",
-            "dialectAwareDefaultConstraints": {
-              "sqlite": "REFERENCES nouns (id) ON DELETE CASCADE"
-            },
-            "default_dart": null,
-            "default_client_dart": null,
-            "dsl_features": [
-              {
-                "foreign_key": {
-                  "to": {
-                    "table": "nouns",
-                    "column": "id"
-                  },
-                  "initially_deferred": false,
-                  "on_update": null,
-                  "on_delete": "cascade"
-                }
-              }
-            ]
-          },
-          {
-            "name": "example_text",
-            "getter_name": "exampleText",
-            "moor_type": "string",
-            "nullable": false,
-            "customConstraints": null,
-            "default_dart": null,
-            "default_client_dart": null,
-            "dsl_features": []
-          }
-        ],
-        "is_virtual": false,
-        "without_rowid": false,
-        "constraints": [],
-        "explicit_pk": [
-          "id"
-        ]
-      }
-    },
-    {
-      "id": 4,
       "references": [],
       "type": "table",
       "data": {
@@ -625,9 +532,9 @@
       }
     },
     {
-      "id": 5,
+      "id": 4,
       "references": [
-        4,
+        3,
         0
       ],
       "type": "table",
@@ -726,9 +633,9 @@
       }
     },
     {
-      "id": 6,
+      "id": 5,
       "references": [
-        4
+        3
       ],
       "type": "table",
       "data": {
@@ -853,10 +760,8 @@
       }
     },
     {
-      "id": 7,
-      "references": [
-        4
-      ],
+      "id": 6,
+      "references": [],
       "type": "table",
       "data": {
         "name": "sentences",
@@ -899,6 +804,90 @@
             "default_dart": null,
             "default_client_dart": null,
             "dsl_features": []
+          },
+          {
+            "name": "sentence_text",
+            "getter_name": "sentenceText",
+            "moor_type": "string",
+            "nullable": false,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": []
+          }
+        ],
+        "is_virtual": false,
+        "without_rowid": false,
+        "constraints": [],
+        "explicit_pk": [
+          "id"
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "references": [
+        6,
+        3
+      ],
+      "type": "table",
+      "data": {
+        "name": "sentence_verbs",
+        "was_declared_in_moor": false,
+        "columns": [
+          {
+            "name": "source",
+            "getter_name": "source",
+            "moor_type": "string",
+            "nullable": false,
+            "customConstraints": null,
+            "default_dart": "const CustomExpression('\\'official\\'')",
+            "default_client_dart": null,
+            "dsl_features": [],
+            "type_converter": {
+              "dart_expr": "sourceConverter",
+              "dart_type_name": "ContentSource"
+            }
+          },
+          {
+            "name": "retired",
+            "getter_name": "retired",
+            "moor_type": "bool",
+            "nullable": false,
+            "customConstraints": null,
+            "defaultConstraints": "CHECK (\"retired\" IN (0, 1))",
+            "dialectAwareDefaultConstraints": {
+              "sqlite": "CHECK (\"retired\" IN (0, 1))"
+            },
+            "default_dart": "const CustomExpression('0')",
+            "default_client_dart": null,
+            "dsl_features": []
+          },
+          {
+            "name": "sentence_id",
+            "getter_name": "sentenceId",
+            "moor_type": "string",
+            "nullable": false,
+            "customConstraints": null,
+            "defaultConstraints": "REFERENCES sentences (id) ON DELETE CASCADE",
+            "dialectAwareDefaultConstraints": {
+              "sqlite": "REFERENCES sentences (id) ON DELETE CASCADE"
+            },
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": [
+              {
+                "foreign_key": {
+                  "to": {
+                    "table": "sentences",
+                    "column": "id"
+                  },
+                  "initially_deferred": false,
+                  "on_update": null,
+                  "on_delete": "cascade"
+                }
+              }
+            ]
           },
           {
             "name": "verb_id",
@@ -955,16 +944,6 @@
             }
           },
           {
-            "name": "sentence_text",
-            "getter_name": "sentenceText",
-            "moor_type": "string",
-            "nullable": false,
-            "customConstraints": null,
-            "default_dart": null,
-            "default_client_dart": null,
-            "dsl_features": []
-          },
-          {
             "name": "answer",
             "getter_name": "answer",
             "moor_type": "string",
@@ -987,18 +966,142 @@
               "dart_expr": "stringListConverter",
               "dart_type_name": "List<String>"
             }
+          },
+          {
+            "name": "before",
+            "getter_name": "before",
+            "moor_type": "string",
+            "nullable": true,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": []
           }
         ],
         "is_virtual": false,
         "without_rowid": false,
         "constraints": [],
         "explicit_pk": [
-          "id"
+          "sentence_id",
+          "verb_id",
+          "tense",
+          "person"
         ]
       }
     },
     {
       "id": 8,
+      "references": [
+        6,
+        1
+      ],
+      "type": "table",
+      "data": {
+        "name": "sentence_nouns",
+        "was_declared_in_moor": false,
+        "columns": [
+          {
+            "name": "source",
+            "getter_name": "source",
+            "moor_type": "string",
+            "nullable": false,
+            "customConstraints": null,
+            "default_dart": "const CustomExpression('\\'official\\'')",
+            "default_client_dart": null,
+            "dsl_features": [],
+            "type_converter": {
+              "dart_expr": "sourceConverter",
+              "dart_type_name": "ContentSource"
+            }
+          },
+          {
+            "name": "retired",
+            "getter_name": "retired",
+            "moor_type": "bool",
+            "nullable": false,
+            "customConstraints": null,
+            "defaultConstraints": "CHECK (\"retired\" IN (0, 1))",
+            "dialectAwareDefaultConstraints": {
+              "sqlite": "CHECK (\"retired\" IN (0, 1))"
+            },
+            "default_dart": "const CustomExpression('0')",
+            "default_client_dart": null,
+            "dsl_features": []
+          },
+          {
+            "name": "sentence_id",
+            "getter_name": "sentenceId",
+            "moor_type": "string",
+            "nullable": false,
+            "customConstraints": null,
+            "defaultConstraints": "REFERENCES sentences (id) ON DELETE CASCADE",
+            "dialectAwareDefaultConstraints": {
+              "sqlite": "REFERENCES sentences (id) ON DELETE CASCADE"
+            },
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": [
+              {
+                "foreign_key": {
+                  "to": {
+                    "table": "sentences",
+                    "column": "id"
+                  },
+                  "initially_deferred": false,
+                  "on_update": null,
+                  "on_delete": "cascade"
+                }
+              }
+            ]
+          },
+          {
+            "name": "noun_id",
+            "getter_name": "nounId",
+            "moor_type": "string",
+            "nullable": false,
+            "customConstraints": null,
+            "defaultConstraints": "REFERENCES nouns (id) ON DELETE CASCADE",
+            "dialectAwareDefaultConstraints": {
+              "sqlite": "REFERENCES nouns (id) ON DELETE CASCADE"
+            },
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": [
+              {
+                "foreign_key": {
+                  "to": {
+                    "table": "nouns",
+                    "column": "id"
+                  },
+                  "initially_deferred": false,
+                  "on_update": null,
+                  "on_delete": "cascade"
+                }
+              }
+            ]
+          },
+          {
+            "name": "word",
+            "getter_name": "word",
+            "moor_type": "string",
+            "nullable": false,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": []
+          }
+        ],
+        "is_virtual": false,
+        "without_rowid": false,
+        "constraints": [],
+        "explicit_pk": [
+          "sentence_id",
+          "noun_id"
+        ]
+      }
+    },
+    {
+      "id": 9,
       "references": [
         1
       ],
@@ -1114,7 +1217,7 @@
       }
     },
     {
-      "id": 9,
+      "id": 10,
       "references": [],
       "type": "table",
       "data": {
@@ -1151,7 +1254,7 @@
       }
     },
     {
-      "id": 10,
+      "id": 11,
       "references": [],
       "type": "table",
       "data": {
@@ -1363,7 +1466,7 @@
       }
     },
     {
-      "id": 11,
+      "id": 12,
       "references": [],
       "type": "table",
       "data": {
@@ -1465,10 +1568,10 @@
       }
     },
     {
-      "id": 12,
+      "id": 13,
       "references": [
-        10,
-        11
+        11,
+        12
       ],
       "type": "table",
       "data": {
@@ -1656,7 +1759,7 @@
       }
     },
     {
-      "id": 13,
+      "id": 14,
       "references": [],
       "type": "table",
       "data": {
@@ -1712,13 +1815,13 @@
       }
     },
     {
-      "id": 14,
+      "id": 15,
       "references": [
-        10
+        11
       ],
       "type": "index",
       "data": {
-        "on": 10,
+        "on": 11,
         "name": "cards_item",
         "sql": "CREATE UNIQUE INDEX cards_item ON cards (item_id, drill_type, IFNULL(tense, ''))",
         "unique": true,
@@ -1726,13 +1829,13 @@
       }
     },
     {
-      "id": 15,
+      "id": 16,
       "references": [
-        12
+        13
       ],
       "type": "index",
       "data": {
-        "on": 12,
+        "on": 13,
         "name": "review_logs_card",
         "sql": null,
         "unique": false,
@@ -1745,13 +1848,13 @@
       }
     },
     {
-      "id": 16,
+      "id": 17,
       "references": [
-        12
+        13
       ],
       "type": "index",
       "data": {
-        "on": 12,
+        "on": 13,
         "name": "review_logs_day",
         "sql": null,
         "unique": false,
@@ -1793,15 +1896,6 @@
       ]
     },
     {
-      "name": "noun_examples",
-      "sql": [
-        {
-          "dialect": "sqlite",
-          "sql": "CREATE TABLE IF NOT EXISTS \"noun_examples\" (\"source\" TEXT NOT NULL DEFAULT 'official', \"retired\" INTEGER NOT NULL DEFAULT 0 CHECK (\"retired\" IN (0, 1)), \"id\" TEXT NOT NULL, \"noun_id\" TEXT NOT NULL REFERENCES nouns (id) ON DELETE CASCADE, \"example_text\" TEXT NOT NULL, PRIMARY KEY (\"id\"));"
-        }
-      ]
-    },
-    {
       "name": "verbs",
       "sql": [
         {
@@ -1833,7 +1927,25 @@
       "sql": [
         {
           "dialect": "sqlite",
-          "sql": "CREATE TABLE IF NOT EXISTS \"sentences\" (\"source\" TEXT NOT NULL DEFAULT 'official', \"retired\" INTEGER NOT NULL DEFAULT 0 CHECK (\"retired\" IN (0, 1)), \"id\" TEXT NOT NULL, \"verb_id\" TEXT NOT NULL REFERENCES verbs (id) ON DELETE CASCADE, \"tense\" TEXT NOT NULL, \"person\" TEXT NOT NULL, \"sentence_text\" TEXT NOT NULL, \"answer\" TEXT NOT NULL, \"alternatives\" TEXT NOT NULL DEFAULT '[]', PRIMARY KEY (\"id\"));"
+          "sql": "CREATE TABLE IF NOT EXISTS \"sentences\" (\"source\" TEXT NOT NULL DEFAULT 'official', \"retired\" INTEGER NOT NULL DEFAULT 0 CHECK (\"retired\" IN (0, 1)), \"id\" TEXT NOT NULL, \"sentence_text\" TEXT NOT NULL, PRIMARY KEY (\"id\"));"
+        }
+      ]
+    },
+    {
+      "name": "sentence_verbs",
+      "sql": [
+        {
+          "dialect": "sqlite",
+          "sql": "CREATE TABLE IF NOT EXISTS \"sentence_verbs\" (\"source\" TEXT NOT NULL DEFAULT 'official', \"retired\" INTEGER NOT NULL DEFAULT 0 CHECK (\"retired\" IN (0, 1)), \"sentence_id\" TEXT NOT NULL REFERENCES sentences (id) ON DELETE CASCADE, \"verb_id\" TEXT NOT NULL REFERENCES verbs (id) ON DELETE CASCADE, \"tense\" TEXT NOT NULL, \"person\" TEXT NOT NULL, \"answer\" TEXT NOT NULL, \"alternatives\" TEXT NOT NULL DEFAULT '[]', \"before\" TEXT NULL, PRIMARY KEY (\"sentence_id\", \"verb_id\", \"tense\", \"person\"));"
+        }
+      ]
+    },
+    {
+      "name": "sentence_nouns",
+      "sql": [
+        {
+          "dialect": "sqlite",
+          "sql": "CREATE TABLE IF NOT EXISTS \"sentence_nouns\" (\"source\" TEXT NOT NULL DEFAULT 'official', \"retired\" INTEGER NOT NULL DEFAULT 0 CHECK (\"retired\" IN (0, 1)), \"sentence_id\" TEXT NOT NULL REFERENCES sentences (id) ON DELETE CASCADE, \"noun_id\" TEXT NOT NULL REFERENCES nouns (id) ON DELETE CASCADE, \"word\" TEXT NOT NULL, PRIMARY KEY (\"sentence_id\", \"noun_id\"));"
         }
       ]
     },

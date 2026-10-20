@@ -46,7 +46,6 @@ final fixture = ContentSet(
         Synonym('ac'),
       ],
       categoryIds: ['cat.everyday', 'cat.topic'],
-      examples: ['aa one', 'aa two'],
       imageIds: ['i.aa-1', 'i.aa-2'],
     ),
     ContentNoun(
@@ -56,7 +55,6 @@ final fixture = ContentSet(
       pluralOnly: true,
       level: Level.avance,
       categoryIds: ['cat.topic'],
-      examples: ['bb one'],
     ),
   ],
   verbs: [
@@ -82,22 +80,43 @@ final fixture = ContentSet(
                   : const [],
             ),
       ],
-      sentences: const [
-        ContentSentence(
-          id: 's.cc.1',
+    ),
+  ],
+  sentences: const [
+    // A prompt for cc and an example of aa at once.
+    ContentSentence(
+      id: 's.one',
+      text: 'one cc present 1s aa',
+      verbs: [
+        SentenceVerb(
+          verbId: 'v.cc',
           tense: Tense.present,
           person: Person.firstSingular,
-          text: 'cc ___ one',
           answer: 'cc present 1s',
           alternatives: ['cc alt present'],
         ),
-        ContentSentence(
-          id: 's.cc.2',
+      ],
+      nouns: [SentenceNoun(nounId: 'n.aa', word: 'aa')],
+    ),
+    ContentSentence(
+      id: 's.two',
+      text: 'two l’cc passe_compose 3p',
+      verbs: [
+        SentenceVerb(
+          verbId: 'v.cc',
           tense: Tense.passeCompose,
           person: Person.thirdPlural,
-          text: 'cc ___ two',
           answer: 'cc passe_compose 3p',
+          before: 'la',
         ),
+      ],
+    ),
+    ContentSentence(
+      id: 's.three',
+      text: 'three aa bbs',
+      nouns: [
+        SentenceNoun(nounId: 'n.aa', word: 'aa'),
+        SentenceNoun(nounId: 'n.bb', word: 'bbs'),
       ],
     ),
   ],

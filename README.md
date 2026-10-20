@@ -80,8 +80,9 @@ test/                  mirrors lib/ and tool/; test/drift/ holds the migration t
 - **Drift** stores everything in SQLite, on the device. Every schema change raises
   the schema version, ships with a migration, and is dumped with
   `dart run drift_dev make-migrations`, with a test that opens the previous version.
-- **Content** (words, verbs, sentences, images) is written as JSON files, one noun
-  category or one verb per file. `tool/content_build.dart` checks them against
+- **Content** (words, verbs, sentences, images) is written as JSON files: one noun
+  category or one verb per file, and sentences in their own files, each linked to
+  the verbs and nouns it uses. `tool/content_build.dart` checks them against
   `content/schema/` and the rules beyond it, then builds a content pack: one SQLite
   file with the app's content tables, which the app imports on first launch.
 - **go_router** handles routing. The five screens in the bottom navigation bar are

@@ -12,11 +12,12 @@ abstract interface class ContentTables {
   $CategoriesTable get categories;
   $NounsTable get nouns;
   $NounCategoriesTable get nounCategories;
-  $NounExamplesTable get nounExamples;
   $VerbsTable get verbs;
   $VerbCategoriesTable get verbCategories;
   $VerbFormsTable get verbForms;
   $SentencesTable get sentences;
+  $SentenceVerbsTable get sentenceVerbs;
+  $SentenceNounsTable get sentenceNouns;
   $ImagesTable get images;
   $ContentMetaTable get contentMeta;
 }
@@ -81,20 +82,6 @@ class NounCategories extends Table with ContentColumns {
   Set<Column<Object>> get primaryKey => {nounId, categoryId};
 }
 
-@DataClassName('NounExampleRow')
-class NounExamples extends Table with ContentColumns {
-  TextColumn get id => text()();
-  TextColumn get nounId =>
-      text().references(Nouns, #id, onDelete: KeyAction.cascade)();
-
-  /// The spec's `text`. A column called `text` breaks Drift's generated
-  /// schema test helpers.
-  TextColumn get exampleText => text()();
-
-  @override
-  Set<Column<Object>> get primaryKey => {id};
-}
-
 @DataClassName('VerbRow')
 class Verbs extends Table with ContentColumns {
   TextColumn get id => text()();
@@ -138,25 +125,55 @@ class VerbForms extends Table with ContentColumns {
   Set<Column<Object>> get primaryKey => {verbId, tense, person};
 }
 
+/// A sentence written in full. Its links say which verbs it is a
+/// Conjugation prompt for and which nouns it is an example of.
 @DataClassName('SentenceRow')
 class Sentences extends Table with ContentColumns {
   TextColumn get id => text()();
+
+  /// The sentence, with no blank. A column called `text` breaks Drift's
+  /// generated schema test helpers.
+  TextColumn get sentenceText => text()();
+
+  @override
+  Set<Column<Object>> get primaryKey => {id};
+}
+
+/// A verb a sentence uses, in one tense and person.
+@DataClassName('SentenceVerbRow')
+class SentenceVerbs extends Table with ContentColumns {
+  TextColumn get sentenceId =>
+      text().references(Sentences, #id, onDelete: KeyAction.cascade)();
   TextColumn get verbId =>
       text().references(Verbs, #id, onDelete: KeyAction.cascade)();
   TextColumn get tense => text().map(tenseConverter)();
   TextColumn get person => text().map(personConverter)();
 
-  /// The spec's `text`, with `___` once where the verb goes. A column called
-  /// `text` breaks Drift's generated schema test helpers.
-  TextColumn get sentenceText => text()();
-
-  /// What fills the blank, with any agreement (*sommes allés*).
+  /// The words the drill blanks out, with any agreement (*sommes allés*).
   TextColumn get answer => text()();
   TextColumn get alternatives =>
       text().map(stringListConverter).withDefault(const Constant('[]'))();
 
+  /// *le* or *la*, when the word before the answer is an elided *l’*.
+  TextColumn get before => text().nullable()();
+
   @override
-  Set<Column<Object>> get primaryKey => {id};
+  Set<Column<Object>> get primaryKey => {sentenceId, verbId, tense, person};
+}
+
+/// A noun a sentence is an example of.
+@DataClassName('SentenceNounRow')
+class SentenceNouns extends Table with ContentColumns {
+  TextColumn get sentenceId =>
+      text().references(Sentences, #id, onDelete: KeyAction.cascade)();
+  TextColumn get nounId =>
+      text().references(Nouns, #id, onDelete: KeyAction.cascade)();
+
+  /// The words the noun takes in the sentence (*haricots*), shown in bold.
+  TextColumn get word => text()();
+
+  @override
+  Set<Column<Object>> get primaryKey => {sentenceId, nounId};
 }
 
 /// A noun's images (Spaced Repetition → Data model). Not a content table:
