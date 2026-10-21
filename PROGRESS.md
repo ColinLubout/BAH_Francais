@@ -43,17 +43,21 @@ until this is merged.
   the validator and, later, the Conjugaison drill.
 - **Everyday content, a draft to check** (`content/`, decision 57): *Les essentiels*,
   30 nouns with definitions, and *Les verbes essentiels*, 10 verbs with all 24 forms;
-  269 sentences, some serving several verbs and nouns.
+  383 sentences, many serving several verbs and nouns.
   - The owner checks it on a review page (a private claude.ai artifact) that shows
     each item with its English meaning and saves their marks.
   - 2026-10-21: the owner checked the nouns and verbs. 38 were right; *eau* and
     *nuit* got new definitions (and *nuit* a new example) from their notes. 18
-    sentences that used one of the 30 nouns without linking it now link it. The
-    sentences are being checked.
+    sentences that used one of the 30 nouns without linking it now link it.
+  - 2026-10-21: the sentences now come from Tatoeba (decision 61): 366 by native
+    speakers, each credited, and 17 drafted where Tatoeba has nothing suitable.
+    Every verb, tense and person has two or more, and every noun two or more
+    examples. The review page shows each sentence's source and Tatoeba's English
+    translation; the sentences are to check again.
 - **Sample set** (`content/sample/`): 3 noun categories of 10 nouns, 5 verbs with
   all 24 forms, 151 sentences and 6 placeholder SVGs. Marked as samples; it never
   ships.
-- **Tests:** 497, all passing. Domain coverage is 99.4%; the DAOs, the content store,
+- **Tests:** 503, all passing. Domain coverage is 99.4%; the DAOs, the content store,
   the converters and the prompt logic are fully covered.
 
 **The milestone's "done when" and its tests:**
@@ -111,6 +115,13 @@ until this is merged.
   needs a person's eye: in *Personne ne savait son nom*, *personne* is a pronoun.
 - M6: À propos / Crédits credits Wiktionary (CC BY-SA 4.0) and Kaikki.org /
   wiktextract (decision 60), with French wording from the owner.
+- M6: À propos / Crédits credits Tatoeba and its licence, CC BY 2.0 FR (decision 61).
+  The licence asks for each author to be credited: the sentences table keeps every
+  sentence's Tatoeba number and author, so Crédits can list the authors, or the
+  drill can name a sentence's author. Which one is the owner's call.
+- M8: picking Tatoeba sentences for the topic categories (names allowed there,
+  decision 61). The script that picked the everyday ones was a one-off outside the
+  repo; done again, it belongs in `tool/` with its tests.
 - M6: `drillSettings.title` ("Réglages – {drill}") doesn't match the spec's
   *Réglages de l'exercice*.
 - M6: for the everyday and Perso categories, only Jamais changes anything (decisions
@@ -548,6 +559,35 @@ document.
       without their own table are checked from the plain verb's forms.
     - *Adds to* Phase 1 content → what Claude Code builds (the schema, validator
       and pack builder).
+
+### 2026-10-21 (milestone 2, agreed with the owner)
+
+61. **The everyday sentences come from Tatoeba** (tatoeba.org), in place of the
+    drafted ones wherever Tatoeba has one that fits.
+    - **How many:** two or more sentences for each verb, tense and person, and two
+      or more examples for each noun. A sentence links every everyday verb form and
+      noun it uses, so one sentence often counts for several.
+    - **Which:** sentences by native speakers (French at level 5 on their Tatoeba
+      profile), of 3 to 10 words, with an English translation, no tag other than
+      *OK* or a tense, and no crude word. The verb form follows its subject pronoun;
+      *avoir* and *être* followed by a participle are another verb's compound tense,
+      not theirs. Up to 12 words, or no translation, only where nothing else fits.
+    - **No names** in the everyday categories: no capital letter after the first.
+      The topic categories, added later, may name people.
+    - **Drafted sentences** stay only where Tatoeba can't fill a slot: 17, for 12
+      verb forms (*nous disions*, *nous avons su*, *vous avez su*, *tu as voulu*,
+      *nous voudrons*, and seven with only one from Tatoeba).
+    - **Credit:** each Tatoeba sentence keeps its number and author, in the content
+      file (`"credit": {"tatoeba": 1234, "author": "…"}`) and in the `sentences`
+      table (`tatoeba_id`, `tatoeba_author`); its id is `s.tatoeba.<number>`.
+      Tatoeba is CC BY 2.0 FR: it is credited in `content/README.md`, and on
+      À propos / Crédits (milestone 6).
+    - **Changes to the text:** apostrophes made typographic (’) and a space before
+      *? ! : ;*, as the rest of the content is written. Nothing else.
+    - Tatoeba's English translations show on the review page only, never in the app.
+      Its downloads stay out of the repo, in `data/tatoeba/`.
+    - *Adds to* Content model → Sentence (its credit), Content files, and À propos /
+      Crédits; *changes* decision 57 (the sentences are no longer drafted).
 
 ### Notes
 

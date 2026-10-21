@@ -1,26 +1,88 @@
 {
   "sentences": [
     {
-      "id": "s.aller.pr.1s.01",
-      "text": "Je vais au marché le samedi.",
-      "verbs": [
-        {
-          "verb": "v.aller",
-          "tense": "present",
-          "person": "1s",
-          "answer": "vais"
-        }
-      ]
-    },
-    {
-      "id": "s.aller.pr.2s.01",
-      "text": "Tu vas à l’école à pied ?",
+      "id": "s.tatoeba.2058549",
+      "text": "J’aimerais savoir quand tu vas l’envoyer.",
+      "credit": {
+        "tatoeba": 2058549,
+        "author": "Amastan"
+      },
       "verbs": [
         {
           "verb": "v.aller",
           "tense": "present",
           "person": "2s",
           "answer": "vas"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.336212",
+      "text": "Tu vas devoir formuler quelques excuses.",
+      "credit": {
+        "tatoeba": 336212,
+        "author": "sysko"
+      },
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "present",
+          "person": "2s",
+          "answer": "vas"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.1402969",
+      "text": "Je ne sais pas quand il va revenir.",
+      "credit": {
+        "tatoeba": 1402969,
+        "author": "serpico"
+      },
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "present",
+          "person": "3s",
+          "answer": "va"
+        },
+        {
+          "verb": "v.savoir",
+          "tense": "present",
+          "person": "1s",
+          "answer": "sais"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.3782495",
+      "text": "On ne va jamais s’en sortir.",
+      "credit": {
+        "tatoeba": 3782495,
+        "author": "kamillel"
+      },
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "present",
+          "person": "3s",
+          "answer": "va"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.336881",
+      "text": "Nous allons généralement à l’école à pied.",
+      "credit": {
+        "tatoeba": 336881,
+        "author": "sysko"
+      },
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "present",
+          "person": "1p",
+          "answer": "allons"
         }
       ],
       "nouns": [
@@ -31,26 +93,12 @@
       ]
     },
     {
-      "id": "s.aller.pr.3s.01",
-      "text": "Elle va chez le médecin demain matin.",
-      "verbs": [
-        {
-          "verb": "v.aller",
-          "tense": "present",
-          "person": "3s",
-          "answer": "va"
-        }
-      ],
-      "nouns": [
-        {
-          "noun": "n.matin",
-          "word": "matin"
-        }
-      ]
-    },
-    {
-      "id": "s.aller.pr.1p.01",
-      "text": "Nous allons souvent à la plage en été.",
+      "id": "s.tatoeba.8758520",
+      "text": "Nous n’allons pas accompagner les enfants à l’école.",
+      "credit": {
+        "tatoeba": 8758520,
+        "author": "Aiji"
+      },
       "verbs": [
         {
           "verb": "v.aller",
@@ -58,11 +106,47 @@
           "person": "1p",
           "answer": "allons"
         }
+      ],
+      "nouns": [
+        {
+          "noun": "n.enfant",
+          "word": "enfants"
+        },
+        {
+          "noun": "n.ecole",
+          "word": "école"
+        }
       ]
     },
     {
-      "id": "s.aller.pr.2p.01",
-      "text": "Vous allez bien ?",
+      "id": "s.tatoeba.10233",
+      "text": "Si vous y allez, j’y vais.",
+      "credit": {
+        "tatoeba": 10233,
+        "author": "sacredceltic"
+      },
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "present",
+          "person": "2p",
+          "answer": "allez"
+        },
+        {
+          "verb": "v.aller",
+          "tense": "present",
+          "person": "1s",
+          "answer": "vais"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.2058551",
+      "text": "J’aimerais savoir quand vous allez l’envoyer.",
+      "credit": {
+        "tatoeba": 2058551,
+        "author": "Amastan"
+      },
       "verbs": [
         {
           "verb": "v.aller",
@@ -73,8 +157,12 @@
       ]
     },
     {
-      "id": "s.aller.pr.3p.01",
-      "text": "Ils vont au cinéma ce soir.",
+      "id": "s.tatoeba.340228",
+      "text": "Ils vont inspecter cette île déserte.",
+      "credit": {
+        "tatoeba": 340228,
+        "author": "sysko"
+      },
       "verbs": [
         {
           "verb": "v.aller",
@@ -82,17 +170,15 @@
           "person": "3p",
           "answer": "vont"
         }
-      ],
-      "nouns": [
-        {
-          "noun": "n.soir",
-          "word": "soir"
-        }
       ]
     },
     {
-      "id": "s.aller.pc.1s.01",
-      "text": "Hier, je suis allé à la boulangerie.",
+      "id": "s.tatoeba.1291227",
+      "text": "Je suis allé voir un spectacle aujourd’hui.",
+      "credit": {
+        "tatoeba": 1291227,
+        "author": "sysko"
+      },
       "verbs": [
         {
           "verb": "v.aller",
@@ -106,8 +192,31 @@
       ]
     },
     {
-      "id": "s.aller.pc.2s.01",
-      "text": "Tu es allé à Paris l’année dernière ?",
+      "id": "s.tatoeba.1338953",
+      "text": "Je suis allée au supermarché.",
+      "credit": {
+        "tatoeba": 1338953,
+        "author": "Salutlolo"
+      },
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "passe_compose",
+          "person": "1s",
+          "answer": "suis allée",
+          "alternatives": [
+            "suis allé"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.8653018",
+      "text": "Est-ce que tu y es allé en costume cette année ?",
+      "credit": {
+        "tatoeba": 8653018,
+        "author": "Aiji"
+      },
       "verbs": [
         {
           "verb": "v.aller",
@@ -127,8 +236,37 @@
       ]
     },
     {
-      "id": "s.aller.pc.3s.01",
-      "text": "Elle est allée au travail en bus.",
+      "id": "s.tatoeba.8954279",
+      "text": "Est-ce que tu es allée quelque part la nuit dernière ?",
+      "credit": {
+        "tatoeba": 8954279,
+        "author": "Aiji"
+      },
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "passe_compose",
+          "person": "2s",
+          "answer": "es allée",
+          "alternatives": [
+            "es allé"
+          ]
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.nuit",
+          "word": "nuit"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.128949",
+      "text": "Elle est allée au cinéma l’autre jour.",
+      "credit": {
+        "tatoeba": 128949,
+        "author": "dominiko"
+      },
       "verbs": [
         {
           "verb": "v.aller",
@@ -139,113 +277,24 @@
       ],
       "nouns": [
         {
-          "noun": "n.travail",
-          "word": "travail"
+          "noun": "n.jour",
+          "word": "jour"
         }
       ]
     },
     {
-      "id": "s.aller.pc.1p.01",
-      "text": "Hier, nous sommes allés au cinéma.",
+      "id": "s.tatoeba.132119",
+      "text": "Hier, il est allé à l’école étudier.",
+      "credit": {
+        "tatoeba": 132119,
+        "author": "nimfeo"
+      },
       "verbs": [
         {
           "verb": "v.aller",
           "tense": "passe_compose",
-          "person": "1p",
-          "answer": "sommes allés",
-          "alternatives": [
-            "sommes allées"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "s.aller.pc.2p.01",
-      "text": "Mesdames, vous êtes allées à la réunion ?",
-      "verbs": [
-        {
-          "verb": "v.aller",
-          "tense": "passe_compose",
-          "person": "2p",
-          "answer": "êtes allées"
-        }
-      ]
-    },
-    {
-      "id": "s.aller.pc.3p.01",
-      "text": "Mes parents sont allés en Italie cet été.",
-      "verbs": [
-        {
-          "verb": "v.aller",
-          "tense": "passe_compose",
-          "person": "3p",
-          "answer": "sont allés"
-        }
-      ]
-    },
-    {
-      "id": "s.aller.im.1s.01",
-      "text": "Quand j’étais petit, j’allais chez ma grand-mère le dimanche.",
-      "verbs": [
-        {
-          "verb": "v.aller",
-          "tense": "imparfait",
-          "person": "1s",
-          "answer": "allais"
-        }
-      ]
-    },
-    {
-      "id": "s.aller.im.2s.01",
-      "text": "Avant, tu allais au travail en voiture.",
-      "verbs": [
-        {
-          "verb": "v.aller",
-          "tense": "imparfait",
-          "person": "2s",
-          "answer": "allais"
-        }
-      ],
-      "nouns": [
-        {
-          "noun": "n.travail",
-          "word": "travail"
-        }
-      ]
-    },
-    {
-      "id": "s.aller.im.3s.01",
-      "text": "Il allait à la piscine tous les mercredis.",
-      "verbs": [
-        {
-          "verb": "v.aller",
-          "tense": "imparfait",
           "person": "3s",
-          "answer": "allait"
-        }
-      ]
-    },
-    {
-      "id": "s.aller.im.1p.01",
-      "text": "Nous allions souvent au parc quand il faisait beau.",
-      "verbs": [
-        {
-          "verb": "v.aller",
-          "tense": "imparfait",
-          "person": "1p",
-          "answer": "allions"
-        }
-      ]
-    },
-    {
-      "id": "s.aller.im.2p.01",
-      "text": "Vous alliez à l’école ensemble ?",
-      "verbs": [
-        {
-          "verb": "v.aller",
-          "tense": "imparfait",
-          "person": "2p",
-          "answer": "alliez"
+          "answer": "est allé"
         }
       ],
       "nouns": [
@@ -256,14 +305,21 @@
       ]
     },
     {
-      "id": "s.aller.im.3p.01",
-      "text": "Elles allaient au marché chaque semaine.",
+      "id": "s.tatoeba.1601685",
+      "text": "Nous y sommes allés pour une semaine.",
+      "credit": {
+        "tatoeba": 1601685,
+        "author": "sacredceltic"
+      },
       "verbs": [
         {
           "verb": "v.aller",
-          "tense": "imparfait",
-          "person": "3p",
-          "answer": "allaient"
+          "tense": "passe_compose",
+          "person": "1p",
+          "answer": "sommes allés",
+          "alternatives": [
+            "sommes allées"
+          ]
         }
       ],
       "nouns": [
@@ -274,20 +330,378 @@
       ]
     },
     {
-      "id": "s.aller.fs.1s.01",
-      "text": "Demain, j’irai à la banque.",
+      "id": "s.tatoeba.3260211",
+      "text": "Hier soir nous sommes allés au théâtre.",
+      "credit": {
+        "tatoeba": 3260211,
+        "author": "nimfeo"
+      },
       "verbs": [
         {
           "verb": "v.aller",
-          "tense": "futur_simple",
-          "person": "1s",
-          "answer": "irai"
+          "tense": "passe_compose",
+          "person": "1p",
+          "answer": "sommes allés",
+          "alternatives": [
+            "sommes allées"
+          ]
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.soir",
+          "word": "soir"
         }
       ]
     },
     {
-      "id": "s.aller.fs.2s.01",
-      "text": "Tu iras voir ce film avec nous ?",
+      "id": "s.tatoeba.2251441",
+      "text": "Cette fois, vous êtes allés trop loin.",
+      "credit": {
+        "tatoeba": 2251441,
+        "author": "sacredceltic"
+      },
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "passe_compose",
+          "person": "2p",
+          "answer": "êtes allés",
+          "alternatives": [
+            "êtes allé",
+            "êtes allée",
+            "êtes allées"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.2906187",
+      "text": "Vous êtes allées au travail.",
+      "credit": {
+        "tatoeba": 2906187,
+        "author": "Amastan"
+      },
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "passe_compose",
+          "person": "2p",
+          "answer": "êtes allées",
+          "alternatives": [
+            "êtes allé",
+            "êtes allée",
+            "êtes allés"
+          ]
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.travail",
+          "word": "travail"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.1820462",
+      "text": "Elles sont allées faire du surf.",
+      "credit": {
+        "tatoeba": 1820462,
+        "author": "sacredceltic"
+      },
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "passe_compose",
+          "person": "3p",
+          "answer": "sont allées"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.787789",
+      "text": "Ils sont allés dans les bois pique-niquer.",
+      "credit": {
+        "tatoeba": 787789,
+        "author": "U2FS"
+      },
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "passe_compose",
+          "person": "3p",
+          "answer": "sont allés"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.563222",
+      "text": "J’allais t’écrire mais j’ai été trop occupé.",
+      "credit": {
+        "tatoeba": 563222,
+        "author": "sacredceltic"
+      },
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "imparfait",
+          "person": "1s",
+          "answer": "allais"
+        },
+        {
+          "verb": "v.etre",
+          "tense": "passe_compose",
+          "person": "1s",
+          "answer": "ai été"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.6378671",
+      "text": "Qui a dit que je n’allais pas t’aider ?",
+      "credit": {
+        "tatoeba": 6378671,
+        "author": "Scorpionvenin14"
+      },
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "imparfait",
+          "person": "1s",
+          "answer": "allais"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.1840198",
+      "text": "Tu as dit que tu allais t’en débrouiller.",
+      "credit": {
+        "tatoeba": 1840198,
+        "author": "sacredceltic"
+      },
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "imparfait",
+          "person": "2s",
+          "answer": "allais"
+        },
+        {
+          "verb": "v.dire",
+          "tense": "passe_compose",
+          "person": "2s",
+          "answer": "as dit"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.6599391",
+      "text": "Je voulais m’assurer que tu allais bien.",
+      "credit": {
+        "tatoeba": 6599391,
+        "author": "Aiji"
+      },
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "imparfait",
+          "person": "2s",
+          "answer": "allais"
+        },
+        {
+          "verb": "v.vouloir",
+          "tense": "imparfait",
+          "person": "1s",
+          "answer": "voulais"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.10491937",
+      "text": "Elle savait qu’elle allait mourir.",
+      "credit": {
+        "tatoeba": 10491937,
+        "author": "lbdx"
+      },
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "imparfait",
+          "person": "3s",
+          "answer": "allait"
+        },
+        {
+          "verb": "v.savoir",
+          "tense": "imparfait",
+          "person": "3s",
+          "answer": "savait"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.1066710",
+      "text": "Il n’allait plus jamais revoir son pays.",
+      "credit": {
+        "tatoeba": 1066710,
+        "author": "sacredceltic"
+      },
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "imparfait",
+          "person": "3s",
+          "answer": "allait"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.pays",
+          "word": "pays"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.1987147",
+      "text": "Et si nous allions voir un film ce soir ?",
+      "credit": {
+        "tatoeba": 1987147,
+        "author": "sacredceltic"
+      },
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "imparfait",
+          "person": "1p",
+          "answer": "allions"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.soir",
+          "word": "soir"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.7449009",
+      "text": "Nous n’allions jamais nulle part quand j’étais enfant.",
+      "credit": {
+        "tatoeba": 7449009,
+        "author": "Aiji"
+      },
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "imparfait",
+          "person": "1p",
+          "answer": "allions"
+        },
+        {
+          "verb": "v.etre",
+          "tense": "imparfait",
+          "person": "1s",
+          "answer": "étais"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.enfant",
+          "word": "enfant"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.3229738",
+      "text": "Savez-vous à quelle allure vous alliez ?",
+      "credit": {
+        "tatoeba": 3229738,
+        "author": "sacredceltic"
+      },
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "imparfait",
+          "person": "2p",
+          "answer": "alliez"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.8395849",
+      "text": "Je suis venu voir si vous alliez bien.",
+      "credit": {
+        "tatoeba": 8395849,
+        "author": "Aiji"
+      },
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "imparfait",
+          "person": "2p",
+          "answer": "alliez"
+        },
+        {
+          "verb": "v.venir",
+          "tense": "passe_compose",
+          "person": "1s",
+          "answer": "suis venu",
+          "alternatives": [
+            "suis venue"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.11871690",
+      "text": "Ils ont dit qu’ils allaient gagner.",
+      "credit": {
+        "tatoeba": 11871690,
+        "author": "calypsow"
+      },
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "imparfait",
+          "person": "3p",
+          "answer": "allaient"
+        },
+        {
+          "verb": "v.dire",
+          "tense": "passe_compose",
+          "person": "3p",
+          "answer": "ont dit"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.8412204",
+      "text": "Ils ont dit qu’ils n’allaient pas à terre.",
+      "credit": {
+        "tatoeba": 8412204,
+        "author": "lbdx"
+      },
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "imparfait",
+          "person": "3p",
+          "answer": "allaient"
+        },
+        {
+          "verb": "v.dire",
+          "tense": "passe_compose",
+          "person": "3p",
+          "answer": "ont dit"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.431357",
+      "text": "Tu iras mieux dans quelques jours.",
+      "credit": {
+        "tatoeba": 431357,
+        "author": "qdii"
+      },
       "verbs": [
         {
           "verb": "v.aller",
@@ -295,11 +709,59 @@
           "person": "2s",
           "answer": "iras"
         }
+      ],
+      "nouns": [
+        {
+          "noun": "n.jour",
+          "word": "jours"
+        }
       ]
     },
     {
-      "id": "s.aller.fs.3s.01",
-      "text": "Elle ira en vacances en août.",
+      "id": "s.tatoeba.470058",
+      "text": "Partout où tu iras, tu seras bienvenu.",
+      "credit": {
+        "tatoeba": 470058,
+        "author": "sacredceltic"
+      },
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "futur_simple",
+          "person": "2s",
+          "answer": "iras"
+        },
+        {
+          "verb": "v.etre",
+          "tense": "futur_simple",
+          "person": "2s",
+          "answer": "seras"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.3260193",
+      "text": "S’il pleut, on ira au musée d’art.",
+      "credit": {
+        "tatoeba": 3260193,
+        "author": "nimfeo"
+      },
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "futur_simple",
+          "person": "3s",
+          "answer": "ira"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.6798898",
+      "text": "Il ira en ville.",
+      "credit": {
+        "tatoeba": 6798898,
+        "author": "Micsmithel"
+      },
       "verbs": [
         {
           "verb": "v.aller",
@@ -310,26 +772,62 @@
       ],
       "nouns": [
         {
-          "noun": "n.vacances",
-          "word": "vacances"
+          "noun": "n.ville",
+          "word": "ville"
         }
       ]
     },
     {
-      "id": "s.aller.fs.1p.01",
-      "text": "Nous irons à la montagne l’hiver prochain.",
+      "id": "s.tatoeba.1021043",
+      "text": "S’il fait beau demain, nous irons pique-niquer.",
+      "credit": {
+        "tatoeba": 1021043,
+        "author": "U2FS"
+      },
       "verbs": [
         {
           "verb": "v.aller",
           "tense": "futur_simple",
           "person": "1p",
           "answer": "irons"
+        },
+        {
+          "verb": "v.faire",
+          "tense": "present",
+          "person": "3s",
+          "answer": "fait"
         }
       ]
     },
     {
-      "id": "s.aller.fs.2p.01",
-      "text": "Vous irez à la fête samedi ?",
+      "id": "s.tatoeba.4835592",
+      "text": "Si tu le veux, nous irons.",
+      "credit": {
+        "tatoeba": 4835592,
+        "author": "sacredceltic"
+      },
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "futur_simple",
+          "person": "1p",
+          "answer": "irons"
+        },
+        {
+          "verb": "v.vouloir",
+          "tense": "present",
+          "person": "2s",
+          "answer": "veux"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.1347671",
+      "text": "Vous irez à l’école demain.",
+      "credit": {
+        "tatoeba": 1347671,
+        "author": "sacredceltic"
+      },
       "verbs": [
         {
           "verb": "v.aller",
@@ -337,11 +835,59 @@
           "person": "2p",
           "answer": "irez"
         }
+      ],
+      "nouns": [
+        {
+          "noun": "n.ecole",
+          "word": "école"
+        }
       ]
     },
     {
-      "id": "s.aller.fs.3p.01",
-      "text": "Ils iront à Lyon en train.",
+      "id": "s.tatoeba.8305667",
+      "text": "Vous irez mieux dans quelques jours.",
+      "credit": {
+        "tatoeba": 8305667,
+        "author": "Aiji"
+      },
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "futur_simple",
+          "person": "2p",
+          "answer": "irez"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.jour",
+          "word": "jours"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.567457",
+      "text": "Elles iront faire les courses.",
+      "credit": {
+        "tatoeba": 567457,
+        "author": "sacredceltic"
+      },
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "futur_simple",
+          "person": "3p",
+          "answer": "iront"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.8703374",
+      "text": "S’il pleut demain, ils n’iront pas.",
+      "credit": {
+        "tatoeba": 8703374,
+        "author": "Julien_PDC"
+      },
       "verbs": [
         {
           "verb": "v.aller",

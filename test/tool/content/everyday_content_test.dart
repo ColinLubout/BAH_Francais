@@ -58,6 +58,75 @@ void main() {
     );
   });
 
+  group('everyday sentences', () {
+    final everydayIds = {
+      for (final c in content.categories)
+        if (c.everyday) c.id,
+    };
+    final nouns = {
+      for (final n in content.nouns)
+        if (n.categoryIds.any(everydayIds.contains)) n.id,
+    };
+    final verbs = {
+      for (final v in content.verbs)
+        if (v.categoryIds.any(everydayIds.contains)) v.id,
+    };
+    // Those that use only everyday words and verbs.
+    final sentences = [
+      for (final s in content.sentences)
+        if (s.verbs.every((v) => verbs.contains(v.verbId)) &&
+            s.nouns.every((n) => nouns.contains(n.nounId)))
+          s,
+    ];
+
+    test('two or more for each verb, tense and person, and each noun', () {
+      final perSlot = <(String, Tense, Person), int>{};
+      final perNoun = <String, int>{};
+      for (final s in sentences) {
+        for (final v in s.verbs) {
+          final slot = (v.verbId, v.tense, v.person);
+          perSlot[slot] = (perSlot[slot] ?? 0) + 1;
+        }
+        for (final n in s.nouns) {
+          perNoun[n.nounId] = (perNoun[n.nounId] ?? 0) + 1;
+        }
+      }
+      for (final verb in verbs) {
+        for (final tense in Tense.values) {
+          for (final person in Person.values) {
+            expect(
+              perSlot[(verb, tense, person)] ?? 0,
+              greaterThanOrEqualTo(2),
+              reason: '$verb ${tense.id} ${person.id}',
+            );
+          }
+        }
+      }
+      for (final noun in nouns) {
+        expect(perNoun[noun] ?? 0, greaterThanOrEqualTo(2), reason: noun);
+      }
+    });
+
+    test('name no one: no capital letter after the first', () {
+      final capital = RegExp(r'(?<=.)\p{Lu}', unicode: true);
+      for (final s in sentences) {
+        expect(capital.hasMatch(s.text), isFalse, reason: s.text);
+      }
+    });
+
+    test('a sentence from Tatoeba is credited, and its id is its number', () {
+      for (final s in sentences) {
+        final credit = s.credit;
+        if (credit == null) {
+          expect(s.id, isNot(startsWith('s.tatoeba.')));
+        } else {
+          expect(s.id, 's.tatoeba.${credit.tatoebaId}');
+          expect(credit.author, isNotEmpty);
+        }
+      }
+    });
+  });
+
   test('every word and verb has its own rank', () {
     final nounRanks = content.nouns.map((n) => n.rank).toSet();
     final verbRanks = content.verbs.map((v) => v.rank).toSet();

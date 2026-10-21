@@ -1,32 +1,34 @@
 {
   "sentences": [
     {
-      "id": "s.savoir.pr.1s.01",
-      "text": "Je ne sais pas où il habite.",
-      "verbs": [
-        {
-          "verb": "v.savoir",
-          "tense": "present",
-          "person": "1s",
-          "answer": "sais"
-        }
-      ]
-    },
-    {
-      "id": "s.savoir.pr.2s.01",
-      "text": "Tu sais nager ?",
+      "id": "s.tatoeba.3417803",
+      "text": "Tu ne sais même pas qui elles sont.",
+      "credit": {
+        "tatoeba": 3417803,
+        "author": "GB3"
+      },
       "verbs": [
         {
           "verb": "v.savoir",
           "tense": "present",
           "person": "2s",
           "answer": "sais"
+        },
+        {
+          "verb": "v.etre",
+          "tense": "present",
+          "person": "3p",
+          "answer": "sont"
         }
       ]
     },
     {
-      "id": "s.savoir.pr.3s.01",
-      "text": "Elle sait parler quatre langues.",
+      "id": "s.tatoeba.1509808",
+      "text": "Il ne sait même pas nager !",
+      "credit": {
+        "tatoeba": 1509808,
+        "author": "martin9"
+      },
       "verbs": [
         {
           "verb": "v.savoir",
@@ -37,8 +39,34 @@
       ]
     },
     {
-      "id": "s.savoir.pr.1p.01",
-      "text": "Nous savons que c’est difficile.",
+      "id": "s.tatoeba.1467811",
+      "text": "Nous savons qu’elle habite en ville.",
+      "credit": {
+        "tatoeba": 1467811,
+        "author": "Rovo"
+      },
+      "verbs": [
+        {
+          "verb": "v.savoir",
+          "tense": "present",
+          "person": "1p",
+          "answer": "savons"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.ville",
+          "word": "ville"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.2446079",
+      "text": "Nous savons ce que nous voulons.",
+      "credit": {
+        "tatoeba": 2446079,
+        "author": "Amastan"
+      },
       "verbs": [
         {
           "verb": "v.savoir",
@@ -47,28 +75,42 @@
           "answer": "savons"
         },
         {
-          "verb": "v.etre",
+          "verb": "v.vouloir",
           "tense": "present",
-          "person": "3s",
-          "answer": "est"
+          "person": "1p",
+          "answer": "voulons"
         }
       ]
     },
     {
-      "id": "s.savoir.pr.2p.01",
-      "text": "Vous savez où est la gare ?",
+      "id": "s.tatoeba.4583392",
+      "text": "Elles savent que nous sommes ici.",
+      "credit": {
+        "tatoeba": 4583392,
+        "author": "sacredceltic"
+      },
       "verbs": [
         {
           "verb": "v.savoir",
           "tense": "present",
-          "person": "2p",
-          "answer": "savez"
+          "person": "3p",
+          "answer": "savent"
+        },
+        {
+          "verb": "v.etre",
+          "tense": "present",
+          "person": "1p",
+          "answer": "sommes"
         }
       ]
     },
     {
-      "id": "s.savoir.pr.3p.01",
-      "text": "Ils savent déjà la nouvelle.",
+      "id": "s.tatoeba.5300948",
+      "text": "Ils ne savent pas mon nom.",
+      "credit": {
+        "tatoeba": 5300948,
+        "author": "pititnatole"
+      },
       "verbs": [
         {
           "verb": "v.savoir",
@@ -76,17 +118,55 @@
           "person": "3p",
           "answer": "savent"
         }
+      ],
+      "nouns": [
+        {
+          "noun": "n.nom",
+          "word": "nom"
+        }
       ]
     },
     {
-      "id": "s.savoir.pc.1s.01",
-      "text": "J’ai su la réponse trop tard.",
+      "id": "s.tatoeba.3651654",
+      "text": "J’ai su trouver les mots.",
+      "credit": {
+        "tatoeba": 3651654,
+        "author": "sacredceltic"
+      },
       "verbs": [
         {
           "verb": "v.savoir",
           "tense": "passe_compose",
           "person": "1s",
           "answer": "ai su"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.mot",
+          "word": "mots"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.595723",
+      "text": "J’ai su répondre à toutes les questions.",
+      "credit": {
+        "tatoeba": 595723,
+        "author": "qdii"
+      },
+      "verbs": [
+        {
+          "verb": "v.savoir",
+          "tense": "passe_compose",
+          "person": "1s",
+          "answer": "ai su"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.question",
+          "word": "questions"
         }
       ]
     },
@@ -103,8 +183,44 @@
       ]
     },
     {
-      "id": "s.savoir.pc.3s.01",
-      "text": "Il a su tout de suite que c’était grave.",
+      "id": "s.tatoeba.8681882",
+      "text": "Comment tu as su ?",
+      "credit": {
+        "tatoeba": 8681882,
+        "author": "Julien_PDC"
+      },
+      "verbs": [
+        {
+          "verb": "v.savoir",
+          "tense": "passe_compose",
+          "person": "2s",
+          "answer": "as su"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.1493782",
+      "text": "Elle a su faire d’une pierre deux coups.",
+      "credit": {
+        "tatoeba": 1493782,
+        "author": "Rovo"
+      },
+      "verbs": [
+        {
+          "verb": "v.savoir",
+          "tense": "passe_compose",
+          "person": "3s",
+          "answer": "a su"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.7564867",
+      "text": "On a su qu’il était harcelé à l’école.",
+      "credit": {
+        "tatoeba": 7564867,
+        "author": "tras"
+      },
       "verbs": [
         {
           "verb": "v.savoir",
@@ -117,6 +233,12 @@
           "tense": "imparfait",
           "person": "3s",
           "answer": "était"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.ecole",
+          "word": "école"
         }
       ]
     },
@@ -139,6 +261,18 @@
       ]
     },
     {
+      "id": "s.savoir.pc.1p.02",
+      "text": "Nous avons su la vérité trop tard.",
+      "verbs": [
+        {
+          "verb": "v.savoir",
+          "tense": "passe_compose",
+          "person": "1p",
+          "answer": "avons su"
+        }
+      ]
+    },
+    {
       "id": "s.savoir.pc.2p.01",
       "text": "Vous avez su quoi répondre ?",
       "verbs": [
@@ -151,8 +285,24 @@
       ]
     },
     {
-      "id": "s.savoir.pc.3p.01",
-      "text": "Ils ont su trouver la solution.",
+      "id": "s.savoir.pc.2p.02",
+      "text": "Vous avez su garder le secret.",
+      "verbs": [
+        {
+          "verb": "v.savoir",
+          "tense": "passe_compose",
+          "person": "2p",
+          "answer": "avez su"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.5662073",
+      "text": "Sais-tu comment ils ont su ?",
+      "credit": {
+        "tatoeba": 5662073,
+        "author": "Aiji"
+      },
       "verbs": [
         {
           "verb": "v.savoir",
@@ -163,26 +313,50 @@
       ]
     },
     {
-      "id": "s.savoir.im.1s.01",
-      "text": "Je ne savais pas que tu étais là.",
+      "id": "s.tatoeba.5662074",
+      "text": "Savez-vous comment elles ont su ?",
+      "credit": {
+        "tatoeba": 5662074,
+        "author": "Aiji"
+      },
       "verbs": [
         {
           "verb": "v.savoir",
+          "tense": "passe_compose",
+          "person": "3p",
+          "answer": "ont su"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.1064554",
+      "text": "Je voulais juste voir si tu savais.",
+      "credit": {
+        "tatoeba": 1064554,
+        "author": "sysko"
+      },
+      "verbs": [
+        {
+          "verb": "v.savoir",
+          "tense": "imparfait",
+          "person": "2s",
+          "answer": "savais"
+        },
+        {
+          "verb": "v.vouloir",
           "tense": "imparfait",
           "person": "1s",
-          "answer": "savais"
-        },
-        {
-          "verb": "v.etre",
-          "tense": "imparfait",
-          "person": "2s",
-          "answer": "étais"
+          "answer": "voulais"
         }
       ]
     },
     {
-      "id": "s.savoir.im.2s.01",
-      "text": "Tu savais qu’il allait pleuvoir ?",
+      "id": "s.tatoeba.9010067",
+      "text": "Tu m’as dit que tu savais faire ça.",
+      "credit": {
+        "tatoeba": 9010067,
+        "author": "Aiji"
+      },
       "verbs": [
         {
           "verb": "v.savoir",
@@ -191,34 +365,20 @@
           "answer": "savais"
         },
         {
-          "verb": "v.aller",
-          "tense": "imparfait",
-          "person": "3s",
-          "answer": "allait"
+          "verb": "v.dire",
+          "tense": "passe_compose",
+          "person": "2s",
+          "answer": "as dit"
         }
       ]
     },
     {
-      "id": "s.savoir.im.3s.01",
-      "text": "Personne ne savait son nom.",
-      "verbs": [
-        {
-          "verb": "v.savoir",
-          "tense": "imparfait",
-          "person": "3s",
-          "answer": "savait"
-        }
-      ],
-      "nouns": [
-        {
-          "noun": "n.nom",
-          "word": "nom"
-        }
-      ]
-    },
-    {
-      "id": "s.savoir.im.1p.01",
-      "text": "Nous savions déjà lire à cinq ans.",
+      "id": "s.tatoeba.1981757",
+      "text": "Nous ne savions bien sûr pas où elle cachait l’argent.",
+      "credit": {
+        "tatoeba": 1981757,
+        "author": "nimfeo"
+      },
       "verbs": [
         {
           "verb": "v.savoir",
@@ -226,11 +386,43 @@
           "person": "1p",
           "answer": "savions"
         }
+      ],
+      "nouns": [
+        {
+          "noun": "n.argent",
+          "word": "argent"
+        }
       ]
     },
     {
-      "id": "s.savoir.im.2p.01",
-      "text": "Vous saviez que le magasin était fermé ?",
+      "id": "s.tatoeba.6761788",
+      "text": "Nous savions qu’il y avait quelque chose à faire.",
+      "credit": {
+        "tatoeba": 6761788,
+        "author": "GB3"
+      },
+      "verbs": [
+        {
+          "verb": "v.savoir",
+          "tense": "imparfait",
+          "person": "1p",
+          "answer": "savions"
+        },
+        {
+          "verb": "v.avoir",
+          "tense": "imparfait",
+          "person": "3s",
+          "answer": "avait"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.12180283",
+      "text": "Vous le saviez depuis tout ce temps ?",
+      "credit": {
+        "tatoeba": 12180283,
+        "author": "lbdx"
+      },
       "verbs": [
         {
           "verb": "v.savoir",
@@ -238,11 +430,43 @@
           "person": "2p",
           "answer": "saviez"
         }
+      ],
+      "nouns": [
+        {
+          "noun": "n.temps",
+          "word": "temps"
+        }
       ]
     },
     {
-      "id": "s.savoir.im.3p.01",
-      "text": "Ils savaient tous la chanson par cœur.",
+      "id": "s.tatoeba.3470439",
+      "text": "Vous saviez que j’étais là.",
+      "credit": {
+        "tatoeba": 3470439,
+        "author": "Lulantis"
+      },
+      "verbs": [
+        {
+          "verb": "v.savoir",
+          "tense": "imparfait",
+          "person": "2p",
+          "answer": "saviez"
+        },
+        {
+          "verb": "v.etre",
+          "tense": "imparfait",
+          "person": "1s",
+          "answer": "étais"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.1742335",
+      "text": "Ils ne le savaient pas eux-mêmes.",
+      "credit": {
+        "tatoeba": 1742335,
+        "author": "Sibelius"
+      },
       "verbs": [
         {
           "verb": "v.savoir",
@@ -253,8 +477,34 @@
       ]
     },
     {
-      "id": "s.savoir.fs.1s.01",
-      "text": "Je saurai demain si j’ai le poste.",
+      "id": "s.tatoeba.3336005",
+      "text": "Elles savaient exactement ce qu’ils faisaient.",
+      "credit": {
+        "tatoeba": 3336005,
+        "author": "sacredceltic"
+      },
+      "verbs": [
+        {
+          "verb": "v.savoir",
+          "tense": "imparfait",
+          "person": "3p",
+          "answer": "savaient"
+        },
+        {
+          "verb": "v.faire",
+          "tense": "imparfait",
+          "person": "3p",
+          "answer": "faisaient"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.3039302",
+      "text": "Demain, je saurai qui est le nouveau président.",
+      "credit": {
+        "tatoeba": 3039302,
+        "author": "Rovo"
+      },
       "verbs": [
         {
           "verb": "v.savoir",
@@ -265,8 +515,28 @@
       ]
     },
     {
-      "id": "s.savoir.fs.2s.01",
-      "text": "Tu sauras la réponse bientôt.",
+      "id": "s.tatoeba.7290611",
+      "text": "Je le saurai demain.",
+      "credit": {
+        "tatoeba": 7290611,
+        "author": "Aiji"
+      },
+      "verbs": [
+        {
+          "verb": "v.savoir",
+          "tense": "futur_simple",
+          "person": "1s",
+          "answer": "saurai"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.1582257",
+      "text": "Tu le sauras bien assez tôt.",
+      "credit": {
+        "tatoeba": 1582257,
+        "author": "sacredceltic"
+      },
       "verbs": [
         {
           "verb": "v.savoir",
@@ -277,8 +547,34 @@
       ]
     },
     {
-      "id": "s.savoir.fs.3s.01",
-      "text": "Elle saura quoi faire.",
+      "id": "s.tatoeba.964008",
+      "text": "Le jour viendra où tu sauras la vérité.",
+      "credit": {
+        "tatoeba": 964008,
+        "author": "sacredceltic"
+      },
+      "verbs": [
+        {
+          "verb": "v.savoir",
+          "tense": "futur_simple",
+          "person": "2s",
+          "answer": "sauras"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.jour",
+          "word": "jour"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.13350361",
+      "text": "Elle ne saura pas ce qui lui est arrivé.",
+      "credit": {
+        "tatoeba": 13350361,
+        "author": "genes1s"
+      },
       "verbs": [
         {
           "verb": "v.savoir",
@@ -289,8 +585,34 @@
       ]
     },
     {
-      "id": "s.savoir.fs.1p.01",
-      "text": "Nous saurons vendredi qui a gagné.",
+      "id": "s.tatoeba.5344222",
+      "text": "On ne saura jamais qui il est.",
+      "credit": {
+        "tatoeba": 5344222,
+        "author": "Aiji"
+      },
+      "verbs": [
+        {
+          "verb": "v.savoir",
+          "tense": "futur_simple",
+          "person": "3s",
+          "answer": "saura"
+        },
+        {
+          "verb": "v.etre",
+          "tense": "present",
+          "person": "3s",
+          "answer": "est"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.5387455",
+      "text": "Un jour, nous saurons.",
+      "credit": {
+        "tatoeba": 5387455,
+        "author": "alexisslay"
+      },
       "verbs": [
         {
           "verb": "v.savoir",
@@ -298,11 +620,43 @@
           "person": "1p",
           "answer": "saurons"
         }
+      ],
+      "nouns": [
+        {
+          "noun": "n.jour",
+          "word": "jour"
+        }
       ]
     },
     {
-      "id": "s.savoir.fs.2p.01",
-      "text": "Vous saurez conduire après dix leçons.",
+      "id": "s.tatoeba.8269893",
+      "text": "Nous le saurons au matin.",
+      "credit": {
+        "tatoeba": 8269893,
+        "author": "Aiji"
+      },
+      "verbs": [
+        {
+          "verb": "v.savoir",
+          "tense": "futur_simple",
+          "person": "1p",
+          "answer": "saurons"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.matin",
+          "word": "matin"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.10461145",
+      "text": "Appelez-moi lorsque vous saurez quelque chose !",
+      "credit": {
+        "tatoeba": 10461145,
+        "author": "sacredceltic"
+      },
       "verbs": [
         {
           "verb": "v.savoir",
@@ -313,14 +667,62 @@
       ]
     },
     {
-      "id": "s.savoir.fs.3p.01",
-      "text": "Ils sauront bientôt la vérité.",
+      "id": "s.tatoeba.1582258",
+      "text": "Vous le saurez bien assez tôt.",
+      "credit": {
+        "tatoeba": 1582258,
+        "author": "sacredceltic"
+      },
+      "verbs": [
+        {
+          "verb": "v.savoir",
+          "tense": "futur_simple",
+          "person": "2p",
+          "answer": "saurez"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.1479146",
+      "text": "Elles ne sauront jamais que nous sommes là.",
+      "credit": {
+        "tatoeba": 1479146,
+        "author": "sacredceltic"
+      },
       "verbs": [
         {
           "verb": "v.savoir",
           "tense": "futur_simple",
           "person": "3p",
           "answer": "sauront"
+        },
+        {
+          "verb": "v.etre",
+          "tense": "present",
+          "person": "1p",
+          "answer": "sommes"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.7700649",
+      "text": "Ils ne sauront pas qu’on est là.",
+      "credit": {
+        "tatoeba": 7700649,
+        "author": "Maxence"
+      },
+      "verbs": [
+        {
+          "verb": "v.savoir",
+          "tense": "futur_simple",
+          "person": "3p",
+          "answer": "sauront"
+        },
+        {
+          "verb": "v.etre",
+          "tense": "present",
+          "person": "3s",
+          "answer": "est"
         }
       ]
     }

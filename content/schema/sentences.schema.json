@@ -40,6 +40,16 @@
           "type": "array",
           "minItems": 1,
           "items": { "$ref": "#/definitions/noun" }
+        },
+        "credit": {
+          "description": "A sentence from Tatoeba (CC BY 2.0 FR): its number there and its author, who must be credited.",
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["tatoeba", "author"],
+          "properties": {
+            "tatoeba": { "type": "integer", "minimum": 1 },
+            "author": { "$ref": "#/definitions/text" }
+          }
         }
       }
     },

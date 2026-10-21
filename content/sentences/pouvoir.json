@@ -1,74 +1,12 @@
 {
   "sentences": [
     {
-      "id": "s.pouvoir.pr.1s.01",
-      "text": "Je ne peux pas venir ce soir.",
-      "verbs": [
-        {
-          "verb": "v.pouvoir",
-          "tense": "present",
-          "person": "1s",
-          "answer": "peux"
-        }
-      ],
-      "nouns": [
-        {
-          "noun": "n.soir",
-          "word": "soir"
-        }
-      ]
-    },
-    {
-      "id": "s.pouvoir.pr.2s.01",
-      "text": "Tu peux m’aider, s’il te plaît ?",
-      "verbs": [
-        {
-          "verb": "v.pouvoir",
-          "tense": "present",
-          "person": "2s",
-          "answer": "peux"
-        }
-      ]
-    },
-    {
-      "id": "s.pouvoir.pr.3s.01",
-      "text": "On peut entrer ?",
-      "verbs": [
-        {
-          "verb": "v.pouvoir",
-          "tense": "present",
-          "person": "3s",
-          "answer": "peut"
-        }
-      ]
-    },
-    {
-      "id": "s.pouvoir.pr.1p.01",
-      "text": "Nous pouvons partir maintenant.",
-      "verbs": [
-        {
-          "verb": "v.pouvoir",
-          "tense": "present",
-          "person": "1p",
-          "answer": "pouvons"
-        }
-      ]
-    },
-    {
-      "id": "s.pouvoir.pr.2p.01",
-      "text": "Vous pouvez répéter, s’il vous plaît ?",
-      "verbs": [
-        {
-          "verb": "v.pouvoir",
-          "tense": "present",
-          "person": "2p",
-          "answer": "pouvez"
-        }
-      ]
-    },
-    {
-      "id": "s.pouvoir.pr.3p.01",
-      "text": "Les enfants peuvent jouer dehors.",
+      "id": "s.tatoeba.1843191",
+      "text": "Elles ne peuvent pas nous intimider.",
+      "credit": {
+        "tatoeba": 1843191,
+        "author": "sacredceltic"
+      },
       "verbs": [
         {
           "verb": "v.pouvoir",
@@ -76,17 +14,15 @@
           "person": "3p",
           "answer": "peuvent"
         }
-      ],
-      "nouns": [
-        {
-          "noun": "n.enfant",
-          "word": "enfants"
-        }
       ]
     },
     {
-      "id": "s.pouvoir.pc.1s.01",
-      "text": "J’ai pu dormir un peu dans le train.",
+      "id": "s.tatoeba.8265",
+      "text": "Je n’ai pu dormir la nuit dernière.",
+      "credit": {
+        "tatoeba": 8265,
+        "author": "sacredceltic"
+      },
       "verbs": [
         {
           "verb": "v.pouvoir",
@@ -94,11 +30,43 @@
           "person": "1s",
           "answer": "ai pu"
         }
+      ],
+      "nouns": [
+        {
+          "noun": "n.nuit",
+          "word": "nuit"
+        }
       ]
     },
     {
-      "id": "s.pouvoir.pc.2s.01",
-      "text": "Tu as pu finir ton travail ?",
+      "id": "s.tatoeba.8496296",
+      "text": "J’ai pu répondre à la question correctement.",
+      "credit": {
+        "tatoeba": 8496296,
+        "author": "Aiji"
+      },
+      "verbs": [
+        {
+          "verb": "v.pouvoir",
+          "tense": "passe_compose",
+          "person": "1s",
+          "answer": "ai pu"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.question",
+          "word": "question"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.12452783",
+      "text": "Tu as pu sauver quelque chose ?",
+      "credit": {
+        "tatoeba": 12452783,
+        "author": "Rovo"
+      },
       "verbs": [
         {
           "verb": "v.pouvoir",
@@ -106,29 +74,75 @@
           "person": "2s",
           "answer": "as pu"
         }
-      ],
-      "nouns": [
+      ]
+    },
+    {
+      "id": "s.tatoeba.7695149",
+      "text": "Tu as pu dormir ?",
+      "credit": {
+        "tatoeba": 7695149,
+        "author": "Maxence"
+      },
+      "verbs": [
         {
-          "noun": "n.travail",
-          "word": "travail"
+          "verb": "v.pouvoir",
+          "tense": "passe_compose",
+          "person": "2s",
+          "answer": "as pu"
         }
       ]
     },
     {
-      "id": "s.pouvoir.pc.3s.01",
-      "text": "Elle a pu trouver une place pour se garer.",
+      "id": "s.tatoeba.11965733",
+      "text": "On a fait ce qu’on a pu.",
+      "credit": {
+        "tatoeba": 11965733,
+        "author": "calypsow"
+      },
       "verbs": [
         {
           "verb": "v.pouvoir",
           "tense": "passe_compose",
           "person": "3s",
           "answer": "a pu"
+        },
+        {
+          "verb": "v.faire",
+          "tense": "passe_compose",
+          "person": "3s",
+          "answer": "a fait"
         }
       ]
     },
     {
-      "id": "s.pouvoir.pc.1p.01",
-      "text": "Nous avons pu voir la mer depuis l’hôtel.",
+      "id": "s.tatoeba.8413576",
+      "text": "Il a fait aussi vite qu’il a pu.",
+      "credit": {
+        "tatoeba": 8413576,
+        "author": "lbdx"
+      },
+      "verbs": [
+        {
+          "verb": "v.pouvoir",
+          "tense": "passe_compose",
+          "person": "3s",
+          "answer": "a pu"
+        },
+        {
+          "verb": "v.faire",
+          "tense": "passe_compose",
+          "person": "3s",
+          "answer": "a fait"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.484018",
+      "text": "Nous avons pu attraper le dernier train.",
+      "credit": {
+        "tatoeba": 484018,
+        "author": "sacredceltic"
+      },
       "verbs": [
         {
           "verb": "v.pouvoir",
@@ -139,8 +153,34 @@
       ]
     },
     {
-      "id": "s.pouvoir.pc.2p.01",
-      "text": "Vous avez pu parler au directeur ?",
+      "id": "s.tatoeba.4878933",
+      "text": "Nous avons fait tout ce que nous avons pu.",
+      "credit": {
+        "tatoeba": 4878933,
+        "author": "sacredceltic"
+      },
+      "verbs": [
+        {
+          "verb": "v.pouvoir",
+          "tense": "passe_compose",
+          "person": "1p",
+          "answer": "avons pu"
+        },
+        {
+          "verb": "v.faire",
+          "tense": "passe_compose",
+          "person": "1p",
+          "answer": "avons fait"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.12452542",
+      "text": "Vous avez pu sauver quelque chose ?",
+      "credit": {
+        "tatoeba": 12452542,
+        "author": "lbdx"
+      },
       "verbs": [
         {
           "verb": "v.pouvoir",
@@ -151,8 +191,50 @@
       ]
     },
     {
-      "id": "s.pouvoir.pc.3p.01",
-      "text": "Ils ont pu partir à l’heure.",
+      "id": "s.tatoeba.6966097",
+      "text": "J’espère que vous avez pu acheter tout ce dont vous avez besoin.",
+      "credit": {
+        "tatoeba": 6966097,
+        "author": "Yemana"
+      },
+      "verbs": [
+        {
+          "verb": "v.pouvoir",
+          "tense": "passe_compose",
+          "person": "2p",
+          "answer": "avez pu"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.14042053",
+      "text": "Ils ont fait tout ce qu’ils ont pu.",
+      "credit": {
+        "tatoeba": 14042053,
+        "author": "Myrano_"
+      },
+      "verbs": [
+        {
+          "verb": "v.pouvoir",
+          "tense": "passe_compose",
+          "person": "3p",
+          "answer": "ont pu"
+        },
+        {
+          "verb": "v.faire",
+          "tense": "passe_compose",
+          "person": "3p",
+          "answer": "ont fait"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.1973613",
+      "text": "Ils n’ont pu trouver le problème.",
+      "credit": {
+        "tatoeba": 1973613,
+        "author": "sacredceltic"
+      },
       "verbs": [
         {
           "verb": "v.pouvoir",
@@ -163,14 +245,18 @@
       ],
       "nouns": [
         {
-          "noun": "n.heure",
-          "word": "heure"
+          "noun": "n.probleme",
+          "word": "problème"
         }
       ]
     },
     {
-      "id": "s.pouvoir.im.1s.01",
-      "text": "Avant, je pouvais courir dix kilomètres.",
+      "id": "s.tatoeba.130452",
+      "text": "Je ne pouvais me souvenir de son nom.",
+      "credit": {
+        "tatoeba": 130452,
+        "author": "hirymnak"
+      },
       "verbs": [
         {
           "verb": "v.pouvoir",
@@ -178,11 +264,43 @@
           "person": "1s",
           "answer": "pouvais"
         }
+      ],
+      "nouns": [
+        {
+          "noun": "n.nom",
+          "word": "nom"
+        }
       ]
     },
     {
-      "id": "s.pouvoir.im.2s.01",
-      "text": "Tu pouvais venir quand tu voulais.",
+      "id": "s.tatoeba.973704",
+      "text": "Je ne pouvais pas croire ce que j’ai vu.",
+      "credit": {
+        "tatoeba": 973704,
+        "author": "manuk7"
+      },
+      "verbs": [
+        {
+          "verb": "v.pouvoir",
+          "tense": "imparfait",
+          "person": "1s",
+          "answer": "pouvais"
+        },
+        {
+          "verb": "v.voir",
+          "tense": "passe_compose",
+          "person": "1s",
+          "answer": "ai vu"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.12663942",
+      "text": "Tu as fait ce que tu pouvais.",
+      "credit": {
+        "tatoeba": 12663942,
+        "author": "anzart"
+      },
       "verbs": [
         {
           "verb": "v.pouvoir",
@@ -191,16 +309,64 @@
           "answer": "pouvais"
         },
         {
-          "verb": "v.vouloir",
-          "tense": "imparfait",
+          "verb": "v.faire",
+          "tense": "passe_compose",
           "person": "2s",
-          "answer": "voulais"
+          "answer": "as fait"
         }
       ]
     },
     {
-      "id": "s.pouvoir.im.3s.01",
-      "text": "Il pouvait déjà lire à quatre ans.",
+      "id": "s.tatoeba.7730368",
+      "text": "Si tu pouvais me prêter main forte, ça m’aiderait beaucoup.",
+      "credit": {
+        "tatoeba": 7730368,
+        "author": "lbdx"
+      },
+      "verbs": [
+        {
+          "verb": "v.pouvoir",
+          "tense": "imparfait",
+          "person": "2s",
+          "answer": "pouvais"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.main",
+          "word": "main"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.1257170",
+      "text": "J’ai dit qu’il pouvait y aller.",
+      "credit": {
+        "tatoeba": 1257170,
+        "author": "sacredceltic"
+      },
+      "verbs": [
+        {
+          "verb": "v.pouvoir",
+          "tense": "imparfait",
+          "person": "3s",
+          "answer": "pouvait"
+        },
+        {
+          "verb": "v.dire",
+          "tense": "passe_compose",
+          "person": "1s",
+          "answer": "ai dit"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.134609",
+      "text": "Elle ne pouvait plus supporter sa grossièreté.",
+      "credit": {
+        "tatoeba": 134609,
+        "author": "Aiji"
+      },
       "verbs": [
         {
           "verb": "v.pouvoir",
@@ -211,8 +377,12 @@
       ]
     },
     {
-      "id": "s.pouvoir.im.1p.01",
-      "text": "Nous pouvions voir la tour Eiffel de notre fenêtre.",
+      "id": "s.tatoeba.529320",
+      "text": "Nous ne pouvions qu’admirer son courage.",
+      "credit": {
+        "tatoeba": 529320,
+        "author": "sacredceltic"
+      },
       "verbs": [
         {
           "verb": "v.pouvoir",
@@ -223,8 +393,34 @@
       ]
     },
     {
-      "id": "s.pouvoir.im.2p.01",
-      "text": "Vous pouviez dormir avec tout ce bruit ?",
+      "id": "s.tatoeba.824172",
+      "text": "Nous ne pouvions voir personne dans la rue.",
+      "credit": {
+        "tatoeba": 824172,
+        "author": "sacredceltic"
+      },
+      "verbs": [
+        {
+          "verb": "v.pouvoir",
+          "tense": "imparfait",
+          "person": "1p",
+          "answer": "pouvions"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.rue",
+          "word": "rue"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.5738669",
+      "text": "Si vous pouviez remonter le temps, que changeriez-vous ?",
+      "credit": {
+        "tatoeba": 5738669,
+        "author": "Yemana"
+      },
       "verbs": [
         {
           "verb": "v.pouvoir",
@@ -232,11 +428,65 @@
           "person": "2p",
           "answer": "pouviez"
         }
+      ],
+      "nouns": [
+        {
+          "noun": "n.temps",
+          "word": "temps"
+        }
       ]
     },
     {
-      "id": "s.pouvoir.im.3p.01",
-      "text": "Les élèves pouvaient sortir à midi.",
+      "id": "s.tatoeba.8352802",
+      "text": "Vous ne pouviez pas comprendre ce qu’il disait.",
+      "credit": {
+        "tatoeba": 8352802,
+        "author": "zarisi"
+      },
+      "verbs": [
+        {
+          "verb": "v.pouvoir",
+          "tense": "imparfait",
+          "person": "2p",
+          "answer": "pouviez"
+        },
+        {
+          "verb": "v.dire",
+          "tense": "imparfait",
+          "person": "3s",
+          "answer": "disait"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.1041903",
+      "text": "Ils ne pouvaient trouver de travail par chez eux.",
+      "credit": {
+        "tatoeba": 1041903,
+        "author": "sacredceltic"
+      },
+      "verbs": [
+        {
+          "verb": "v.pouvoir",
+          "tense": "imparfait",
+          "person": "3p",
+          "answer": "pouvaient"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.travail",
+          "word": "travail"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.5702773",
+      "text": "Elles ne pouvaient pas nous aider.",
+      "credit": {
+        "tatoeba": 5702773,
+        "author": "Aiji"
+      },
       "verbs": [
         {
           "verb": "v.pouvoir",
@@ -247,8 +497,40 @@
       ]
     },
     {
-      "id": "s.pouvoir.fs.1s.01",
-      "text": "Je pourrai venir demain.",
+      "id": "s.tatoeba.3039294",
+      "text": "Lorsque j’irai bien, je pourrai terminer le travail.",
+      "credit": {
+        "tatoeba": 3039294,
+        "author": "Rovo"
+      },
+      "verbs": [
+        {
+          "verb": "v.pouvoir",
+          "tense": "futur_simple",
+          "person": "1s",
+          "answer": "pourrai"
+        },
+        {
+          "verb": "v.aller",
+          "tense": "futur_simple",
+          "person": "1s",
+          "answer": "irai"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.travail",
+          "word": "travail"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.6000378",
+      "text": "Je pourrai entendre des portes claquer.",
+      "credit": {
+        "tatoeba": 6000378,
+        "author": "PERCE_NEIGE"
+      },
       "verbs": [
         {
           "verb": "v.pouvoir",
@@ -256,29 +538,59 @@
           "person": "1s",
           "answer": "pourrai"
         }
+      ],
+      "nouns": [
+        {
+          "noun": "n.porte",
+          "word": "portes"
+        }
       ]
     },
     {
-      "id": "s.pouvoir.fs.2s.01",
-      "text": "Tu pourras partir quand tu voudras.",
+      "id": "s.tatoeba.1021666",
+      "text": "Fais-moi savoir les jours auxquels tu pourras venir.",
+      "credit": {
+        "tatoeba": 1021666,
+        "author": "sacredceltic"
+      },
       "verbs": [
         {
           "verb": "v.pouvoir",
           "tense": "futur_simple",
           "person": "2s",
           "answer": "pourras"
-        },
+        }
+      ],
+      "nouns": [
         {
-          "verb": "v.vouloir",
-          "tense": "futur_simple",
-          "person": "2s",
-          "answer": "voudras"
+          "noun": "n.jour",
+          "word": "jours"
         }
       ]
     },
     {
-      "id": "s.pouvoir.fs.3s.01",
-      "text": "Elle pourra conduire l’année prochaine.",
+      "id": "s.tatoeba.480533",
+      "text": "Tu ne pourras pas attraper le train.",
+      "credit": {
+        "tatoeba": 480533,
+        "author": "sacredceltic"
+      },
+      "verbs": [
+        {
+          "verb": "v.pouvoir",
+          "tense": "futur_simple",
+          "person": "2s",
+          "answer": "pourras"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.4245205",
+      "text": "Elle ne pourra pas venir demain.",
+      "credit": {
+        "tatoeba": 4245205,
+        "author": "JulieMDM"
+      },
       "verbs": [
         {
           "verb": "v.pouvoir",
@@ -286,17 +598,31 @@
           "person": "3s",
           "answer": "pourra"
         }
-      ],
-      "nouns": [
+      ]
+    },
+    {
+      "id": "s.tatoeba.8482275",
+      "text": "On te contactera dès qu’on le pourra.",
+      "credit": {
+        "tatoeba": 8482275,
+        "author": "Aiji"
+      },
+      "verbs": [
         {
-          "noun": "n.annee",
-          "word": "année"
+          "verb": "v.pouvoir",
+          "tense": "futur_simple",
+          "person": "3s",
+          "answer": "pourra"
         }
       ]
     },
     {
-      "id": "s.pouvoir.fs.1p.01",
-      "text": "Nous pourrons en parler ce soir.",
+      "id": "s.tatoeba.10156916",
+      "text": "Espérons que nous pourrons le faire l’année prochaine.",
+      "credit": {
+        "tatoeba": 10156916,
+        "author": "Rovo"
+      },
       "verbs": [
         {
           "verb": "v.pouvoir",
@@ -307,14 +633,40 @@
       ],
       "nouns": [
         {
-          "noun": "n.soir",
-          "word": "soir"
+          "noun": "n.annee",
+          "word": "année"
         }
       ]
     },
     {
-      "id": "s.pouvoir.fs.2p.01",
-      "text": "Vous pourrez visiter le musée gratuitement.",
+      "id": "s.tatoeba.5139642",
+      "text": "Nous ferons ce que nous pourrons.",
+      "credit": {
+        "tatoeba": 5139642,
+        "author": "gege_veggie"
+      },
+      "verbs": [
+        {
+          "verb": "v.pouvoir",
+          "tense": "futur_simple",
+          "person": "1p",
+          "answer": "pourrons"
+        },
+        {
+          "verb": "v.faire",
+          "tense": "futur_simple",
+          "person": "1p",
+          "answer": "ferons"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.1021670",
+      "text": "Faites-moi savoir les jours auxquels vous pourrez venir.",
+      "credit": {
+        "tatoeba": 1021670,
+        "author": "sacredceltic"
+      },
       "verbs": [
         {
           "verb": "v.pouvoir",
@@ -322,11 +674,59 @@
           "person": "2p",
           "answer": "pourrez"
         }
+      ],
+      "nouns": [
+        {
+          "noun": "n.jour",
+          "word": "jours"
+        }
       ]
     },
     {
-      "id": "s.pouvoir.fs.3p.01",
-      "text": "Ils pourront rentrer plus tôt vendredi.",
+      "id": "s.tatoeba.335941",
+      "text": "Vous pourrez le contacter chez lui ce soir.",
+      "credit": {
+        "tatoeba": 335941,
+        "author": "sysko"
+      },
+      "verbs": [
+        {
+          "verb": "v.pouvoir",
+          "tense": "futur_simple",
+          "person": "2p",
+          "answer": "pourrez"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.soir",
+          "word": "soir"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.11656622",
+      "text": "Ils ne pourront pas vous arrêter.",
+      "credit": {
+        "tatoeba": 11656622,
+        "author": "Aiji"
+      },
+      "verbs": [
+        {
+          "verb": "v.pouvoir",
+          "tense": "futur_simple",
+          "person": "3p",
+          "answer": "pourront"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.5116651",
+      "text": "Ils pourront finir leurs devoirs après le dîner.",
+      "credit": {
+        "tatoeba": 5116651,
+        "author": "gege_veggie"
+      },
       "verbs": [
         {
           "verb": "v.pouvoir",

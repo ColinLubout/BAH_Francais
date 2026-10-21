@@ -237,6 +237,7 @@ class ContentSentence {
     required this.text,
     this.verbs = const [],
     this.nouns = const [],
+    this.credit,
   });
 
   final String id;
@@ -246,9 +247,13 @@ class ContentSentence {
   final List<SentenceVerb> verbs;
   final List<SentenceNoun> nouns;
 
+  /// Where the sentence comes from, when someone else wrote it.
+  final SentenceCredit? credit;
+
   Map<String, Object?> toJson() => {
     'id': id,
     'text': text,
+    'credit': credit?.toJson(),
     'verbs': [
       for (final v in [...verbs]..sort(_byVerb)) v.toJson(),
     ],
@@ -265,6 +270,22 @@ class ContentSentence {
     if (byTense != 0) return byTense;
     return a.person.index.compareTo(b.person.index);
   }
+}
+
+/// A sentence from Tatoeba (tatoeba.org), whose licence (CC BY 2.0 FR)
+/// asks for its author to be credited.
+@immutable
+class SentenceCredit {
+  const SentenceCredit({required this.tatoebaId, required this.author});
+
+  /// The sentence's number on Tatoeba, as in
+  /// `tatoeba.org/sentences/show/<id>`.
+  final int tatoebaId;
+
+  /// The Tatoeba user who wrote it.
+  final String author;
+
+  Map<String, Object?> toJson() => {'tatoeba': tatoebaId, 'author': author};
 }
 
 /// A verb a sentence uses: the words its form takes there, which the

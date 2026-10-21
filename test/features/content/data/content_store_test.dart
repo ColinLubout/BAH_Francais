@@ -35,7 +35,10 @@ void main() {
     expect(one.verbs.single.answer, 'cc present 1s');
     expect(one.verbs.single.alternatives, ['cc alt present']);
     expect(one.nouns.single.nounId, 'n.aa');
+    expect(one.credit?.tatoebaId, 1234);
+    expect(one.credit?.author, 'someone');
     expect(sentences['s.two']!.verbs.single.before, 'la');
+    expect(sentences['s.two']!.credit, isNull);
     expect(sentences['s.three']!.verbs, isEmpty);
     expect(sentences['s.three']!.nouns.map((n) => n.word), ['aa', 'bbs']);
   });

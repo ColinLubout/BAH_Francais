@@ -1,62 +1,12 @@
 {
   "sentences": [
     {
-      "id": "s.etre.pr.1s.01",
-      "text": "Je suis fatigué ce soir.",
-      "verbs": [
-        {
-          "verb": "v.etre",
-          "tense": "present",
-          "person": "1s",
-          "answer": "suis"
-        }
-      ],
-      "nouns": [
-        {
-          "noun": "n.soir",
-          "word": "soir"
-        }
-      ]
-    },
-    {
-      "id": "s.etre.pr.2s.01",
-      "text": "Tu es en retard !",
-      "verbs": [
-        {
-          "verb": "v.etre",
-          "tense": "present",
-          "person": "2s",
-          "answer": "es"
-        }
-      ]
-    },
-    {
-      "id": "s.etre.pr.3s.01",
-      "text": "Elle est professeure de français.",
-      "verbs": [
-        {
-          "verb": "v.etre",
-          "tense": "present",
-          "person": "3s",
-          "answer": "est"
-        }
-      ]
-    },
-    {
-      "id": "s.etre.pr.1p.01",
-      "text": "Nous sommes contents de vous voir.",
-      "verbs": [
-        {
-          "verb": "v.etre",
-          "tense": "present",
-          "person": "1p",
-          "answer": "sommes"
-        }
-      ]
-    },
-    {
-      "id": "s.etre.pr.2p.01",
-      "text": "Vous êtes prêts ?",
+      "id": "s.tatoeba.1402950",
+      "text": "Vous êtes trop jeune pour vous marier.",
+      "credit": {
+        "tatoeba": 1402950,
+        "author": "serpico"
+      },
       "verbs": [
         {
           "verb": "v.etre",
@@ -67,8 +17,12 @@
       ]
     },
     {
-      "id": "s.etre.pr.3p.01",
-      "text": "Ils sont dans le jardin.",
+      "id": "s.tatoeba.6274",
+      "text": "Ce sont les maths que j’aime le moins.",
+      "credit": {
+        "tatoeba": 6274,
+        "author": "qdii"
+      },
       "verbs": [
         {
           "verb": "v.etre",
@@ -79,8 +33,12 @@
       ]
     },
     {
-      "id": "s.etre.pc.1s.01",
-      "text": "J’ai été malade toute la semaine dernière.",
+      "id": "s.tatoeba.1404385",
+      "text": "J’ai été pris dans un embouteillage.",
+      "credit": {
+        "tatoeba": 1404385,
+        "author": "serpico"
+      },
       "verbs": [
         {
           "verb": "v.etre",
@@ -88,17 +46,15 @@
           "person": "1s",
           "answer": "ai été"
         }
-      ],
-      "nouns": [
-        {
-          "noun": "n.semaine",
-          "word": "semaine"
-        }
       ]
     },
     {
-      "id": "s.etre.pc.2s.01",
-      "text": "Tu as été très gentil avec moi hier.",
+      "id": "s.tatoeba.2296601",
+      "text": "Tu as été la dernière à arriver.",
+      "credit": {
+        "tatoeba": 2296601,
+        "author": "Amastan"
+      },
       "verbs": [
         {
           "verb": "v.etre",
@@ -109,8 +65,34 @@
       ]
     },
     {
-      "id": "s.etre.pc.3s.01",
-      "text": "Le voyage a été long et fatigant.",
+      "id": "s.tatoeba.6936950",
+      "text": "Tu as été surfer ce matin, n’est-ce pas ?",
+      "credit": {
+        "tatoeba": 6936950,
+        "author": "Aiji"
+      },
+      "verbs": [
+        {
+          "verb": "v.etre",
+          "tense": "passe_compose",
+          "person": "2s",
+          "answer": "as été"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.matin",
+          "word": "matin"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.1516481",
+      "text": "Il a été soldat pendant la guerre.",
+      "credit": {
+        "tatoeba": 1516481,
+        "author": "Aiji"
+      },
       "verbs": [
         {
           "verb": "v.etre",
@@ -121,8 +103,34 @@
       ]
     },
     {
-      "id": "s.etre.pc.1p.01",
-      "text": "Nous avons été surpris par la nouvelle.",
+      "id": "s.tatoeba.6736889",
+      "text": "J’en avais une, mais elle a été volée.",
+      "credit": {
+        "tatoeba": 6736889,
+        "author": "Aiji"
+      },
+      "verbs": [
+        {
+          "verb": "v.etre",
+          "tense": "passe_compose",
+          "person": "3s",
+          "answer": "a été"
+        },
+        {
+          "verb": "v.avoir",
+          "tense": "imparfait",
+          "person": "1s",
+          "answer": "avais"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.4675193",
+      "text": "Nous avons été tellement choqués par son décès brutal.",
+      "credit": {
+        "tatoeba": 4675193,
+        "author": "thowas"
+      },
       "verbs": [
         {
           "verb": "v.etre",
@@ -133,8 +141,28 @@
       ]
     },
     {
-      "id": "s.etre.pc.2p.01",
-      "text": "Vous avez été très patients, merci.",
+      "id": "s.tatoeba.4675195",
+      "text": "Nous avons été tellement choqués par sa mort subite.",
+      "credit": {
+        "tatoeba": 4675195,
+        "author": "thowas"
+      },
+      "verbs": [
+        {
+          "verb": "v.etre",
+          "tense": "passe_compose",
+          "person": "1p",
+          "answer": "avons été"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.6936951",
+      "text": "Vous avez été surfer ce matin, n’est-ce pas ?",
+      "credit": {
+        "tatoeba": 6936951,
+        "author": "Aiji"
+      },
       "verbs": [
         {
           "verb": "v.etre",
@@ -142,41 +170,43 @@
           "person": "2p",
           "answer": "avez été"
         }
+      ],
+      "nouns": [
+        {
+          "noun": "n.matin",
+          "word": "matin"
+        }
       ]
     },
     {
-      "id": "s.etre.pc.3p.01",
-      "text": "Les enfants ont été sages aujourd’hui.",
+      "id": "s.tatoeba.727355",
+      "text": "Vous avez été absent de l’école hier.",
+      "credit": {
+        "tatoeba": 727355,
+        "author": "chkube"
+      },
       "verbs": [
         {
           "verb": "v.etre",
           "tense": "passe_compose",
-          "person": "3p",
-          "answer": "ont été"
+          "person": "2p",
+          "answer": "avez été"
         }
       ],
       "nouns": [
         {
-          "noun": "n.enfant",
-          "word": "enfants"
+          "noun": "n.ecole",
+          "word": "école"
         }
       ]
     },
     {
-      "id": "s.etre.im.1s.01",
-      "text": "Quand j’étais petit, j’habitais à la campagne.",
-      "verbs": [
-        {
-          "verb": "v.etre",
-          "tense": "imparfait",
-          "person": "1s",
-          "answer": "étais"
-        }
-      ]
-    },
-    {
-      "id": "s.etre.im.2s.01",
-      "text": "Avant, tu étais toujours en retard.",
+      "id": "s.tatoeba.10224116",
+      "text": "Tu étais censé regarder le film aussi.",
+      "credit": {
+        "tatoeba": 10224116,
+        "author": "Melimelo"
+      },
       "verbs": [
         {
           "verb": "v.etre",
@@ -187,20 +217,12 @@
       ]
     },
     {
-      "id": "s.etre.im.3s.01",
-      "text": "Il était tard quand nous sommes rentrés.",
-      "verbs": [
-        {
-          "verb": "v.etre",
-          "tense": "imparfait",
-          "person": "3s",
-          "answer": "était"
-        }
-      ]
-    },
-    {
-      "id": "s.etre.im.1p.01",
-      "text": "Nous étions très heureux dans cette maison.",
+      "id": "s.tatoeba.1417827",
+      "text": "Dimanche nous étions sur la plage à faire du cerf-volant.",
+      "credit": {
+        "tatoeba": 1417827,
+        "author": "Delapouite"
+      },
       "verbs": [
         {
           "verb": "v.etre",
@@ -208,17 +230,31 @@
           "person": "1p",
           "answer": "étions"
         }
-      ],
-      "nouns": [
+      ]
+    },
+    {
+      "id": "s.tatoeba.5534762",
+      "text": "Nous étions là pour longtemps.",
+      "credit": {
+        "tatoeba": 5534762,
+        "author": "guyniv"
+      },
+      "verbs": [
         {
-          "noun": "n.maison",
-          "word": "maison"
+          "verb": "v.etre",
+          "tense": "imparfait",
+          "person": "1p",
+          "answer": "étions"
         }
       ]
     },
     {
-      "id": "s.etre.im.2p.01",
-      "text": "Vous étiez où hier soir ?",
+      "id": "s.tatoeba.483090",
+      "text": "Vous étiez en retard au travail.",
+      "credit": {
+        "tatoeba": 483090,
+        "author": "sacredceltic"
+      },
       "verbs": [
         {
           "verb": "v.etre",
@@ -229,14 +265,46 @@
       ],
       "nouns": [
         {
+          "noun": "n.travail",
+          "word": "travail"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.6716580",
+      "text": "Je sais où vous étiez hier soir.",
+      "credit": {
+        "tatoeba": 6716580,
+        "author": "Aiji"
+      },
+      "verbs": [
+        {
+          "verb": "v.etre",
+          "tense": "imparfait",
+          "person": "2p",
+          "answer": "étiez"
+        },
+        {
+          "verb": "v.savoir",
+          "tense": "present",
+          "person": "1s",
+          "answer": "sais"
+        }
+      ],
+      "nouns": [
+        {
           "noun": "n.soir",
           "word": "soir"
         }
       ]
     },
     {
-      "id": "s.etre.im.3p.01",
-      "text": "Les rues étaient vides ce matin-là.",
+      "id": "s.tatoeba.11877412",
+      "text": "Ce n’étaient pas eux.",
+      "credit": {
+        "tatoeba": 11877412,
+        "author": "zogwarg"
+      },
       "verbs": [
         {
           "verb": "v.etre",
@@ -244,21 +312,31 @@
           "person": "3p",
           "answer": "étaient"
         }
-      ],
-      "nouns": [
+      ]
+    },
+    {
+      "id": "s.tatoeba.3696914",
+      "text": "Malgré toute leur richesse, ils étaient malheureux.",
+      "credit": {
+        "tatoeba": 3696914,
+        "author": "gege_veggie"
+      },
+      "verbs": [
         {
-          "noun": "n.rue",
-          "word": "rues"
-        },
-        {
-          "noun": "n.matin",
-          "word": "matin"
+          "verb": "v.etre",
+          "tense": "imparfait",
+          "person": "3p",
+          "answer": "étaient"
         }
       ]
     },
     {
-      "id": "s.etre.fs.1s.01",
-      "text": "Je serai à Paris lundi prochain.",
+      "id": "s.tatoeba.9829948",
+      "text": "M’aimerez-vous encore quand je serai vieille ?",
+      "credit": {
+        "tatoeba": 9829948,
+        "author": "Micsmithel"
+      },
       "verbs": [
         {
           "verb": "v.etre",
@@ -269,20 +347,34 @@
       ]
     },
     {
-      "id": "s.etre.fs.2s.01",
-      "text": "Tu seras là demain ?",
+      "id": "s.tatoeba.4164894",
+      "text": "Je peux y regarder lorsque tu seras prêt.",
+      "credit": {
+        "tatoeba": 4164894,
+        "author": "sacredceltic"
+      },
       "verbs": [
         {
           "verb": "v.etre",
           "tense": "futur_simple",
           "person": "2s",
           "answer": "seras"
+        },
+        {
+          "verb": "v.pouvoir",
+          "tense": "present",
+          "person": "1s",
+          "answer": "peux"
         }
       ]
     },
     {
-      "id": "s.etre.fs.3s.01",
-      "text": "Le magasin sera fermé dimanche.",
+      "id": "s.tatoeba.1417833",
+      "text": "Elle sera de retour dans moins de dix minutes.",
+      "credit": {
+        "tatoeba": 1417833,
+        "author": "Delapouite"
+      },
       "verbs": [
         {
           "verb": "v.etre",
@@ -293,8 +385,34 @@
       ]
     },
     {
-      "id": "s.etre.fs.1p.01",
-      "text": "Nous serons en vacances en août.",
+      "id": "s.tatoeba.8126762",
+      "text": "Je serai content quand ce sera terminé.",
+      "credit": {
+        "tatoeba": 8126762,
+        "author": "Aiji"
+      },
+      "verbs": [
+        {
+          "verb": "v.etre",
+          "tense": "futur_simple",
+          "person": "3s",
+          "answer": "sera"
+        },
+        {
+          "verb": "v.etre",
+          "tense": "futur_simple",
+          "person": "1s",
+          "answer": "serai"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.6380944",
+      "text": "Nous serons de retour dans une heure.",
+      "credit": {
+        "tatoeba": 6380944,
+        "author": "Aiji"
+      },
       "verbs": [
         {
           "verb": "v.etre",
@@ -305,32 +423,118 @@
       ],
       "nouns": [
         {
-          "noun": "n.vacances",
-          "word": "vacances"
+          "noun": "n.heure",
+          "word": "heure"
         }
       ]
     },
     {
-      "id": "s.etre.fs.2p.01",
-      "text": "Vous serez toujours les bienvenus chez nous.",
+      "id": "s.tatoeba.7992521",
+      "text": "Nous y serons dans trois heures.",
+      "credit": {
+        "tatoeba": 7992521,
+        "author": "Aiji"
+      },
+      "verbs": [
+        {
+          "verb": "v.etre",
+          "tense": "futur_simple",
+          "person": "1p",
+          "answer": "serons"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.heure",
+          "word": "heures"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.1370405",
+      "text": "J’ai le sentiment que vous serez un très bon avocat.",
+      "credit": {
+        "tatoeba": 1370405,
+        "author": "sysko"
+      },
       "verbs": [
         {
           "verb": "v.etre",
           "tense": "futur_simple",
           "person": "2p",
           "answer": "serez"
+        },
+        {
+          "verb": "v.avoir",
+          "tense": "present",
+          "person": "1s",
+          "answer": "ai"
         }
       ]
     },
     {
-      "id": "s.etre.fs.3p.01",
-      "text": "Ils seront contents de te voir.",
+      "id": "s.tatoeba.4164890",
+      "text": "Je peux y regarder lorsque vous serez prêt.",
+      "credit": {
+        "tatoeba": 4164890,
+        "author": "sacredceltic"
+      },
+      "verbs": [
+        {
+          "verb": "v.etre",
+          "tense": "futur_simple",
+          "person": "2p",
+          "answer": "serez"
+        },
+        {
+          "verb": "v.pouvoir",
+          "tense": "present",
+          "person": "1s",
+          "answer": "peux"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.1427711",
+      "text": "Ils seront ici à trois heures.",
+      "credit": {
+        "tatoeba": 1427711,
+        "author": "martin9"
+      },
       "verbs": [
         {
           "verb": "v.etre",
           "tense": "futur_simple",
           "person": "3p",
           "answer": "seront"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.heure",
+          "word": "heures"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.5791892",
+      "text": "Je suis sûr qu’elles seront très heureuses ensemble.",
+      "credit": {
+        "tatoeba": 5791892,
+        "author": "Aiji"
+      },
+      "verbs": [
+        {
+          "verb": "v.etre",
+          "tense": "futur_simple",
+          "person": "3p",
+          "answer": "seront"
+        },
+        {
+          "verb": "v.etre",
+          "tense": "present",
+          "person": "1s",
+          "answer": "suis"
         }
       ]
     }

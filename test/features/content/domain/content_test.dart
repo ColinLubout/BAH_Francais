@@ -59,6 +59,20 @@ void main() {
     },
   );
 
+  test('a sentence from Tatoeba keeps its number and author', () {
+    const sentence = ContentSentence(
+      id: 's.tatoeba.42',
+      text: 'a b',
+      nouns: [SentenceNoun(nounId: 'n.a', word: 'a')],
+      credit: SentenceCredit(tatoebaId: 42, author: 'someone'),
+    );
+    expect(sentence.toJson()['credit'], {'tatoeba': 42, 'author': 'someone'});
+    expect(
+      const ContentSentence(id: 's.a', text: 'a').toJson()['credit'],
+      isNull,
+    );
+  });
+
   test('an official image’s id is its file name without the extension', () {
     expect(ContentImage.idFor('fourchette-1.svg'), 'i.fourchette-1');
     expect(ContentImage.idFor('dessin'), 'i.dessin');

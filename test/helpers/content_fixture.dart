@@ -97,6 +97,7 @@ final fixture = ContentSet(
         ),
       ],
       nouns: [SentenceNoun(nounId: 'n.aa', word: 'aa')],
+      credit: SentenceCredit(tatoebaId: 1234, author: 'someone'),
     ),
     ContentSentence(
       id: 's.two',

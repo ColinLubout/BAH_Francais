@@ -631,6 +631,11 @@ class _Validation {
               word: n['word']! as String,
             ),
         ],
+        credit: switch (json['credit']) {
+          {'tatoeba': final int id, 'author': final String author} =>
+            SentenceCredit(tatoebaId: id, author: author),
+          _ => null,
+        },
       );
 
   static T _byId<T extends Enum>(

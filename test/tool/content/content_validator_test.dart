@@ -151,6 +151,24 @@ void main() {
       expect(sentences['s.aller.pc.1s.01']!.verbs.single.alternatives, [
         'suis allée',
       ]);
+      expect(house.credit, isNull);
+    });
+
+    test('a sentence’s credit becomes its content', () {
+      final report = validateContent(
+        editedSentence(
+          allerSentences,
+          's.aller.pr.1s.01',
+          (s) => s['credit'] = {'tatoeba': 123, 'author': 'someone'},
+        ),
+        schemas,
+      );
+      expect(report.errors, isEmpty);
+      final credit = report.content.sentences
+          .firstWhere((s) => s.id == 's.aller.pr.1s.01')
+          .credit!;
+      expect(credit.tatoebaId, 123);
+      expect(credit.author, 'someone');
     });
   });
 
@@ -253,6 +271,25 @@ void main() {
           (s) => firstVerb(s)['before'] = 'les',
         ),
         [payerSentences, 'before'],
+      );
+    });
+
+    test('a credit has a Tatoeba number and an author', () {
+      expectError(
+        editedSentence(
+          allerSentences,
+          's.aller.pr.1s.01',
+          (s) => s['credit'] = {'tatoeba': 123},
+        ),
+        [allerSentences, '/sentences/0/credit', 'author'],
+      );
+      expectError(
+        editedSentence(
+          allerSentences,
+          's.aller.pr.1s.01',
+          (s) => s['credit'] = {'tatoeba': '123', 'author': 'someone'},
+        ),
+        [allerSentences, '/sentences/0/credit/tatoeba'],
       );
     });
 

@@ -110,7 +110,12 @@ class ContentStore {
         ])
         ..insertAll(t.sentences, [
           for (final s in content.sentences)
-            SentencesCompanion.insert(id: s.id, sentenceText: s.text),
+            SentencesCompanion.insert(
+              id: s.id,
+              sentenceText: s.text,
+              tatoebaId: Value(s.credit?.tatoebaId),
+              tatoebaAuthor: Value(s.credit?.author),
+            ),
         ])
         ..insertAll(t.sentenceVerbs, [
           for (final s in content.sentences)
@@ -266,6 +271,12 @@ class ContentStore {
           ContentSentence(
             id: s.id,
             text: s.sentenceText,
+            credit: s.tatoebaId == null || s.tatoebaAuthor == null
+                ? null
+                : SentenceCredit(
+                    tatoebaId: s.tatoebaId!,
+                    author: s.tatoebaAuthor!,
+                  ),
             verbs: [
               for (final l in sentenceVerbs)
                 if (l.sentenceId == s.id)

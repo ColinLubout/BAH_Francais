@@ -651,8 +651,31 @@ class Sentences extends Table with TableInfo {
     requiredDuringInsert: true,
     $customConstraints: 'NOT NULL',
   );
+  late final GeneratedColumn<int> tatoebaId = GeneratedColumn<int>(
+    'tatoeba_id',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    $customConstraints: 'NULL',
+  );
+  late final GeneratedColumn<String> tatoebaAuthor = GeneratedColumn<String>(
+    'tatoeba_author',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    $customConstraints: 'NULL',
+  );
   @override
-  List<GeneratedColumn> get $columns => [source, retired, id, sentenceText];
+  List<GeneratedColumn> get $columns => [
+    source,
+    retired,
+    id,
+    sentenceText,
+    tatoebaId,
+    tatoebaAuthor,
+  ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override

@@ -135,6 +135,10 @@ class Sentences extends Table with ContentColumns {
   /// generated schema test helpers.
   TextColumn get sentenceText => text()();
 
+  /// The credit of a sentence from Tatoeba: its number there and its author.
+  IntColumn get tatoebaId => integer().nullable()();
+  TextColumn get tatoebaAuthor => text().nullable()();
+
   @override
   Set<Column<Object>> get primaryKey => {id};
 }

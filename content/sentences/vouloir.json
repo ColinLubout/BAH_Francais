@@ -1,20 +1,12 @@
 {
   "sentences": [
     {
-      "id": "s.vouloir.pr.1s.01",
-      "text": "Je veux un café, s’il vous plaît.",
-      "verbs": [
-        {
-          "verb": "v.vouloir",
-          "tense": "present",
-          "person": "1s",
-          "answer": "veux"
-        }
-      ]
-    },
-    {
-      "id": "s.vouloir.pr.2s.01",
-      "text": "Tu veux venir avec nous ?",
+      "id": "s.tatoeba.7272215",
+      "text": "Tu ne veux pas un autre enfant ?",
+      "credit": {
+        "tatoeba": 7272215,
+        "author": "tras"
+      },
       "verbs": [
         {
           "verb": "v.vouloir",
@@ -22,11 +14,21 @@
           "person": "2s",
           "answer": "veux"
         }
+      ],
+      "nouns": [
+        {
+          "noun": "n.enfant",
+          "word": "enfant"
+        }
       ]
     },
     {
-      "id": "s.vouloir.pr.3s.01",
-      "text": "Elle veut apprendre le japonais.",
+      "id": "s.tatoeba.133241",
+      "text": "Il veut travailler dans un hôpital.",
+      "credit": {
+        "tatoeba": 133241,
+        "author": "nimfeo"
+      },
       "verbs": [
         {
           "verb": "v.vouloir",
@@ -37,32 +39,72 @@
       ]
     },
     {
-      "id": "s.vouloir.pr.1p.01",
-      "text": "Nous voulons visiter Rome cet été.",
+      "id": "s.tatoeba.1431470",
+      "text": "Elle veut un nouveau chapeau.",
+      "credit": {
+        "tatoeba": 1431470,
+        "author": "Julien_PDC"
+      },
       "verbs": [
         {
           "verb": "v.vouloir",
           "tense": "present",
-          "person": "1p",
-          "answer": "voulons"
+          "person": "3s",
+          "answer": "veut"
         }
       ]
     },
     {
-      "id": "s.vouloir.pr.2p.01",
-      "text": "Vous voulez du thé ou du café ?",
+      "id": "s.tatoeba.4236863",
+      "text": "Si vous voulez rester ici, vous êtes bienvenu.",
+      "credit": {
+        "tatoeba": 4236863,
+        "author": "sacredceltic"
+      },
       "verbs": [
         {
           "verb": "v.vouloir",
           "tense": "present",
           "person": "2p",
           "answer": "voulez"
+        },
+        {
+          "verb": "v.etre",
+          "tense": "present",
+          "person": "2p",
+          "answer": "êtes"
         }
       ]
     },
     {
-      "id": "s.vouloir.pr.3p.01",
-      "text": "Les enfants veulent aller au parc.",
+      "id": "s.tatoeba.7482726",
+      "text": "Je vais avec vous si vous voulez.",
+      "credit": {
+        "tatoeba": 7482726,
+        "author": "felix63"
+      },
+      "verbs": [
+        {
+          "verb": "v.vouloir",
+          "tense": "present",
+          "person": "2p",
+          "answer": "voulez"
+        },
+        {
+          "verb": "v.aller",
+          "tense": "present",
+          "person": "1s",
+          "answer": "vais"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.10543268",
+      "text": "Elles veulent dire la même chose.",
+      "credit": {
+        "tatoeba": 10543268,
+        "author": "Rovo"
+      },
       "verbs": [
         {
           "verb": "v.vouloir",
@@ -73,14 +115,56 @@
       ],
       "nouns": [
         {
-          "noun": "n.enfant",
-          "word": "enfants"
+          "noun": "n.chose",
+          "word": "chose"
         }
       ]
     },
     {
-      "id": "s.vouloir.pc.1s.01",
-      "text": "J’ai voulu t’appeler, mais j’ai oublié.",
+      "id": "s.tatoeba.2287839",
+      "text": "Ils veulent bien faire les choses.",
+      "credit": {
+        "tatoeba": 2287839,
+        "author": "Rovo"
+      },
+      "verbs": [
+        {
+          "verb": "v.vouloir",
+          "tense": "present",
+          "person": "3p",
+          "answer": "veulent"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.chose",
+          "word": "choses"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.3845929",
+      "text": "J’ai voulu juste donner mon opinion.",
+      "credit": {
+        "tatoeba": 3845929,
+        "author": "christian63"
+      },
+      "verbs": [
+        {
+          "verb": "v.vouloir",
+          "tense": "passe_compose",
+          "person": "1s",
+          "answer": "ai voulu"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.4585112",
+      "text": "J’ai voulu y aller mais j’ai oublié.",
+      "credit": {
+        "tatoeba": 4585112,
+        "author": "dadidas"
+      },
       "verbs": [
         {
           "verb": "v.vouloir",
@@ -103,14 +187,68 @@
       ]
     },
     {
-      "id": "s.vouloir.pc.3s.01",
-      "text": "Il a voulu voir la mer avant de partir.",
+      "id": "s.vouloir.pc.2s.02",
+      "text": "Tu as voulu venir avec nous.",
+      "verbs": [
+        {
+          "verb": "v.vouloir",
+          "tense": "passe_compose",
+          "person": "2s",
+          "answer": "as voulu"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.131768",
+      "text": "Il a voulu enseigner l’anglais à l’école.",
+      "credit": {
+        "tatoeba": 131768,
+        "author": "TRANG"
+      },
       "verbs": [
         {
           "verb": "v.vouloir",
           "tense": "passe_compose",
           "person": "3s",
           "answer": "a voulu"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.ecole",
+          "word": "école"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.1997393",
+      "text": "Elle a voulu me rencontrer.",
+      "credit": {
+        "tatoeba": 1997393,
+        "author": "sacredceltic"
+      },
+      "verbs": [
+        {
+          "verb": "v.vouloir",
+          "tense": "passe_compose",
+          "person": "3s",
+          "answer": "a voulu"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.14037751",
+      "text": "Nous avons voulu le mettre à la disposition de tous.",
+      "credit": {
+        "tatoeba": 14037751,
+        "author": "Rovo"
+      },
+      "verbs": [
+        {
+          "verb": "v.vouloir",
+          "tense": "passe_compose",
+          "person": "1p",
+          "answer": "avons voulu"
         }
       ]
     },
@@ -123,6 +261,22 @@
           "tense": "passe_compose",
           "person": "1p",
           "answer": "avons voulu"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.11922433",
+      "text": "Je n’ai pas compris pourquoi vous avez voulu revenir.",
+      "credit": {
+        "tatoeba": 11922433,
+        "author": "JSKabylie15"
+      },
+      "verbs": [
+        {
+          "verb": "v.vouloir",
+          "tense": "passe_compose",
+          "person": "2p",
+          "answer": "avez voulu"
         }
       ]
     },
@@ -145,8 +299,12 @@
       ]
     },
     {
-      "id": "s.vouloir.pc.3p.01",
-      "text": "Ils ont voulu rester jusqu’à la fin.",
+      "id": "s.tatoeba.12587088",
+      "text": "Ils nous en ont voulu.",
+      "credit": {
+        "tatoeba": 12587088,
+        "author": "anzart"
+      },
       "verbs": [
         {
           "verb": "v.vouloir",
@@ -157,32 +315,28 @@
       ]
     },
     {
-      "id": "s.vouloir.im.1s.01",
-      "text": "Petit, je voulais devenir pompier.",
+      "id": "s.tatoeba.845387",
+      "text": "Ils ont voulu organiser ma filature, mais je les ai embobinés.",
+      "credit": {
+        "tatoeba": 845387,
+        "author": "sacredceltic"
+      },
       "verbs": [
         {
           "verb": "v.vouloir",
-          "tense": "imparfait",
-          "person": "1s",
-          "answer": "voulais"
+          "tense": "passe_compose",
+          "person": "3p",
+          "answer": "ont voulu"
         }
       ]
     },
     {
-      "id": "s.vouloir.im.2s.01",
-      "text": "Tu voulais me parler ?",
-      "verbs": [
-        {
-          "verb": "v.vouloir",
-          "tense": "imparfait",
-          "person": "2s",
-          "answer": "voulais"
-        }
-      ]
-    },
-    {
-      "id": "s.vouloir.im.3s.01",
-      "text": "Elle voulait toujours avoir raison.",
+      "id": "s.tatoeba.2329897",
+      "text": "Elle voulait avoir une famille avec lui.",
+      "credit": {
+        "tatoeba": 2329897,
+        "author": "sacredceltic"
+      },
       "verbs": [
         {
           "verb": "v.vouloir",
@@ -190,11 +344,43 @@
           "person": "3s",
           "answer": "voulait"
         }
+      ],
+      "nouns": [
+        {
+          "noun": "n.famille",
+          "word": "famille"
+        }
       ]
     },
     {
-      "id": "s.vouloir.im.1p.01",
-      "text": "Nous voulions acheter une maison à la campagne.",
+      "id": "s.tatoeba.499000",
+      "text": "Il voulait en faire à sa tête.",
+      "credit": {
+        "tatoeba": 499000,
+        "author": "sacredceltic"
+      },
+      "verbs": [
+        {
+          "verb": "v.vouloir",
+          "tense": "imparfait",
+          "person": "3s",
+          "answer": "voulait"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.tete",
+          "word": "tête"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.3670277",
+      "text": "Nous voulions vous souhaiter bonne chance.",
+      "credit": {
+        "tatoeba": 3670277,
+        "author": "sacredceltic"
+      },
       "verbs": [
         {
           "verb": "v.vouloir",
@@ -202,17 +388,31 @@
           "person": "1p",
           "answer": "voulions"
         }
-      ],
-      "nouns": [
+      ]
+    },
+    {
+      "id": "s.tatoeba.7857560",
+      "text": "Nous voulions gagner à tout prix.",
+      "credit": {
+        "tatoeba": 7857560,
+        "author": "Salutlolo"
+      },
+      "verbs": [
         {
-          "noun": "n.maison",
-          "word": "maison"
+          "verb": "v.vouloir",
+          "tense": "imparfait",
+          "person": "1p",
+          "answer": "voulions"
         }
       ]
     },
     {
-      "id": "s.vouloir.im.2p.01",
-      "text": "Vous vouliez voir le directeur ?",
+      "id": "s.tatoeba.2013451",
+      "text": "Vous vouliez cela, n’est-ce pas ?",
+      "credit": {
+        "tatoeba": 2013451,
+        "author": "sacredceltic"
+      },
       "verbs": [
         {
           "verb": "v.vouloir",
@@ -223,38 +423,126 @@
       ]
     },
     {
-      "id": "s.vouloir.im.3p.01",
-      "text": "Ils voulaient partir en vacances en juillet.",
+      "id": "s.tatoeba.2026135",
+      "text": "Y a-t-il quelqu’un à qui vous vouliez parler ?",
+      "credit": {
+        "tatoeba": 2026135,
+        "author": "sacredceltic"
+      },
+      "verbs": [
+        {
+          "verb": "v.vouloir",
+          "tense": "imparfait",
+          "person": "2p",
+          "answer": "vouliez"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.6741464",
+      "text": "J’ai dit exactement ce qu’elles voulaient entendre.",
+      "credit": {
+        "tatoeba": 6741464,
+        "author": "GB3"
+      },
       "verbs": [
         {
           "verb": "v.vouloir",
           "tense": "imparfait",
           "person": "3p",
           "answer": "voulaient"
-        }
-      ],
-      "nouns": [
+        },
         {
-          "noun": "n.vacances",
-          "word": "vacances"
+          "verb": "v.dire",
+          "tense": "passe_compose",
+          "person": "1s",
+          "answer": "ai dit"
         }
       ]
     },
     {
-      "id": "s.vouloir.fs.1s.01",
-      "text": "Quand je voudrai partir, je te le dirai.",
+      "id": "s.tatoeba.497610",
+      "text": "Je ne voudrai pas le refaire.",
+      "credit": {
+        "tatoeba": 497610,
+        "author": "Bruno"
+      },
       "verbs": [
         {
           "verb": "v.vouloir",
           "tense": "futur_simple",
           "person": "1s",
           "answer": "voudrai"
-        },
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.7857657",
+      "text": "Je ne voudrai jamais m’asseoir sur cette chaise verte.",
+      "credit": {
+        "tatoeba": 7857657,
+        "author": "Salutlolo"
+      },
+      "verbs": [
         {
-          "verb": "v.dire",
+          "verb": "v.vouloir",
           "tense": "futur_simple",
           "person": "1s",
-          "answer": "dirai"
+          "answer": "voudrai"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.1907823",
+      "text": "Tu ne voudras jamais ce qu’ils veulent.",
+      "credit": {
+        "tatoeba": 1907823,
+        "author": "sacredceltic"
+      },
+      "verbs": [
+        {
+          "verb": "v.vouloir",
+          "tense": "futur_simple",
+          "person": "2s",
+          "answer": "voudras"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.7368390",
+      "text": "Tu peux m’appeler quand tu voudras.",
+      "credit": {
+        "tatoeba": 7368390,
+        "author": "BahaMansoub"
+      },
+      "verbs": [
+        {
+          "verb": "v.vouloir",
+          "tense": "futur_simple",
+          "person": "2s",
+          "answer": "voudras"
+        },
+        {
+          "verb": "v.pouvoir",
+          "tense": "present",
+          "person": "2s",
+          "answer": "peux"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.10749979",
+      "text": "Elle ne voudra pas s’asseoir à côté de lui.",
+      "credit": {
+        "tatoeba": 10749979,
+        "author": "lbdx"
+      },
+      "verbs": [
+        {
+          "verb": "v.vouloir",
+          "tense": "futur_simple",
+          "person": "3s",
+          "answer": "voudra"
         }
       ]
     },
@@ -283,8 +571,30 @@
       ]
     },
     {
-      "id": "s.vouloir.fs.2p.01",
-      "text": "Faites comme vous voudrez.",
+      "id": "s.vouloir.fs.1p.02",
+      "text": "Nous voudrons partir avant la nuit.",
+      "verbs": [
+        {
+          "verb": "v.vouloir",
+          "tense": "futur_simple",
+          "person": "1p",
+          "answer": "voudrons"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.nuit",
+          "word": "nuit"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.11619651",
+      "text": "Je vous prêterai tout l’argent que vous voudrez.",
+      "credit": {
+        "tatoeba": 11619651,
+        "author": "Aiji"
+      },
       "verbs": [
         {
           "verb": "v.vouloir",
@@ -292,17 +602,77 @@
           "person": "2p",
           "answer": "voudrez"
         }
+      ],
+      "nouns": [
+        {
+          "noun": "n.argent",
+          "word": "argent"
+        }
       ]
     },
     {
-      "id": "s.vouloir.fs.3p.01",
-      "text": "Ils voudront sans doute venir avec nous.",
+      "id": "s.tatoeba.12194896",
+      "text": "Je ferai tout ce que vous voudrez.",
+      "credit": {
+        "tatoeba": 12194896,
+        "author": "lbdx"
+      },
+      "verbs": [
+        {
+          "verb": "v.vouloir",
+          "tense": "futur_simple",
+          "person": "2p",
+          "answer": "voudrez"
+        },
+        {
+          "verb": "v.faire",
+          "tense": "futur_simple",
+          "person": "1s",
+          "answer": "ferai"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.2468044",
+      "text": "Je sais qu’elles voudront toutes t’aider.",
+      "credit": {
+        "tatoeba": 2468044,
+        "author": "sacredceltic"
+      },
       "verbs": [
         {
           "verb": "v.vouloir",
           "tense": "futur_simple",
           "person": "3p",
           "answer": "voudront"
+        },
+        {
+          "verb": "v.savoir",
+          "tense": "present",
+          "person": "1s",
+          "answer": "sais"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.2468048",
+      "text": "Je sais qu’ils voudront tous t’assister.",
+      "credit": {
+        "tatoeba": 2468048,
+        "author": "sacredceltic"
+      },
+      "verbs": [
+        {
+          "verb": "v.vouloir",
+          "tense": "futur_simple",
+          "person": "3p",
+          "answer": "voudront"
+        },
+        {
+          "verb": "v.savoir",
+          "tense": "present",
+          "person": "1s",
+          "answer": "sais"
         }
       ]
     }

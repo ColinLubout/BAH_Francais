@@ -42,21 +42,33 @@ dart run tool/dictionary_check.dart content
 
 ## Sources and credits
 
+Most sentences come from [Tatoeba](https://tatoeba.org), a collection of
+sentences and translations available under the
+[Creative Commons Attribution 2.0 France licence](https://creativecommons.org/licenses/by/2.0/fr/)
+(CC BY 2.0 FR). Each one keeps its Tatoeba number and its author in its
+`credit`, and its id is `s.tatoeba.<number>`: the sentence is at
+`https://tatoeba.org/fr/sentences/show/<number>`. Their apostrophes are made
+typographic (’) and a space is put before *? ! : ;*, as in the rest of the
+content; nothing else is changed. Sentences without a `credit` were written
+for this app.
+
 The content is checked, and drafted, against
 [Wiktionary](https://www.wiktionary.org), whose text is available under the
 [Creative Commons Attribution-ShareAlike licence](https://creativecommons.org/licenses/by-sa/4.0/),
 through the machine-readable [French dictionary at Kaikki.org](https://kaikki.org/dictionary/French/),
 extracted with wiktextract (Tatu Ylonen, *Wiktextract: Wiktionary as
 Machine-Readable Structured Data*, LREC 2022). Nothing is copied from it:
-definitions and sentences are written for this app.
+the definitions are written for this app.
 
 ## Status
 
 **Draft, not yet checked.** The everyday categories, *Les essentiels* (30 nouns)
-and *Les verbes essentiels* (10 verbs), with their 269 sentences, were drafted
-by Claude Code for the owner to check (decision 57 in `PROGRESS.md`). Every word,
-gender, form and sentence, and every link from a sentence to a verb or noun,
-must be checked by a fluent French speaker before it ships.
+and *Les verbes essentiels* (10 verbs), were drafted by Claude Code for the owner
+to check (decision 57 in `PROGRESS.md`). Their 383 sentences are from Tatoeba,
+except 17 drafted for the verb forms Tatoeba has no suitable sentence for
+(decision 61). Every word, gender, form and sentence, and every link from a
+sentence to a verb or noun, must be checked by a fluent French speaker before it
+ships.
 
 - The nouns have definitions and no images yet.
 - `rank` orders the words within the everyday set, most useful first. It is an
