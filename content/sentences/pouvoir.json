@@ -10,6 +10,12 @@
           "person": "1s",
           "answer": "peux"
         }
+      ],
+      "nouns": [
+        {
+          "noun": "n.soir",
+          "word": "soir"
+        }
       ]
     },
     {
@@ -99,6 +105,12 @@
           "tense": "passe_compose",
           "person": "2s",
           "answer": "as pu"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.travail",
+          "word": "travail"
         }
       ]
     },
@@ -274,6 +286,12 @@
           "person": "3s",
           "answer": "pourra"
         }
+      ],
+      "nouns": [
+        {
+          "noun": "n.annee",
+          "word": "année"
+        }
       ]
     },
     {
@@ -285,6 +303,12 @@
           "tense": "futur_simple",
           "person": "1p",
           "answer": "pourrons"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.soir",
+          "word": "soir"
         }
       ]
     },

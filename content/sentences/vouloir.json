@@ -70,6 +70,12 @@
           "person": "3p",
           "answer": "veulent"
         }
+      ],
+      "nouns": [
+        {
+          "noun": "n.enfant",
+          "word": "enfants"
+        }
       ]
     },
     {
@@ -129,6 +135,12 @@
           "tense": "passe_compose",
           "person": "2p",
           "answer": "avez voulu"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.jour",
+          "word": "jour"
         }
       ]
     },
@@ -219,6 +231,12 @@
           "tense": "imparfait",
           "person": "3p",
           "answer": "voulaient"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.vacances",
+          "word": "vacances"
         }
       ]
     },

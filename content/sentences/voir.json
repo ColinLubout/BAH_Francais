@@ -304,6 +304,12 @@
           "person": "3p",
           "answer": "verront"
         }
+      ],
+      "nouns": [
+        {
+          "noun": "n.semaine",
+          "word": "semaine"
+        }
       ]
     }
   ]

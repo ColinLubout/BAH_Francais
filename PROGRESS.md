@@ -44,6 +44,12 @@ until this is merged.
 - **Everyday content, a draft to check** (`content/`, decision 57): *Les essentiels*,
   30 nouns with definitions, and *Les verbes essentiels*, 10 verbs with all 24 forms;
   269 sentences, some serving several verbs and nouns.
+  - The owner checks it on a review page (a private claude.ai artifact) that shows
+    each item with its English meaning and saves their marks.
+  - 2026-10-21: the owner checked the nouns and verbs. 38 were right; *eau* and
+    *nuit* got new definitions (and *nuit* a new example) from their notes. 18
+    sentences that used one of the 30 nouns without linking it now link it. The
+    sentences are being checked.
 - **Sample set** (`content/sample/`): 3 noun categories of 10 nouns, 5 verbs with
   all 24 forms, 151 sentences and 6 placeholder SVGs. Marked as samples; it never
   ships.
@@ -100,6 +106,9 @@ until this is merged.
   differently.
 - M5: form validation errors use Material's red, but the spec keeps red for wrong
   answers only.
+- M8 (or whenever nouns are added): a check that lists the sentences already using a
+  new noun without linking it, so the links can be added in one go and checked. It
+  needs a person's eye: in *Personne ne savait son nom*, *personne* is a pronoun.
 - M6: À propos / Crédits credits Wiktionary (CC BY-SA 4.0) and Kaikki.org /
   wiktextract (decision 60), with French wording from the owner.
 - M6: `drillSettings.title` ("Réglages – {drill}") doesn't match the spec's

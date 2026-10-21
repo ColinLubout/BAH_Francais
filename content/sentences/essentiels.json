@@ -244,7 +244,7 @@
     },
     {
       "id": "s.nuit.01",
-      "text": "Bonne nuit, dors bien !",
+      "text": "Il a plu toute la nuit.",
       "nouns": [
         {
           "noun": "n.nuit",
@@ -335,6 +335,10 @@
         {
           "noun": "n.semaine",
           "word": "semaine"
+        },
+        {
+          "noun": "n.jour",
+          "word": "jours"
         }
       ]
     },
@@ -345,6 +349,10 @@
         {
           "noun": "n.soir",
           "word": "soir"
+        },
+        {
+          "noun": "n.heure",
+          "word": "heures"
         }
       ]
     },

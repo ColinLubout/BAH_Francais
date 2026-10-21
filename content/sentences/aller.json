@@ -40,6 +40,12 @@
           "person": "3s",
           "answer": "va"
         }
+      ],
+      "nouns": [
+        {
+          "noun": "n.matin",
+          "word": "matin"
+        }
       ]
     },
     {
@@ -112,6 +118,12 @@
             "es allée"
           ]
         }
+      ],
+      "nouns": [
+        {
+          "noun": "n.annee",
+          "word": "année"
+        }
       ]
     },
     {
@@ -123,6 +135,12 @@
           "tense": "passe_compose",
           "person": "3s",
           "answer": "est allée"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.travail",
+          "word": "travail"
         }
       ]
     },
@@ -247,6 +265,12 @@
           "person": "3p",
           "answer": "allaient"
         }
+      ],
+      "nouns": [
+        {
+          "noun": "n.semaine",
+          "word": "semaine"
+        }
       ]
     },
     {
@@ -282,6 +306,12 @@
           "tense": "futur_simple",
           "person": "3s",
           "answer": "ira"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.vacances",
+          "word": "vacances"
         }
       ]
     },

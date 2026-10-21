@@ -160,7 +160,7 @@
       "gender": "f",
       "level": "debutant",
       "rank": 18,
-      "definition": "Moment où il fait noir et où l’on dort."
+      "definition": "Période où il fait noir, du soir au matin."
     },
     {
       "id": "n.tete",
@@ -193,7 +193,7 @@
       "elides": true,
       "level": "debutant",
       "rank": 22,
-      "definition": "Liquide transparent que l’on boit."
+      "definition": "Liquide transparent que l’on boit (H₂O)."
     },
     {
       "id": "n.argent",
