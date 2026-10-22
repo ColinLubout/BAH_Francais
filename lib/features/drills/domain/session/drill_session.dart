@@ -19,18 +19,20 @@ class VocabularyCard {
     required this.card,
     required this.item,
     required this.prompt,
-    required this.articleMandatory,
+    this.sentence,
   });
 
   final DrillCard card;
   final VocabularyItem item;
   final VocabularyPrompt prompt;
 
-  /// *Article obligatoire*: the answer must start with an article.
-  final bool articleMandatory;
+  /// The sentence the answer box sits in, the noun blanked; none when the
+  /// noun has no sentence with it as it is typed.
+  final ExampleSentence? sentence;
 
-  /// Every way of typing a right answer, for live feedback.
-  List<String> get typings => item.answer.typings(mandatory: articleMandatory);
+  /// Every way of typing a right answer, for live feedback. The article is
+  /// optional: the sentence around the box already has one (decision 70).
+  List<String> get typings => item.answer.typings(mandatory: false);
 }
 
 /// What the drill screen shows.
@@ -62,7 +64,8 @@ class CardFeedback extends DrillView {
   final VocabularyCard card;
   final Grade grade;
 
-  /// One of the noun's sentences, with the noun in bold.
+  /// The question's sentence, or else one of the noun's, with the noun in
+  /// bold.
   final ExampleSentence? example;
 
   /// *Faute de frappe* or *Trop facile* was used: no override is offered
@@ -135,7 +138,6 @@ class DrillSession {
     required this._scheduler,
     required this._random,
     required this._queue,
-    required this.articleMandatory,
     required this.startedAt,
   });
 
@@ -147,7 +149,6 @@ class DrillSession {
     required Clock clock,
     required DrillScheduler scheduler,
     required double Function() random,
-    bool articleMandatory = false,
   }) async {
     if (drill != DrillType.vocabulary) {
       throw UnsupportedError('Only the Vocabulaire drill exists so far');
@@ -166,7 +167,6 @@ class DrillSession {
       scheduler: scheduler,
       random: random,
       queue: queue,
-      articleMandatory: articleMandatory,
       startedAt: clock.nowUtc(),
     );
   }
@@ -203,9 +203,6 @@ class DrillSession {
   static bool closesAfter(Duration away) => away > resumeWindow;
 
   final DrillType drill;
-
-  /// *Article obligatoire*. Changes apply from the next card.
-  bool articleMandatory;
 
   /// When the session started, UTC.
   final DateTime startedAt;
@@ -252,7 +249,7 @@ class DrillSession {
             card: step.card,
             item: item,
             prompt: VocabularyPrompt.of(item, _random),
-            articleMandatory: articleMandatory,
+            sentence: _pick(item.sentencesToFill),
           ),
           startsFreePractice: step.startsFreePractice,
         );
@@ -270,7 +267,7 @@ class DrillSession {
     final grade = gradeVocabulary(
       typed: typed,
       noun: card.item.answer,
-      articleMandatory: card.articleMandatory,
+      articleMandatory: false,
       flaggedWhileTyping: capsGrade,
     );
     return _answer(card, grade, typed: typed);
@@ -280,7 +277,7 @@ class DrillSession {
   Future<DrillView> giveUp() {
     final card = _question.card;
     final grade = Grade.gaveUp(
-      card.item.answer.displayAnswer(mandatory: card.articleMandatory),
+      card.item.answer.displayAnswer(mandatory: false),
     );
     return _answer(card, grade);
   }
@@ -393,16 +390,15 @@ class DrillSession {
     _typed = typed;
     _answered++;
     if (grade.rating != Rating.again) _correct++;
-    final examples = card.item.examples;
     return _view = CardFeedback(
       card,
       grade,
-      example: examples.isEmpty
-          ? null
-          : examples[(_random() * examples.length).floor().clamp(
-              0,
-              examples.length - 1,
-            )],
+      example: card.sentence ?? _pick(card.item.examples),
     );
   }
+
+  /// One of [items], chosen with the session's randomness.
+  T? _pick<T>(List<T> items) => items.isEmpty
+      ? null
+      : items[(_random() * items.length).floor().clamp(0, items.length - 1)];
 }

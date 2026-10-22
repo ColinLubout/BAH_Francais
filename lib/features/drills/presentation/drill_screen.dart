@@ -121,11 +121,11 @@ class _DrillScreenState extends ConsumerState<DrillScreen> {
                 child: switch (view) {
                   null => const _Preparing(),
                   CardQuestion() => _Card(
-                    card: view.card,
                     notice: view.startsFreePractice,
                     child: VocabularyQuestion(
                       key: ObjectKey(view),
                       question: view,
+                      prompt: _Prompt(view.card.prompt),
                       liveFeedback: ref
                           .watch(drillDisplaySettingsProvider(widget.drill))
                           .liveFeedback,
@@ -134,12 +134,22 @@ class _DrillScreenState extends ConsumerState<DrillScreen> {
                     ),
                   ),
                   CardFeedback() => _Card(
-                    card: view.card,
-                    child: FeedbackPanel(
-                      key: ObjectKey(view),
-                      feedback: view,
-                      onOverride: controller.overrideGrade,
-                      onNext: controller.next,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Expanded(
+                          child: SingleChildScrollView(
+                            padding: const EdgeInsets.all(16),
+                            child: Center(child: _Prompt(view.card.prompt)),
+                          ),
+                        ),
+                        FeedbackPanel(
+                          key: ObjectKey(view),
+                          feedback: view,
+                          onOverride: controller.overrideGrade,
+                          onNext: controller.next,
+                        ),
+                      ],
                     ),
                   ),
                   GoalReached() => _Message(
@@ -205,11 +215,11 @@ class _TopBar extends StatelessWidget {
   }
 }
 
-/// The prompt at the top, the answer area or feedback below it.
+/// A card: the question or the feedback, under *Tout est à jour* when the
+/// session has just moved into free practice.
 class _Card extends StatelessWidget {
-  const _Card({required this.card, required this.child, this.notice = false});
+  const _Card({required this.child, this.notice = false});
 
-  final VocabularyCard card;
   final Widget child;
 
   /// *Tout est à jour !*: the session has just moved into free practice.
@@ -217,7 +227,6 @@ class _Card extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -226,28 +235,31 @@ class _Card extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
             child: Text(
               '${Strings.drillAllCaughtUp}\n${Strings.drillFreePractice}',
-              style: theme.textTheme.bodyMedium,
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
           ),
-        Expanded(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.all(16),
-            child: Center(
-              child: switch (card.prompt) {
-                ImagePrompt(:final imageId) => PromptImage(imageId),
-                DefinitionPrompt(:final definition) => Text(
-                  definition,
-                  textAlign: TextAlign.center,
-                  style: theme.textTheme.headlineSmall,
-                ),
-              },
-            ),
-          ),
-        ),
-        child,
+        Expanded(child: child),
       ],
     );
   }
+}
+
+/// One of the noun's images, or its definition, in body text so the
+/// sentence below stands out (decision 70).
+class _Prompt extends StatelessWidget {
+  const _Prompt(this.prompt);
+
+  final VocabularyPrompt prompt;
+
+  @override
+  Widget build(BuildContext context) => switch (prompt) {
+    ImagePrompt(:final imageId) => PromptImage(imageId),
+    DefinitionPrompt(:final definition) => Text(
+      definition,
+      textAlign: TextAlign.center,
+      style: Theme.of(context).textTheme.bodyLarge,
+    ),
+  };
 }
 
 /// A one-line message instead of a card, with the one thing to do next.

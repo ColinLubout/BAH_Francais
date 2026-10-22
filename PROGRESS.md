@@ -12,6 +12,11 @@
     word) or the definition, whichever the noun has, picked at random. The answer
     field opens with the keyboard, without autocorrect or suggestions; *Valider*
     (decision 68) or Enter submits.
+  - **The answer box in a sentence** (decision 70, after the owner tried the drill
+    on a phone): the box takes the noun's place in one of its sentences, in the
+    middle of the screen, with the words around it beside it or on the lines above
+    and below. The definition is in smaller text, and *Je ne sais pas* and
+    *Valider* sit side by side.
   - **Live feedback** as the user types: right letters green and underlined, accent
     slips orange with a dotted underline, and every letter red with a ✗ once one is
     wrong. A letter that went red or orange caps the grade at Hard even once
@@ -40,7 +45,7 @@
   after two answers, both on a real database file with the bundled pack. The same
   flows run on the computer in the normal test suite (`test/integration/`), and on
   an Android emulator in a new CI job. Both pass on a Pixel 8 emulator (Android 14).
-- **Tests:** 645, all passing. Domain coverage is 98.3%.
+- **Tests:** 661, all passing. Domain coverage is 98.3%.
 
 **The milestone's "done when" and its tests:**
 
@@ -71,9 +76,18 @@ None.
   strings, unless the owner wants a confirmation after all.
 - M6: *Aucune carte disponible* offers *Ouvrir les réglages*, which opens Réglages
   until the drill settings screens exist.
-- M6: the drill already reads Article obligatoire and the live-feedback setting
-  (`drillDisplaySettingsProvider`); until the settings exist, they are at their
-  defaults (off and on).
+- M6: the drill already reads the live-feedback setting
+  (`drillDisplaySettingsProvider`); until the settings exist, it is on.
+- After decision 70, Article obligatoire is unused: the strings
+  `drillSettings.articleMandatory`, `drillSettings.articleMandatoryHelp` and
+  `drill.answerHintWithArticle`, and the mandatory-article rule in the grading
+  (`gradeVocabulary`'s `articleMandatory`, from milestone 1). They can go once the
+  owner has folded the decision into the spec.
+- `drill.cardsAnswered` ("{n} cartes") has no singular, so the top bar says
+  *0 cartes* and *1 cartes*. It needs a `drill.cardsAnswered_one` from the owner
+  (decision 10's plural keys).
+- M4: the Conjugaison drill puts its answer box in its sentence the same way
+  (decision 70), with `BlankSentence`.
 - M7 and M8: the first-launch import runs on the main isolate. That is quick for
   the 127 KB pack, but the full content may hold the launch for longer; it could
   move to a background isolate.
@@ -748,6 +762,34 @@ document.
     jour*. The rest of Accueil, the other drills' tiles and the mixed session, stays
     in milestone 4.
     - *Changes* Build plan → milestones 3 and 4.
+70. **The answer box sits in a sentence**, after the owner tried the drill on a
+    phone.
+    - **The sentence:** one of the noun's sentences, chosen at random on each
+      review, with the box in place of the noun. Only sentences with the noun as
+      it is typed count (*chat*, not *chats*; a synonym counts too); the
+      validator requires every noun to have one. The feedback panel shows the
+      same sentence, the noun in bold.
+    - **The layout:** the box in the middle of the width. The words before it end
+      at its left edge and those after it start at its right edge, as many as fit;
+      the rest wrap onto lines above and below, centred. The box's line is in the
+      middle of the space under the prompt when there is room, lower when the
+      prompt and the lines above need it, and the card scrolls when it is all too
+      tall. *? ! : ;* stay on the line of the word before them.
+    - **The box** is as wide for every word, wide enough for its hint (*Votre
+      réponse*) and the ✗, so it never hints at the word's length; it widens as
+      the typing needs. The ✗ shows inside the box, at its end.
+    - **The article:** the box takes the noun alone, since the sentence has its
+      article. An article typed anyway is graded as before (right, or Hard if
+      wrong). **Article obligatoire leaves the Vocabulaire settings**: the
+      sentence shows the article, and the Genre drill tests the gender.
+    - **The prompt:** the image, or the definition in body text (smaller than the
+      sentence), above the sentence.
+    - ***Je ne sais pas* and *Valider* are side by side**, *Valider* on the right.
+    - The Conjugaison drill (milestone 4) uses the same layout for its blank.
+    - *Changes* Activities → Vocabulary drill (the prompt, and Article
+      obligatoire), Drill settings (Article obligatoire), Typing behaviour (*Je ne
+      sais pas* "under the field", and the ✗ "beside the field"), and Content
+      files (the validator rule).
 
 ### Notes
 

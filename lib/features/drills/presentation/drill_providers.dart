@@ -32,13 +32,7 @@ double Function() drillRandom(Ref ref) => Random().nextDouble;
 /// screens (milestone 6).
 @immutable
 class DrillDisplaySettings {
-  const DrillDisplaySettings({
-    this.articleMandatory = false,
-    this.liveFeedback = true,
-  });
-
-  /// *Article obligatoire* (Vocabulaire), off by default.
-  final bool articleMandatory;
+  const DrillDisplaySettings({this.liveFeedback = true});
 
   /// *Correction en direct*, on by default.
   final bool liveFeedback;

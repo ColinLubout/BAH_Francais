@@ -26,9 +26,6 @@ class DrillController extends _$DrillController {
       clock: ref.read(clockProvider),
       scheduler: ref.read(drillSchedulerProvider),
       random: ref.read(drillRandomProvider),
-      articleMandatory: ref
-          .read(drillDisplaySettingsProvider(drill))
-          .articleMandatory,
     );
     return await _session.next();
   }

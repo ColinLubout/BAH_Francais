@@ -15,8 +15,10 @@
 /// - with a `grammar.json`, every sentence lists the grammar concepts it uses
 ///   and its level, the level of its hardest concept, no higher than the
 ///   content's `max_level`;
-/// - every noun has a sentence, and every verb a sentence per person in each
-///   tense taught; no sentence is a prompt for a tense that isn't;
+/// - every noun has a sentence, and one with the noun as it is typed (not in
+///   the plural, unless plural-only), or a synonym, for the Vocabulaire drill
+///   to blank; every verb has a sentence per person in each tense taught; no
+///   sentence is a prompt for a tense that isn't;
 /// - a sentence is written in full, with no `___`;
 /// - the verbs and nouns a sentence uses exist, and their words are in it
 ///   exactly once, as whole words;
@@ -459,17 +461,33 @@ class _Validation {
   }
 
   void _checkNouns() {
-    final inSentences = {
-      for (final s in sentences)
-        for (final n in s.value.nouns) n.nounId,
-    };
+    final inSentences = <String, Set<String>>{};
+    for (final s in sentences) {
+      for (final n in s.value.nouns) {
+        (inSentences[n.nounId] ??= {}).add(n.word.toLowerCase());
+      }
+    }
     for (final n in nouns) {
       final noun = n.value;
       if (noun.definition == null && _imageEntries(n.json).isEmpty) {
         _error(n.file, noun.id, 'has neither an image nor a definition');
       }
-      if (!sentencesUnread && !inSentences.contains(noun.id)) {
+      final used = inSentences[noun.id];
+      if (!sentencesUnread && used == null) {
         _error(n.file, noun.id, 'no sentence uses it as an example');
+      } else if (used != null &&
+          !used.any(
+            [
+              noun.word,
+              ...noun.synonyms.map((s) => s.word),
+            ].map((w) => w.toLowerCase()).contains,
+          )) {
+        _error(
+          n.file,
+          noun.id,
+          'no sentence has it as it is typed, for the Vocabulaire drill '
+          'to blank',
+        );
       }
       for (final word in [noun.word, ...noun.synonyms.map((s) => s.word)]) {
         if (splitArticle(normalise(word)).article != null) {

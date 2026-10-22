@@ -27,6 +27,18 @@ class VocabularyItem {
 
   /// Sentences using the noun; the feedback panel shows one.
   final List<ExampleSentence> examples;
+
+  /// The [examples] the answer box can sit in: those with the noun as it is
+  /// typed (*chat*, not *chats*), or one of its synonyms.
+  List<ExampleSentence> get sentencesToFill {
+    final words = {for (final w in answer.accepted) w.word.toLowerCase()};
+    return [
+      for (final example in examples)
+        if (example.blanked case final blanked?
+            when words.contains(blanked.toLowerCase()))
+          example,
+    ];
+  }
 }
 
 /// A sentence that uses a noun, with the noun's words to show in bold.
@@ -47,6 +59,19 @@ class ExampleSentence {
 
   /// The noun in [text], shown in bold.
   final Span? highlight;
+
+  /// The noun as [text] has it, which a question blanks.
+  String? get blanked => switch (highlight) {
+    final h? => text.substring(h.start, h.end),
+    null => null,
+  };
+
+  /// [text] up to the noun, and from after it: the words around the answer
+  /// box. All of [text] before, when it has no noun to blank.
+  (String, String) get aroundBlank => switch (highlight) {
+    final h? => (text.substring(0, h.start), text.substring(h.end)),
+    null => (text, ''),
+  };
 
   @override
   bool operator ==(Object other) =>

@@ -15,6 +15,7 @@ import 'package:bah_francais/features/drills/domain/session/drill_store.dart';
 import 'package:bah_francais/features/drills/domain/session/vocabulary_item.dart';
 import 'package:bah_francais/features/drills/presentation/drill_screen.dart';
 import 'package:bah_francais/features/drills/presentation/session_summary_screen.dart';
+import 'package:bah_francais/features/drills/presentation/widgets/blank_sentence.dart';
 import 'package:bah_francais/features/drills/presentation/widgets/prompt_image.dart';
 import 'package:bah_francais/features/home/presentation/home_screen.dart';
 import 'package:bah_francais/features/settings/presentation/settings_screen.dart';
@@ -118,6 +119,12 @@ void main() {
       expect(find.byType(DrillScreen), findsOneWidget);
       expect(find.text('def fourchette'), findsOneWidget);
       expect(find.text(Strings.drillCardsAnswered(n: 0)), findsOneWidget);
+      // In body text, smaller than the sentence (decision 70).
+      final definition = find.text('def fourchette');
+      expect(
+        tester.widget<Text>(definition).style,
+        Theme.of(tester.element(definition)).textTheme.bodyLarge,
+      );
 
       final textField = tester.widget<TextField>(field);
       expect(textField.autofocus, isTrue);
@@ -158,6 +165,54 @@ void main() {
       );
       expect(find.bySemanticsLabel(RegExp('école')), findsNothing);
       semantics.dispose();
+    });
+
+    testWidgets('the answer box takes the noun’s place in a sentence', (
+      tester,
+    ) async {
+      await openDrill(tester, store());
+      // "zz fourchette zz": the words around the noun, not the noun.
+      expect(find.text('zz'), findsNWidgets(2));
+      expect(find.textContaining('fourchette zz'), findsNothing);
+      final box = tester.getRect(field);
+      final before = tester.getRect(find.text('zz').first);
+      final after = tester.getRect(find.text('zz').last);
+      expect(before.bottom <= box.top || before.right <= box.left, isTrue);
+      expect(after.top >= box.bottom || after.left >= box.right, isTrue);
+      // In the middle of the space between the top bar and the buttons.
+      final space = tester.getRect(find.byType(BlankSentence));
+      expect(box.center.dx, space.center.dx);
+      expect(box.center.dy, moreOrLessEquals(space.center.dy, epsilon: 1));
+    });
+
+    testWidgets('the box is as wide for every word, wider for long typing', (
+      tester,
+    ) async {
+      await openDrill(tester, store(items: [fourchette, ecole]));
+      final width = tester.getSize(field).width;
+      await type(tester, 'qq');
+      expect(wrongMark, findsOneWidget);
+      expect(tester.getSize(field).width, width, reason: 'room for the ✗');
+      await tester.tap(find.text(Strings.drillIDontKnow));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text(Strings.drillNext));
+      await tester.pumpAndSettle();
+      expect(find.text(Strings.drillCardsAnswered(n: 1)), findsOneWidget);
+      expect(tester.getSize(field).width, width);
+      await type(tester, 'fourchette fourchette');
+      expect(tester.getSize(field).width, greaterThan(width));
+    });
+
+    testWidgets('Je ne sais pas and Valider are side by side', (tester) async {
+      await openDrill(tester, store());
+      final giveUp = tester.getRect(
+        find.widgetWithText(TextButton, Strings.drillIDontKnow),
+      );
+      final valider = tester.getRect(
+        find.widgetWithText(FilledButton, Strings.drillSubmit),
+      );
+      expect(giveUp.center.dy, valider.center.dy);
+      expect(giveUp.right, lessThan(valider.left));
     });
 
     testWidgets('Valider waits for an answer; Enter submits it', (

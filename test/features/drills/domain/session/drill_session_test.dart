@@ -2,6 +2,7 @@
 // gender and elision; the sentences are made-up tokens around them.
 
 import 'package:bah_francais/features/content/domain/content_types.dart';
+import 'package:bah_francais/features/content/domain/synonym.dart';
 import 'package:bah_francais/features/drills/domain/drill_type.dart';
 import 'package:bah_francais/features/drills/domain/grading/answer_forms.dart';
 import 'package:bah_francais/features/drills/domain/grading/grade.dart';
@@ -38,7 +39,6 @@ const ecole = VocabularyItem(
 Future<(DrillSession, FakeClock)> open(
   FakeStore store, {
   double random = 0,
-  bool articleMandatory = false,
 }) async {
   final clock = FakeClock(noon, offset: paris);
   final session = await DrillSession.open(
@@ -47,7 +47,6 @@ Future<(DrillSession, FakeClock)> open(
     clock: clock,
     scheduler: DrillScheduler(random: () => 0.5),
     random: () => random,
-    articleMandatory: articleMandatory,
   );
   return (session, clock);
 }
@@ -96,13 +95,61 @@ void main() {
       );
     });
 
-    test('with Article obligatoire, the answer needs one', () async {
-      final (session, _) = await open(oneNoun(), articleMandatory: true);
-      final card = ((await session.next()) as CardQuestion).card;
-      expect(card.typings, isNot(contains('fourchette')));
-      final view = await session.submit('fourchette') as CardFeedback;
-      expect(view.grade.rating, Rating.hard);
-      expect(view.grade.errorType, ErrorType.article);
+    group('the sentence the answer box sits in (decision 70)', () {
+      final plural = ExampleSentence.of('zz fourchettes zz', 'fourchettes');
+      final first = ExampleSentence.of('aa fourchette', 'fourchette');
+      final capital = ExampleSentence.of('Fourchette bb', 'Fourchette');
+      final synonym = ExampleSentence.of('cc fourch dd', 'fourch');
+      final item = VocabularyItem(
+        nounId: 'n.fourchette',
+        answer: const VocabularyAnswer(
+          word: 'fourchette',
+          gender: Gender.feminine,
+          synonyms: [Synonym('fourch')],
+        ),
+        definition: 'def fourchette',
+        examples: [plural, first, capital, synonym],
+      );
+
+      test('has the noun as it is typed, or a synonym, never a plural', () {
+        expect(item.sentencesToFill, [first, capital, synonym]);
+      });
+
+      test('is chosen at random, and shown again filled in', () async {
+        final (session, _) = await open(oneNoun(item: item));
+        final card = ((await session.next()) as CardQuestion).card;
+        expect(card.sentence, first);
+        final view = await session.submit('fourchette') as CardFeedback;
+        expect(view.example, first);
+
+        final (last, _) = await open(oneNoun(item: item), random: 0.99);
+        expect(((await last.next()) as CardQuestion).card.sentence, synonym);
+      });
+
+      test('has the article, so the answer needs none', () async {
+        final (session, _) = await open(oneNoun(item: item));
+        final card = ((await session.next()) as CardQuestion).card;
+        expect(card.typings, containsAll(['fourchette', 'la fourchette']));
+        final view = await session.giveUp() as CardFeedback;
+        expect(view.grade.answer, 'fourchette');
+      });
+
+      test('none as it is typed: the box alone, and any example', () async {
+        final (session, _) = await open(
+          oneNoun(
+            item: VocabularyItem(
+              nounId: 'n.fourchette',
+              answer: fourchette.answer,
+              definition: 'def fourchette',
+              examples: [plural],
+            ),
+          ),
+        );
+        final card = ((await session.next()) as CardQuestion).card;
+        expect(card.sentence, isNull);
+        final view = await session.submit('fourchette') as CardFeedback;
+        expect(view.example, plural);
+      });
     });
 
     test('no card at all', () async {
@@ -392,6 +439,15 @@ void main() {
         const ExampleSentence('zz fourchette zz', highlight: Span(3, 13)),
       );
       expect(ExampleSentence.of('zz', 'fourchette').highlight, isNull);
+    });
+
+    test('a sentence splits around its noun, for the answer box', () {
+      final example = ExampleSentence.of('Passe la fourchette !', 'fourchette');
+      expect(example.blanked, 'fourchette');
+      expect(example.aroundBlank, ('Passe la ', ' !'));
+      final none = ExampleSentence.of('zz', 'fourchette');
+      expect(none.blanked, isNull);
+      expect(none.aroundBlank, ('zz', ''));
     });
 
     test('a noun with neither image nor definition cannot be asked', () {
