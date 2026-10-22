@@ -27,6 +27,13 @@ Validate the content and build its pack (from the repo root):
 dart run tool/content_build.dart content
 ```
 
+The app bundles this pack and imports it on first launch. After changing the
+content, rebuild the bundled copy, or a test fails:
+
+```bash
+dart run tool/content_build.dart content --version 1 --out assets/content/content-pack.sqlite
+```
+
 Tag new sentences with their grammar concepts and level first. Tags already
 in a file are kept, and where the detection disagrees with them it says so:
 

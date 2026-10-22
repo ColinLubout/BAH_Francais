@@ -65,8 +65,9 @@ dart run tool/gen_strings.dart                             # strings/*.json -> l
 flutter analyze
 dart format --set-exit-if-changed .
 flutter test --coverage
-flutter test integration_test
+flutter test integration_test                               # needs a device or emulator
 dart run tool/content_build.dart content/sample             # validate + build a content pack
+dart run tool/content_build.dart content --version 1 --out assets/content/content-pack.sqlite  # rebuild the bundled pack
 dart run tool/grammar_tag.dart content                      # tag new sentences with their grammar concepts and level
 dart run drift_dev make-migrations                          # after a schema change: dump it + migration tests
 dart run tool/dictionary_check.dart content                 # check genders, forms and sentence words against Wiktionary (needs data/kaikki/)
