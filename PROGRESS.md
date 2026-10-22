@@ -39,7 +39,7 @@
 - **Integration tests** (`integration_test/`): a full session, and a force-close
   after two answers, both on a real database file with the bundled pack. The same
   flows run on the computer in the normal test suite (`test/integration/`), and on
-  an Android emulator in a new CI job.
+  an Android emulator in a new CI job. Both pass on a Pixel 8 emulator (Android 14).
 - **Tests:** 645, all passing. Domain coverage is 98.3%.
 
 **The milestone's "done when" and its tests:**
@@ -760,5 +760,6 @@ document.
   running the content tool first. Its version stays 1 until milestone 7 brings
   content updates.
 - `xml` is held at 7.0.x, since `flutter_svg`, which draws the noun images, needs it.
-- `flutter test integration_test` needs a phone or an emulator; with none
-  connected, the same flows run on the computer with `flutter test`.
+- `flutter test integration_test` needs a phone or an emulator: start one with
+  `flutter emulators --launch <id>` and pass `-d <device>`. With none, the same
+  flows run on the computer with `flutter test`.
