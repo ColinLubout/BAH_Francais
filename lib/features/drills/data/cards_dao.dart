@@ -54,6 +54,15 @@ class CardsDao {
   Stream<List<DrillCard>> watchCards(DrillType drill) =>
       _ofDrill(drill).watch();
 
+  /// Every card of the item [itemId], in every drill: a noun's Genre and
+  /// Vocabulaire cards, a verb's card per tense.
+  Future<List<DrillCard>> cardsOfItem(String itemId) =>
+      (_db.select(_db.cards)
+            ..where((c) => c.itemId.equals(itemId))
+            ..orderBy([(c) => OrderingTerm(expression: c.id)]))
+          .map(_card)
+          .get();
+
   /// Every card of [drill], with what the queue needs to know about its
   /// item: categories, level, rank, Perso, retired and verb group.
   Future<List<QueueCard>> queueCards(DrillType drill) async {

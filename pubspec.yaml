@@ -42,6 +42,9 @@ flutter:
     # Registered with the licence page at start-up (see lib/app/licences.dart).
     - assets/fonts/OFL.txt
     - assets/licences/py-fsrs.txt
+    # The content pack every build ships with, imported on the first launch.
+    # Built from content/ (see content/README.md); a test checks it matches.
+    - assets/content/content-pack.sqlite
 
   # Bundled, never fetched at runtime, so the app stays offline.
   # Only these three weights exist: the theme never asks for any other.
