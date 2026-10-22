@@ -88,9 +88,6 @@ None.
   `drill.answerHintWithArticle`, and the mandatory-article rule in the grading
   (`gradeVocabulary`'s `articleMandatory`, from milestone 1). They can go once the
   owner has folded the decision into the spec.
-- `drill.cardsAnswered` ("{n} cartes") has no singular, so the top bar says
-  *0 cartes* and *1 cartes*. It needs a `drill.cardsAnswered_one` from the owner
-  (decision 10's plural keys).
 - M4: the Conjugaison drill puts its answer box in its sentence the same way
   (decision 70), with `BlankSentence`, and follows *Valider* the same way
   (decision 71). The Genre drill already moves on after a Correct answer, after a
@@ -835,6 +832,10 @@ document.
     - *Replaces* decision 26's *Trop facile* (after a Correct answer, in the
       feedback panel) and decision 71's snackbar; *changes* Activities → Shared
       drill behaviour (the override buttons).
+73. **Card counts have a singular**, the owner's wording: *{n} carte* for 0 and
+    1, *{n} cartes* from 2 (`drill.cardsAnswered` in the drill's top bar, and
+    `reviewList.cardCount` for milestone 6), as decision 10's plural keys.
+    - *Adds to* the strings.
 
 ### Notes
 

@@ -49,7 +49,8 @@
   },
 
   "drill": {
-    "cardsAnswered": "{n} cartes",
+    "cardsAnswered_one": "{n} carte",
+    "cardsAnswered_other": "{n} cartes",
     "genderMasculine": "masculin",
     "genderFeminine": "féminin",
     "genderBoth": "les deux",
@@ -93,7 +94,8 @@
     "atRisk": "À risque",
     "hardWords": "Mots difficiles",
     "emptyGroup": "Rien ici pour l’instant",
-    "cardCount": "{n} cartes"
+    "cardCount_one": "{n} carte",
+    "cardCount_other": "{n} cartes"
   },
 
   "words": {

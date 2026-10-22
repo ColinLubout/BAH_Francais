@@ -103,8 +103,9 @@ abstract final class Strings {
   /// Préparation du contenu…
   static const homePreparingContent = 'Préparation du contenu…';
 
-  /// {n} cartes
-  static String drillCardsAnswered({required int n}) => '$n cartes';
+  /// {n} carte · {n} cartes
+  static String drillCardsAnswered({required int n}) =>
+      n.abs() < 2 ? '$n carte' : '$n cartes';
 
   /// masculin
   static const drillGenderMasculine = 'masculin';
@@ -219,8 +220,9 @@ abstract final class Strings {
   /// Rien ici pour l’instant
   static const reviewListEmptyGroup = 'Rien ici pour l’instant';
 
-  /// {n} cartes
-  static String reviewListCardCount({required int n}) => '$n cartes';
+  /// {n} carte · {n} cartes
+  static String reviewListCardCount({required int n}) =>
+      n.abs() < 2 ? '$n carte' : '$n cartes';
 
   /// Mots
   static const wordsTitle = 'Mots';
