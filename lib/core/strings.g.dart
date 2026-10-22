@@ -88,9 +88,6 @@ abstract final class Strings {
   /// {n} à réviser
   static String homeDueCount({required int n}) => '$n à réviser';
 
-  /// Tout est à jour
-  static const homeDueNone = 'Tout est à jour';
-
   /// Liste de révision
   static const homeReviewList = 'Liste de révision';
 
@@ -118,9 +115,6 @@ abstract final class Strings {
 
   /// Votre réponse
   static const drillAnswerHint = 'Votre réponse';
-
-  /// Votre réponse, avec l’article
-  static const drillAnswerHintWithArticle = 'Votre réponse, avec l’article';
 
   /// Infinitif
   static const drillInfinitive = 'Infinitif';
@@ -180,9 +174,6 @@ abstract final class Strings {
 
   /// Marqué comme connu
   static const drillMarkedKnown = 'Marqué comme connu';
-
-  /// Terminer la session ?
-  static const drillLeaveSession = 'Terminer la session ?';
 
   /// Résumé de session
   static const sessionSummaryTitle = 'Résumé de session';
@@ -603,13 +594,6 @@ abstract final class Strings {
 
   /// Afficher l’image
   static const drillSettingsShowImage = 'Afficher l’image';
-
-  /// Article obligatoire
-  static const drillSettingsArticleMandatory = 'Article obligatoire';
-
-  /// Il faudra écrire l’article avec le mot.
-  static const drillSettingsArticleMandatoryHelp =
-      'Il faudra écrire l’article avec le mot.';
 
   /// Correction en direct
   static const drillSettingsLiveFeedback = 'Correction en direct';

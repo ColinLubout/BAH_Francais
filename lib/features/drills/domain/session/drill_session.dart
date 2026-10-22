@@ -32,7 +32,7 @@ class VocabularyCard {
 
   /// Every way of typing a right answer, for live feedback. The article is
   /// optional: the sentence around the box already has one (decision 70).
-  List<String> get typings => item.answer.typings(mandatory: false);
+  List<String> get typings => item.answer.typings();
 
   /// The word is seen for the first time: *Trop facile* is offered, with no
   /// answer needed (decision 72).
@@ -271,7 +271,6 @@ class DrillSession {
     final grade = gradeVocabulary(
       typed: typed,
       noun: card.item.answer,
-      articleMandatory: false,
       flaggedWhileTyping: capsGrade,
     );
     await _answer(card, grade, typed: typed);
@@ -293,9 +292,7 @@ class DrillSession {
   /// *Je ne sais pas*: Again, and the answer is shown.
   Future<DrillView> giveUp() async {
     final card = _question.card;
-    final grade = Grade.gaveUp(
-      card.item.answer.displayAnswer(mandatory: false),
-    );
+    final grade = Grade.gaveUp(card.item.answer.word);
     await _answer(card, grade);
     return _view = CardFeedback(card, grade);
   }

@@ -51,20 +51,25 @@ class VocabularyAnswer {
   ];
 
   /// Every way of typing a right answer, for live feedback: each accepted
-  /// word with each of its articles, and alone when the article is
-  /// optional.
-  List<String> typings({required bool mandatory}) => [
+  /// word alone, and with each of its articles.
+  List<String> typings() => [
     for (final w in accepted) ...[
-      if (!mandatory) w.word,
-      for (final article in w.validArticles(mandatory: mandatory))
-        joinArticle(article, w.word),
+      w.word,
+      for (final article in w.validArticles()) joinArticle(article, w.word),
     ],
   ];
 
-  /// [word] as shown when no answer was typed (*Je ne sais pas*): with its
-  /// indefinite article when the article is mandatory.
-  String displayAnswer({required bool mandatory}) =>
-      accepted.first.display(mandatory: mandatory);
+  /// [word] with *un* or *une*, as the Genre drill's correction shows it:
+  /// never *l’*, which hides the gender; *un/une* for a "les deux" noun, and
+  /// *des* for a plural-only one.
+  String withIndefiniteArticle() {
+    if (pluralOnly) return joinArticle('des', word);
+    return switch (gender) {
+      Gender.masculine => joinArticle('un', word),
+      Gender.feminine => joinArticle('une', word),
+      Gender.both => joinArticle('un/une', word),
+    };
+  }
 }
 
 /// A noun or synonym, with the articles that go with its gender and elision.
@@ -86,9 +91,8 @@ class AcceptedWord {
   ///
   /// Singular nouns take *le/la* or *un/une* by gender (either gender for
   /// "les deux" nouns), plural-only nouns *les* or *des*. A noun that takes
-  /// *l’* never takes *le/la*; *l’* itself is accepted only when the article
-  /// is optional, because it doesn't show the gender.
-  Set<String> validArticles({required bool mandatory}) {
+  /// *l’* never takes *le/la*.
+  Set<String> validArticles() {
     if (pluralOnly) return {'les', 'des'};
     final masculine = gender != Gender.feminine;
     final feminine = gender != Gender.masculine;
@@ -97,26 +101,20 @@ class AcceptedWord {
       if (feminine) 'une',
       if (!elides && masculine) 'le',
       if (!elides && feminine) 'la',
-      if (elides && !mandatory) _elided,
+      if (elides) _elided,
     };
   }
 
-  /// The article to show with the answer, preferring definite when the user
-  /// typed a definite article.
-  String displayArticle({required bool mandatory, String? typed}) {
-    final valid = validArticles(mandatory: mandatory);
-    if (typed != null && valid.contains(typed)) return typed;
-    final wantsDefinite = typed != null && _definite.contains(typed);
+  /// The article to show with the answer, for one the user typed: theirs if
+  /// it is right, else a right one of the same kind (definite or not).
+  String displayArticle(String typed) {
+    if (validArticles().contains(typed)) return typed;
+    final wantsDefinite = _definite.contains(typed);
     if (pluralOnly) return wantsDefinite ? 'les' : 'des';
     final feminine = gender == Gender.feminine;
     if (wantsDefinite && !elides) return feminine ? 'la' : 'le';
     return feminine ? 'une' : 'un';
   }
-
-  /// [word], with its indefinite article when the article is mandatory.
-  String display({required bool mandatory}) => mandatory
-      ? joinArticle(displayArticle(mandatory: mandatory), word)
-      : word;
 }
 
 /// Splits a normalised answer into its leading article, if any, and the

@@ -5,20 +5,11 @@ import 'package:bah_francais/features/drills/domain/grading/normalise.dart';
 import 'package:bah_francais/features/drills/domain/rating.dart';
 
 /// Grades a Gender answer: right is Good, wrong is Again. A "les deux" noun
-/// needs *les deux*. The drill moves on by itself after a right answer, so it
-/// offers no *Trop facile*.
+/// needs *les deux*.
 Grade gradeGender({required Gender correct, required Gender chosen}) =>
     chosen == correct
-    ? const Grade(
-        rating: Rating.good,
-        errorType: ErrorType.none,
-        tooEasyOffered: false,
-      )
-    : const Grade(
-        rating: Rating.again,
-        errorType: ErrorType.wrong,
-        tooEasyOffered: false,
-      );
+    ? const Grade(rating: Rating.good, errorType: ErrorType.none)
+    : const Grade(rating: Rating.again, errorType: ErrorType.wrong);
 
 /// Grades a Conjugation answer against the sentence's [answer] and its
 /// [alternatives] (*paie* / *paye*).
@@ -38,14 +29,13 @@ Grade gradeConjugation({
 
 /// Grades a Vocabulary answer.
 ///
-/// Any accepted word, exact and with an accepted article (or none, when the
-/// article is optional), is Good. A right word with only accent slips, or
-/// with a wrong or missing article, or both, is Hard. Anything else is
-/// Again. [flaggedWhileTyping] caps the grade at Hard.
+/// Any accepted word, exact and with a right article or none, is Good. A
+/// right word with only accent slips, or with a wrong article, or both, is
+/// Hard. Anything else is Again. [flaggedWhileTyping] caps the grade at
+/// Hard.
 Grade gradeVocabulary({
   required String typed,
   required VocabularyAnswer noun,
-  required bool articleMandatory,
   bool flaggedWhileTyping = false,
 }) {
   final (:article, :rest) = splitArticle(normalise(typed));
@@ -55,26 +45,20 @@ Grade gradeVocabulary({
     final grade = Grade(
       rating: Rating.again,
       errorType: ErrorType.wrong,
-      answer: noun.displayAnswer(mandatory: articleMandatory),
+      answer: noun.word,
     );
     return flaggedWhileTyping ? grade.capAtHard() : grade;
   }
 
   // The articles go by the word typed: a synonym has its own.
   final matched = accepted[match.index];
-  final valid = matched.validArticles(mandatory: articleMandatory);
-  final articleOk = article == null
-      ? !articleMandatory
-      : valid.contains(article);
-  final showArticle = article != null || articleMandatory;
+  final articleOk =
+      article == null || matched.validArticles().contains(article);
 
   final errors = <Span>[];
   String shown;
-  if (showArticle) {
-    final shownArticle = matched.displayArticle(
-      mandatory: articleMandatory,
-      typed: article,
-    );
+  if (article != null) {
+    final shownArticle = matched.displayArticle(article);
     shown = joinArticle(shownArticle, matched.word);
     final wordStart = shown.length - matched.word.length;
     // Highlight the article itself, not the space after it.

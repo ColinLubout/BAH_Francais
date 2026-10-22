@@ -291,7 +291,7 @@ None.
 
 ## Decisions
 
-These change or add to `docs/SPEC.md`, which is the spec (decision 74). Decisions 1–76
+These change or add to `docs/SPEC.md`, which is the spec (decision 74). Decisions 1–80
 are folded into it as of 2026-10-22; from now on, each decision is folded in by the
 pull request that records it here.
 
@@ -856,6 +856,35 @@ pull request that records it here.
     jour*, even when new words are left to learn.
     - *Replaces* decision 69's *Tout est à jour* and Screens → Accueil's "the due
       line reads *Tout est à jour*".
+
+### 2026-10-22 (milestone 4, agreed with the owner)
+
+77. **The Genre correction goes under the image**, so nothing above it moves:
+    the tiles (the chosen one still filled), the word and the image stay put, and
+    under them come the result with its icon, the word with *un/une*, an example
+    sentence with the noun in bold, and the *Astuce* line if there is one.
+    *Faute de frappe* and *Suivant* sit at the bottom.
+    - *Adds to* Activities → Gender drill.
+78. **Genre's *Trop facile*** (decision 75) is a text button at the bottom of the
+    card, in the thumb zone, where *Suivant* appears after a wrong answer: Genre
+    has no answer buttons, since tapping a tile answers.
+    - *Adds to* Activities → Gender drill.
+79. **Accueil's ⋮ menus and *Liste de révision* link come in milestone 6**, with
+    the screens they open, so no link leads nowhere. So does the tile's *Aucune
+    catégorie choisie* state, which opens the drill's settings and can only arise
+    once the weights can be set there.
+    - *Changes* Build plan → milestones 4 and 6.
+80. **The mixed session's order: most urgent first, the drills taking turns.**
+    Each drill offers its next card, by its own Session flow. Learning steps come
+    first; then due reviews and new cards, each drill keeping its own rhythm of
+    one new card per four reviews; then free practice. Among equally urgent cards,
+    the drill shown least recently goes first, and a card for the word just shown
+    waits a turn, unless nothing else is left. A drill that has reached its daily
+    goal, or has nothing, drops out; when every drill has, the session shows *Ça
+    suffit pour aujourd’hui.* if any reached its goal, otherwise *Aucune carte
+    disponible*. *Tout est à jour !* shows once, when the session first moves into
+    free practice.
+    - *Adds to* Activities → Starting a session.
 
 ### Notes
 

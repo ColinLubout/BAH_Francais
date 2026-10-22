@@ -56,9 +56,21 @@ void main() {
     expect(find.text(Strings.homeDueCount(n: 2)), findsOneWidget);
   });
 
-  testWidgets('nothing due: Tout est à jour', (tester) async {
+  testWidgets('nothing due, new words or not: no line (decision 76)', (
+    tester,
+  ) async {
     await pumpHome(tester, FakeStore(cards: [newCard(itemId: 'n.a', id: 1)]));
-    expect(find.text(Strings.homeDueNone), findsOneWidget);
+    expect(find.text(Strings.homeDrillVocabulary), findsOneWidget);
+    expect(find.textContaining(Strings.homeDueCount(n: 0)), findsNothing);
+    final tile = find.ancestor(
+      of: find.text(Strings.homeDrillVocabulary),
+      matching: find.byType(Card),
+    );
+    expect(
+      find.descendant(of: tile, matching: find.byType(Text)),
+      findsOneWidget,
+      reason: 'the drill name alone',
+    );
   });
 
   testWidgets('while the content is prepared, the tile waits', (tester) async {

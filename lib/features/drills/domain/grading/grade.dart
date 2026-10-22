@@ -52,15 +52,13 @@ class Grade {
     required this.errorType,
     this.answer,
     this.errors = const [],
-    this.tooEasyOffered = true,
   });
 
   /// *Je ne sais pas*: Again, and the answer is shown.
   const Grade.gaveUp(String this.answer)
     : rating = Rating.again,
       errorType = ErrorType.gaveUp,
-      errors = const [],
-      tooEasyOffered = false;
+      errors = const [];
 
   /// *Trop facile* on a word seen for the first time, with no answer typed:
   /// Easy (decision 72).
@@ -68,8 +66,7 @@ class Grade {
     : rating = Rating.easy,
       errorType = ErrorType.none,
       answer = null,
-      errors = const [],
-      tooEasyOffered = false;
+      errors = const [];
 
   final Rating rating;
   final ErrorType errorType;
@@ -82,27 +79,14 @@ class Grade {
   /// highlight.
   final List<Span> errors;
 
-  /// Whether this drill offers *Trop facile* at all: the Gender drill moves
-  /// on after a second, so it does not.
-  final bool tooEasyOffered;
-
   /// *Faute de frappe* follows an Incorrect answer, but not *Je ne sais pas*.
   bool get canMarkTypo =>
       rating == Rating.again && errorType == ErrorType.wrong;
-
-  /// *Trop facile* follows a Correct answer (graded Good).
-  bool get canMarkTooEasy => tooEasyOffered && rating == Rating.good;
 
   /// *Faute de frappe*: the answer becomes Hard.
   Grade markTypo() {
     if (!canMarkTypo) throw StateError('Faute de frappe is not offered');
     return _copy(rating: Rating.hard, errorType: ErrorType.typoOverride);
-  }
-
-  /// *Trop facile*: the answer becomes Easy.
-  Grade markTooEasy() {
-    if (!canMarkTooEasy) throw StateError('Trop facile is not offered');
-    return _copy(rating: Rating.easy);
   }
 
   /// Caps the grade at Hard: a letter went red or orange while typing.
@@ -115,7 +99,6 @@ class Grade {
     errorType: errorType ?? this.errorType,
     answer: answer,
     errors: errors,
-    tooEasyOffered: tooEasyOffered,
   );
 
   @override
@@ -124,8 +107,7 @@ class Grade {
       other.rating == rating &&
       other.errorType == errorType &&
       other.answer == answer &&
-      _sameSpans(other.errors, errors) &&
-      other.tooEasyOffered == tooEasyOffered;
+      _sameSpans(other.errors, errors);
 
   @override
   int get hashCode =>

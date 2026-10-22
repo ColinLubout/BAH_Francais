@@ -48,27 +48,21 @@ class DrillTile extends ConsumerWidget {
     final theme = Theme.of(context);
     final ready = ref.watch(contentReadyProvider).hasValue;
     final due = ref.watch(dueTodayProvider(drill)).value;
-    final Widget line;
-    if (!ready) {
-      line = const Row(
-        children: [
-          SizedBox.square(
-            dimension: 16,
-            child: CircularProgressIndicator(strokeWidth: 2),
-          ),
-          SizedBox(width: 8),
-          Flexible(child: Text(Strings.homePreparingContent)),
-        ],
-      );
-    } else {
-      line = Text(
-        due == null
-            ? ''
-            : due > 0
-            ? Strings.homeDueCount(n: due)
-            : Strings.homeDueNone,
-      );
-    }
+    // Nothing due: no line at all (decision 76).
+    final line = !ready
+        ? const Row(
+            children: [
+              SizedBox.square(
+                dimension: 16,
+                child: CircularProgressIndicator(strokeWidth: 2),
+              ),
+              SizedBox(width: 8),
+              Flexible(child: Text(Strings.homePreparingContent)),
+            ],
+          )
+        : due != null && due > 0
+        ? Text(Strings.homeDueCount(n: due))
+        : null;
     return Card(
       clipBehavior: Clip.antiAlias,
       child: InkWell(
@@ -81,11 +75,13 @@ class DrillTile extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(nameOf(drill), style: theme.textTheme.titleLarge),
-              const SizedBox(height: 4),
-              DefaultTextStyle.merge(
-                style: theme.textTheme.bodyMedium,
-                child: line,
-              ),
+              if (line != null) ...[
+                const SizedBox(height: 4),
+                DefaultTextStyle.merge(
+                  style: theme.textTheme.bodyMedium,
+                  child: line,
+                ),
+              ],
             ],
           ),
         ),
