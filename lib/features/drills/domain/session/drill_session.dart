@@ -1,5 +1,6 @@
 import 'package:bah_francais/core/time/clock.dart';
 import 'package:bah_francais/core/time/study_day.dart';
+import 'package:bah_francais/features/content/domain/content_types.dart';
 import 'package:bah_francais/features/drills/domain/answer.dart';
 import 'package:bah_francais/features/drills/domain/card.dart';
 import 'package:bah_francais/features/drills/domain/drill_type.dart';
@@ -9,35 +10,9 @@ import 'package:bah_francais/features/drills/domain/queue/session_queue.dart';
 import 'package:bah_francais/features/drills/domain/rating.dart';
 import 'package:bah_francais/features/drills/domain/scheduling.dart';
 import 'package:bah_francais/features/drills/domain/session/drill_store.dart';
-import 'package:bah_francais/features/drills/domain/session/vocabulary_item.dart';
+import 'package:bah_francais/features/drills/domain/session/noun_item.dart';
+import 'package:bah_francais/features/drills/domain/session/session_card.dart';
 import 'package:meta/meta.dart';
-
-/// A Vocabulaire card as the drill screen shows it.
-@immutable
-class VocabularyCard {
-  const VocabularyCard({
-    required this.card,
-    required this.item,
-    required this.prompt,
-    this.sentence,
-  });
-
-  final DrillCard card;
-  final VocabularyItem item;
-  final VocabularyPrompt prompt;
-
-  /// The sentence the answer box sits in, the noun blanked; none when the
-  /// noun has no sentence with it as it is typed.
-  final ExampleSentence? sentence;
-
-  /// Every way of typing a right answer, for live feedback. The article is
-  /// optional: the sentence around the box already has one (decision 70).
-  List<String> get typings => item.answer.typings();
-
-  /// The word is seen for the first time: *Trop facile* is offered, with no
-  /// answer needed (decision 72).
-  bool get offersTooEasy => card.state == CardState.newCard;
-}
 
 /// What the drill screen shows.
 @immutable
@@ -49,7 +24,7 @@ sealed class DrillView {
 class CardQuestion extends DrillView {
   const CardQuestion(this.card, {this.startsFreePractice = false});
 
-  final VocabularyCard card;
+  final SessionCard card;
 
   /// The session has just moved into free practice: *Tout est à jour !* shows
   /// above this card, once.
@@ -58,21 +33,25 @@ class CardQuestion extends DrillView {
 
 /// The correction after an answer that wasn't Correct: *Presque*,
 /// *Incorrect* or *Je ne sais pas*. The card stays as it was, with what was
-/// typed, and the answer shows under it (decision 71). A Correct answer has
-/// none: the next card comes at once.
+/// answered, and the correction shows under it (decisions 71 and 75). A
+/// Correct answer has none: the next card comes at once.
 class CardFeedback extends DrillView {
   const CardFeedback(
     this.card,
     this.grade, {
     this.typed,
+    this.chosen,
     this.overridden = false,
   });
 
-  final VocabularyCard card;
+  final SessionCard card;
   final Grade grade;
 
-  /// What was typed; none after *Je ne sais pas*.
+  /// What was typed; none after *Je ne sais pas*, or in Genre.
   final String? typed;
+
+  /// The tile tapped, in Genre.
+  final Gender? chosen;
 
   /// *Faute de frappe* was used: it isn't offered any more.
   final bool overridden;
@@ -92,13 +71,15 @@ class NoCards extends DrillView {
   const NoCards();
 }
 
-/// The numbers the session summary shows.
+/// The numbers the session summary shows: for the whole session, and in a
+/// mixed session for each drill.
 @immutable
 class SessionSummary {
   const SessionSummary({
     required this.answered,
     required this.correct,
     required this.duration,
+    this.byDrill = const {},
   });
 
   final int answered;
@@ -106,8 +87,12 @@ class SessionSummary {
   /// Answers graded anything but Again.
   final int correct;
 
-  /// From the start of the session to its last answer.
+  /// From the start of the session to its last answer; for one drill of a
+  /// mixed session, the time spent answering its cards.
   final Duration duration;
+
+  /// Each drill's numbers, in a mixed session, for the drills answered.
+  final Map<DrillType, SessionSummary> byDrill;
 
   /// No card was answered: no summary is shown, and no session was saved.
   bool get isEmpty => answered == 0;
@@ -122,13 +107,13 @@ class SessionSummary {
 class KnownMark {
   const KnownMark(this.cards);
 
-  /// The item's cards as they were before the mark.
+  /// The cards marked, as they were before the mark.
   final List<DrillCard> cards;
 }
 
-/// One session of a drill: serves cards in the order Session flow sets,
-/// grades the answers and saves each at once, so a session can stop at any
-/// moment without losing one.
+/// One session of one drill, or of all three (a mixed session): serves cards
+/// in the order Session flow sets, grades the answers and saves each at
+/// once, so a session can stop at any moment without losing one.
 ///
 /// The session row is written with the first answer; a session with none
 /// leaves nothing behind.
@@ -140,22 +125,22 @@ class DrillSession {
     required this._scheduler,
     required this._random,
     required this._queue,
+    required this._showsGenderImage,
     required this.startedAt,
   });
 
-  /// Opens a session of [drill]: builds its queue from the store, without
-  /// showing a card yet (call [next]).
+  /// Opens a session of [drill], or a mixed session when [drill] is null:
+  /// builds its queue from the store, without showing a card yet (call
+  /// [next]). [showsGenderImage] is Genre's *Afficher l’image*.
   static Future<DrillSession> open({
-    required DrillType drill,
+    required DrillType? drill,
     required DrillStore store,
     required Clock clock,
     required DrillScheduler scheduler,
     required double Function() random,
+    bool showsGenderImage = true,
   }) async {
-    if (drill != DrillType.vocabulary) {
-      throw UnsupportedError('Only the Vocabulaire drill exists so far');
-    }
-    final queue = await queueFor(
+    Future<SessionQueue> queueOf(DrillType drill) => queueFor(
       drill,
       store: store,
       clock: clock,
@@ -168,7 +153,10 @@ class DrillSession {
       clock: clock,
       scheduler: scheduler,
       random: random,
-      queue: queue,
+      queue: drill == null
+          ? MixedQueue({for (final d in DrillType.values) d: await queueOf(d)})
+          : await queueOf(drill),
+      showsGenderImage: showsGenderImage,
       startedAt: clock.nowUtc(),
     );
   }
@@ -204,7 +192,8 @@ class DrillSession {
   /// Whether a session left for [away] is closed.
   static bool closesAfter(Duration away) => away > resumeWindow;
 
-  final DrillType drill;
+  /// The drill; null for a mixed session.
+  final DrillType? drill;
 
   /// When the session started, UTC.
   final DateTime startedAt;
@@ -213,14 +202,16 @@ class DrillSession {
   final Clock _clock;
   final DrillScheduler _scheduler;
   final double Function() _random;
-  final SessionQueue _queue;
+  final CardQueue _queue;
+  final bool _showsGenderImage;
 
   DrillView _view = const NoCards();
   DateTime? _shownAt;
   int? _sessionId;
-  int _answered = 0;
-  int _correct = 0;
   DateTime? _lastAnswerAt;
+
+  /// Each drill's answers, correct answers and time answering.
+  final Map<DrillType, (int, int, Duration)> _tallies = {};
 
   /// The answer now corrected on screen, for *Faute de frappe*.
   ReviewOutcome? _outcome;
@@ -229,11 +220,26 @@ class DrillSession {
   /// What the screen shows now.
   DrillView get view => _view;
 
-  SessionSummary get summary => SessionSummary(
-    answered: _answered,
-    correct: _correct,
-    duration: (_lastAnswerAt ?? startedAt).difference(startedAt),
-  );
+  SessionSummary get summary {
+    var answered = 0;
+    var correct = 0;
+    for (final (a, c, _) in _tallies.values) {
+      answered += a;
+      correct += c;
+    }
+    return SessionSummary(
+      answered: answered,
+      correct: correct,
+      duration: (_lastAnswerAt ?? startedAt).difference(startedAt),
+      byDrill: drill != null
+          ? const {}
+          : {
+              for (final d in DrillType.values)
+                if (_tallies[d] case (final a, final c, final time))
+                  d: SessionSummary(answered: a, correct: c, duration: time),
+            },
+    );
+  }
 
   /// Moves on to the next card, or to what the session shows when none is
   /// left.
@@ -241,17 +247,12 @@ class DrillSession {
     final step = _queue.next(_clock);
     switch (step) {
       case ShowCard():
-        final item = await _store.vocabularyItem(step.card.itemId);
+        final card = await _cardFor(step.card);
         _shownAt = _clock.nowUtc();
         _outcome = null;
         _logId = null;
         return _view = CardQuestion(
-          VocabularyCard(
-            card: step.card,
-            item: item,
-            prompt: VocabularyPrompt.of(item, _random),
-            sentence: _pick(item.sentencesToFill),
-          ),
+          card,
           startsFreePractice: step.startsFreePractice,
         );
       case DailyGoalReached():
@@ -261,40 +262,68 @@ class DrillSession {
     }
   }
 
-  /// Grades [typed] and saves the answer. [capsGrade] means a letter went
-  /// red or orange while typing, which caps the grade at Hard.
+  /// Grades [typed], in Vocabulaire or Conjugaison, and saves the answer.
+  /// [capsGrade] means a letter went red or orange while typing, which caps
+  /// the grade at Hard.
   ///
   /// A Correct answer moves straight on to the next card; any other answer
   /// shows its correction (decision 71).
   Future<DrillView> submit(String typed, {bool capsGrade = false}) async {
-    final card = _question.card;
-    final grade = gradeVocabulary(
-      typed: typed,
-      noun: card.item.answer,
-      flaggedWhileTyping: capsGrade,
-    );
+    final card = switch (_question.card) {
+      final TypedCard card => card,
+      GenderCard() => throw StateError('A Genre card is answered by a tile'),
+    };
+    final grade = switch (card) {
+      VocabularyCard(:final item) => gradeVocabulary(
+        typed: typed,
+        noun: item.answer,
+        flaggedWhileTyping: capsGrade,
+      ),
+      ConjugationCard(:final sentence) => gradeConjugation(
+        typed: typed,
+        answer: sentence.answer,
+        alternatives: sentence.alternatives,
+        flaggedWhileTyping: capsGrade,
+      ),
+    };
     await _answer(card, grade, typed: typed);
-    if (grade.rating == Rating.good || grade.rating == Rating.easy) {
-      return await next();
-    }
+    if (_isCorrect(grade)) return await next();
     return _view = CardFeedback(card, grade, typed: typed);
   }
 
-  /// *Trop facile*, on a word seen for the first time: Easy with no answer
-  /// typed, and the next card at once (decision 72).
+  /// Grades the tile [chosen], in Genre, and saves the answer: a Correct
+  /// answer moves straight on, a wrong one shows its correction (decision
+  /// 75).
+  Future<DrillView> choose(Gender chosen) async {
+    final card = switch (_question.card) {
+      final GenderCard card => card,
+      TypedCard() => throw StateError('Only a Genre card has tiles'),
+    };
+    final grade = gradeGender(correct: card.item.answer.gender, chosen: chosen);
+    await _answer(card, grade);
+    if (_isCorrect(grade)) return await next();
+    return _view = CardFeedback(card, grade, chosen: chosen);
+  }
+
+  /// *Je ne sais pas*, in Vocabulaire or Conjugaison: Again, and the answer
+  /// is shown.
+  Future<DrillView> giveUp() async {
+    final card = switch (_question.card) {
+      final TypedCard card => card,
+      GenderCard() => throw StateError('Genre has no Je ne sais pas'),
+    };
+    final grade = Grade.gaveUp(card.answer);
+    await _answer(card, grade);
+    return _view = CardFeedback(card, grade);
+  }
+
+  /// *Trop facile*, on a word seen for the first time: Easy with no answer,
+  /// and the next card at once (decision 72).
   Future<DrillView> tooEasy() async {
     final card = _question.card;
     if (!card.offersTooEasy) throw StateError('Trop facile is not offered');
     await _answer(card, const Grade.tooEasy());
     return await next();
-  }
-
-  /// *Je ne sais pas*: Again, and the answer is shown.
-  Future<DrillView> giveUp() async {
-    final card = _question.card;
-    final grade = Grade.gaveUp(card.item.answer.word);
-    await _answer(card, grade);
-    return _view = CardFeedback(card, grade);
   }
 
   /// *Faute de frappe* after a wrong answer: it is saved again as Hard.
@@ -309,34 +338,48 @@ class DrillSession {
       throw StateError('Faute de frappe is not offered');
     }
     final grade = feedback.grade.markTypo();
-    _outcome = await _regrade(
-      outcome,
+    final regraded = _scheduler.regrade(outcome, grade.rating);
+    await _store.replaceAnswer(
       logId,
-      grade,
-      responseTime: _responseTime,
-      typed: feedback.typed,
+      Answer(
+        outcome: regraded,
+        sessionId: _sessionId!,
+        responseTime: _responseTime,
+        errorType: grade.errorType,
+        typed: feedback.typed,
+      ),
     );
+    _queue.recordRegrade(regraded);
+    final drill = feedback.card.card.drill;
+    if (_tallies[drill] case (final a, final c, final time)) {
+      _tallies[drill] = (a, c + 1, time);
+    }
+    _outcome = regraded;
     return _view = CardFeedback(
       feedback.card,
       grade,
       typed: feedback.typed,
+      chosen: feedback.chosen,
       overridden: true,
     );
   }
 
-  /// *Je le connais*: the noun's cards in every drill leave practice, with
-  /// no grade and no review-log row, and the next card comes at once. Keep
-  /// the mark for [undoKnown].
+  /// *Je le connais*: a noun's cards in every drill leave practice, or for
+  /// a verb, only its card in this tense; no grade and no review-log row,
+  /// and the next card comes at once. Keep the mark for [undoKnown].
   Future<(KnownMark, DrillView)> markKnown() async {
     final card = switch (_view) {
       CardQuestion(:final card) || CardFeedback(:final card) => card.card,
       _ => throw StateError('No card to mark known'),
     };
-    final cards = await _store.cardsOfItem(card.itemId);
+    final cards = [
+      for (final c in await _store.cardsOfItem(card.itemId))
+        if (card.drill != DrillType.conjugation || c.tense == card.tense) c,
+    ];
     final now = _clock.nowUtc();
     await _store.setKnownAt([for (final c in cards) c.id], now);
     for (final c in cards) {
-      if (c.drill == drill) _queue.update(c.withKnownAt(now));
+      if (_serves(c)) _queue.update(c.withKnownAt(now));
     }
     return (KnownMark(cards), await next());
   }
@@ -345,7 +388,7 @@ class DrillSession {
   Future<void> undoKnown(KnownMark mark) async {
     await _store.setKnownAt([for (final c in mark.cards) c.id], null);
     for (final c in mark.cards) {
-      if (c.drill == drill) _queue.update(c.withKnownAt(null));
+      if (_serves(c)) _queue.update(c.withKnownAt(null));
     }
   }
 
@@ -354,17 +397,54 @@ class DrillSession {
     _ => throw StateError('No card is waiting for an answer'),
   };
 
+  /// The card is in this session's drill, or in any for a mixed session.
+  bool _serves(DrillCard card) => drill == null || card.drill == drill;
+
+  static bool _isCorrect(Grade grade) =>
+      grade.rating == Rating.good || grade.rating == Rating.easy;
+
   Duration get _responseTime {
     final shown = _shownAt ?? startedAt;
     final time = (_lastAnswerAt ?? _clock.nowUtc()).difference(shown);
     return time.isNegative ? Duration.zero : time;
   }
 
-  Future<void> _answer(
-    VocabularyCard card,
-    Grade grade, {
-    String? typed,
-  }) async {
+  /// The card to show for [card], with what its drill needs.
+  Future<SessionCard> _cardFor(DrillCard card) async {
+    switch (card.drill) {
+      case DrillType.gender:
+        final item = await _store.nounItem(card.itemId);
+        return GenderCard(
+          card: card,
+          item: item,
+          imageId: _showsGenderImage ? _pick(item.imageIds) : null,
+          example: _pick(item.examples),
+        );
+      case DrillType.vocabulary:
+        final item = await _store.nounItem(card.itemId);
+        return VocabularyCard(
+          card: card,
+          item: item,
+          prompt: VocabularyPrompt.of(item, _random),
+          sentence: _pick(item.sentencesToFill),
+        );
+      case DrillType.conjugation:
+        final item = await _store.conjugationItem(card.itemId, card.tense!);
+        // A person at random, then one of its sentences.
+        final persons = {for (final s in item.sentences) s.person}.toList();
+        final person = _pick(persons);
+        final sentence = _pick([
+          for (final s in item.sentences)
+            if (s.person == person) s,
+        ]);
+        if (sentence == null) {
+          throw StateError('${item.verbId} has no sentence in ${item.tense}');
+        }
+        return ConjugationCard(card: card, item: item, sentence: sentence);
+    }
+  }
+
+  Future<void> _answer(SessionCard card, Grade grade, {String? typed}) async {
     final now = _clock.nowUtc();
     final outcome = _scheduler.review(
       card.card,
@@ -377,47 +457,24 @@ class DrillSession {
       at: startedAt,
     );
     _lastAnswerAt = now;
-    final logId = await _store.recordAnswer(
+    final responseTime = _responseTime;
+    _logId = await _store.recordAnswer(
       Answer(
         outcome: outcome,
         sessionId: sessionId,
-        responseTime: _responseTime,
+        responseTime: responseTime,
         errorType: grade.errorType,
         typed: typed,
       ),
     );
     _queue.record(outcome);
     _outcome = outcome;
-    _logId = logId;
-    _answered++;
-    if (grade.rating != Rating.again) _correct++;
-  }
-
-  /// Saves the answer [logId] again with [grade], scheduled again from the
-  /// card's state before it.
-  Future<ReviewOutcome> _regrade(
-    ReviewOutcome outcome,
-    int logId,
-    Grade grade, {
-    required Duration responseTime,
-    String? typed,
-  }) async {
-    final regraded = _scheduler.regrade(outcome, grade.rating);
-    await _store.replaceAnswer(
-      logId,
-      Answer(
-        outcome: regraded,
-        sessionId: _sessionId!,
-        responseTime: responseTime,
-        errorType: grade.errorType,
-        typed: typed,
-      ),
+    final (a, c, time) = _tallies[card.card.drill] ?? (0, 0, Duration.zero);
+    _tallies[card.card.drill] = (
+      a + 1,
+      grade.rating == Rating.again ? c : c + 1,
+      time + responseTime,
     );
-    _queue.recordRegrade(regraded);
-    if (outcome.rating == Rating.again && grade.rating != Rating.again) {
-      _correct++;
-    }
-    return regraded;
   }
 
   /// One of [items], chosen with the session's randomness.

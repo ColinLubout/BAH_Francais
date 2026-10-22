@@ -4,30 +4,43 @@ import 'package:bah_francais/app/router.dart';
 import 'package:bah_francais/core/strings.g.dart';
 import 'package:bah_francais/features/content/data/bundled_content.dart';
 import 'package:bah_francais/features/drills/domain/drill_type.dart';
+import 'package:bah_francais/features/drills/presentation/drill_name.dart';
 import 'package:bah_francais/features/drills/presentation/drill_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-/// Accueil: the home screen, where a session starts.
-///
-/// So far it has the Vocabulaire tile; *Commencer*, the other tiles and the
-/// rest of the screen come in milestone 4 (decision 69).
-class HomeScreen extends StatelessWidget {
+/// Accueil: the home screen, where a session starts: one large *Commencer*
+/// button for a mixed session, and under it a tile per drill. Its ⋮ menus
+/// and *Liste de révision* link come with their screens in milestone 6
+/// (decision 79).
+class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) => const Scaffold(
-    body: SafeArea(
-      child: Padding(
-        padding: EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [DrillTile(drill: DrillType.vocabulary)],
+  Widget build(BuildContext context, WidgetRef ref) {
+    final ready = ref.watch(contentReadyProvider).hasValue;
+    return Scaffold(
+      body: SafeArea(
+        child: ListView(
+          padding: const EdgeInsets.all(16),
+          children: [
+            FilledButton(
+              onPressed: ready
+                  ? () => unawaited(context.push(Routes.drill(null)))
+                  : null,
+              style: FilledButton.styleFrom(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+              ),
+              child: const Text(Strings.homeStart),
+            ),
+            const SizedBox(height: 16),
+            for (final drill in DrillType.values) DrillTile(drill: drill),
+          ],
         ),
       ),
-    ),
-  );
+    );
+  }
 }
 
 /// A drill's tile: its name, and under it how many cards are due today.
@@ -36,12 +49,6 @@ class DrillTile extends ConsumerWidget {
   const DrillTile({required this.drill, super.key});
 
   final DrillType drill;
-
-  static String nameOf(DrillType drill) => switch (drill) {
-    DrillType.gender => Strings.homeDrillGender,
-    DrillType.vocabulary => Strings.homeDrillVocabulary,
-    DrillType.conjugation => Strings.homeDrillConjugation,
-  };
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -74,7 +81,7 @@ class DrillTile extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(nameOf(drill), style: theme.textTheme.titleLarge),
+              Text(drillName(drill), style: theme.textTheme.titleLarge),
               if (line != null) ...[
                 const SizedBox(height: 4),
                 DefaultTextStyle.merge(

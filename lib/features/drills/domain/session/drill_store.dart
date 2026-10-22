@@ -1,11 +1,13 @@
 import 'package:bah_francais/core/time/study_day.dart';
+import 'package:bah_francais/features/content/domain/content_types.dart';
 import 'package:bah_francais/features/drills/domain/answer.dart';
 import 'package:bah_francais/features/drills/domain/card.dart';
 import 'package:bah_francais/features/drills/domain/drill_type.dart';
 import 'package:bah_francais/features/drills/domain/queue/queue_card.dart';
 import 'package:bah_francais/features/drills/domain/queue/queue_settings.dart';
 import 'package:bah_francais/features/drills/domain/queue/session_queue.dart';
-import 'package:bah_francais/features/drills/domain/session/vocabulary_item.dart';
+import 'package:bah_francais/features/drills/domain/session/conjugation_item.dart';
+import 'package:bah_francais/features/drills/domain/session/noun_item.dart';
 import 'package:meta/meta.dart';
 
 /// What a drill's queue is built with: the drill's settings, and its everyday
@@ -49,6 +51,9 @@ abstract interface class DrillStore {
   /// Marks the cards known at [at], or brings them back when [at] is null.
   Future<void> setKnownAt(Iterable<int> cardIds, DateTime? at);
 
-  /// What a Vocabulaire card needs from the noun [nounId].
-  Future<VocabularyItem> vocabularyItem(String nounId);
+  /// What a Genre or Vocabulaire card needs from the noun [nounId].
+  Future<NounItem> nounItem(String nounId);
+
+  /// What a Conjugaison card needs from the verb [verbId] in [tense].
+  Future<ConjugationItem> conjugationItem(String verbId, Tense tense);
 }

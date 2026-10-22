@@ -1,5 +1,6 @@
 import 'package:bah_francais/core/time/clock_provider.dart';
 import 'package:bah_francais/features/content/data/bundled_content.dart';
+import 'package:bah_francais/features/content/domain/content_types.dart';
 import 'package:bah_francais/features/drills/domain/drill_type.dart';
 import 'package:bah_francais/features/drills/domain/session/drill_session.dart';
 import 'package:bah_francais/features/drills/presentation/drill_providers.dart';
@@ -7,8 +8,9 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'drill_controller.g.dart';
 
-/// The session of [drill] on screen. It lives while its drill screen or
-/// summary is open, and a new one starts each time the drill is opened.
+/// The session of [drill] on screen, or a mixed session when [drill] is
+/// null. It lives while its drill screen or summary is open, and a new one
+/// starts each time the drill is opened.
 @riverpod
 class DrillController extends _$DrillController {
   late DrillSession _session;
@@ -18,7 +20,7 @@ class DrillController extends _$DrillController {
   bool _busy = false;
 
   @override
-  Future<DrillView> build(DrillType drill) async {
+  Future<DrillView> build(DrillType? drill) async {
     await ref.watch(contentReadyProvider.future);
     _session = await DrillSession.open(
       drill: drill,
@@ -26,6 +28,9 @@ class DrillController extends _$DrillController {
       clock: ref.read(clockProvider),
       scheduler: ref.read(drillSchedulerProvider),
       random: ref.read(drillRandomProvider),
+      showsGenderImage: ref
+          .read(drillDisplaySettingsProvider(DrillType.gender))
+          .showImage,
     );
     return await _session.next();
   }
@@ -39,6 +44,9 @@ class DrillController extends _$DrillController {
 
   /// *Trop facile*, on a word seen for the first time.
   Future<void> tooEasy() => _run(_session.tooEasy);
+
+  /// A Genre tile.
+  Future<void> choose(Gender chosen) => _run(() => _session.choose(chosen));
 
   /// *Je ne sais pas*.
   Future<void> giveUp() => _run(_session.giveUp);

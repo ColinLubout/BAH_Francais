@@ -3,29 +3,41 @@ import 'package:bah_francais/features/drills/domain/grading/answer_forms.dart';
 import 'package:bah_francais/features/drills/domain/grading/grade.dart';
 import 'package:meta/meta.dart';
 
-/// What a Vocabulaire card needs from its noun.
+/// What a Genre or Vocabulaire card needs from its noun.
 @immutable
-class VocabularyItem {
-  const VocabularyItem({
+class NounItem {
+  const NounItem({
     required this.nounId,
     required this.answer,
     this.imageIds = const [],
     this.definition,
+    this.gloss,
+    this.endingHint,
     this.examples = const [],
   });
 
   final String nounId;
 
-  /// The noun and its synonyms, with their article rules.
+  /// The noun and its synonyms, with their gender and article rules.
   final VocabularyAnswer answer;
 
   /// The noun's images; the prompt shows one of them.
   final List<String> imageIds;
 
-  /// The prompt when there is no image (*Période de sept jours*).
+  /// The Vocabulaire prompt when there is no image (*Période de sept
+  /// jours*).
   final String? definition;
 
-  /// Sentences using the noun; the feedback panel shows one.
+  /// A short French gloss, shown with the noun in the Genre drill, so a word
+  /// whose meaning changes with its gender is unambiguous.
+  final String? gloss;
+
+  /// The ending rule the Genre correction shows as *Astuce* (*-tion →
+  /// féminin*).
+  final String? endingHint;
+
+  /// Sentences using the noun: the Genre correction shows one; the
+  /// Vocabulaire answer box sits in one of [sentencesToFill].
   final List<ExampleSentence> examples;
 
   /// The [examples] the answer box can sit in: those with the noun as it is
@@ -91,7 +103,7 @@ sealed class VocabularyPrompt {
   /// One of [item]'s images, chosen with [random] on each review, so the user
   /// learns the word rather than one picture; its definition when it has no
   /// image.
-  factory VocabularyPrompt.of(VocabularyItem item, double Function() random) {
+  factory VocabularyPrompt.of(NounItem item, double Function() random) {
     final images = item.imageIds;
     if (images.isNotEmpty) {
       final index = (random() * images.length).floor();

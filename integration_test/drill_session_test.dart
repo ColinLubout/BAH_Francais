@@ -1,4 +1,4 @@
-// Milestone 3's integration tests, on a device: run with
+// The drills' integration tests, on a device: run with
 // `flutter test integration_test`.
 
 import 'package:flutter_test/flutter_test.dart';
@@ -14,4 +14,7 @@ void main() {
     'a force-close mid-session loses no answered card',
     forceCloseLosesNothing,
   );
+  testWidgets('completes a Genre session', completesAGenderSession);
+  testWidgets('completes a Conjugaison session', completesAConjugationSession);
+  testWidgets('completes a mixed session', completesAMixedSession);
 }

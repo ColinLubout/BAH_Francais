@@ -2,15 +2,20 @@ import 'dart:async';
 
 import 'package:bah_francais/app/router.dart';
 import 'package:bah_francais/core/strings.g.dart';
+import 'package:bah_francais/core/theme/app_text_styles.dart';
 import 'package:bah_francais/core/time/clock_provider.dart';
 import 'package:bah_francais/features/content/data/bundled_content.dart';
+import 'package:bah_francais/features/content/domain/content_types.dart';
 import 'package:bah_francais/features/drills/domain/drill_type.dart';
 import 'package:bah_francais/features/drills/domain/session/drill_session.dart';
-import 'package:bah_francais/features/drills/domain/session/vocabulary_item.dart';
+import 'package:bah_francais/features/drills/domain/session/noun_item.dart';
+import 'package:bah_francais/features/drills/domain/session/session_card.dart';
 import 'package:bah_francais/features/drills/presentation/drill_controller.dart';
+import 'package:bah_francais/features/drills/presentation/drill_name.dart';
 import 'package:bah_francais/features/drills/presentation/drill_providers.dart';
+import 'package:bah_francais/features/drills/presentation/widgets/gender_card_view.dart';
 import 'package:bah_francais/features/drills/presentation/widgets/prompt_image.dart';
-import 'package:bah_francais/features/drills/presentation/widgets/vocabulary_card_view.dart';
+import 'package:bah_francais/features/drills/presentation/widgets/typed_card_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -20,7 +25,10 @@ import 'package:go_router/go_router.dart';
 class DrillScreen extends ConsumerStatefulWidget {
   const DrillScreen({required this.drill, super.key});
 
-  final DrillType drill;
+  /// The drill; null for a mixed session.
+  /// (Commencer on Accueil).
+
+  final DrillType? drill;
 
   @override
   ConsumerState<DrillScreen> createState() => _DrillScreenState();
@@ -116,6 +124,55 @@ class _DrillScreenState extends ConsumerState<DrillScreen> {
       );
   }
 
+  /// The view of [card], from its question to its correction; one per card,
+  /// so what was typed carries over.
+  Widget _cardView(
+    SessionCard card, {
+    required CardFeedback? feedback,
+    required Widget? notice,
+  }) {
+    final controller = ref.read(_provider.notifier);
+    return switch (card) {
+      GenderCard() => GenderCardView(
+        key: ObjectKey(card),
+        card: card,
+        feedback: feedback,
+        notice: notice,
+        onChoose: controller.choose,
+        onTooEasy: controller.tooEasy,
+        onTypo: controller.markTypo,
+        onNext: controller.next,
+        controlsKey: _controls,
+      ),
+      TypedCard() => TypedCardView(
+        key: ObjectKey(card),
+        card: card,
+        feedback: feedback,
+        notice: notice,
+        prompt: switch (card) {
+          VocabularyCard(:final prompt) => _Prompt(prompt),
+          ConjugationCard() => const SizedBox.shrink(),
+        },
+        subline: switch (card) {
+          ConjugationCard(:final item) => _VerbAndTense(
+            infinitive: item.infinitive,
+            tense: item.tense,
+          ),
+          VocabularyCard() => null,
+        },
+        liveFeedback: ref
+            .watch(drillDisplaySettingsProvider(card.card.drill))
+            .liveFeedback,
+        onSubmit: controller.submit,
+        onTooEasy: controller.tooEasy,
+        onGiveUp: controller.giveUp,
+        onTypo: controller.markTypo,
+        onNext: controller.next,
+        controlsKey: _controls,
+      ),
+    };
+  }
+
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(_provider);
@@ -138,28 +195,22 @@ class _DrillScreenState extends ConsumerState<DrillScreen> {
                 onClose: _close,
                 onKnown: onCard ? _markKnown : null,
               ),
+              // A mixed session names the drill of the card on screen.
+              if (widget.drill == null)
+                if (view
+                    case CardQuestion(:final card) || CardFeedback(:final card))
+                  _DrillLabel(card.card.drill),
               Expanded(
                 child: switch (view) {
                   null => const _Preparing(),
                   // One view per card, from its question to its correction.
                   CardQuestion(:final card) ||
-                  CardFeedback(:final card) => VocabularyCardView(
-                    key: ObjectKey(card),
-                    card: card,
+                  CardFeedback(:final card) => _cardView(
+                    card,
                     feedback: view is CardFeedback ? view : null,
                     notice: view is CardQuestion && view.startsFreePractice
                         ? const _FreePracticeNotice()
                         : null,
-                    prompt: _Prompt(card.prompt),
-                    liveFeedback: ref
-                        .watch(drillDisplaySettingsProvider(widget.drill))
-                        .liveFeedback,
-                    onSubmit: controller.submit,
-                    onTooEasy: controller.tooEasy,
-                    onGiveUp: controller.giveUp,
-                    onTypo: controller.markTypo,
-                    onNext: controller.next,
-                    controlsKey: _controls,
                   ),
                   GoalReached() => _Message(
                     message: Strings.drillDailyGoalReached,
@@ -257,6 +308,52 @@ class _Prompt extends StatelessWidget {
       style: Theme.of(context).textTheme.bodyLarge,
     ),
   };
+}
+
+/// Under a Conjugaison sentence: the infinitive, in bold, and the tense.
+class _VerbAndTense extends StatelessWidget {
+  const _VerbAndTense({required this.infinitive, required this.tense});
+
+  final String infinitive;
+  final Tense tense;
+
+  @override
+  Widget build(BuildContext context) {
+    final style = Theme.of(context).textTheme.bodyLarge;
+    return Wrap(
+      alignment: WrapAlignment.center,
+      spacing: 12,
+      children: [
+        Text(
+          infinitive,
+          style: style?.merge(AppTextStyles.of(context).emphasis),
+        ),
+        Text(switch (tense) {
+          Tense.present => Strings.tensesPresent,
+          Tense.passeCompose => Strings.tensesPasseCompose,
+          Tense.imparfait => Strings.tensesImparfait,
+          Tense.futurSimple => Strings.tensesFuturSimple,
+        }, style: style),
+      ],
+    );
+  }
+}
+
+/// Under the top bar in a mixed session: the drill of the card on screen.
+class _DrillLabel extends StatelessWidget {
+  const _DrillLabel(this.drill);
+
+  final DrillType drill;
+
+  @override
+  Widget build(BuildContext context) => Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 16),
+    child: Text(
+      drillName(drill),
+      textAlign: TextAlign.center,
+      style: Theme.of(context).textTheme.labelLarge,
+    ),
+  );
 }
 
 /// A one-line message instead of a card, with the one thing to do next.

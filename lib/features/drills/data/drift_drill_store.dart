@@ -12,8 +12,9 @@ import 'package:bah_francais/features/drills/domain/grading/answer_forms.dart';
 import 'package:bah_francais/features/drills/domain/queue/queue_card.dart';
 import 'package:bah_francais/features/drills/domain/queue/queue_settings.dart';
 import 'package:bah_francais/features/drills/domain/queue/session_queue.dart';
+import 'package:bah_francais/features/drills/domain/session/conjugation_item.dart';
 import 'package:bah_francais/features/drills/domain/session/drill_store.dart';
-import 'package:bah_francais/features/drills/domain/session/vocabulary_item.dart';
+import 'package:bah_francais/features/drills/domain/session/noun_item.dart';
 import 'package:drift/drift.dart';
 
 /// The drill sessions' store, over the app's database.
@@ -67,10 +68,52 @@ class DriftDrillStore implements DrillStore {
   Future<void> setKnownAt(Iterable<int> cardIds, DateTime? at) =>
       _cards.setKnownAt(cardIds, at);
 
+  /// The verb, with the sentences that are prompts for it in [tense], in
+  /// every person, ordered by id.
+  @override
+  Future<ConjugationItem> conjugationItem(String verbId, Tense tense) async {
+    final verb = await (_db.select(
+      _db.verbs,
+    )..where((v) => v.id.equals(verbId))).getSingle();
+    final rows =
+        await (_db.select(_db.sentenceVerbs).join([
+                innerJoin(
+                  _db.sentences,
+                  _db.sentences.id.equalsExp(_db.sentenceVerbs.sentenceId),
+                ),
+              ])
+              ..where(
+                _db.sentenceVerbs.verbId.equals(verbId) &
+                    _db.sentenceVerbs.tense.equalsValue(tense) &
+                    _db.sentenceVerbs.retired.not() &
+                    _db.sentences.retired.not(),
+              )
+              ..orderBy([OrderingTerm(expression: _db.sentences.id)]))
+            .get();
+    return ConjugationItem(
+      verbId: verb.id,
+      infinitive: verb.infinitive,
+      tense: tense,
+      hAspire: verb.hAspire,
+      sentences: [
+        for (final row in rows)
+          if (row.readTable(_db.sentenceVerbs) case final link)
+            ConjugationSentence(
+              id: link.sentenceId,
+              text: row.readTable(_db.sentences).sentenceText,
+              person: link.person,
+              answer: link.answer,
+              alternatives: link.alternatives,
+              before: link.before,
+            ),
+      ],
+    );
+  }
+
   /// The noun, official or the user's own, with its images in the order they
   /// were added and the sentences that use it.
   @override
-  Future<VocabularyItem> vocabularyItem(String nounId) async {
+  Future<NounItem> nounItem(String nounId) async {
     final noun = await (_db.select(
       _db.nouns,
     )..where((n) => n.id.equals(nounId))).getSingle();
@@ -95,7 +138,7 @@ class DriftDrillStore implements DrillStore {
               )
               ..orderBy([OrderingTerm(expression: _db.sentences.id)]))
             .get();
-    return VocabularyItem(
+    return NounItem(
       nounId: noun.id,
       answer: VocabularyAnswer(
         word: noun.word,
@@ -106,6 +149,8 @@ class DriftDrillStore implements DrillStore {
       ),
       imageIds: images,
       definition: noun.definition,
+      gloss: noun.gloss,
+      endingHint: noun.endingHint,
       examples: [
         for (final row in uses)
           ExampleSentence.of(

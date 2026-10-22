@@ -32,10 +32,13 @@ double Function() drillRandom(Ref ref) => Random().nextDouble;
 /// screens (milestone 6).
 @immutable
 class DrillDisplaySettings {
-  const DrillDisplaySettings({this.liveFeedback = true});
+  const DrillDisplaySettings({this.liveFeedback = true, this.showImage = true});
 
-  /// *Correction en direct*, on by default.
+  /// *Correction en direct* (Vocabulaire, Conjugaison), on by default.
   final bool liveFeedback;
+
+  /// *Afficher l’image* (Genre), on by default.
+  final bool showImage;
 }
 
 @Riverpod(keepAlive: true)
