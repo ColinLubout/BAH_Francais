@@ -2,7 +2,8 @@
 
 ## Current milestone: 3 — Vocabulaire drill
 
-**Status:** done on branch `milestone-3`, not pushed yet. Next: milestone 4.
+**Status:** done, and merged in PR #6. Then the spec was brought up to date
+(decision 74), on branch `spec-update`. Next: milestone 4.
 
 ### Done
 
@@ -76,26 +77,24 @@ None.
 
 ### Spotted for later milestones
 
-- `drill.leaveSession` ("Terminer la session ?") is unused: the spec has × go
-  straight to the summary, with no confirmation. It can be removed from the
-  strings, unless the owner wants a confirmation after all.
+- M4, agreed with the owner on 2026-10-22: remove what is unused —
+  - `drill.leaveSession` ("Terminer la session ?"), since × goes straight to the
+    summary;
+  - Article obligatoire (decision 70): the strings `drillSettings.articleMandatory`,
+    `drillSettings.articleMandatoryHelp` and `drill.answerHintWithArticle`, and the
+    grading's mandatory-article rule (`gradeVocabulary`'s `articleMandatory`);
+  - the grading's *Trop facile* after an answer (`Grade.markTooEasy`,
+    `canMarkTooEasy`), replaced by decision 72.
 - M6: *Aucune carte disponible* offers *Ouvrir les réglages*, which opens Réglages
   until the drill settings screens exist.
 - M6: the drill already reads the live-feedback setting
   (`drillDisplaySettingsProvider`); until the settings exist, it is on.
-- After decision 70, Article obligatoire is unused: the strings
-  `drillSettings.articleMandatory`, `drillSettings.articleMandatoryHelp` and
-  `drill.answerHintWithArticle`, and the mandatory-article rule in the grading
-  (`gradeVocabulary`'s `articleMandatory`, from milestone 1). They can go once the
-  owner has folded the decision into the spec.
 - M4: the Conjugaison drill puts its answer box in its sentence the same way
-  (decision 70), with `BlankSentence`, and follows *Valider* the same way
-  (decision 71). The Genre drill already moves on after a Correct answer, after a
-  second; whether its corrections also stay in place, and whether a new word
-  there or in Conjugaison has *Trop facile* (decision 72), is for M4.
-- After decision 72, the grading's *Trop facile* after an answer
-  (`Grade.markTooEasy`, `canMarkTooEasy`, from milestone 1) is unused; M4 can
-  remove it if the other drills follow decision 72.
+  (decision 70), with `BlankSentence`; Genre and Conjugaison follow decisions 71
+  and 72 (decision 75). How the correction sits on the Genre card is to settle
+  then.
+- M4: a drill tile with nothing due shows no line (decision 76); the Vocabulaire
+  tile shows *Tout est à jour* until then.
 - M7 and M8: the first-launch import runs on the main isolate. That is quick for
   the 127 KB pack, but the full content may hold the launch for longer; it could
   move to a background isolate.
@@ -292,8 +291,9 @@ None.
 
 ## Decisions
 
-These change or add to `docs/SPEC.md`. They are for the owner to fold into the spec
-document.
+These change or add to `docs/SPEC.md`, which is the spec (decision 74). Decisions 1–76
+are folded into it as of 2026-10-22; from now on, each decision is folded in by the
+pull request that records it here.
 
 ### 2026-09-23 (milestone 0, agreed with the owner)
 
@@ -836,6 +836,26 @@ document.
     1, *{n} cartes* from 2 (`drill.cardsAnswered` in the drill's top bar, and
     `reviewList.cardCount` for milestone 6), as decision 10's plural keys.
     - *Adds to* the strings.
+
+### 2026-10-22 (before milestone 4, agreed with the owner)
+
+74. **`docs/SPEC.md` is the spec, kept in the repo.** It is no longer exported
+    from a document: decisions 1–76 are folded into it, and from now on each
+    decision the owner agrees is recorded here and folded into the spec in the
+    same pull request. CLAUDE.md and the spec's "How Claude Code should work" say
+    so.
+    - *Changes* Build plan → How Claude Code should work, and CLAUDE.md's "never
+      edit `docs/SPEC.md`".
+75. **The Genre and Conjugaison drills follow decisions 71 and 72**: a Correct
+    answer moves straight on (in Genre too, in place of its 1-second wait), any
+    other answer keeps the card in place with its correction, and a word seen for
+    the first time offers *Trop facile*. How each drill's card looks is settled in
+    milestone 4; Conjugaison puts its answer box in its sentence (decision 70).
+    - *Changes* Activities → Shared drill behaviour (Advancing) and Gender drill.
+76. **A drill tile with nothing due shows no line**, rather than *Tout est à
+    jour*, even when new words are left to learn.
+    - *Replaces* decision 69's *Tout est à jour* and Screens → Accueil's "the due
+      line reads *Tout est à jour*".
 
 ### Notes
 
