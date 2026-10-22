@@ -133,6 +133,9 @@ abstract final class Strings {
   /// Je ne sais pas
   static const drillIDontKnow = 'Je ne sais pas';
 
+  /// Valider
+  static const drillSubmit = 'Valider';
+
   /// Suivant
   static const drillNext = 'Suivant';
 
@@ -188,6 +191,9 @@ abstract final class Strings {
 
   /// Réponses correctes
   static const sessionSummaryAccuracy = 'Réponses correctes';
+
+  /// {n} %
+  static String sessionSummaryPercent({required int n}) => '$n %';
 
   /// Durée
   static const sessionSummaryDuration = 'Durée';
@@ -705,6 +711,9 @@ abstract final class Strings {
   /// Illustration du mot {word}
   static String accessibilityWordImage({required String word}) =>
       'Illustration du mot $word';
+
+  /// Image à nommer
+  static const accessibilityPromptImage = 'Image à nommer';
 
   /// Réponse correcte
   static const accessibilityAnswerCorrect = 'Réponse correcte';

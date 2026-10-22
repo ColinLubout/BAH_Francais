@@ -50,6 +50,17 @@ class VocabularyAnswer {
       ),
   ];
 
+  /// Every way of typing a right answer, for live feedback: each accepted
+  /// word with each of its articles, and alone when the article is
+  /// optional.
+  List<String> typings({required bool mandatory}) => [
+    for (final w in accepted) ...[
+      if (!mandatory) w.word,
+      for (final article in w.validArticles(mandatory: mandatory))
+        joinArticle(article, w.word),
+    ],
+  ];
+
   /// [word] as shown when no answer was typed (*Je ne sais pas*): with its
   /// indefinite article when the article is mandatory.
   String displayAnswer({required bool mandatory}) =>

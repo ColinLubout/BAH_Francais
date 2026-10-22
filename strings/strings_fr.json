@@ -59,6 +59,7 @@
     "tense": "Temps",
     "iKnowIt": "Je le connais",
     "iDontKnow": "Je ne sais pas",
+    "submit": "Valider",
     "next": "Suivant",
     "resultCorrect": "Correct",
     "resultAlmost": "Presque",
@@ -80,6 +81,7 @@
     "title": "Résumé de session",
     "cardsAnswered": "Cartes répondues",
     "accuracy": "Réponses correctes",
+    "percent": "{n} %",
     "duration": "Durée",
     "finish": "Terminer",
     "resume": "Continuer"
@@ -293,6 +295,7 @@
     "chooseFeminine": "féminin",
     "chooseBoth": "les deux",
     "wordImage": "Illustration du mot {word}",
+    "promptImage": "Image à nommer",
     "answerCorrect": "Réponse correcte",
     "answerAlmost": "Réponse presque correcte",
     "answerIncorrect": "Réponse incorrecte",
