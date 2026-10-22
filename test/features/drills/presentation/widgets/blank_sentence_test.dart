@@ -114,12 +114,46 @@ void main() {
   });
 
   testWidgets('? ! : ; stay with the word before them', (tester) async {
-    // "cc ?" is 80 wide: with its space, too wide for the 84 beside the box.
-    await pumpSentence(tester, after: ' cc ?', width: 300);
-    expect(find.text('cc ?'), findsOneWidget);
+    // 228 wide, 128 beside the box: room for "cc" and its space, not for
+    // "cc dd ?", so "dd ?" wraps below together.
+    await pumpSentence(tester, after: ' cc dd ?', width: 260);
+    expect(find.text('cc'), findsOneWidget);
+    expect(find.text('dd ?'), findsOneWidget);
     expect(
-      tester.getRect(find.text('cc ?')).top,
+      tester.getRect(find.text('dd ?')).top,
       greaterThanOrEqualTo(tester.getRect(field).bottom),
+    );
+  });
+
+  testWidgets('words share the box’s line, centred with it', (tester) async {
+    // "aa bb cc" and "." fit beside the box with their gaps: one line.
+    await pumpSentence(tester, before: 'aa bb cc ', after: '.');
+    final box = tester.getRect(field);
+    final left = tester.getRect(find.text('aa bb cc'));
+    final right = tester.getRect(find.text('.'));
+    expect(box.left - left.right, 20);
+    expect(right.left - box.right, 2);
+    expect(left.center.dy, moreOrLessEquals(box.center.dy, epsilon: 6));
+    expect((left.left + right.right) / 2, 200);
+  });
+
+  testWidgets('the box stays near the middle: words from the shorter side', (
+    tester,
+  ) async {
+    // 268 beside the box: "cc dd" and "ee ff" with their spaces fit, a third
+    // word on either side doesn't.
+    await pumpSentence(tester, before: 'aa bb cc dd ', after: ' ee ff gg hh');
+    final box = tester.getRect(field);
+    expect(box.center.dx, 200);
+    expect(tester.getRect(find.text('cc dd')).right, lessThan(box.left));
+    expect(tester.getRect(find.text('ee ff')).left, greaterThan(box.right));
+    expect(
+      tester.getRect(find.text('aa bb')).bottom,
+      lessThanOrEqualTo(box.top),
+    );
+    expect(
+      tester.getRect(find.text('gg hh')).top,
+      greaterThanOrEqualTo(box.bottom),
     );
   });
 

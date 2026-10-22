@@ -18,11 +18,12 @@ double textWidth(String text, TextStyle style, TextScaler scaler) {
 /// A sentence with the answer box in place of its noun (decision 70), below
 /// a [header].
 ///
-/// The box sits in the middle of the width. The words before it end at its
-/// left edge and the words after it start at its right edge, as many as fit
-/// there; the rest wrap onto lines above and below. The box's line is as
-/// near the middle of the height as the header and the lines above allow.
-/// When everything is taller than the space, it scrolls.
+/// The box's line holds as many of the words around it as fit across the
+/// width, taken on whichever side is shorter so the box stays as near the
+/// middle as it can, and is centred; the rest wrap onto lines above and
+/// below. The box's line is as near the middle of the height as the header
+/// and the lines above allow. When everything is taller than the space, it
+/// scrolls.
 class BlankSentence extends StatelessWidget {
   const BlankSentence({
     required this.header,
@@ -63,39 +64,24 @@ class BlankSentence extends StatelessWidget {
       builder: (context, constraints) {
         final width = constraints.maxWidth - 2 * _padding;
         final box = math.min(fieldWidth, width);
-        final side = (width - box) / 2;
         // A space between the box and the words beside it, unless they
         // touch, as after *l’* or before a full stop.
         final space = measure(' ');
-        final (above, left) = _fitEnd(
+        final gapBefore = before.endsWith(' ') ? space : _touching;
+        final gapAfter = after.startsWith(' ') ? space : _touching;
+        final (:above, :left, :right, :below) = _fitAround(
           _words(before),
-          side - (before.endsWith(' ') ? space : _touching),
-          measure,
-        );
-        final (right, below) = _fitStart(
           _words(after),
-          side - (after.startsWith(' ') ? space : _touching),
-          measure,
+          room: width - box,
+          measure: measure,
+          gapBefore: gapBefore,
+          gapAfter: gapAfter,
         );
-        final gapBefore = left.isEmpty
-            ? 0.0
-            : (before.endsWith(' ') ? space : _touching);
-        final gapAfter = right.isEmpty
-            ? 0.0
-            : (after.startsWith(' ') ? space : _touching);
         Widget lines(String text) => text.isEmpty
             ? const SizedBox.shrink()
             : Text(text, textAlign: TextAlign.center, style: style);
-        Widget beside(String text, double width, TextAlign align) => SizedBox(
-          width: width,
-          child: Text(
-            text,
-            textAlign: align,
-            style: style,
-            maxLines: 1,
-            softWrap: false,
-          ),
-        );
+        Widget beside(String text) =>
+            Text(text, style: style, maxLines: 1, softWrap: false);
         return SingleChildScrollView(
           padding: const EdgeInsets.all(_padding),
           child: _CentredLineLayout(
@@ -104,19 +90,21 @@ class BlankSentence extends StatelessWidget {
             children: [
               header,
               lines(above),
-              SizedBox(
-                width: width,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.baseline,
-                  textBaseline: TextBaseline.alphabetic,
-                  children: [
-                    beside(left, side - gapBefore, TextAlign.end),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.baseline,
+                textBaseline: TextBaseline.alphabetic,
+                children: [
+                  if (left.isNotEmpty) ...[
+                    beside(left),
                     SizedBox(width: gapBefore),
-                    SizedBox(width: box, child: field),
-                    SizedBox(width: gapAfter),
-                    beside(right, side - gapAfter, TextAlign.start),
                   ],
-                ),
+                  SizedBox(width: box, child: field),
+                  if (right.isNotEmpty) ...[
+                    SizedBox(width: gapAfter),
+                    beside(right),
+                  ],
+                ],
               ),
               lines(below),
             ],
@@ -145,31 +133,43 @@ List<String> _words(String text) {
 
 final _spacedPunctuation = RegExp(r'^[?!:;]+$');
 
-/// [words] split so the last ones fit in [width]: (the rest, those).
-(String, String) _fitEnd(
-  List<String> words,
-  double width,
-  double Function(String) measure,
-) {
-  var start = words.length;
-  while (start > 0 && measure(words.sublist(start - 1).join(' ')) <= width) {
-    start--;
+/// The words [before] and [after] the box, split into those on the lines
+/// above, beside it on the left and right, and on the lines below.
+///
+/// The box's line takes words one at a time while they fit in [room]: from
+/// the end of [before] or the start of [after], whichever side is shorter,
+/// so the box stays near the middle. A side with words takes its gap too.
+({String above, String left, String right, String below}) _fitAround(
+  List<String> before,
+  List<String> after, {
+  required double room,
+  required double Function(String) measure,
+  required double gapBefore,
+  required double gapAfter,
+}) {
+  String left(int n) => before.sublist(before.length - n).join(' ');
+  String right(int n) => after.sublist(0, n).join(' ');
+  double used(int l, int r) =>
+      (l > 0 ? measure(left(l)) + gapBefore : 0) +
+      (r > 0 ? measure(right(r)) + gapAfter : 0);
+  var l = 0;
+  var r = 0;
+  while (true) {
+    final canLeft = l < before.length && used(l + 1, r) <= room;
+    final canRight = r < after.length && used(l, r + 1) <= room;
+    if (!canLeft && !canRight) break;
+    if (canLeft && (!canRight || measure(left(l)) <= measure(right(r)))) {
+      l++;
+    } else {
+      r++;
+    }
   }
-  return (words.sublist(0, start).join(' '), words.sublist(start).join(' '));
-}
-
-/// [words] split so the first ones fit in [width]: (those, the rest).
-(String, String) _fitStart(
-  List<String> words,
-  double width,
-  double Function(String) measure,
-) {
-  var end = 0;
-  while (end < words.length &&
-      measure(words.sublist(0, end + 1).join(' ')) <= width) {
-    end++;
-  }
-  return (words.sublist(0, end).join(' '), words.sublist(end).join(' '));
+  return (
+    above: before.sublist(0, before.length - l).join(' '),
+    left: left(l),
+    right: right(r),
+    below: after.sublist(r).join(' '),
+  );
 }
 
 /// Lays out four children, each centred across the width: a header at the

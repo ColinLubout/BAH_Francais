@@ -180,8 +180,11 @@ void main() {
       expect(before.bottom <= box.top || before.right <= box.left, isTrue);
       expect(after.top >= box.bottom || after.left >= box.right, isTrue);
       // In the middle of the space between the top bar and the buttons.
+      // The box's line is centred, in the middle of the space between the
+      // top bar and the buttons.
       final space = tester.getRect(find.byType(BlankSentence));
-      expect(box.center.dx, space.center.dx);
+      final line = before.right <= box.left ? box.expandToInclude(before) : box;
+      expect(line.center.dx, moreOrLessEquals(space.center.dx, epsilon: 0.5));
       expect(box.center.dy, moreOrLessEquals(space.center.dy, epsilon: 1));
     });
 

@@ -13,9 +13,9 @@
     field opens with the keyboard, without autocorrect or suggestions; *Valider*
     (decision 68) or Enter submits.
   - **The answer box in a sentence** (decision 70, after the owner tried the drill
-    on a phone): the box takes the noun's place in one of its sentences, in the
-    middle of the screen, with the words around it beside it or on the lines above
-    and below. The definition is in smaller text, and *Je ne sais pas* and
+    on a phone): the box takes the noun's place in one of its sentences, near the
+    middle of the screen, with the words around it on its line, or on the lines
+    above and below when they don't fit. The definition is in smaller text, and *Je ne sais pas* and
     *Valider* sit side by side.
   - **Live feedback** as the user types: right letters green and underlined, accent
     slips orange with a dotted underline, and every letter red with a ✗ once one is
@@ -45,7 +45,7 @@
   after two answers, both on a real database file with the bundled pack. The same
   flows run on the computer in the normal test suite (`test/integration/`), and on
   an Android emulator in a new CI job. Both pass on a Pixel 8 emulator (Android 14).
-- **Tests:** 661, all passing. Domain coverage is 98.3%.
+- **Tests:** 663, all passing. Domain coverage is 98.3%.
 
 **The milestone's "done when" and its tests:**
 
@@ -769,12 +769,14 @@ document.
       it is typed count (*chat*, not *chats*; a synonym counts too); the
       validator requires every noun to have one. The feedback panel shows the
       same sentence, the noun in bold.
-    - **The layout:** the box in the middle of the width. The words before it end
-      at its left edge and those after it start at its right edge, as many as fit;
-      the rest wrap onto lines above and below, centred. The box's line is in the
-      middle of the space under the prompt when there is room, lower when the
-      prompt and the lines above need it, and the card scrolls when it is all too
-      tall. *? ! : ;* stay on the line of the word before them.
+    - **The layout:** the box's line holds as many of the words around it as fit
+      across the screen, and is centred. When they don't all fit, the words are
+      taken from whichever side of the box is shorter, so the box stays as near
+      the middle as it can; the rest wrap onto lines above and below, centred.
+      The box's line is in the middle of the space under the prompt when there is
+      room, lower when the prompt and the lines above need it, and the card
+      scrolls when it is all too tall. *? ! : ;* stay on the line of the word
+      before them.
     - **The box** is as wide for every word, wide enough for its hint (*Votre
       réponse*) and the ✗, so it never hints at the word's length; it widens as
       the typing needs. The ✗ shows inside the box, at its end.
