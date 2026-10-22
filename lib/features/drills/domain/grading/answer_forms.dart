@@ -1,4 +1,5 @@
 import 'package:bah_francais/features/content/domain/content_types.dart';
+import 'package:bah_francais/features/content/domain/synonym.dart';
 import 'package:bah_francais/features/drills/domain/grading/normalise.dart';
 import 'package:meta/meta.dart';
 
@@ -8,10 +9,8 @@ const _elided = 'l$apostrophe';
 const List<String> _spaced = ['le', 'la', 'les', 'un', 'une', 'des'];
 const Set<String> _definite = {'le', 'la', 'les', _elided};
 
-/// What a Vocabulary card accepts: the noun and its synonyms, with the
-/// article rules that go with its gender.
-///
-/// Synonyms are taken to share the noun's gender and elision.
+/// What a Vocabulary card accepts: the noun and its synonyms, each with the
+/// article rules of its own gender and elision.
 @immutable
 class VocabularyAnswer {
   const VocabularyAnswer({
@@ -26,18 +25,53 @@ class VocabularyAnswer {
   final String word;
 
   final Gender gender;
-  final List<String> synonyms;
+  final List<Synonym> synonyms;
 
   /// Takes *l’* (*l’arbre*).
   final bool elides;
 
-  /// Only used in the plural (*les ciseaux*).
+  /// Only used in the plural (*les ciseaux*), and so are its synonyms.
   final bool pluralOnly;
 
-  /// Every accepted word, [word] first.
-  List<String> get words => [word, ...synonyms];
+  /// Every accepted word with its article rules, the noun first.
+  List<AcceptedWord> get accepted => [
+    AcceptedWord(
+      word: word,
+      gender: gender,
+      elides: elides,
+      pluralOnly: pluralOnly,
+    ),
+    for (final synonym in synonyms)
+      AcceptedWord(
+        word: synonym.word,
+        gender: synonym.gender ?? gender,
+        elides: synonym.elides ?? elides,
+        pluralOnly: pluralOnly,
+      ),
+  ];
 
-  /// The articles accepted before the noun.
+  /// [word] as shown when no answer was typed (*Je ne sais pas*): with its
+  /// indefinite article when the article is mandatory.
+  String displayAnswer({required bool mandatory}) =>
+      accepted.first.display(mandatory: mandatory);
+}
+
+/// A noun or synonym, with the articles that go with its gender and elision.
+@immutable
+class AcceptedWord {
+  const AcceptedWord({
+    required this.word,
+    required this.gender,
+    required this.elides,
+    required this.pluralOnly,
+  });
+
+  final String word;
+  final Gender gender;
+  final bool elides;
+  final bool pluralOnly;
+
+  /// The articles accepted before the word.
   ///
   /// Singular nouns take *le/la* or *un/une* by gender (either gender for
   /// "les deux" nouns), plural-only nouns *les* or *des*. A noun that takes
@@ -68,9 +102,8 @@ class VocabularyAnswer {
     return feminine ? 'une' : 'un';
   }
 
-  /// [word] as shown when no answer was typed (*Je ne sais pas*): with its
-  /// indefinite article when the article is mandatory.
-  String displayAnswer({required bool mandatory}) => mandatory
+  /// [word], with its indefinite article when the article is mandatory.
+  String display({required bool mandatory}) => mandatory
       ? joinArticle(displayArticle(mandatory: mandatory), word)
       : word;
 }

@@ -105,8 +105,12 @@ class SessionQueue {
     required this._countsOn,
     required this._scheduler,
     required double Function() random,
+    Set<String> everydayCategoryIds = const {},
   }) : _cards = {for (final c in cards) c.card.id: c},
-       _picker = NewCardPicker(random);
+       _picker = NewCardPicker(
+         random,
+         everydayCategoryIds: everydayCategoryIds,
+       );
 
   /// The drill's settings. Changes apply from the next card.
   QueueSettings settings;

@@ -1,11 +1,56 @@
 # Progress
 
-## Current milestone: 1 — Domain core
+## Current milestone: 1 follow-ups
 
-**Status:** built on branch `milestone-1`, pushed, and waiting for the owner's review.
-Milestone 2 doesn't start until it's merged.
+**Status:** built on branch `milestone-1-followups`, waiting for the owner's review.
+Milestone 2, the data layer, comes next, on a branch built on this one.
 
 ### Done
+
+- **Synonyms with their own gender and elision** (decision 42): the Vocabulaire drill
+  accepts each synonym with its own articles.
+- **The order of new cards** (decisions 40 and 41): the user's own words first, then
+  the everyday category, then the topics by their weights.
+- **Tests:** 334, all passing. Domain coverage is 99.5%.
+
+### Left for the owner
+
+- Review and merge the `milestone-1-followups` PR.
+- Add the Codecov upload token as the GitHub Actions secret `CODECOV_TOKEN`, if not
+  done yet.
+- Turn on branch protection for `main`, requiring the three CI jobs, if not done yet.
+- Supply the real logo and app icon (files and sizes in `assets/branding/README.md`).
+- Answer the open questions below before milestone 3.
+
+### Open questions
+
+1. **Wording for the goal-reached message.** When the daily review limit is reached,
+   the drill tells the user they've reached today's goal and to take a break until
+   tomorrow (decision 27). It needs a new key in `strings_fr.json`, for example
+   `drill.dailyGoalReached`, with French you write. It's needed for milestone 3.
+2. **The result word for an exact answer capped at Hard.** An exactly right answer
+   graded Hard because a letter went red or orange while typing: does the feedback
+   panel say *Correct* or *Presque*? Grading gives Hard with no error, and the panel
+   (milestone 3) needs the word.
+
+### Spotted for later milestones
+
+- M2: the content validator could reject a noun spelled starting with *le, la, les,
+  un, une* or *des* and a space, or with *l’*. Grading reads that start as an article
+  (decision 38), so the noun could never be answered right.
+- M3: `drill.leaveSession` ("Terminer la session ?") implies a confirmation dialog, but
+  the spec says × goes straight to the summary.
+- M4: the selected gender tile puts a yellow symbol on teal, which measures 1.28:1,
+  under the 3:1 minimum for meaningful graphics.
+- M5: form validation errors use Material's red, but the spec keeps red for wrong
+  answers only.
+- M6: `drillSettings.title` ("Réglages – {drill}") doesn't match the spec's
+  *Réglages de l'exercice*.
+- M6: for the everyday and Perso categories, only Jamais changes anything (decisions
+  40 and 41): Moins, Normal and Plus all behave the same. Their weight setting may
+  need to be just on or Jamais.
+
+## Milestone 1 — Domain core (merged, PR #3)
 
 - **FSRS:** a port of the py-fsrs 6.3.2 scheduler (`lib/features/drills/domain/fsrs/`),
   checked against py-fsrs's own reference tests.
@@ -57,44 +102,6 @@ Milestone 2 doesn't start until it's merged.
 | All scheduling works offline | `domain_purity_test.dart`: the domain can't reach the network |
 | Force-closing mid-session loses no answered card | Milestone 3. It needs the database (M2) and the drill screen (M3), and the build plan puts it in M3. |
 | All user-facing text in French except Welcome | The strings generator (M0) and each screen's widget tests |
-
-### Left for the owner
-
-- Review and merge the `milestone-1` PR.
-- Add the Codecov upload token as the GitHub Actions secret `CODECOV_TOKEN`, if not
-  done yet.
-- Turn on branch protection for `main`, requiring the three CI jobs, if not done yet.
-- Supply the real logo and app icon (files and sizes in `assets/branding/README.md`).
-- Answer the open questions below before milestone 3.
-
-### Open questions
-
-1. **Wording for the goal-reached message.** When the daily review limit is reached,
-   the drill tells the user they've reached today's goal and to take a break until
-   tomorrow (decision 27). It needs a new key in `strings_fr.json`, for example
-   `drill.dailyGoalReached`, with French you write. It's needed for milestone 3.
-2. **The result word for an exact answer capped at Hard.** An exactly right answer
-   graded Hard because a letter went red or orange while typing: does the feedback
-   panel say *Correct* or *Presque*? Grading gives Hard with no error, and the panel
-   (milestone 3) needs the word.
-3. **Synonyms with a different gender.** A synonym is taken to share its noun's gender
-   and elision: *une voiture* / *une auto*, *l’* for both or neither. If content ever
-   needs a synonym of another gender, the content model needs a way to say so. This
-   is for milestone 2.
-
-### Spotted for later milestones
-
-- M2: the content validator could reject a noun spelled starting with *le, la, les,
-  un, une* or *des* and a space, or with *l’*. Grading reads that start as an article
-  (decision 38), so the noun could never be answered right.
-- M3: `drill.leaveSession` ("Terminer la session ?") implies a confirmation dialog, but
-  the spec says × goes straight to the summary.
-- M4: the selected gender tile puts a yellow symbol on teal, which measures 1.28:1,
-  under the 3:1 minimum for meaningful graphics.
-- M5: form validation errors use Material's red, but the spec keeps red for wrong
-  answers only.
-- M6: `drillSettings.title` ("Réglages – {drill}") doesn't match the spec's
-  *Réglages de l'exercice*.
 
 ## Milestone 0 — Project setup (merged, PR #1)
 
@@ -307,6 +314,32 @@ document.
     *l’*, always has that article split off before the word is compared. No noun is
     spelled starting with one, so the word is never tried again with the article as
     part of it. Without the space or apostrophe, those letters are part of the word.
+
+### 2026-10-19 (milestone 1 follow-ups, agreed with the owner)
+
+39. **Categories are prioritised with their weights only** (Jamais / Moins / Normal /
+    Plus), as the spec says. Users don't reorder categories: a category's
+    `sort_order` in the content decides where it is listed.
+40. **The everyday category.** The content can mark one noun category and one verb
+    category as the everyday set, the universally useful words, with
+    `"everyday": true`. The other categories are topics.
+    - While a drill's everyday category has new cards, they come before any topic's.
+      After that, the topics go by their weights.
+    - Setting it to Jamais skips it, and pauses its reviews as Jamais always does.
+      Moins and Plus make no difference to it.
+    - *Adds to* Category weighting and new-card order.
+41. **The user's own words come first** among all new cards, oldest first: before the
+    everyday set and the topics, from any of their categories not set to Jamais.
+    - *Changes* decision 35, where Perso words came first only within their
+      category. The Perso category's weight now only matters for Jamais.
+42. **A synonym can have its own gender and elision** (open question 3). The
+    Vocabulaire drill accepts each synonym with its own articles: *la voiture*, but
+    *l’auto*.
+    - In a content file, a synonym is a plain word when it shares the noun's gender
+      and elision, and otherwise `{ "word": "auto", "elides": true }`, with
+      `"gender"` too when that differs.
+    - A plural-only noun's synonyms are plural-only too.
+    - *Replaces* decision 28's "synonyms share the noun's gender and elision".
 
 ### Notes
 
