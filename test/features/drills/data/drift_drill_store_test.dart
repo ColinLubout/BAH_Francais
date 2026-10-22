@@ -101,8 +101,8 @@ void main() {
       );
       final view = await session.next() as CardQuestion;
       clock.advance(const Duration(seconds: 3));
-      await session.submit(view.card.item.answer.word);
-      await session.overrideGrade();
+      final (next, offer) = await session.submit(view.card.item.answer.word);
+      await session.tooEasy(offer!);
 
       final logs = await db.select(db.reviewLogs).get();
       expect(logs.single.rating, Rating.easy);
@@ -113,12 +113,13 @@ void main() {
       expect(sessions.single.answered, 1);
       expect(sessions.single.correct, 1);
 
+      // A Correct answer moved on: the mark is for the card now shown.
+      final shown = (next as CardQuestion).card.item.nounId;
       final (mark, _) = await session.markKnown();
-      final known = await DriftDrillStore(db)
-          .cardsOfItem(view.card.item.nounId);
+      final known = await DriftDrillStore(db).cardsOfItem(shown);
       expect(known.every((c) => c.isKnown), isTrue);
       await session.undoKnown(mark);
-      final back = await DriftDrillStore(db).cardsOfItem(view.card.item.nounId);
+      final back = await DriftDrillStore(db).cardsOfItem(shown);
       expect(back.any((c) => c.isKnown), isFalse);
     },
   );

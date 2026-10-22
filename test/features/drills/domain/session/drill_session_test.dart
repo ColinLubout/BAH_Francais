@@ -3,6 +3,7 @@
 
 import 'package:bah_francais/features/content/domain/content_types.dart';
 import 'package:bah_francais/features/content/domain/synonym.dart';
+import 'package:bah_francais/features/drills/domain/card.dart';
 import 'package:bah_francais/features/drills/domain/drill_type.dart';
 import 'package:bah_francais/features/drills/domain/grading/answer_forms.dart';
 import 'package:bah_francais/features/drills/domain/grading/grade.dart';
@@ -115,12 +116,12 @@ void main() {
         expect(item.sentencesToFill, [first, capital, synonym]);
       });
 
-      test('is chosen at random, and shown again filled in', () async {
+      test('is chosen at random, and stays for the correction', () async {
         final (session, _) = await open(oneNoun(item: item));
         final card = ((await session.next()) as CardQuestion).card;
         expect(card.sentence, first);
-        final view = await session.submit('fourchette') as CardFeedback;
-        expect(view.example, first);
+        final (view, _) = await session.submit('zz');
+        expect((view as CardFeedback).card.sentence, first);
 
         final (last, _) = await open(oneNoun(item: item), random: 0.99);
         expect(((await last.next()) as CardQuestion).card.sentence, synonym);
@@ -134,7 +135,7 @@ void main() {
         expect(view.grade.answer, 'fourchette');
       });
 
-      test('none as it is typed: the box alone, and any example', () async {
+      test('none as it is typed: the box alone', () async {
         final (session, _) = await open(
           oneNoun(
             item: VocabularyItem(
@@ -147,8 +148,6 @@ void main() {
         );
         final card = ((await session.next()) as CardQuestion).card;
         expect(card.sentence, isNull);
-        final view = await session.submit('fourchette') as CardFeedback;
-        expect(view.example, plural);
       });
     });
 
@@ -189,44 +188,57 @@ void main() {
   });
 
   group('answering', () {
-    test('an exact answer is Correct, and saved at once', () async {
-      final store = oneNoun();
-      final (session, clock) = await open(store);
-      await session.next();
-      clock.advance(const Duration(seconds: 4));
-      final view = await session.submit('fourchette') as CardFeedback;
+    test(
+      'an exact answer is Correct, saved, and the next card comes',
+      () async {
+        final store = FakeStore(
+          cards: [
+            newCard(itemId: 'n.fourchette', id: 1),
+            newCard(itemId: 'n.ecole', id: 2),
+          ],
+          items: const {'n.fourchette': fourchette, 'n.ecole': ecole},
+        );
+        final (session, clock) = await open(store);
+        final first = (await session.next() as CardQuestion).card;
+        clock.advance(const Duration(seconds: 4));
+        final (view, _) = await session.submit(first.item.answer.word);
 
-      expect(view.grade.rating, Rating.good);
-      expect(view.example, fourchette.examples.single);
-      expect(view.offersTooEasy, isTrue);
-      expect(view.offersTypo, isFalse);
+        // No correction: the other card at once (decision 71).
+        expect(view, isA<CardQuestion>());
+        expect((view as CardQuestion).card.card.id, isNot(first.card.id));
+        expect(session.summary.correct, 1);
 
-      // The session row is written with the first answer, dated its start.
-      expect(store.sessionsStarted, [noon]);
-      final answer = store.answers.single;
-      expect(answer.sessionId, 7);
-      expect(answer.typed, 'fourchette');
-      expect(answer.responseTime, const Duration(seconds: 4));
-      expect(answer.errorType, ErrorType.none);
-      expect(answer.outcome.rating, Rating.good);
-      expect(answer.outcome.reviewedAt, clock.nowUtc());
-      expect(answer.outcome.studyDay, today);
-    });
+        // The session row is written with the first answer, dated its start.
+        expect(store.sessionsStarted, [noon]);
+        final answer = store.answers.single;
+        expect(answer.sessionId, 7);
+        expect(answer.typed, first.item.answer.word);
+        expect(answer.responseTime, const Duration(seconds: 4));
+        expect(answer.errorType, ErrorType.none);
+        expect(answer.outcome.rating, Rating.good);
+        expect(answer.outcome.reviewedAt, clock.nowUtc());
+        expect(answer.outcome.studyDay, today);
+      },
+    );
 
     test('a letter that went red or orange caps it at Hard', () async {
       final (session, _) = await open(oneNoun());
       await session.next();
-      final view = await session.submit('fourchette', capsGrade: true);
+      final (view, offer) = await session.submit('fourchette', capsGrade: true);
+      // Presque stays for its correction, with what was typed.
       expect((view as CardFeedback).grade.rating, Rating.hard);
+      expect(view.typed, 'fourchette');
+      expect(offer, isNull);
     });
 
     test('a wrong answer is Again, and offers Faute de frappe', () async {
       final (session, _) = await open(oneNoun());
       await session.next();
-      final view = await session.submit('zz') as CardFeedback;
-      expect(view.grade.rating, Rating.again);
+      final (view, offer) = await session.submit('zz');
+      expect((view as CardFeedback).grade.rating, Rating.again);
+      expect(view.typed, 'zz');
       expect(view.offersTypo, isTrue);
-      expect(view.offersTooEasy, isFalse);
+      expect(offer, isNull);
     });
 
     test('Je ne sais pas is Again, shows the answer, offers nothing', () async {
@@ -238,6 +250,7 @@ void main() {
       expect(view.grade.errorType, ErrorType.gaveUp);
       expect(view.grade.answer, 'fourchette');
       expect(view.offersTypo, isFalse);
+      expect(view.typed, isNull);
       expect(store.answers.single.typed, isNull);
     });
 
@@ -273,8 +286,9 @@ void main() {
       await session.submit('zz');
       expect(session.summary.correct, 0);
 
-      final view = await session.overrideGrade() as CardFeedback;
+      final view = await session.markTypo() as CardFeedback;
       expect(view.grade.rating, Rating.hard);
+      expect(view.typed, 'zz');
       expect(view.grade.errorType, ErrorType.typoOverride);
       expect(view.overridden, isTrue);
       expect(view.offersTypo, isFalse);
@@ -284,18 +298,49 @@ void main() {
       expect(answer.outcome.rating, Rating.hard);
       expect(answer.typed, 'zz');
       expect(session.summary.correct, 1);
-      expect(session.overrideGrade, throwsStateError);
+      expect(session.markTypo, throwsStateError);
     });
 
-    test('Trop facile makes it Easy', () async {
+    test('Trop facile, offered once moved on, makes it Easy', () async {
       final store = oneNoun();
+      final (session, clock) = await open(store);
+      await session.next();
+      clock.advance(const Duration(seconds: 3));
+      final (_, offer) = await session.submit('fourchette');
+      clock.advance(const Duration(seconds: 2));
+      await session.tooEasy(offer!);
+
+      final (logId, answer) = store.replaced.single;
+      expect(logId, 101);
+      expect(answer.outcome.rating, Rating.easy);
+      expect(answer.outcome.before.state, CardState.newCard);
+      expect(answer.typed, 'fourchette');
+      expect(answer.responseTime, const Duration(seconds: 3));
+      expect(session.summary.correct, 1);
+    });
+
+    test('Trop facile only for a word met for the first time', () async {
+      final store = FakeStore(
+        cards: [reviewCard(due: noon, itemId: 'n.fourchette', id: 1)],
+        items: const {'n.fourchette': fourchette},
+      );
       final (session, _) = await open(store);
       await session.next();
-      await session.submit('fourchette');
-      final view = await session.overrideGrade() as CardFeedback;
-      expect(view.grade.rating, Rating.easy);
-      expect(store.replaced.single.$2.outcome.rating, Rating.easy);
-      expect(session.summary.correct, 1);
+      final (_, offer) = await session.submit('fourchette');
+      expect(offer, isNull);
+    });
+
+    test('a word back on screen meanwhile takes its Easy state', () async {
+      // The only card comes back at once, in free practice.
+      final (session, _) = await open(oneNoun());
+      await session.next();
+      final (view, offer) = await session.submit('fourchette');
+      expect((view as CardQuestion).card.card.id, 1);
+      await session.tooEasy(offer!);
+      final now = (session.view as CardQuestion).card;
+      expect(now.card.state, CardState.review);
+      expect(now.item, view.card.item);
+      expect(now.sentence, view.card.sentence);
     });
 
     test(
@@ -303,9 +348,9 @@ void main() {
       () async {
         final (session, _) = await open(oneNoun());
         await session.next();
-        expect(session.overrideGrade, throwsStateError);
+        expect(session.markTypo, throwsStateError);
         await session.giveUp();
-        expect(session.overrideGrade, throwsStateError);
+        expect(session.markTypo, throwsStateError);
       },
     );
   });

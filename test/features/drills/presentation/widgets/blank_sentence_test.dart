@@ -19,6 +19,8 @@ Future<void> pumpSentence(
   double width = 400,
   double height = 400,
   double headerHeight = 50,
+  Widget? footer,
+  bool holdLine = false,
 }) async {
   await tester.pumpWidget(
     MaterialApp(
@@ -34,6 +36,8 @@ Future<void> pumpSentence(
               after: after,
               style: _style,
               fieldWidth: 100,
+              footer: footer,
+              holdLine: holdLine,
               field: const TextField(
                 key: _fieldKey,
                 style: _style,
@@ -182,6 +186,28 @@ void main() {
       lessThanOrEqualTo(tester.getRect(field).top),
     );
     expect(tester.takeException(), isNull);
+  });
+  testWidgets('the footer goes under the sentence, the box stays', (
+    tester,
+  ) async {
+    await pumpSentence(tester, after: ' aa');
+    final box = tester.getRect(field);
+    const footer = SizedBox(key: Key('footer'), width: 10, height: 30);
+    await pumpSentence(tester, after: ' aa', footer: footer);
+    expect(tester.getRect(field), box);
+    final under = tester.getRect(find.byKey(const Key('footer')));
+    expect(under.top, greaterThanOrEqualTo(box.bottom + 16));
+  });
+
+  testWidgets('holdLine keeps the box where it was as the space grows', (
+    tester,
+  ) async {
+    await pumpSentence(tester);
+    final box = tester.getRect(field);
+    await pumpSentence(tester, height: 600, holdLine: true);
+    expect(tester.getRect(field), box);
+    await pumpSentence(tester, height: 600);
+    expect(tester.getRect(field).center.dy, 300);
   });
 
   test('a text is measured on one line, at the text size', () {

@@ -52,31 +52,48 @@ class CardQuestion extends DrillView {
   final bool startsFreePractice;
 }
 
-/// The feedback panel after an answer.
+/// The correction after an answer that wasn't Correct: *Presque*,
+/// *Incorrect* or *Je ne sais pas*. The card stays as it was, with what was
+/// typed, and the answer shows under it (decision 71). A Correct answer has
+/// none: the next card comes at once.
 class CardFeedback extends DrillView {
   const CardFeedback(
     this.card,
     this.grade, {
-    this.example,
+    this.typed,
     this.overridden = false,
   });
 
   final VocabularyCard card;
   final Grade grade;
 
-  /// The question's sentence, or else one of the noun's, with the noun in
-  /// bold.
-  final ExampleSentence? example;
+  /// What was typed; none after *Je ne sais pas*.
+  final String? typed;
 
-  /// *Faute de frappe* or *Trop facile* was used: no override is offered
-  /// any more.
+  /// *Faute de frappe* was used: it isn't offered any more.
   final bool overridden;
 
   /// *Faute de frappe* is offered after a wrong answer.
   bool get offersTypo => !overridden && grade.canMarkTypo;
+}
 
-  /// *Trop facile* is offered after a correct one.
-  bool get offersTooEasy => !overridden && grade.canMarkTooEasy;
+/// A Correct answer to a word met for the first time, already behind:
+/// *Trop facile* can still make it Easy, for a few seconds (decision 71).
+@immutable
+class TooEasyOffer {
+  const TooEasyOffer._({
+    required this.grade,
+    required this.outcome,
+    required this.logId,
+    required this.responseTime,
+    required this.typed,
+  });
+
+  final Grade grade;
+  final ReviewOutcome outcome;
+  final int logId;
+  final Duration responseTime;
+  final String typed;
 }
 
 /// The review limit is reached and nothing else is left:
@@ -220,10 +237,9 @@ class DrillSession {
   int _correct = 0;
   DateTime? _lastAnswerAt;
 
-  /// The answer now on screen in the feedback panel, for the overrides.
+  /// The answer now corrected on screen, for *Faute de frappe*.
   ReviewOutcome? _outcome;
   int? _logId;
-  String? _typed;
 
   /// What the screen shows now.
   DrillView get view => _view;
@@ -262,7 +278,14 @@ class DrillSession {
 
   /// Grades [typed] and saves the answer. [capsGrade] means a letter went
   /// red or orange while typing, which caps the grade at Hard.
-  Future<DrillView> submit(String typed, {bool capsGrade = false}) {
+  ///
+  /// A Correct answer moves straight on to the next card, with a
+  /// [TooEasyOffer] the first time the word is answered. Any other answer
+  /// shows its correction (decision 71).
+  Future<(DrillView, TooEasyOffer?)> submit(
+    String typed, {
+    bool capsGrade = false,
+  }) async {
     final card = _question.card;
     final grade = gradeVocabulary(
       typed: typed,
@@ -270,57 +293,85 @@ class DrillSession {
       articleMandatory: false,
       flaggedWhileTyping: capsGrade,
     );
-    return _answer(card, grade, typed: typed);
+    final saved = await _answer(card, grade, typed: typed);
+    if (grade.rating != Rating.good && grade.rating != Rating.easy) {
+      return (_view = CardFeedback(card, grade, typed: typed), null);
+    }
+    final firstTime =
+        card.card.state == CardState.newCard && grade.canMarkTooEasy;
+    final offer = firstTime
+        ? TooEasyOffer._(
+            grade: grade,
+            outcome: saved.outcome,
+            logId: saved.logId,
+            responseTime: saved.responseTime,
+            typed: typed,
+          )
+        : null;
+    return (await next(), offer);
   }
 
   /// *Je ne sais pas*: Again, and the answer is shown.
-  Future<DrillView> giveUp() {
+  Future<DrillView> giveUp() async {
     final card = _question.card;
     final grade = Grade.gaveUp(
       card.item.answer.displayAnswer(mandatory: false),
     );
-    return _answer(card, grade);
+    await _answer(card, grade);
+    return _view = CardFeedback(card, grade);
   }
 
-  /// *Faute de frappe* after a wrong answer, or *Trop facile* after a correct
-  /// one: the answer is saved again with the new grade.
-  Future<DrillView> overrideGrade() async {
+  /// *Faute de frappe* after a wrong answer: it is saved again as Hard.
+  Future<DrillView> markTypo() async {
     final feedback = _view;
     final outcome = _outcome;
     final logId = _logId;
     if (feedback is! CardFeedback || outcome == null || logId == null) {
       throw StateError('No answer to override');
     }
-    final Grade grade;
-    if (feedback.offersTypo) {
-      grade = feedback.grade.markTypo();
-    } else if (feedback.offersTooEasy) {
-      grade = feedback.grade.markTooEasy();
-    } else {
-      throw StateError('No override is offered');
+    if (!feedback.offersTypo) {
+      throw StateError('Faute de frappe is not offered');
     }
-    final regraded = _scheduler.regrade(outcome, grade.rating);
-    await _store.replaceAnswer(
+    final grade = feedback.grade.markTypo();
+    _outcome = await _regrade(
+      outcome,
       logId,
-      Answer(
-        outcome: regraded,
-        sessionId: _sessionId!,
-        responseTime: _responseTime,
-        errorType: grade.errorType,
-        typed: _typed,
-      ),
+      grade,
+      responseTime: _responseTime,
+      typed: feedback.typed,
     );
-    _queue.recordRegrade(regraded);
-    if (outcome.rating == Rating.again && grade.rating != Rating.again) {
-      _correct++;
-    }
-    _outcome = regraded;
     return _view = CardFeedback(
       feedback.card,
       grade,
-      example: feedback.example,
+      typed: feedback.typed,
       overridden: true,
     );
+  }
+
+  /// *Trop facile*, from [offer], once the session has moved on: the answer
+  /// is saved again as Easy. If the card is back on screen meanwhile, it is
+  /// answered from its new state.
+  Future<void> tooEasy(TooEasyOffer offer) async {
+    final regraded = await _regrade(
+      offer.outcome,
+      offer.logId,
+      offer.grade.markTooEasy(),
+      responseTime: offer.responseTime,
+      typed: offer.typed,
+    );
+    final view = _view;
+    if (view is CardQuestion && view.card.card.id == regraded.after.id) {
+      final card = view.card;
+      _view = CardQuestion(
+        VocabularyCard(
+          card: regraded.after,
+          item: card.item,
+          prompt: card.prompt,
+          sentence: card.sentence,
+        ),
+        startsFreePractice: view.startsFreePractice,
+      );
+    }
   }
 
   /// *Je le connais*: the noun's cards in every drill leave practice, with
@@ -359,7 +410,7 @@ class DrillSession {
     return time.isNegative ? Duration.zero : time;
   }
 
-  Future<DrillView> _answer(
+  Future<({ReviewOutcome outcome, int logId, Duration responseTime})> _answer(
     VocabularyCard card,
     Grade grade, {
     String? typed,
@@ -376,25 +427,49 @@ class DrillSession {
       at: startedAt,
     );
     _lastAnswerAt = now;
-    _logId = await _store.recordAnswer(
+    final responseTime = _responseTime;
+    final logId = await _store.recordAnswer(
       Answer(
         outcome: outcome,
         sessionId: sessionId,
-        responseTime: _responseTime,
+        responseTime: responseTime,
         errorType: grade.errorType,
         typed: typed,
       ),
     );
     _queue.record(outcome);
     _outcome = outcome;
-    _typed = typed;
+    _logId = logId;
     _answered++;
     if (grade.rating != Rating.again) _correct++;
-    return _view = CardFeedback(
-      card,
-      grade,
-      example: card.sentence ?? _pick(card.item.examples),
+    return (outcome: outcome, logId: logId, responseTime: responseTime);
+  }
+
+  /// Saves the answer [logId] again with [grade], scheduled again from the
+  /// card's state before it.
+  Future<ReviewOutcome> _regrade(
+    ReviewOutcome outcome,
+    int logId,
+    Grade grade, {
+    required Duration responseTime,
+    String? typed,
+  }) async {
+    final regraded = _scheduler.regrade(outcome, grade.rating);
+    await _store.replaceAnswer(
+      logId,
+      Answer(
+        outcome: regraded,
+        sessionId: _sessionId!,
+        responseTime: responseTime,
+        errorType: grade.errorType,
+        typed: typed,
+      ),
     );
+    _queue.recordRegrade(regraded);
+    if (outcome.rating == Rating.again && grade.rating != Rating.again) {
+      _correct++;
+    }
+    return regraded;
   }
 
   /// One of [items], chosen with the session's randomness.

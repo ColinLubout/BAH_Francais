@@ -24,7 +24,7 @@ double textWidth(String text, TextStyle style, TextScaler scaler) {
 /// below. The box's line is as near the middle of the height as the header
 /// and the lines above allow. When everything is taller than the space, it
 /// scrolls.
-class BlankSentence extends StatelessWidget {
+class BlankSentence extends StatefulWidget {
   const BlankSentence({
     required this.header,
     required this.before,
@@ -32,6 +32,8 @@ class BlankSentence extends StatelessWidget {
     required this.style,
     required this.field,
     required this.fieldWidth,
+    this.footer,
+    this.holdLine = false,
     super.key,
   });
 
@@ -51,13 +53,39 @@ class BlankSentence extends StatelessWidget {
   /// The box's width, before it is capped to the width there is.
   final double fieldWidth;
 
+  /// Under the sentence, without moving the box: the correction.
+  final Widget? footer;
+
+  /// Keeps the box's line where it is, though the space changes: the
+  /// keyboard closes when the correction shows.
+  final bool holdLine;
+
+  @override
+  State<BlankSentence> createState() => _BlankSentenceState();
+}
+
+class _BlankSentenceState extends State<BlankSentence> {
   static const _padding = 16.0;
 
   /// The gap between the box and a word that touches it.
   static const _touching = 2.0;
 
+  /// The height the box's line is centred in, kept while
+  /// [BlankSentence.holdLine].
+  double? _height;
+
   @override
   Widget build(BuildContext context) {
+    final BlankSentence(
+      :header,
+      :before,
+      :after,
+      :style,
+      :field,
+      :fieldWidth,
+      :footer,
+      :holdLine,
+    ) = widget;
     final scaler = MediaQuery.textScalerOf(context);
     double measure(String text) => textWidth(text, style, scaler);
     return LayoutBuilder(
@@ -85,7 +113,10 @@ class BlankSentence extends StatelessWidget {
         return SingleChildScrollView(
           padding: const EdgeInsets.all(_padding),
           child: _CentredLineLayout(
-            height: constraints.maxHeight - 2 * _padding,
+            height: switch (_height) {
+              final held? when holdLine => held,
+              _ => _height = constraints.maxHeight - 2 * _padding,
+            },
             gap: _padding,
             children: [
               header,
@@ -107,6 +138,7 @@ class BlankSentence extends StatelessWidget {
                 ],
               ),
               lines(below),
+              footer ?? const SizedBox.shrink(),
             ],
           ),
         );
@@ -172,13 +204,15 @@ final _spacedPunctuation = RegExp(r'^[?!:;]+$');
   );
 }
 
-/// Lays out four children, each centred across the width: a header at the
-/// top, then the lines above a line, the line, and the lines below it. The
-/// line sits as near the middle of [height] as the header and the lines
-/// above allow, and as the lines below need. It is taller than [height]
-/// when its children are, for a scroll view.
+/// Lays out five children, each centred across the width: a header at the
+/// top, then the lines above a line, the line, the lines below it, and a
+/// footer. The line sits as near the middle of [height] as the header and
+/// the lines above allow, and as the lines below need; the footer doesn't
+/// move it. It is taller than [height] when its children are, for a scroll
+/// view.
 class _CentredLineLayout extends MultiChildRenderObjectWidget {
-  /// [children]: the header, the lines above, the line, the lines below.
+  /// [children]: the header, the lines above, the line, the lines below, the
+  /// footer.
   const _CentredLineLayout({
     required this.height,
     required this.gap,
@@ -236,17 +270,20 @@ class _RenderCentredLine extends RenderBox
     }
   }
 
-  /// Each child's top, from their sizes, and the height they take.
+  /// Each child's top, from their sizes, and the height they take. The
+  /// footer goes under the rest, and never moves the line.
   (List<double>, double) _place(List<Size> sizes) {
-    final [header, above, line, below] = sizes;
+    final [header, above, line, below, footer] = sizes;
     final gap = header.height > 0 ? _gap : 0.0;
     final middle = (_height - line.height) / 2;
     final highest = header.height + gap + above.height;
     final lowest = _height - line.height - below.height;
     final top = math.max(highest, math.min(middle, lowest));
+    final footerTop =
+        top + line.height + below.height + (footer.height > 0 ? _gap : 0.0);
     return (
-      [0, top - above.height, top, top + line.height],
-      math.max(_height, top + line.height + below.height),
+      [0, top - above.height, top, top + line.height, footerTop],
+      math.max(_height, footerTop + footer.height),
     );
   }
 

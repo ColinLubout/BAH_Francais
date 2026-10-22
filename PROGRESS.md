@@ -24,9 +24,12 @@
   - **The accent bar** inserts at the cursor and keeps the keyboard open.
   - ***Je ne sais pas*** and ***Je le connais***: the next card at once, with
     *Annuler* for 5 seconds; a known mark writes no rating and no review-log row.
-  - **The feedback panel:** *Correct* / *Presque* / *Incorrect* with an icon as well
-    as a colour, the answer with its wrong letters marked, an example sentence with
-    the noun in bold, *Trop facile* or *Faute de frappe*, and *Suivant*.
+  - **After *Valider*** (decision 71): a Correct answer moves straight on, with
+    *Trop facile* offered for 5 seconds the first time a word is answered. Presque,
+    Incorrect and *Je ne sais pas* keep the card in place, the box keeping what was
+    typed, and show the result (an icon as well as a colour) and the answer with
+    its wrong letters marked under the sentence, with *Faute de frappe* (after
+    Incorrect) and *Suivant*.
   - **The session:** milestone 1's queue over the database. *Tout est à jour* once,
     above free practice; *Ça suffit pour aujourd’hui* at the daily goal; *Aucune
     carte disponible* with a way to the settings. Each answer is saved as it is
@@ -45,7 +48,7 @@
   after two answers, both on a real database file with the bundled pack. The same
   flows run on the computer in the normal test suite (`test/integration/`), and on
   an Android emulator in a new CI job. Both pass on a Pixel 8 emulator (Android 14).
-- **Tests:** 663, all passing. Domain coverage is 98.3%.
+- **Tests:** 670, all passing. Domain coverage is 98.3%.
 
 **The milestone's "done when" and its tests:**
 
@@ -87,7 +90,9 @@ None.
   *0 cartes* and *1 cartes*. It needs a `drill.cardsAnswered_one` from the owner
   (decision 10's plural keys).
 - M4: the Conjugaison drill puts its answer box in its sentence the same way
-  (decision 70), with `BlankSentence`.
+  (decision 70), with `BlankSentence`, and follows *Valider* the same way
+  (decision 71). The Genre drill already moves on after a Correct answer, after a
+  second; whether its corrections also stay in place is for M4.
 - M7 and M8: the first-launch import runs on the main isolate. That is quick for
   the 127 KB pack, but the full content may hold the launch for longer; it could
   move to a background isolate.
@@ -767,8 +772,8 @@ document.
     - **The sentence:** one of the noun's sentences, chosen at random on each
       review, with the box in place of the noun. Only sentences with the noun as
       it is typed count (*chat*, not *chats*; a synonym counts too); the
-      validator requires every noun to have one. The feedback panel shows the
-      same sentence, the noun in bold.
+      validator requires every noun to have one. It stays on screen for the
+      correction (decision 71).
     - **The layout:** the box's line holds as many of the words around it as fit
       across the screen, and is centred. When they don't all fit, the words are
       taken from whichever side of the box is shorter, so the box stays as near
@@ -777,9 +782,10 @@ document.
       room, lower when the prompt and the lines above need it, and the card
       scrolls when it is all too tall. *? ! : ;* stay on the line of the word
       before them.
-    - **The box** is as wide for every word, wide enough for its hint (*Votre
-      réponse*) and the ✗, so it never hints at the word's length; it widens as
-      the typing needs. The ✗ shows inside the box, at its end.
+    - **The box** is as wide for every word, so it never hints at the word's
+      length: about five letters of the sentence's font, and room for the ✗. It
+      widens as the typing needs. The ✗ shows inside the box, at its end. It is
+      empty: *Votre réponse* is its screen-reader label only (decision 71).
     - **The article:** the box takes the noun alone, since the sentence has its
       article. An article typed anyway is graded as before (right, or Hard if
       wrong). **Article obligatoire leaves the Vocabulaire settings**: the
@@ -792,6 +798,28 @@ document.
       obligatoire), Drill settings (Article obligatoire), Typing behaviour (*Je ne
       sais pas* "under the field", and the ✗ "beside the field"), and Content
       files (the validator rule).
+71. **What follows *Valider***, after the owner tried decision 70 on a phone.
+    - **Correct** moves straight on to the next card, with no feedback panel.
+      The first time a word is answered (its card was new), a snackbar *Correct ·
+      Trop facile* stays for 5 seconds; *Trop facile* makes that answer Easy.
+      Later Correct answers offer nothing.
+    - **Presque and Incorrect** keep the card as it is: the prompt, the sentence
+      and the box with what was typed, which can no longer be changed. Under the
+      sentence come the result, a word with its icon (*Incorrect*, *Presque*),
+      and *Réponse : …* with the wrong letters marked. *Faute de frappe* (after
+      Incorrect only) and *Suivant* take the places of *Je ne sais pas* and
+      *Valider*. The keyboard closes, and the box doesn't move. *Je ne sais pas*
+      does the same, the box left as it was.
+    - **No separate example sentence**: the question's sentence is already on
+      screen.
+    - **The box has no visible hint**: *Votre réponse* is its screen-reader label
+      only.
+    - **Snackbars** (this one and *Je le connais*'s *Annuler*) float just above
+      the buttons and accent bar, so the next answer can be given meanwhile, and
+      go after 5 seconds.
+    - *Changes* Activities → Shared drill behaviour (the feedback panel and
+      Advancing), Typing behaviour, and decision 26 (*Trop facile* only after a
+      word's first answer, from a snackbar).
 
 ### Notes
 
@@ -807,3 +835,7 @@ document.
 - `flutter test integration_test` needs a phone or an emulator: start one with
   `flutter emulators --launch <id>` and pass `-d <device>`. With none, the same
   flows run on the computer with `flutter test`.
+- In Flutter 3.47, a snackbar with an action stays until it is dismissed
+  (`SnackBar.persist` defaults to true when there is one). The drill's snackbars set
+  `persist: false`, so *Annuler* and *Trop facile* go after 5 seconds as the spec
+  says; a test checks it.

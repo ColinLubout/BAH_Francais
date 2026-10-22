@@ -9,9 +9,8 @@ import 'package:bah_francais/features/drills/domain/session/drill_session.dart';
 import 'package:bah_francais/features/drills/domain/session/vocabulary_item.dart';
 import 'package:bah_francais/features/drills/presentation/drill_controller.dart';
 import 'package:bah_francais/features/drills/presentation/drill_providers.dart';
-import 'package:bah_francais/features/drills/presentation/widgets/feedback_panel.dart';
 import 'package:bah_francais/features/drills/presentation/widgets/prompt_image.dart';
-import 'package:bah_francais/features/drills/presentation/widgets/vocabulary_question.dart';
+import 'package:bah_francais/features/drills/presentation/widgets/vocabulary_card_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -61,7 +60,9 @@ class _DrillScreenState extends ConsumerState<DrillScreen> {
   }
 
   /// × or back: the summary, or straight to Accueil if nothing was answered.
+  /// A snackbar still showing (*Trop facile*, *Annuler*) stays with the card.
   void _close() {
+    ScaffoldMessenger.of(context).removeCurrentSnackBar();
     final answered =
         ref.read(_provider).hasValue &&
         !ref.read(_provider.notifier).summary.isEmpty;
@@ -77,20 +78,53 @@ class _DrillScreenState extends ConsumerState<DrillScreen> {
     context.go(Routes.home);
   }
 
+  /// *Valider*. A Correct answer moves straight on; the first time the word
+  /// is answered, *Trop facile* stays on offer for a few seconds
+  /// (decision 71).
+  Future<void> _submit(String typed, {required bool capsGrade}) async {
+    final controller = ref.read(_provider.notifier);
+    final offer = await controller.submit(typed, capsGrade: capsGrade);
+    if (offer == null || !mounted) return;
+    _snackBar(
+      Strings.drillResultCorrect,
+      action: Strings.drillTooEasy,
+      onAction: () => controller.tooEasy(offer),
+    );
+  }
+
   Future<void> _markKnown() async {
     final controller = ref.read(_provider.notifier);
     final mark = await controller.markKnown();
     if (mark == null || !mounted) return;
+    _snackBar(
+      Strings.drillMarkedKnown,
+      action: Strings.commonUndo,
+      onAction: () => controller.undoKnown(mark),
+    );
+  }
+
+  /// The buttons and accent bar at the bottom, or the message's button.
+  final GlobalKey _controls = GlobalKey();
+
+  /// A snackbar with its one action, for 5 seconds. It floats above the
+  /// buttons and accent bar, so the next answer can be given meanwhile.
+  void _snackBar(
+    String message, {
+    required String action,
+    required VoidCallback onAction,
+  }) {
+    final controls = _controls.currentContext?.size?.height ?? 0;
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
       ..showSnackBar(
         SnackBar(
-          content: const Text(Strings.drillMarkedKnown),
+          content: Text(message),
           duration: const Duration(seconds: 5),
-          action: SnackBarAction(
-            label: Strings.commonUndo,
-            onPressed: () => controller.undoKnown(mark),
-          ),
+          // With an action, a snackbar would otherwise stay until dismissed.
+          persist: false,
+          behavior: SnackBarBehavior.floating,
+          margin: EdgeInsets.fromLTRB(16, 0, 16, controls + 8),
+          action: SnackBarAction(label: action, onPressed: onAction),
         ),
       );
   }
@@ -120,46 +154,35 @@ class _DrillScreenState extends ConsumerState<DrillScreen> {
               Expanded(
                 child: switch (view) {
                   null => const _Preparing(),
-                  CardQuestion() => _Card(
-                    notice: view.startsFreePractice,
-                    child: VocabularyQuestion(
-                      key: ObjectKey(view),
-                      question: view,
-                      prompt: _Prompt(view.card.prompt),
-                      liveFeedback: ref
-                          .watch(drillDisplaySettingsProvider(widget.drill))
-                          .liveFeedback,
-                      onSubmit: controller.submit,
-                      onGiveUp: controller.giveUp,
-                    ),
-                  ),
-                  CardFeedback() => _Card(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Expanded(
-                          child: SingleChildScrollView(
-                            padding: const EdgeInsets.all(16),
-                            child: Center(child: _Prompt(view.card.prompt)),
-                          ),
-                        ),
-                        FeedbackPanel(
-                          key: ObjectKey(view),
-                          feedback: view,
-                          onOverride: controller.overrideGrade,
-                          onNext: controller.next,
-                        ),
-                      ],
-                    ),
+                  // One view per card, from its question to its correction.
+                  CardQuestion(:final card) ||
+                  CardFeedback(:final card) => VocabularyCardView(
+                    key: ObjectKey(card),
+                    card: card,
+                    feedback: view is CardFeedback ? view : null,
+                    notice: view is CardQuestion && view.startsFreePractice
+                        ? const _FreePracticeNotice()
+                        : null,
+                    prompt: _Prompt(card.prompt),
+                    liveFeedback: ref
+                        .watch(drillDisplaySettingsProvider(widget.drill))
+                        .liveFeedback,
+                    onSubmit: _submit,
+                    onGiveUp: controller.giveUp,
+                    onTypo: controller.markTypo,
+                    onNext: controller.next,
+                    controlsKey: _controls,
                   ),
                   GoalReached() => _Message(
                     message: Strings.drillDailyGoalReached,
                     action: Strings.sessionSummaryFinish,
+                    buttonKey: _controls,
                     onAction: _close,
                   ),
                   NoCards() => _Message(
                     message: Strings.drillNoCards,
                     action: Strings.drillOpenSettings,
+                    buttonKey: _controls,
                     onAction: () => context.go(Routes.settings),
                   ),
                 },
@@ -215,33 +238,19 @@ class _TopBar extends StatelessWidget {
   }
 }
 
-/// A card: the question or the feedback, under *Tout est à jour* when the
-/// session has just moved into free practice.
-class _Card extends StatelessWidget {
-  const _Card({required this.child, this.notice = false});
-
-  final Widget child;
-
-  /// *Tout est à jour !*: the session has just moved into free practice.
-  final bool notice;
+/// *Tout est à jour !*, above the card: the session has just moved into
+/// free practice.
+class _FreePracticeNotice extends StatelessWidget {
+  const _FreePracticeNotice();
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        if (notice)
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-            child: Text(
-              '${Strings.drillAllCaughtUp}\n${Strings.drillFreePractice}',
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
-          ),
-        Expanded(child: child),
-      ],
-    );
-  }
+  Widget build(BuildContext context) => Padding(
+    padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+    child: Text(
+      '${Strings.drillAllCaughtUp}\n${Strings.drillFreePractice}',
+      style: Theme.of(context).textTheme.bodyMedium,
+    ),
+  );
 }
 
 /// One of the noun's images, or its definition, in body text so the
@@ -268,11 +277,15 @@ class _Message extends StatelessWidget {
     required this.message,
     required this.action,
     required this.onAction,
+    this.buttonKey,
   });
 
   final String message;
   final String action;
   final VoidCallback onAction;
+
+  /// On the button, so a snackbar can sit above it.
+  final Key? buttonKey;
 
   @override
   Widget build(BuildContext context) {
@@ -290,7 +303,11 @@ class _Message extends StatelessWidget {
               ),
             ),
           ),
-          FilledButton(onPressed: onAction, child: Text(action)),
+          FilledButton(
+            key: buttonKey,
+            onPressed: onAction,
+            child: Text(action),
+          ),
         ],
       ),
     );

@@ -96,9 +96,9 @@ Future<void> next(WidgetTester tester) async {
   await settle(tester);
 }
 
-/// Completes a session: a right answer, a wrong one and *Je ne sais pas*,
-/// then × to the summary and *Terminer* to Accueil. Every answer is in the
-/// database.
+/// Completes a session: a right answer, which moves straight on, a wrong
+/// one and *Je ne sais pas*, each corrected, then × to the summary and
+/// *Terminer* to Accueil. Every answer is in the database.
 Future<void> completesASession(WidgetTester tester) async {
   final db = AppDatabase(NativeDatabase(newDatabaseFile()));
   addTearDown(db.close);
@@ -106,8 +106,9 @@ Future<void> completesASession(WidgetTester tester) async {
   await openVocabulary(tester);
 
   await answer(tester, currentAnswer(tester));
-  expect(find.text(Strings.drillResultCorrect), findsOneWidget);
-  await next(tester);
+  expect(find.text(Strings.drillCardsAnswered(n: 1)), findsOneWidget);
+  expect(find.text(Strings.drillNext), findsNothing);
+  expect(find.text(Strings.drillTooEasy), findsOneWidget);
 
   await answer(tester, 'zz');
   expect(find.text(Strings.drillResultIncorrect), findsOneWidget);

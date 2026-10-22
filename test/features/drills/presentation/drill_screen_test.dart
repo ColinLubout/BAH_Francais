@@ -15,6 +15,7 @@ import 'package:bah_francais/features/drills/domain/session/drill_store.dart';
 import 'package:bah_francais/features/drills/domain/session/vocabulary_item.dart';
 import 'package:bah_francais/features/drills/presentation/drill_screen.dart';
 import 'package:bah_francais/features/drills/presentation/session_summary_screen.dart';
+import 'package:bah_francais/features/drills/presentation/widgets/accent_bar.dart';
 import 'package:bah_francais/features/drills/presentation/widgets/blank_sentence.dart';
 import 'package:bah_francais/features/drills/presentation/widgets/prompt_image.dart';
 import 'package:bah_francais/features/home/presentation/home_screen.dart';
@@ -179,13 +180,27 @@ void main() {
       final after = tester.getRect(find.text('zz').last);
       expect(before.bottom <= box.top || before.right <= box.left, isTrue);
       expect(after.top >= box.bottom || after.left >= box.right, isTrue);
-      // In the middle of the space between the top bar and the buttons.
       // The box's line is centred, in the middle of the space between the
       // top bar and the buttons.
       final space = tester.getRect(find.byType(BlankSentence));
-      final line = before.right <= box.left ? box.expandToInclude(before) : box;
+      final line = [before, after]
+          .where((r) => (r.center.dy - box.center.dy).abs() < box.height / 2)
+          .fold(box, (line, r) => line.expandToInclude(r));
       expect(line.center.dx, moreOrLessEquals(space.center.dx, epsilon: 0.5));
       expect(box.center.dy, moreOrLessEquals(space.center.dy, epsilon: 1));
+    });
+
+    testWidgets('the box is empty: its hint is for screen readers only', (
+      tester,
+    ) async {
+      final semantics = tester.ensureSemantics();
+      await openDrill(tester, store());
+      expect(find.text(Strings.drillAnswerHint), findsNothing);
+      expect(
+        tester.getSemantics(field),
+        isSemantics(label: Strings.drillAnswerHint, isTextField: true),
+      );
+      semantics.dispose();
     });
 
     testWidgets('the box is as wide for every word, wider for long typing', (
@@ -304,41 +319,136 @@ void main() {
     expect(editable.focusNode.hasFocus, isTrue);
   });
 
-  group('the feedback panel', () {
-    testWidgets('Correct offers Trop facile, which makes it Easy', (
+  group('after Valider (decision 71)', () {
+    /// The word asked first, of fourchette and école.
+    String firstWord() => find.text('def fourchette').evaluate().isNotEmpty
+        ? 'fourchette'
+        : 'école';
+
+    testWidgets('Correct: the next card at once', (tester) async {
+      await openDrill(tester, store(items: [fourchette, ecole]));
+      final first = firstWord();
+      await submit(tester, first);
+
+      expect(find.text(Strings.drillCardsAnswered(n: 1)), findsOneWidget);
+      expect(
+        find.text(first == 'fourchette' ? 'def école' : 'def fourchette'),
+        findsOneWidget,
+      );
+      expect(find.text(Strings.drillNext), findsNothing);
+      expect(tester.widget<TextField>(field).controller!.text, isEmpty);
+      expect(tester.widget<TextField>(field).readOnly, isFalse);
+    });
+
+    testWidgets('a word met for the first time: Trop facile, for 5 s', (
       tester,
     ) async {
-      final fake = store();
+      final fake = store(items: [fourchette, ecole]);
       await openDrill(tester, fake);
-      await submit(tester, 'fourchette');
-      expect(find.text(Strings.drillResultCorrect), findsOneWidget);
-      expect(find.text(Strings.drillTypo), findsNothing);
-
+      await submit(tester, firstWord());
+      expect(
+        find.widgetWithText(SnackBar, Strings.drillResultCorrect),
+        findsOneWidget,
+      );
+      // Above the buttons, so the next word can be answered meanwhile.
+      expect(
+        tester
+            .getRect(
+              find
+                  .descendant(
+                    of: find.byType(SnackBar),
+                    matching: find.byType(Material),
+                  )
+                  .first,
+            )
+            .bottom,
+        lessThanOrEqualTo(
+          tester
+              .getRect(find.widgetWithText(FilledButton, Strings.drillSubmit))
+              .top,
+        ),
+      );
       await tester.tap(find.text(Strings.drillTooEasy));
       await tester.pumpAndSettle();
       expect(fake.replaced.single.$2.outcome.rating, Rating.easy);
+
+      // The next word's offer goes by itself.
+      await submit(tester, firstWord());
+      expect(find.text(Strings.drillTooEasy), findsOneWidget);
+      await tester.pump(const Duration(seconds: 5));
+      await tester.pumpAndSettle();
       expect(find.text(Strings.drillTooEasy), findsNothing);
     });
 
-    testWidgets('Incorrect shows the answer and offers Faute de frappe', (
+    testWidgets('a word answered before: no Trop facile', (tester) async {
+      await openDrill(
+        tester,
+        FakeStore(
+          cards: [reviewCard(due: noon, itemId: 'n.fourchette', id: 1)],
+          items: const {'n.fourchette': fourchette},
+        ),
+      );
+      await submit(tester, 'fourchette');
+      expect(find.byType(SnackBar), findsNothing);
+    });
+
+    testWidgets('Incorrect: all stays, the answer under the sentence', (
       tester,
     ) async {
       final fake = store();
       await openDrill(tester, fake);
-      await submit(tester, 'zz');
-      expect(find.text(Strings.drillResultIncorrect), findsOneWidget);
-      expect(
-        find.text(Strings.drillCorrectAnswer(answer: 'fourchette')),
-        findsOneWidget,
-      );
+      await type(tester, 'qq');
+      final box = tester.getRect(field);
+      final sentence = tester.getRect(find.text('zz').first);
+      await tester.tap(find.text(Strings.drillSubmit));
+      await tester.pumpAndSettle();
 
+      // The box, what was typed and the sentence haven't moved.
+      expect(tester.getRect(field), box);
+      expect(tester.getRect(find.text('zz').first), sentence);
+      final textField = tester.widget<TextField>(field);
+      expect(textField.controller!.text, 'qq');
+      expect(textField.readOnly, isTrue);
+      expect(wrongMark, findsOneWidget);
+
+      final answer = find.text(
+        Strings.drillCorrectAnswer(answer: 'fourchette'),
+      );
+      final result = find.text(Strings.drillResultIncorrect);
+      expect(tester.getRect(result).top, greaterThan(box.bottom));
+      expect(
+        tester.getRect(answer).top,
+        greaterThan(tester.getRect(result).top),
+      );
+      expect(find.byIcon(Icons.cancel_outlined), findsOneWidget);
+
+      // Faute de frappe and Suivant in place of the question's buttons.
+      expect(find.text(Strings.drillSubmit), findsNothing);
+      expect(find.text(Strings.drillIDontKnow), findsNothing);
+      expect(find.byType(AccentBar), findsNothing);
       await tester.tap(find.text(Strings.drillTypo));
       await tester.pumpAndSettle();
       expect(find.text(Strings.drillResultAlmost), findsOneWidget);
+      expect(find.text(Strings.drillTypo), findsNothing);
       expect(fake.replaced.single.$2.outcome.rating, Rating.hard);
     });
 
-    testWidgets('Je ne sais pas: Incorrect, the answer, no override', (
+    testWidgets('Presque stays too, the slip marked in the answer', (
+      tester,
+    ) async {
+      await openDrill(tester, store(items: [ecole]));
+      await submit(tester, 'ecole');
+      expect(find.text(Strings.drillResultAlmost), findsOneWidget);
+      expect(
+        find.text(Strings.drillCorrectAnswer(answer: 'école')),
+        findsOneWidget,
+      );
+      expect(tester.widget<TextField>(field).controller!.text, 'ecole');
+      expect(find.text(Strings.drillTypo), findsNothing);
+      expect(find.text(Strings.drillNext), findsOneWidget);
+    });
+
+    testWidgets('Je ne sais pas: the box as it was, the answer under it', (
       tester,
     ) async {
       final fake = store();
@@ -350,40 +460,23 @@ void main() {
         find.text(Strings.drillCorrectAnswer(answer: 'fourchette')),
         findsOneWidget,
       );
+      expect(tester.widget<TextField>(field).controller!.text, isEmpty);
       expect(find.text(Strings.drillTypo), findsNothing);
       expect(fake.answers.single.typed, isNull);
-    });
-
-    testWidgets('an example sentence, with the noun in bold', (tester) async {
-      await openDrill(tester, store());
-      await submit(tester, 'fourchette');
-      final text = tester.widget<RichText>(
-        find.byWidgetPredicate(
-          (w) => w is RichText && w.text.toPlainText() == 'zz fourchette zz',
-        ),
-      );
-      // Text.rich nests the spans; look through all of them.
-      TextSpan? bold;
-      text.text.visitChildren((span) {
-        if (span is TextSpan && span.text == 'fourchette') bold = span;
-        return true;
-      });
-      expect(bold?.style?.fontWeight, FontWeight.w700);
     });
 
     testWidgets('Suivant brings the next card; the count goes up', (
       tester,
     ) async {
       await openDrill(tester, store(items: [fourchette, ecole]));
-      final first = find.text('def fourchette').evaluate().isNotEmpty
-          ? 'fourchette'
-          : 'école';
-      await submit(tester, first);
+      final first = firstWord();
+      await submit(tester, 'qq');
+      expect(find.text(Strings.drillCardsAnswered(n: 1)), findsOneWidget);
       await tester.tap(find.text(Strings.drillNext));
       await tester.pumpAndSettle();
 
-      expect(find.text(Strings.drillCardsAnswered(n: 1)), findsOneWidget);
       expect(find.byType(TextField), findsOneWidget);
+      expect(tester.widget<TextField>(field).controller!.text, isEmpty);
       expect(
         find.text(first == 'fourchette' ? 'def école' : 'def fourchette'),
         findsOneWidget,
@@ -405,6 +498,14 @@ void main() {
     await tester.tap(find.text(Strings.commonUndo));
     await tester.pumpAndSettle();
     expect(fake.knownCalls.last.$2, isNull);
+
+    // Annuler is there for 5 seconds.
+    await tester.tap(find.text(Strings.drillIKnowIt));
+    await tester.pumpAndSettle();
+    expect(find.text(Strings.commonUndo), findsOneWidget);
+    await tester.pump(const Duration(seconds: 5));
+    await tester.pumpAndSettle();
+    expect(find.text(Strings.commonUndo), findsNothing);
   });
 
   group('instead of a card', () {

@@ -3,63 +3,27 @@ import 'package:bah_francais/core/theme/app_text_styles.dart';
 import 'package:bah_francais/core/theme/feedback_colors.dart';
 import 'package:bah_francais/features/drills/domain/grading/grade.dart';
 import 'package:bah_francais/features/drills/domain/rating.dart';
-import 'package:bah_francais/features/drills/domain/session/drill_session.dart';
-import 'package:bah_francais/features/drills/domain/session/vocabulary_item.dart';
 import 'package:flutter/material.dart';
 
-/// The panel after an answer: the result with an icon as well as colour,
-/// the correct answer with any error highlighted, an example sentence, the
-/// override that applies, and *Suivant*.
-class FeedbackPanel extends StatelessWidget {
-  const FeedbackPanel({
-    required this.feedback,
-    required this.onOverride,
-    required this.onNext,
-    super.key,
-  });
+/// Under the sentence after an answer that wasn't Correct: the result with
+/// an icon as well as colour, and the correct answer with any error
+/// highlighted (decision 71).
+class Correction extends StatelessWidget {
+  const Correction(this.grade, {super.key});
 
-  final CardFeedback feedback;
-  final VoidCallback onOverride;
-  final VoidCallback onNext;
+  final Grade grade;
 
   @override
   Widget build(BuildContext context) {
-    final grade = feedback.grade;
-    final example = feedback.example;
-    final theme = Theme.of(context);
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          _Result(grade.rating),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        _Result(grade.rating),
+        if (grade.answer case final answer?) ...[
           const SizedBox(height: 8),
-          if (grade.answer case final answer?) _CorrectAnswer(answer, grade),
-          if (example != null) ...[
-            const SizedBox(height: 8),
-            _Example(example),
-          ],
-          if (feedback.offersTypo || feedback.offersTooEasy)
-            Align(
-              alignment: AlignmentDirectional.centerStart,
-              child: TextButton(
-                onPressed: onOverride,
-                child: Text(
-                  feedback.offersTypo
-                      ? Strings.drillTypo
-                      : Strings.drillTooEasy,
-                ),
-              ),
-            ),
-          const SizedBox(height: 12),
-          FilledButton(
-            onPressed: onNext,
-            autofocus: true,
-            child: const Text(Strings.drillNext),
-          ),
-          SizedBox(height: theme.visualDensity.vertical),
+          _CorrectAnswer(answer, grade),
         ],
-      ),
+      ],
     );
   }
 }
@@ -93,6 +57,7 @@ class _Result extends StatelessWidget {
     final style = Theme.of(context).textTheme.titleLarge
         ?.merge(AppTextStyles.of(context).emphasis.copyWith(color: color));
     return Row(
+      mainAxisSize: MainAxisSize.min,
       children: [
         ExcludeSemantics(child: Icon(icon, color: color)),
         const SizedBox(width: 8),
@@ -145,35 +110,8 @@ class _CorrectAnswer extends StatelessWidget {
       ..add(TextSpan(text: template.substring(at + _marker.length)));
     return Text.rich(
       TextSpan(children: spans),
+      textAlign: TextAlign.center,
       style: Theme.of(context).textTheme.titleMedium,
-    );
-  }
-}
-
-/// One of the noun's sentences, with the noun in bold.
-class _Example extends StatelessWidget {
-  const _Example(this.example);
-
-  final ExampleSentence example;
-
-  @override
-  Widget build(BuildContext context) {
-    final text = example.text;
-    final highlight = example.highlight;
-    return Text.rich(
-      TextSpan(
-        children: highlight == null
-            ? [TextSpan(text: text)]
-            : [
-                TextSpan(text: text.substring(0, highlight.start)),
-                TextSpan(
-                  text: text.substring(highlight.start, highlight.end),
-                  style: AppTextStyles.of(context).emphasis,
-                ),
-                TextSpan(text: text.substring(highlight.end)),
-              ],
-      ),
-      style: Theme.of(context).textTheme.bodyLarge,
     );
   }
 }
