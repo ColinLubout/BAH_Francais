@@ -97,14 +97,7 @@ milestone 3, once the open questions below are answered.
 
 ### Open questions
 
-1. **Wording for the goal-reached message.** When the daily review limit is reached,
-   the drill tells the user they've reached today's goal and to take a break until
-   tomorrow (decision 27). It needs a new key in `strings_fr.json`, for example
-   `drill.dailyGoalReached`, with French you write. It's needed for milestone 3.
-2. **The result word for an exact answer capped at Hard.** An exactly right answer
-   graded Hard because a letter went red or orange while typing: does the feedback
-   panel say *Correct* or *Presque*? Grading gives Hard with no error, and the panel
-   (milestone 3) needs the word.
+None. Both questions for milestone 3 are answered (decisions 66 and 67).
 
 ### Spotted for later milestones
 
@@ -678,6 +671,16 @@ document.
     - For content only: the app doesn't store or use the levels, in keeping with
       the spec's "no fixed curriculum, levels, or content unlocking".
     - *Adds to* Content files (`grammar.json`; a sentence's `level` and `grammar`).
+
+### 2026-10-22 (for milestone 3, agreed with the owner)
+
+66. **The goal-reached message** (decision 27) is *Ça suffit pour aujourd’hui.*,
+    the owner's wording, in `strings_fr.json` as `drill.dailyGoalReached`.
+    - *Adds to* the strings.
+67. **An exact answer capped at Hard says *Presque*.** When a letter went red or
+    orange while typing, the answer is graded Hard even if the final answer is exact,
+    and the feedback panel shows *Presque*, as for any Hard.
+    - *Adds to* Grading → the feedback panel's result word.
 
 ### Notes
 

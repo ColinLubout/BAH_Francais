@@ -165,6 +165,9 @@ abstract final class Strings {
   static const drillFreePractice =
       'Vous pouvez continuer avec les cartes les plus fragiles.';
 
+  /// Ça suffit pour aujourd’hui.
+  static const drillDailyGoalReached = 'Ça suffit pour aujourd’hui.';
+
   /// Aucune carte disponible
   static const drillNoCards = 'Aucune carte disponible';
 
