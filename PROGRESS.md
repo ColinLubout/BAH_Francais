@@ -1,9 +1,118 @@
 # Progress
 
-## Current milestone: 3 — Vocabulaire drill
+## Current milestone: 4 — Genre and Conjugaison drills, Accueil, the mixed session
 
-**Status:** done, and merged in PR #6. Then the spec was brought up to date
-(decision 74), on branch `spec-update`. Next: milestone 4.
+**Status:** done on branch `milestone-4`. Next: milestone 5.
+
+### Done
+
+- **Clean-up agreed with the owner:** the Article obligatoire rule and strings, the
+  after-answer *Trop facile* and `drill.leaveSession` are gone; a drill tile with
+  nothing due shows no line (decision 76).
+- **The Genre drill** (decisions 75, 77 and 78): the three tiles at the top, each
+  with a screen-reader label (*féminin*, *masculin*, *les deux*), then the word with
+  its gloss and one of its images (*Afficher l’image*, on until milestone 6). The
+  right tile moves straight on. A wrong one keeps the card in place: the chosen
+  tile stays filled, and under the image come the result, *Réponse : un/une …*, an
+  example sentence with the noun in bold and the *Astuce*; *Faute de frappe* and
+  *Suivant* sit at the bottom, where *Trop facile* is on a new word.
+- **The Conjugaison drill** (decisions 43, 70, 75): a person at random, then one of
+  its sentences, with the answer box in place of the verb and the infinitive and
+  tense underneath. An elided word before the blank is written in full (*Je ne
+  ___*), and elides again as a vowel or silent *h* is typed (*Je n’ai*). Typing,
+  the accent bar, live feedback, *Je ne sais pas*, *Trop facile* and the correction
+  work as in Vocabulaire; *Je le connais* marks the verb in that tense only.
+- **The mixed session** (*Commencer*, decision 80): one queue over the three drills,
+  most urgent first, the drills taking turns, a word never in two drills back to
+  back; each drill keeps its own limits. The drill of the card on screen is named
+  under the top bar, and the summary gives each drill's numbers under the totals.
+- **Accueil:** *Commencer*, then a tile per drill with its due count. Its ⋮ menus,
+  *Liste de révision* link and *Aucune catégorie choisie* state come with their
+  screens in milestone 6 (decision 79).
+- **Layers:** each drill's queue can be asked what it would show without counting
+  it as shown, so `MixedQueue` can choose among them; the session serves three
+  kinds of card (`GenderCard`, `VocabularyCard`, `ConjugationCard`) over
+  `NounItem` and `ConjugationItem`, which `DriftDrillStore` reads.
+- **Integration tests:** a full Genre, Conjugaison and mixed session, besides the
+  Vocabulaire session and the force-close, on the computer and on an emulator.
+- **The spec** has decisions 1–80 folded in.
+- **Tests:** 716, all passing. Domain coverage is 98.5%.
+
+**The milestone's "done when" and its tests:**
+
+| Check | Tests |
+| --- | --- |
+| Each drill has the same test coverage as milestone 3 | Integration: `completesAGenderSession`, `completesAConjugationSession` in `integration_test/flows.dart`; widgets: `genre_conjugaison_screen_test.dart` (each state, accessibility, text scaling); domain: `drill_kinds_test.dart` |
+| A mixed session interleaves drills and respects each drill's limits | `mixed_queue_test.dart` (urgency, turns, the same word waiting, each drill's limits and goal), `drill_kinds_test.dart` (a mixed session), `completesAMixedSession` |
+
+## Ongoing
+
+### Left for the owner
+
+- Add the Codecov upload token as the GitHub Actions secret `CODECOV_TOKEN`, if not
+  done yet.
+- Once the new CI job *Integration tests (Android emulator)* has passed on the
+  milestone 3 PR, add it to the checks `main` requires.
+- Supply the real logo and app icon (files and sizes in `assets/branding/README.md`).
+
+### Open questions
+
+1. **The chosen Genre tile's contrast.** The spec and layouts put a yellow symbol
+   on the teal tile, which measures 1.28:1, under WCAG's 3:1 for a symbol needed to
+   understand the screen. The choice is also shown by the filled tile, and screen
+   readers hear it as selected, so colour isn't the only signal. Keep it as in the
+   layouts, or make the symbol navy on teal (6.8:1), as text on teal already is?
+2. **A mixed session's summary, per drill:** cards answered and % correct are
+   clear; the duration counts the time spent answering that drill's cards, since
+   the drills interleave. Is that what the summary should show?
+
+### Spotted for later milestones
+
+- M6: *Aucune carte disponible* offers *Ouvrir les réglages*, which opens Réglages
+  until the drill settings screens exist.
+- M6: the drills already read *Correction en direct* and Genre's *Afficher
+  l’image* (`drillDisplaySettingsProvider`); until the settings exist, both are on.
+- M6: Accueil's ⋮ menus (*Réglages de l’exercice*), its *Liste de révision* link,
+  and a tile's *Aucune catégorie choisie* state, with their screens (decision 79).
+  The strings `home.reviewList`, `home.drillSettings` and `home.noCategories` wait
+  for them.
+- M7 and M8: the first-launch import runs on the main isolate. That is quick for
+  the 127 KB pack, but the full content may hold the launch for longer; it could
+  move to a background isolate.
+- M8: a Conjugaison sentence accepts the alternatives it lists itself only. The
+  sample repeats a form's alternatives on each of its sentences (*paie* / *paye*);
+  the drill could add the form's own alternatives by itself.
+- M5: *Ajouter une phrase* and the *Phrase d’exemple* of *Ajouter un mot* now store a
+  sentence in full with its link (decision 59): the blank the user leaves is
+  filled with the answer, eliding the word before it where French does.
+- M5: compound forms are stored with the masculine singular participle for every
+  person, as the spec says (*sommes allé*). The Fiche verbe may need to show them
+  differently.
+- M5: form validation errors use Material's red, but the spec keeps red for wrong
+  answers only.
+- M6: the Conjugaison settings' *Temps* lists only the tenses the content teaches
+  (decision 62); with the present alone, the setting has nothing to choose.
+- M7: a content update that adds a tense creates that tense's Conjugaison cards for
+  every verb (decision 62).
+- M8 (new, decision 63): when words are added, sentences that already use a new word
+  link it. The sentences only use the content's nouns and verbs (decision 64), so
+  re-picking them with the new lists does this.
+- M6: À propos / Crédits credits Wiktionary (CC BY-SA 4.0) and Kaikki.org /
+  wiktextract (decision 60), with French wording from the owner.
+- M6: À propos / Crédits credits Tatoeba and its licence, CC BY 2.0 FR (decision 61).
+  The licence asks for each author to be credited: the sentences table keeps every
+  sentence's Tatoeba number and author, so Crédits can list the authors, or the
+  drill can name a sentence's author. Which one is the owner's call.
+- M8: picking Tatoeba sentences for the new words and tenses (names allowed outside
+  the everyday categories, decision 61). The script that picked the everyday ones
+  was a one-off outside the repo; done again, it belongs in `tool/` with its tests.
+- M6: `drillSettings.title` ("Réglages – {drill}") doesn't match the spec's
+  *Réglages de l'exercice*.
+- M6: for the everyday and Perso categories, only Jamais changes anything (decisions
+  40 and 41): Moins, Normal and Plus all behave the same. Their weight setting may
+  need to be just on or Jamais.
+
+## Milestone 3 — Vocabulaire drill (merged, PR #6)
 
 ### Done
 
@@ -60,80 +169,6 @@
 | An integration test completes a session | `integration_test/drill_session_test.dart` and `test/integration/drill_session_flows_test.dart`: completes a Vocabulaire session |
 | A force-close mid-session loses no answered card | The same files: a force-close mid-session loses no answered card |
 | Widget tests cover each drill state | `drill_screen_test.dart`: a card, live feedback, the feedback panel, *Je le connais*, free practice, the daily goal, no card, leaving and the summary, accessibility; `home_screen_test.dart`: the tile |
-
-## Ongoing
-
-### Left for the owner
-
-- Add the Codecov upload token as the GitHub Actions secret `CODECOV_TOKEN`, if not
-  done yet.
-- Once the new CI job *Integration tests (Android emulator)* has passed on the
-  milestone 3 PR, add it to the checks `main` requires.
-- Supply the real logo and app icon (files and sizes in `assets/branding/README.md`).
-
-### Open questions
-
-None.
-
-### Spotted for later milestones
-
-- M4, agreed with the owner on 2026-10-22: remove what is unused —
-  - `drill.leaveSession` ("Terminer la session ?"), since × goes straight to the
-    summary;
-  - Article obligatoire (decision 70): the strings `drillSettings.articleMandatory`,
-    `drillSettings.articleMandatoryHelp` and `drill.answerHintWithArticle`, and the
-    grading's mandatory-article rule (`gradeVocabulary`'s `articleMandatory`);
-  - the grading's *Trop facile* after an answer (`Grade.markTooEasy`,
-    `canMarkTooEasy`), replaced by decision 72.
-- M6: *Aucune carte disponible* offers *Ouvrir les réglages*, which opens Réglages
-  until the drill settings screens exist.
-- M6: the drill already reads the live-feedback setting
-  (`drillDisplaySettingsProvider`); until the settings exist, it is on.
-- M4: the Conjugaison drill puts its answer box in its sentence the same way
-  (decision 70), with `BlankSentence`; Genre and Conjugaison follow decisions 71
-  and 72 (decision 75). How the correction sits on the Genre card is to settle
-  then.
-- M4: a drill tile with nothing due shows no line (decision 76); the Vocabulaire
-  tile shows *Tout est à jour* until then.
-- M7 and M8: the first-launch import runs on the main isolate. That is quick for
-  the 127 KB pack, but the full content may hold the launch for longer; it could
-  move to a background isolate.
-- M4: the Conjugaison prompt comes from `conjugationPrompt` (decision 59), and the
-  word before the blank changes as the user types (decision 43).
-- M4: a sentence accepts its own alternatives only. The sample repeats a form's
-  alternatives on each of its sentences (*paie* / *paye*); the drill could add them
-  by itself.
-- M5: *Ajouter une phrase* and the *Phrase d’exemple* of *Ajouter un mot* now store a
-  sentence in full with its link (decision 59): the blank the user leaves is
-  filled with the answer, eliding the word before it where French does.
-- M4: the selected gender tile puts a yellow symbol on teal, which measures 1.28:1,
-  under the 3:1 minimum for meaningful graphics.
-- M5: compound forms are stored with the masculine singular participle for every
-  person, as the spec says (*sommes allé*). The Fiche verbe may need to show them
-  differently.
-- M5: form validation errors use Material's red, but the spec keeps red for wrong
-  answers only.
-- M6: the Conjugaison settings' *Temps* lists only the tenses the content teaches
-  (decision 62); with the present alone, the setting has nothing to choose.
-- M7: a content update that adds a tense creates that tense's Conjugaison cards for
-  every verb (decision 62).
-- M8 (new, decision 63): when words are added, sentences that already use a new word
-  link it. The sentences only use the content's nouns and verbs (decision 64), so
-  re-picking them with the new lists does this.
-- M6: À propos / Crédits credits Wiktionary (CC BY-SA 4.0) and Kaikki.org /
-  wiktextract (decision 60), with French wording from the owner.
-- M6: À propos / Crédits credits Tatoeba and its licence, CC BY 2.0 FR (decision 61).
-  The licence asks for each author to be credited: the sentences table keeps every
-  sentence's Tatoeba number and author, so Crédits can list the authors, or the
-  drill can name a sentence's author. Which one is the owner's call.
-- M8: picking Tatoeba sentences for the new words and tenses (names allowed outside
-  the everyday categories, decision 61). The script that picked the everyday ones
-  was a one-off outside the repo; done again, it belongs in `tool/` with its tests.
-- M6: `drillSettings.title` ("Réglages – {drill}") doesn't match the spec's
-  *Réglages de l'exercice*.
-- M6: for the everyday and Perso categories, only Jamais changes anything (decisions
-  40 and 41): Moins, Normal and Plus all behave the same. Their weight setting may
-  need to be just on or Jamais.
 
 ## Milestone 2 — Data layer (merged, PR #5)
 
