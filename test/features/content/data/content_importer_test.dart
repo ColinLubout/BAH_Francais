@@ -60,8 +60,9 @@ void main() {
     final dao = CardsDao(db);
     expect(await dao.cards(DrillType.gender), hasLength(2));
     expect(await dao.cards(DrillType.vocabulary), hasLength(2));
+    // A Conjugaison card per tense the pack teaches, and none for the others.
     final conjugation = await dao.cards(DrillType.conjugation);
-    expect(conjugation, hasLength(4));
+    expect(conjugation.map((c) => c.tense), fixture.tenses);
     for (final card in conjugation) {
       expect(card.state, CardState.newCard);
       expect(card.createdAt, importedAt);

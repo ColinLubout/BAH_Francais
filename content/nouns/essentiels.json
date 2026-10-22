@@ -8,14 +8,6 @@
   },
   "nouns": [
     {
-      "id": "n.temps",
-      "word": "temps",
-      "gender": "m",
-      "level": "debutant",
-      "rank": 1,
-      "definition": "Durée qui passe, en minutes, en heures, en jours."
-    },
-    {
       "id": "n.jour",
       "word": "jour",
       "gender": "m",
@@ -33,60 +25,12 @@
       "definition": "Personne adulte de sexe masculin."
     },
     {
-      "id": "n.annee",
-      "word": "année",
-      "gender": "f",
-      "elides": true,
-      "level": "debutant",
-      "rank": 4,
-      "definition": "Période de douze mois.",
-      "synonyms": [
-        {
-          "word": "an",
-          "gender": "m"
-        }
-      ]
-    },
-    {
-      "id": "n.chose",
-      "word": "chose",
-      "gender": "f",
-      "level": "debutant",
-      "rank": 5,
-      "definition": "Objet ou idée dont on ne dit pas le nom."
-    },
-    {
       "id": "n.femme",
       "word": "femme",
       "gender": "f",
       "level": "debutant",
       "rank": 6,
       "definition": "Personne adulte de sexe féminin."
-    },
-    {
-      "id": "n.enfant",
-      "word": "enfant",
-      "gender": "both",
-      "elides": true,
-      "level": "debutant",
-      "rank": 7,
-      "definition": "Garçon ou fille qui n’est pas encore adulte."
-    },
-    {
-      "id": "n.personne",
-      "word": "personne",
-      "gender": "f",
-      "level": "debutant",
-      "rank": 8,
-      "definition": "Être humain, homme ou femme."
-    },
-    {
-      "id": "n.main",
-      "word": "main",
-      "gender": "f",
-      "level": "debutant",
-      "rank": 9,
-      "definition": "Partie du corps au bout du bras, avec cinq doigts."
     },
     {
       "id": "n.maison",
@@ -106,119 +50,12 @@
       "definition": "Période de soixante minutes."
     },
     {
-      "id": "n.nom",
-      "word": "nom",
-      "gender": "m",
-      "level": "debutant",
-      "rank": 12,
-      "definition": "Mot qui sert à appeler une personne ou une chose."
-    },
-    {
-      "id": "n.mot",
-      "word": "mot",
-      "gender": "m",
-      "level": "debutant",
-      "rank": 13,
-      "definition": "Groupe de lettres qui a un sens."
-    },
-    {
       "id": "n.travail",
       "word": "travail",
       "gender": "m",
       "level": "debutant",
       "rank": 14,
       "definition": "Activité que l’on fait pour gagner sa vie."
-    },
-    {
-      "id": "n.question",
-      "word": "question",
-      "gender": "f",
-      "level": "debutant",
-      "rank": 15,
-      "definition": "Phrase par laquelle on demande quelque chose.",
-      "ending_hint": "-tion → féminin"
-    },
-    {
-      "id": "n.ville",
-      "word": "ville",
-      "gender": "f",
-      "level": "debutant",
-      "rank": 16,
-      "definition": "Grand lieu où vivent beaucoup de gens, avec des rues et des magasins."
-    },
-    {
-      "id": "n.pays",
-      "word": "pays",
-      "gender": "m",
-      "level": "debutant",
-      "rank": 17,
-      "definition": "Territoire d’une nation, avec ses frontières."
-    },
-    {
-      "id": "n.nuit",
-      "word": "nuit",
-      "gender": "f",
-      "level": "debutant",
-      "rank": 18,
-      "definition": "Période où il fait noir, du soir au matin."
-    },
-    {
-      "id": "n.tete",
-      "word": "tête",
-      "gender": "f",
-      "level": "debutant",
-      "rank": 19,
-      "definition": "Partie du corps au-dessus du cou."
-    },
-    {
-      "id": "n.famille",
-      "word": "famille",
-      "gender": "f",
-      "level": "debutant",
-      "rank": 20,
-      "definition": "Les parents et leurs enfants."
-    },
-    {
-      "id": "n.porte",
-      "word": "porte",
-      "gender": "f",
-      "level": "debutant",
-      "rank": 21,
-      "definition": "Ce que l’on ouvre pour entrer dans une pièce ou une maison."
-    },
-    {
-      "id": "n.eau",
-      "word": "eau",
-      "gender": "f",
-      "elides": true,
-      "level": "debutant",
-      "rank": 22,
-      "definition": "Liquide transparent que l’on boit (H₂O)."
-    },
-    {
-      "id": "n.argent",
-      "word": "argent",
-      "gender": "m",
-      "elides": true,
-      "level": "debutant",
-      "rank": 23,
-      "definition": "Pièces et billets qui servent à payer."
-    },
-    {
-      "id": "n.probleme",
-      "word": "problème",
-      "gender": "m",
-      "level": "debutant",
-      "rank": 24,
-      "definition": "Difficulté qu’il faut résoudre."
-    },
-    {
-      "id": "n.semaine",
-      "word": "semaine",
-      "gender": "f",
-      "level": "debutant",
-      "rank": 25,
-      "definition": "Période de sept jours."
     },
     {
       "id": "n.soir",
@@ -229,38 +66,28 @@
       "definition": "Fin de la journée, avant la nuit."
     },
     {
-      "id": "n.rue",
-      "word": "rue",
-      "gender": "f",
-      "level": "debutant",
-      "rank": 27,
-      "definition": "Voie bordée de maisons, dans une ville ou un village."
-    },
-    {
-      "id": "n.matin",
-      "word": "matin",
+      "id": "n.chat",
+      "word": "chat",
       "gender": "m",
       "level": "debutant",
-      "rank": 28,
-      "definition": "Début de la journée, après le lever du soleil."
+      "rank": 31,
+      "definition": "Petit animal domestique qui miaule."
     },
     {
-      "id": "n.ecole",
-      "word": "école",
-      "gender": "f",
-      "elides": true,
+      "id": "n.chien",
+      "word": "chien",
+      "gender": "m",
       "level": "debutant",
-      "rank": 29,
-      "definition": "Lieu où les enfants apprennent à lire et à écrire."
+      "rank": 32,
+      "definition": "Animal domestique qui aboie."
     },
     {
-      "id": "n.vacances",
-      "word": "vacances",
+      "id": "n.voiture",
+      "word": "voiture",
       "gender": "f",
-      "plural_only": true,
       "level": "debutant",
-      "rank": 30,
-      "definition": "Période où l’on ne travaille pas et où l’on ne va pas à l’école."
+      "rank": 33,
+      "definition": "Véhicule à quatre roues, avec un moteur."
     }
   ]
 }

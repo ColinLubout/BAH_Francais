@@ -19,6 +19,7 @@ class SourceFile {
 /// Everything a content directory holds.
 class ContentFiles {
   const ContentFiles({
+    this.tenses,
     this.verbCategories,
     this.nouns = const [],
     this.verbs = const [],
@@ -26,9 +27,10 @@ class ContentFiles {
     this.images = const {},
   });
 
-  /// Reads `verb-categories.json`, `nouns/*.json`, `verbs/*.json`,
-  /// `sentences/*.json` and the files under `images/` in [root]. Anything
-  /// else there (such as a `sample/` or `schema/` folder) is not content.
+  /// Reads `tenses.json`, `verb-categories.json`, `nouns/*.json`,
+  /// `verbs/*.json`, `sentences/*.json` and the files under `images/` in
+  /// [root]. Anything else there (such as a `sample/` or `schema/` folder) is
+  /// not content.
   factory ContentFiles.read(Directory root) {
     String relative(File file) =>
         p.split(p.relative(file.path, from: root.path)).join('/');
@@ -48,12 +50,17 @@ class ContentFiles {
       ];
     }
 
-    final categories = File(p.join(root.path, 'verb-categories.json'));
+    SourceFile? file(String name) {
+      final f = File(p.join(root.path, name));
+      return f.existsSync()
+          ? SourceFile(relative(f), f.readAsStringSync())
+          : null;
+    }
+
     final imagesDir = Directory(p.join(root.path, 'images'));
     return ContentFiles(
-      verbCategories: categories.existsSync()
-          ? SourceFile(relative(categories), categories.readAsStringSync())
-          : null,
+      tenses: file('tenses.json'),
+      verbCategories: file('verb-categories.json'),
       nouns: jsonFiles('nouns'),
       verbs: jsonFiles('verbs'),
       sentences: jsonFiles('sentences'),
@@ -64,6 +71,9 @@ class ContentFiles {
       },
     );
   }
+
+  /// `tenses.json`, if there is one: the tenses the content teaches.
+  final SourceFile? tenses;
 
   /// `verb-categories.json`, if there is one.
   final SourceFile? verbCategories;
@@ -78,6 +88,7 @@ class ContentFiles {
 /// The JSON Schema for each kind of content file (`content/schema/`).
 class ContentSchemas {
   const ContentSchemas({
+    required this.tenses,
     required this.nounCategory,
     required this.verb,
     required this.verbCategories,
@@ -89,6 +100,7 @@ class ContentSchemas {
     JsonSchema schema(String name) =>
         JsonSchema.create(File(p.join(dir.path, name)).readAsStringSync());
     return ContentSchemas(
+      tenses: schema('tenses.schema.json'),
       nounCategory: schema('noun-category.schema.json'),
       verb: schema('verb.schema.json'),
       verbCategories: schema('verb-categories.schema.json'),
@@ -96,6 +108,7 @@ class ContentSchemas {
     );
   }
 
+  final JsonSchema tenses;
   final JsonSchema nounCategory;
   final JsonSchema verb;
   final JsonSchema verbCategories;

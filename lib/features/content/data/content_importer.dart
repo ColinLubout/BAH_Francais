@@ -27,8 +27,9 @@ class ContentImporter {
   final AppDatabase _db;
   final Clock _clock;
 
-  /// Imports the pack at [path], with New cards for every noun and verb,
-  /// and returns what the pack says about itself.
+  /// Imports the pack at [path], with New cards for every noun, and for
+  /// every verb in each tense the pack teaches, and returns what the pack
+  /// says about itself.
   ///
   /// The pack is opened read-only and everything is written in one
   /// transaction, so a failure, or the app closing, leaves nothing behind
@@ -78,6 +79,7 @@ class ContentImporter {
           at: now,
           nounIds: [for (final n in content.nouns) n.id],
           verbIds: [for (final v in content.verbs) v.id],
+          tenses: content.tenses,
         );
       });
       return info;

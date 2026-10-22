@@ -3,6 +3,8 @@
 The words, verbs and sentences the app teaches, as JSON files that
 `tool/content_build.dart` validates and turns into a content pack.
 
+- `tenses.json`: the tenses the content teaches. Verbs keep all 24 forms, but
+  only these tenses get Conjugaison cards and need sentences.
 - `verb-categories.json`: every verb category.
 - `nouns/<category>.json`: one noun category and its nouns.
 - `verbs/<verb>.json`: one verb and its 24 forms.
@@ -30,6 +32,11 @@ variant form the content doesn't accept. Wiktionary can be wrong too, so a
 disagreement is something to look at, not an automatic fix. It can't check
 *h aspiré*, which this data doesn't mark.
 
+It also checks the words of the sentences (decision 64): a sentence uses only
+the content's nouns and verbs, conjugated in a tense it teaches, with no
+infinitive straight after a conjugated verb. It goes by each word's parts of
+speech in Wiktionary, so what it lists is to look at, not a sure mistake.
+
 It needs Kaikki.org's French dictionary, a large download kept out of the
 repo:
 
@@ -45,7 +52,8 @@ dart run tool/dictionary_check.dart content
 Most sentences come from [Tatoeba](https://tatoeba.org), a collection of
 sentences and translations available under the
 [Creative Commons Attribution 2.0 France licence](https://creativecommons.org/licenses/by/2.0/fr/)
-(CC BY 2.0 FR). Each one keeps its Tatoeba number and its author in its
+(CC BY 2.0 FR). Only sentences written in French by native speakers are used,
+not translations. Each one keeps its Tatoeba number and its author in its
 `credit`, and its id is `s.tatoeba.<number>`: the sentence is at
 `https://tatoeba.org/fr/sentences/show/<number>`. Their apostrophes are made
 typographic (’) and a space is put before *? ! : ;*, as in the rest of the
@@ -62,16 +70,17 @@ the definitions are written for this app.
 
 ## Status
 
-**Draft, not yet checked.** The everyday categories, *Les essentiels* (30 nouns)
-and *Les verbes essentiels* (10 verbs), were drafted by Claude Code for the owner
-to check (decision 57 in `PROGRESS.md`). Their 383 sentences are from Tatoeba,
-except 17 drafted for the verb forms Tatoeba has no suitable sentence for
-(decision 61). Every word, gender, form and sentence, and every link from a
-sentence to a verb or noun, must be checked by a fluent French speaker before it
-ships.
+**Draft, not yet checked.** A small first pack (decision 62 in `PROGRESS.md`):
+the present only, with the everyday categories *Les essentiels* (10 nouns) and
+*Les verbes essentiels* (6 verbs), drafted by Claude Code for the owner to check
+(decision 57). Their 69 sentences are from Tatoeba, except 14 drafted for the
+verb forms Tatoeba has no suitable sentence for (decisions 61 and 64). Every
+word, gender, form and sentence, and every link from a sentence to a verb or
+noun, must be checked by a fluent French speaker before it ships.
 
 - The nouns have definitions and no images yet.
 - `rank` orders the words within the everyday set, most useful first. It is an
   estimate, not a corpus frequency rank.
 
-The topic categories come with the rest of the content in the final milestone.
+The other three tenses, and lists of 30 verbs and 100 nouns, come in milestone 8
+(decision 63).

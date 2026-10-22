@@ -46,18 +46,20 @@ class CardsDao {
   final AppDatabase _db;
 
   /// Creates New cards dated [at]: Genre and Vocabulaire cards for each of
-  /// [nounIds], and one Conjugaison card per tense for each of [verbIds].
+  /// [nounIds], and a Conjugaison card per tense of [tenses] (the tenses the
+  /// content teaches) for each of [verbIds].
   Future<void> createCards({
     required DateTime at,
     Iterable<String> nounIds = const [],
     Iterable<String> verbIds = const [],
+    Iterable<Tense> tenses = Tense.values,
   }) => _db.batch(
     (batch) => batch.insertAll(_db.cards, [
       for (final id in nounIds)
         for (final drill in [DrillType.gender, DrillType.vocabulary])
           CardsCompanion.insert(itemId: id, drillType: drill, createdAt: at),
       for (final id in verbIds)
-        for (final tense in Tense.values)
+        for (final tense in tenses)
           CardsCompanion.insert(
             itemId: id,
             drillType: DrillType.conjugation,

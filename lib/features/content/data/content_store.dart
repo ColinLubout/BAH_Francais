@@ -18,6 +18,9 @@ class ContentStore {
   static const _releasedKey = 'released_at';
   static const _schemaKey = 'schema_version';
 
+  /// The tenses taught, as ids joined by commas: `present,imparfait`.
+  static const _tensesKey = 'tenses';
+
   /// What the installed content says about itself; null if there is none.
   Future<ContentInfo?> info() async {
     final rows = await _db.select(_tables.contentMeta).get();
@@ -42,12 +45,19 @@ class ContentStore {
     ]),
   );
 
-  /// Adds [content] as official rows, with its images dated [now]. Every
-  /// row is written in one batch, in an order the foreign keys allow.
+  /// Adds [content] as official rows, with its images dated [now], and
+  /// records the tenses it teaches. Every row is written in one batch, in an
+  /// order the foreign keys allow.
   Future<void> write(ContentSet content, {required DateTime now}) {
     final t = _tables;
     return _db.batch((batch) {
       batch
+        ..insertAllOnConflictUpdate(t.contentMeta, [
+          ContentMetaCompanion.insert(
+            key: _tensesKey,
+            value: content.tenses.map((t) => t.id).join(','),
+          ),
+        ])
         ..insertAll(t.categories, [
           for (final c in content.categories)
             CategoriesCompanion.insert(
@@ -204,6 +214,7 @@ class ContentStore {
     ];
 
     return ContentSet(
+      tenses: await tenses(),
       categories: [
         for (final c in categories)
           ContentCategory(
@@ -298,6 +309,20 @@ class ContentStore {
       ],
       images: [for (final i in officialImages) _image(i)],
     );
+  }
+
+  /// The tenses the content teaches, in the order of [Tense.values]. Content
+  /// that doesn't say teaches them all.
+  Future<List<Tense>> tenses() async {
+    final row = await (_db.select(
+      _tables.contentMeta,
+    )..where((m) => m.key.equals(_tensesKey))).getSingleOrNull();
+    if (row == null) return Tense.values;
+    final ids = row.value.split(',').toSet();
+    return [
+      for (final t in Tense.values)
+        if (ids.contains(t.id)) t,
+    ];
   }
 
   /// The categories of [kind] still in use, in their listed order.

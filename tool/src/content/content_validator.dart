@@ -11,8 +11,9 @@
 /// - at most one everyday category of each kind;
 /// - a noun starting with *h* states `elides`, and a verb with a form
 ///   starting with *h* states `h_aspire` (and no other verb does);
-/// - every noun has a sentence, and every verb a sentence per tense and
-///   person;
+/// - `tenses.json` lists the tenses the content teaches;
+/// - every noun has a sentence, and every verb a sentence per person in each
+///   tense taught; no sentence is a prompt for a tense that isn't;
 /// - a sentence is written in full, with no `___`;
 /// - the verbs and nouns a sentence uses exist, and their words are in it
 ///   exactly once, as whole words;
@@ -102,7 +103,15 @@ class _Validation {
   /// noun or verb can be said to lack a sentence.
   bool sentencesUnread = false;
 
+  /// The tenses the content teaches, from `tenses.json`.
+  List<Tense> taught = Tense.values;
+
+  /// Whether `tenses.json` is missing or was refused: which sentences a verb
+  /// needs, and which it may have, is unknown.
+  bool tensesUnread = false;
+
   ContentReport run() {
+    _readTenses();
     if (files.verbCategories case final file?) _readVerbCategories(file);
     files.nouns.forEach(_readNounFile);
     files.verbs.forEach(_readVerb);
@@ -117,6 +126,7 @@ class _Validation {
 
     return ContentReport(
       content: ContentSet(
+        tenses: taught,
         categories: [for (final c in categories) c.value],
         nouns: [for (final n in nouns) n.value],
         verbs: [for (final v in verbs) v.value],
@@ -184,6 +194,30 @@ class _Validation {
         for (final item in list)
           if (item case {'id': final String id}) id,
   ];
+
+  void _readTenses() {
+    final file = files.tenses;
+    if (file == null) {
+      _error(
+        'tenses.json',
+        '',
+        'is missing: list the tenses the content teaches, as '
+            '{"tenses": ["present"]}',
+      );
+      tensesUnread = true;
+      return;
+    }
+    final json = _decode(file, schemas.tenses);
+    if (json == null) {
+      tensesUnread = true;
+      return;
+    }
+    final ids = _strings(json['tenses']).toSet();
+    taught = [
+      for (final t in Tense.values)
+        if (ids.contains(t.id)) t,
+    ];
+  }
 
   void _readVerbCategories(SourceFile file) {
     final json = _decode(
@@ -407,8 +441,8 @@ class _Validation {
         );
       }
 
-      if (sentencesUnread) continue;
-      for (final tense in Tense.values) {
+      if (sentencesUnread || tensesUnread) continue;
+      for (final tense in taught) {
         for (final person in Person.values) {
           if (!inSentences.contains((verb.id, tense, person))) {
             _error(v.file, verb.id, 'no sentence for ${tense.id} ${person.id}');
@@ -438,6 +472,13 @@ class _Validation {
         final key = (link.verbId, link.tense, link.person);
         if (!linkedVerbs.add(key)) {
           error('uses ${link.verbId} ${link.tense.id} ${link.person.id} twice');
+        }
+        if (!tensesUnread && !taught.contains(link.tense)) {
+          error(
+            'is a prompt for ${link.verbId} ${link.tense.id} '
+            '${link.person.id}, but tenses.json doesn’t teach the '
+            '${link.tense.id}',
+          );
         }
         final verb = verbsById[link.verbId];
         if (verb == null) {

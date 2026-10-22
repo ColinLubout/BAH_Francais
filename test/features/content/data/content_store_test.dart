@@ -24,6 +24,18 @@ void main() {
     expect(noun.imageIds, ['i.aa-1', 'i.aa-2']);
   });
 
+  test('the tenses taught read back; content that doesn’t say teaches all '
+      'four', () async {
+    final db = await databaseWith(fixture);
+    final store = ContentStore(db, db);
+    expect(await store.tenses(), [Tense.present, Tense.imparfait]);
+
+    await (db.delete(
+      db.contentMeta,
+    )..where((m) => m.key.equals('tenses'))).go();
+    expect(await store.tenses(), Tense.values);
+  });
+
   test('a sentence reads back with its verbs and nouns', () async {
     final db = await databaseWith(fixture);
     final sentences = {

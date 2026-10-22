@@ -9,6 +9,7 @@ import 'package:flutter_test/flutter_test.dart';
 /// A small content set that uses every column. Its words are made-up
 /// tokens, not French.
 final fixture = ContentSet(
+  tenses: const [Tense.present, Tense.imparfait],
   categories: const [
     ContentCategory(
       id: 'cat.topic',

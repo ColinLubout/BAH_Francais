@@ -41,7 +41,7 @@ class DictionaryVerb {
 
 /// The parts of the dictionary the content uses.
 class Dictionary {
-  Dictionary._(this.nouns, this.verbs);
+  Dictionary._(this.nouns, this.verbs, this.partsOfSpeech);
 
   /// Noun entries by normalised word.
   final Map<String, List<DictionaryNoun>> nouns;
@@ -49,20 +49,28 @@ class Dictionary {
   /// Conjugation tables by normalised infinitive.
   final Map<String, List<DictionaryVerb>> verbs;
 
+  /// The parts of speech (`noun`, `verb`, `adj`…) of each word asked for,
+  /// inflected forms included: *chats* is a noun.
+  final Map<String, Set<String>> partsOfSpeech;
+
   /// Reads the entries for [words] (normalised nouns and verb lemmas: *lever*
-  /// for *se lever*) from the dictionary's JSON lines. Only lines that name
-  /// one of them are decoded, so a whole dictionary reads in seconds.
+  /// for *se lever*), and the parts of speech of [partsOfSpeechFor], from the
+  /// dictionary's JSON lines. Only lines that name one of them are decoded,
+  /// so a whole dictionary reads in seconds.
   static Future<Dictionary> read(
     Stream<String> lines, {
     required Set<String> words,
+    Set<String> partsOfSpeechFor = const {},
   }) async {
     final nouns = <String, List<DictionaryNoun>>{};
     final verbs = <String, List<DictionaryVerb>>{};
+    final partsOfSpeech = <String, Set<String>>{};
+    final wanted = {...words, ...partsOfSpeechFor};
     final named = RegExp(r'"word": ?"((?:[^"\\]|\\.)*)"');
     await for (final line in lines) {
       if (!named
           .allMatches(line)
-          .any((m) => words.contains(normalise(_unescape(m.group(1)!))))) {
+          .any((m) => wanted.contains(normalise(_unescape(m.group(1)!))))) {
         continue;
       }
       final Object? json;
@@ -73,6 +81,10 @@ class Dictionary {
       }
       if (json is! Map<String, Object?> || json['lang_code'] != 'fr') continue;
       final word = normalise(json['word']! as String);
+      if (json['pos'] case final String pos
+          when pos.isNotEmpty && partsOfSpeechFor.contains(word)) {
+        (partsOfSpeech[word] ??= {}).add(pos);
+      }
       if (!words.contains(word)) continue;
       switch (json['pos']) {
         case 'noun':
@@ -83,7 +95,7 @@ class Dictionary {
           }
       }
     }
-    return Dictionary._(nouns, verbs);
+    return Dictionary._(nouns, verbs, partsOfSpeech);
   }
 
   static String _unescape(String s) => jsonDecode('"$s"') as String;

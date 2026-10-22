@@ -1,5 +1,7 @@
 /// Checks content against Wiktionary: genders, plural-only nouns,
-/// auxiliaries and every conjugated form.
+/// auxiliaries and every conjugated form; and the words of its sentences:
+/// no noun or verb the content doesn't have, no tense it doesn't teach, no
+/// infinitive straight after a conjugated verb (decision 64).
 ///
 /// Run from the repo root, after downloading Kaikki.org's French dictionary
 /// (https://kaikki.org/dictionary/French/kaikki.org-dictionary-French.jsonl)
@@ -21,6 +23,7 @@ import 'dart:io';
 import 'src/content/content_files.dart';
 import 'src/content/content_validator.dart';
 import 'src/content/dictionary.dart';
+import 'src/content/sentence_words.dart';
 
 const _defaultDictionary = 'data/kaikki/kaikki.org-dictionary-French.jsonl';
 const _usage =
@@ -68,8 +71,10 @@ Future<void> main(List<String> args) async {
         .transform(utf8.decoder)
         .transform(const LineSplitter()),
     words: wordsToLook(content),
+    partsOfSpeechFor: sentenceWords(content),
   );
   final findings = compare(content, dictionary);
+  final inSentences = checkSentenceWords(content, dictionary.partsOfSpeech);
   final differences = [
     for (final f in findings)
       if (f.difference) f,
@@ -94,6 +99,21 @@ Future<void> main(List<String> args) async {
   if (notes.isNotEmpty) {
     stdout.writeln('\n${notes.length} note(s):');
     for (final f in notes) {
+      stdout.writeln('  $f');
+    }
+  }
+
+  stdout.writeln(
+    '\nChecked the words of ${content.sentences.length} sentences, teaching '
+    '${content.tenses.map((t) => t.id).join(', ')}.',
+  );
+  if (inSentences.isEmpty) {
+    stdout.writeln(
+      'Every noun and verb in them is in the content, in a tense it teaches.',
+    );
+  } else {
+    stdout.writeln('${inSentences.length} to look at:');
+    for (final f in inSentences) {
       stdout.writeln('  $f');
     }
   }

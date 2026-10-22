@@ -68,7 +68,7 @@ flutter test --coverage
 flutter test integration_test
 dart run tool/content_build.dart content/sample             # validate + build a content pack
 dart run drift_dev make-migrations                          # after a schema change: dump it + migration tests
-dart run tool/dictionary_check.dart content                 # check genders and forms against Wiktionary (needs data/kaikki/)
+dart run tool/dictionary_check.dart content                 # check genders, forms and sentence words against Wiktionary (needs data/kaikki/)
 ```
 
 Run `flutter analyze`, the format check and the full test suite before calling anything done.

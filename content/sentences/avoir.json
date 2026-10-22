@@ -1,11 +1,93 @@
 {
   "sentences": [
     {
-      "id": "s.tatoeba.5458654",
-      "text": "On n’a rien de prévu de particulier.",
+      "id": "s.tatoeba.1893079",
+      "text": "Je ne les ai pas.",
       "credit": {
-        "tatoeba": 5458654,
-        "author": "Whidou"
+        "tatoeba": 1893079,
+        "author": "Amastan"
+      },
+      "verbs": [
+        {
+          "verb": "v.avoir",
+          "tense": "present",
+          "person": "1s",
+          "answer": "ai"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.8642608",
+      "text": "J’ai trop de travail.",
+      "credit": {
+        "tatoeba": 8642608,
+        "author": "Julien_PDC"
+      },
+      "verbs": [
+        {
+          "verb": "v.avoir",
+          "tense": "present",
+          "person": "1s",
+          "answer": "ai"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.travail",
+          "word": "travail"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.4588380",
+      "text": "Tu as une voiture.",
+      "credit": {
+        "tatoeba": 4588380,
+        "author": "Amastan"
+      },
+      "verbs": [
+        {
+          "verb": "v.avoir",
+          "tense": "present",
+          "person": "2s",
+          "answer": "as"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.voiture",
+          "word": "voiture"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.9159779",
+      "text": "As-tu un chat ?",
+      "credit": {
+        "tatoeba": 9159779,
+        "author": "Julien_PDC"
+      },
+      "verbs": [
+        {
+          "verb": "v.avoir",
+          "tense": "present",
+          "person": "2s",
+          "answer": "As"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.chat",
+          "word": "chat"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.4469398",
+      "text": "Ta femme a-t-elle sa propre voiture ?",
+      "credit": {
+        "tatoeba": 4469398,
+        "author": "Amastan"
       },
       "verbs": [
         {
@@ -14,29 +96,45 @@
           "person": "3s",
           "answer": "a"
         }
+      ],
+      "nouns": [
+        {
+          "noun": "n.femme",
+          "word": "femme"
+        },
+        {
+          "noun": "n.voiture",
+          "word": "voiture"
+        }
       ]
     },
     {
-      "id": "s.tatoeba.1082629",
-      "text": "Nous avons confiance en lui.",
+      "id": "s.tatoeba.6055433",
+      "text": "Il n’a plus de maison !",
       "credit": {
-        "tatoeba": 1082629,
-        "author": "nimfeo"
+        "tatoeba": 6055433,
+        "author": "verdakoro"
       },
       "verbs": [
         {
           "verb": "v.avoir",
           "tense": "present",
-          "person": "1p",
-          "answer": "avons"
+          "person": "3s",
+          "answer": "a"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.maison",
+          "word": "maison"
         }
       ]
     },
     {
-      "id": "s.tatoeba.4884669",
-      "text": "Nous avons un peu de temps.",
+      "id": "s.tatoeba.3486651",
+      "text": "Nous avons une voiture.",
       "credit": {
-        "tatoeba": 4884669,
+        "tatoeba": 3486651,
         "author": "Aiji"
       },
       "verbs": [
@@ -49,17 +147,39 @@
       ],
       "nouns": [
         {
-          "noun": "n.temps",
-          "word": "temps"
+          "noun": "n.voiture",
+          "word": "voiture"
         }
       ]
     },
     {
-      "id": "s.tatoeba.1432066",
-      "text": "Vous avez un beau nom.",
+      "id": "s.tatoeba.8245523",
+      "text": "Nous avons deux chiens.",
       "credit": {
-        "tatoeba": 1432066,
-        "author": "Aiji"
+        "tatoeba": 8245523,
+        "author": "felix63"
+      },
+      "verbs": [
+        {
+          "verb": "v.avoir",
+          "tense": "present",
+          "person": "1p",
+          "answer": "avons"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.chien",
+          "word": "chiens"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.4588401",
+      "text": "Vous avez une voiture.",
+      "credit": {
+        "tatoeba": 4588401,
+        "author": "Amastan"
       },
       "verbs": [
         {
@@ -71,33 +191,39 @@
       ],
       "nouns": [
         {
-          "noun": "n.nom",
-          "word": "nom"
+          "noun": "n.voiture",
+          "word": "voiture"
         }
       ]
     },
     {
-      "id": "s.tatoeba.747288",
-      "text": "Je pense que vous avez raison.",
+      "id": "s.tatoeba.8441646",
+      "text": "Avez-vous un chat noir ?",
       "credit": {
-        "tatoeba": 747288,
-        "author": "Cocorico"
+        "tatoeba": 8441646,
+        "author": "felix63"
       },
       "verbs": [
         {
           "verb": "v.avoir",
           "tense": "present",
           "person": "2p",
-          "answer": "avez"
+          "answer": "Avez"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.chat",
+          "word": "chat"
         }
       ]
     },
     {
-      "id": "s.tatoeba.1188717",
-      "text": "Ils ont quatre cours le matin.",
+      "id": "s.tatoeba.2070284",
+      "text": "Ils ont froid.",
       "credit": {
-        "tatoeba": 1188717,
-        "author": "sacredceltic"
+        "tatoeba": 2070284,
+        "author": "Amastan"
       },
       "verbs": [
         {
@@ -106,19 +232,13 @@
           "person": "3p",
           "answer": "ont"
         }
-      ],
-      "nouns": [
-        {
-          "noun": "n.matin",
-          "word": "matin"
-        }
       ]
     },
     {
-      "id": "s.tatoeba.2887143",
-      "text": "Elles ont bon appétit ce matin.",
+      "id": "s.tatoeba.4588409",
+      "text": "Elles ont une voiture.",
       "credit": {
-        "tatoeba": 2887143,
+        "tatoeba": 4588409,
         "author": "Amastan"
       },
       "verbs": [
@@ -131,732 +251,8 @@
       ],
       "nouns": [
         {
-          "noun": "n.matin",
-          "word": "matin"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.2428231",
-      "text": "J’ai eu un contrôle il y a deux semaines.",
-      "credit": {
-        "tatoeba": 2428231,
-        "author": "sacredceltic"
-      },
-      "verbs": [
-        {
-          "verb": "v.avoir",
-          "tense": "passe_compose",
-          "person": "1s",
-          "answer": "ai eu"
-        },
-        {
-          "verb": "v.avoir",
-          "tense": "present",
-          "person": "3s",
-          "answer": "a"
-        }
-      ],
-      "nouns": [
-        {
-          "noun": "n.semaine",
-          "word": "semaines"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.8274129",
-      "text": "Je n’ai eu aucun problème avec lui.",
-      "credit": {
-        "tatoeba": 8274129,
-        "author": "dolomitt"
-      },
-      "verbs": [
-        {
-          "verb": "v.avoir",
-          "tense": "passe_compose",
-          "person": "1s",
-          "answer": "ai eu"
-        }
-      ],
-      "nouns": [
-        {
-          "noun": "n.probleme",
-          "word": "problème"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.2141107",
-      "text": "J’ai le même problème que celui que tu as eu.",
-      "credit": {
-        "tatoeba": 2141107,
-        "author": "Sisyphe"
-      },
-      "verbs": [
-        {
-          "verb": "v.avoir",
-          "tense": "passe_compose",
-          "person": "2s",
-          "answer": "as eu"
-        },
-        {
-          "verb": "v.avoir",
-          "tense": "present",
-          "person": "1s",
-          "answer": "ai"
-        }
-      ],
-      "nouns": [
-        {
-          "noun": "n.probleme",
-          "word": "problème"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.4128739",
-      "text": "Tu as eu ce que tu voulais.",
-      "credit": {
-        "tatoeba": 4128739,
-        "author": "sbamsbamsbam"
-      },
-      "verbs": [
-        {
-          "verb": "v.avoir",
-          "tense": "passe_compose",
-          "person": "2s",
-          "answer": "as eu"
-        },
-        {
-          "verb": "v.vouloir",
-          "tense": "imparfait",
-          "person": "2s",
-          "answer": "voulais"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.1339358",
-      "text": "Il a eu un accident au travail.",
-      "credit": {
-        "tatoeba": 1339358,
-        "author": "sacredceltic"
-      },
-      "verbs": [
-        {
-          "verb": "v.avoir",
-          "tense": "passe_compose",
-          "person": "3s",
-          "answer": "a eu"
-        }
-      ],
-      "nouns": [
-        {
-          "noun": "n.travail",
-          "word": "travail"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.746460",
-      "text": "Elle a eu comme l’impression d’avoir vu un fantôme.",
-      "credit": {
-        "tatoeba": 746460,
-        "author": "Aiji"
-      },
-      "verbs": [
-        {
-          "verb": "v.avoir",
-          "tense": "passe_compose",
-          "person": "3s",
-          "answer": "a eu"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.1455899",
-      "text": "En février, nous avons eu de courtes vacances.",
-      "credit": {
-        "tatoeba": 1455899,
-        "author": "Rovo"
-      },
-      "verbs": [
-        {
-          "verb": "v.avoir",
-          "tense": "passe_compose",
-          "person": "1p",
-          "answer": "avons eu"
-        }
-      ],
-      "nouns": [
-        {
-          "noun": "n.vacances",
-          "word": "vacances"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.5535062",
-      "text": "Nous avons eu un petit problème.",
-      "credit": {
-        "tatoeba": 5535062,
-        "author": "Aiji"
-      },
-      "verbs": [
-        {
-          "verb": "v.avoir",
-          "tense": "passe_compose",
-          "person": "1p",
-          "answer": "avons eu"
-        }
-      ],
-      "nouns": [
-        {
-          "noun": "n.probleme",
-          "word": "problème"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.5494572",
-      "text": "Vous avez eu toute la semaine pour étudier.",
-      "credit": {
-        "tatoeba": 5494572,
-        "author": "Aiji"
-      },
-      "verbs": [
-        {
-          "verb": "v.avoir",
-          "tense": "passe_compose",
-          "person": "2p",
-          "answer": "avez eu"
-        }
-      ],
-      "nouns": [
-        {
-          "noun": "n.semaine",
-          "word": "semaine"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.6067058",
-      "text": "Vous avez eu une semaine pour faire ceci.",
-      "credit": {
-        "tatoeba": 6067058,
-        "author": "Aiji"
-      },
-      "verbs": [
-        {
-          "verb": "v.avoir",
-          "tense": "passe_compose",
-          "person": "2p",
-          "answer": "avez eu"
-        }
-      ],
-      "nouns": [
-        {
-          "noun": "n.semaine",
-          "word": "semaine"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.1521331",
-      "text": "Ils ont eu plusieurs enfants.",
-      "credit": {
-        "tatoeba": 1521331,
-        "author": "sacredceltic"
-      },
-      "verbs": [
-        {
-          "verb": "v.avoir",
-          "tense": "passe_compose",
-          "person": "3p",
-          "answer": "ont eu"
-        }
-      ],
-      "nouns": [
-        {
-          "noun": "n.enfant",
-          "word": "enfants"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.1664211",
-      "text": "Elles ont eu une chaude discussion.",
-      "credit": {
-        "tatoeba": 1664211,
-        "author": "sacredceltic"
-      },
-      "verbs": [
-        {
-          "verb": "v.avoir",
-          "tense": "passe_compose",
-          "person": "3p",
-          "answer": "ont eu"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.460532",
-      "text": "Je n’avais pas le cœur au travail.",
-      "credit": {
-        "tatoeba": 460532,
-        "author": "Bruno"
-      },
-      "verbs": [
-        {
-          "verb": "v.avoir",
-          "tense": "imparfait",
-          "person": "1s",
-          "answer": "avais"
-        }
-      ],
-      "nouns": [
-        {
-          "noun": "n.travail",
-          "word": "travail"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.2164093",
-      "text": "J’ai le sentiment que tu avais autre chose en tête.",
-      "credit": {
-        "tatoeba": 2164093,
-        "author": "sacredceltic"
-      },
-      "verbs": [
-        {
-          "verb": "v.avoir",
-          "tense": "imparfait",
-          "person": "2s",
-          "answer": "avais"
-        },
-        {
-          "verb": "v.avoir",
-          "tense": "present",
-          "person": "1s",
-          "answer": "ai"
-        }
-      ],
-      "nouns": [
-        {
-          "noun": "n.tete",
-          "word": "tête"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.5707561",
-      "text": "Tu avais raison, tu sais.",
-      "credit": {
-        "tatoeba": 5707561,
-        "author": "Aiji"
-      },
-      "verbs": [
-        {
-          "verb": "v.avoir",
-          "tense": "imparfait",
-          "person": "2s",
-          "answer": "avais"
-        },
-        {
-          "verb": "v.savoir",
-          "tense": "present",
-          "person": "2s",
-          "answer": "sais"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.1595408",
-      "text": "Nous n’avions pas d’eau potable.",
-      "credit": {
-        "tatoeba": 1595408,
-        "author": "sacredceltic"
-      },
-      "verbs": [
-        {
-          "verb": "v.avoir",
-          "tense": "imparfait",
-          "person": "1p",
-          "answer": "avions"
-        }
-      ],
-      "nouns": [
-        {
-          "noun": "n.eau",
-          "word": "eau"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.3657478",
-      "text": "Nous avions peu d’eau.",
-      "credit": {
-        "tatoeba": 3657478,
-        "author": "sacredceltic"
-      },
-      "verbs": [
-        {
-          "verb": "v.avoir",
-          "tense": "imparfait",
-          "person": "1p",
-          "answer": "avions"
-        }
-      ],
-      "nouns": [
-        {
-          "noun": "n.eau",
-          "word": "eau"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.3444762",
-      "text": "Vous aviez une semaine pour finir ceci.",
-      "credit": {
-        "tatoeba": 3444762,
-        "author": "GB3"
-      },
-      "verbs": [
-        {
-          "verb": "v.avoir",
-          "tense": "imparfait",
-          "person": "2p",
-          "answer": "aviez"
-        }
-      ],
-      "nouns": [
-        {
-          "noun": "n.semaine",
-          "word": "semaine"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.5707562",
-      "text": "Vous aviez raison, vous savez.",
-      "credit": {
-        "tatoeba": 5707562,
-        "author": "Aiji"
-      },
-      "verbs": [
-        {
-          "verb": "v.avoir",
-          "tense": "imparfait",
-          "person": "2p",
-          "answer": "aviez"
-        },
-        {
-          "verb": "v.savoir",
-          "tense": "present",
-          "person": "2p",
-          "answer": "savez"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.1018726",
-      "text": "Ils avaient des problèmes de couple.",
-      "credit": {
-        "tatoeba": 1018726,
-        "author": "sacredceltic"
-      },
-      "verbs": [
-        {
-          "verb": "v.avoir",
-          "tense": "imparfait",
-          "person": "3p",
-          "answer": "avaient"
-        }
-      ],
-      "nouns": [
-        {
-          "noun": "n.probleme",
-          "word": "problèmes"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.1171354",
-      "text": "Elles annoncèrent qu’elles avaient une maison à vendre.",
-      "credit": {
-        "tatoeba": 1171354,
-        "author": "sacredceltic"
-      },
-      "verbs": [
-        {
-          "verb": "v.avoir",
-          "tense": "imparfait",
-          "person": "3p",
-          "answer": "avaient"
-        }
-      ],
-      "nouns": [
-        {
-          "noun": "n.maison",
-          "word": "maison"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.3272477",
-      "text": "Grâce à eux, je n’aurai aucun problème.",
-      "credit": {
-        "tatoeba": 3272477,
-        "author": "Micsmithel"
-      },
-      "verbs": [
-        {
-          "verb": "v.avoir",
-          "tense": "futur_simple",
-          "person": "1s",
-          "answer": "aurai"
-        }
-      ],
-      "nouns": [
-        {
-          "noun": "n.probleme",
-          "word": "problème"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.5019623",
-      "text": "Je t’appellerai quand j’aurai le temps.",
-      "credit": {
-        "tatoeba": 5019623,
-        "author": "Alexs"
-      },
-      "verbs": [
-        {
-          "verb": "v.avoir",
-          "tense": "futur_simple",
-          "person": "1s",
-          "answer": "aurai"
-        }
-      ],
-      "nouns": [
-        {
-          "noun": "n.temps",
-          "word": "temps"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.1549670",
-      "text": "Fais-le lorsque tu en auras le temps.",
-      "credit": {
-        "tatoeba": 1549670,
-        "author": "sacredceltic"
-      },
-      "verbs": [
-        {
-          "verb": "v.avoir",
-          "tense": "futur_simple",
-          "person": "2s",
-          "answer": "auras"
-        }
-      ],
-      "nouns": [
-        {
-          "noun": "n.temps",
-          "word": "temps"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.334375",
-      "text": "Fais-le quand tu auras du temps.",
-      "credit": {
-        "tatoeba": 334375,
-        "author": "TRANG"
-      },
-      "verbs": [
-        {
-          "verb": "v.avoir",
-          "tense": "futur_simple",
-          "person": "2s",
-          "answer": "auras"
-        }
-      ],
-      "nouns": [
-        {
-          "noun": "n.temps",
-          "word": "temps"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.3273711",
-      "text": "Elle aura besoin d’une voiture la semaine prochaine.",
-      "credit": {
-        "tatoeba": 3273711,
-        "author": "Aiji"
-      },
-      "verbs": [
-        {
-          "verb": "v.avoir",
-          "tense": "futur_simple",
-          "person": "3s",
-          "answer": "aura"
-        }
-      ],
-      "nouns": [
-        {
-          "noun": "n.semaine",
-          "word": "semaine"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.7242729",
-      "text": "Combien de personnes pensez-vous qu’il y aura ?",
-      "credit": {
-        "tatoeba": 7242729,
-        "author": "tras"
-      },
-      "verbs": [
-        {
-          "verb": "v.avoir",
-          "tense": "futur_simple",
-          "person": "3s",
-          "answer": "aura"
-        }
-      ],
-      "nouns": [
-        {
-          "noun": "n.personne",
-          "word": "personnes"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.1116700",
-      "text": "Nous aurons un examen aujourd’hui.",
-      "credit": {
-        "tatoeba": 1116700,
-        "author": "sysko"
-      },
-      "verbs": [
-        {
-          "verb": "v.avoir",
-          "tense": "futur_simple",
-          "person": "1p",
-          "answer": "aurons"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.1309596",
-      "text": "Penses-tu que nous aurons beau temps ?",
-      "credit": {
-        "tatoeba": 1309596,
-        "author": "sacredceltic"
-      },
-      "verbs": [
-        {
-          "verb": "v.avoir",
-          "tense": "futur_simple",
-          "person": "1p",
-          "answer": "aurons"
-        }
-      ],
-      "nouns": [
-        {
-          "noun": "n.temps",
-          "word": "temps"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.1549671",
-      "text": "Faites-le lorsque vous en aurez le temps.",
-      "credit": {
-        "tatoeba": 1549671,
-        "author": "sacredceltic"
-      },
-      "verbs": [
-        {
-          "verb": "v.avoir",
-          "tense": "futur_simple",
-          "person": "2p",
-          "answer": "aurez"
-        }
-      ],
-      "nouns": [
-        {
-          "noun": "n.temps",
-          "word": "temps"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.8305669",
-      "text": "Envoyez-le moi quand vous aurez le temps.",
-      "credit": {
-        "tatoeba": 8305669,
-        "author": "Aiji"
-      },
-      "verbs": [
-        {
-          "verb": "v.avoir",
-          "tense": "futur_simple",
-          "person": "2p",
-          "answer": "aurez"
-        }
-      ],
-      "nouns": [
-        {
-          "noun": "n.temps",
-          "word": "temps"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.3271013",
-      "text": "Ils auront moins de temps libre la semaine prochaine.",
-      "credit": {
-        "tatoeba": 3271013,
-        "author": "nimfeo"
-      },
-      "verbs": [
-        {
-          "verb": "v.avoir",
-          "tense": "futur_simple",
-          "person": "3p",
-          "answer": "auront"
-        }
-      ],
-      "nouns": [
-        {
-          "noun": "n.temps",
-          "word": "temps"
-        },
-        {
-          "noun": "n.semaine",
-          "word": "semaine"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.7044229",
-      "text": "Elles auront besoin de se reposer.",
-      "credit": {
-        "tatoeba": 7044229,
-        "author": "Micsmithel"
-      },
-      "verbs": [
-        {
-          "verb": "v.avoir",
-          "tense": "futur_simple",
-          "person": "3p",
-          "answer": "auront"
+          "noun": "n.voiture",
+          "word": "voiture"
         }
       ]
     }

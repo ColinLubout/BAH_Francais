@@ -559,4 +559,27 @@ void main() {
     );
     expect(dictionary.nouns.keys, ['fourchette']);
   });
+
+  test('the parts of speech of the words asked for, inflected forms '
+      'too', () async {
+    String entry(String word, String pos, {String lang = 'fr'}) =>
+        '{"word": "$word", "pos": "$pos", "lang_code": "$lang", '
+        '"senses": []}';
+    final dictionary = await Dictionary.read(
+      Stream.fromIterable([
+        entry('chiens', 'noun'),
+        entry('petit', 'adj'),
+        entry('petit', 'noun'),
+        entry('chiens', 'verb', lang: 'en'),
+        entry('loin', 'adv'),
+      ]),
+      words: const {},
+      partsOfSpeechFor: {'chiens', 'petit'},
+    );
+    expect(dictionary.partsOfSpeech, {
+      'chiens': {'noun'},
+      'petit': {'adj', 'noun'},
+    });
+    expect(dictionary.nouns, isEmpty);
+  });
 }

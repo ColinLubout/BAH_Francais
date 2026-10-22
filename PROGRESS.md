@@ -26,9 +26,13 @@ until this is merged.
     the day's counts from the review log.
   - `SessionsDao` and `CategoryWeightsDao`.
 - **Import** of a content pack into an empty database (`ContentImporter`): read-only,
-  in one transaction, with New cards for every noun and verb. It refuses a missing
-  file, a file that isn't a pack, and a pack needing a newer app, and leaves nothing
-  behind when it fails.
+  in one transaction, with New cards for every noun, and for every verb in each tense
+  the pack teaches (decision 62). It refuses a missing file, a file that isn't a
+  pack, and a pack needing a newer app, and leaves nothing behind when it fails.
+- **The tenses taught** (decision 62): `content/tenses.json` lists them; the validator
+  asks for sentences in those tenses only, the pack records them, and the importer
+  creates Conjugaison cards for them only. The sample teaches all four, so the tests
+  keep covering every tense.
 - **Migrations:** schema version 1 dumped in `drift_schemas/`, a test that the tables
   match it, and `make-migrations` set up for the next versions.
 - **Content tool** (`tool/content_build.dart`): a JSON Schema per kind of file in
@@ -37,27 +41,33 @@ until this is merged.
 - **Dictionary check** (`tool/dictionary_check.dart`, decision 60): compares the
   content with Wiktionary through Kaikki.org's French data, kept in `data/kaikki/`
   and out of git. Both the everyday draft and the sample agree with it on every
-  gender, plural-only noun, auxiliary and conjugated form.
+  gender, plural-only noun, auxiliary and conjugated form. It also checks the words of
+  the sentences (decision 64): it flags a noun or verb the content doesn't have, a
+  form in a tense it doesn't teach, and an infinitive straight after a conjugated
+  verb. The everyday sentences pass.
 - **Conjugation prompts** (`sentence_prompt.dart`): a sentence with its verb blanked
   and an elided word before it written in full (*J’habite* → *Je ___*), shared by
   the validator and, later, the Conjugaison drill.
-- **Everyday content, a draft to check** (`content/`, decision 57): *Les essentiels*,
-  30 nouns with definitions, and *Les verbes essentiels*, 10 verbs with all 24 forms;
-  383 sentences, many serving several verbs and nouns.
+- **Everyday content, a draft to check** (`content/`, decisions 57 and 62): the
+  present only; *Les essentiels*, 10 nouns with definitions, and *Les verbes
+  essentiels*, 6 verbs with all 24 forms; 69 sentences.
   - The owner checks it on a review page (a private claude.ai artifact) that shows
     each item with its English meaning and saves their marks.
   - 2026-10-21: the owner checked the nouns and verbs. 38 were right; *eau* and
-    *nuit* got new definitions (and *nuit* a new example) from their notes. 18
-    sentences that used one of the 30 nouns without linking it now link it.
-  - 2026-10-21: the sentences now come from Tatoeba (decision 61): 366 by native
-    speakers, each credited, and 17 drafted where Tatoeba has nothing suitable.
-    Every verb, tense and person has two or more, and every noun two or more
-    examples. The review page shows each sentence's source and Tatoeba's English
-    translation; the sentences are to check again.
+    *nuit* got new definitions (and *nuit* a new example) from their notes.
+  - 2026-10-21: the sentences came from Tatoeba (decision 61).
+  - 2026-10-22: the owner cut the scope to the present, 6 verbs and 10 nouns
+    (decision 62), and found the Tatoeba sentences unnatural: 70% had been
+    translated from English. The sentences are now Tatoeba's written in French and
+    using only the content's nouns and verbs (decision 64): 55, by 11 native
+    speakers, and 14 drafted (*finir*, *ils font*, *nous disons*), two or more for
+    each verb and person and each noun. The 7 nouns and 5 verbs kept are unchanged,
+    so their marks stand; *chat*, *chien*, *voiture* and *finir* are new, and agree
+    with Wiktionary.
 - **Sample set** (`content/sample/`): 3 noun categories of 10 nouns, 5 verbs with
   all 24 forms, 151 sentences and 6 placeholder SVGs. Marked as samples; it never
   ships.
-- **Tests:** 503, all passing. Domain coverage is 99.4%; the DAOs, the content store,
+- **Tests:** 523, all passing. Domain coverage is 99.4%; the DAOs, the content store,
   the converters and the prompt logic are fully covered.
 
 **The milestone's "done when" and its tests:**
@@ -70,8 +80,8 @@ until this is merged.
 ### Left for the owner
 
 - Review and merge the `milestone-1-followups` PR, then the `milestone-2` PR.
-- Check the everyday content in `content/` (decision 57): every word, gender,
-  definition, example, form and sentence, and the order of the ranks.
+- Check the everyday content in `content/` (decisions 57 and 62): the new nouns
+  (*chat*, *chien*, *voiture*) and verb (*finir*), and the 69 sentences.
 - Add the Codecov upload token as the GitHub Actions secret `CODECOV_TOKEN`, if not
   done yet.
 - Turn on branch protection for `main`, requiring the three CI jobs, if not done yet.
@@ -110,18 +120,22 @@ until this is merged.
   differently.
 - M5: form validation errors use Material's red, but the spec keeps red for wrong
   answers only.
-- M8 (or whenever nouns are added): a check that lists the sentences already using a
-  new noun without linking it, so the links can be added in one go and checked. It
-  needs a person's eye: in *Personne ne savait son nom*, *personne* is a pronoun.
+- M6: the Conjugaison settings' *Temps* lists only the tenses the content teaches
+  (decision 62); with the present alone, the setting has nothing to choose.
+- M7: a content update that adds a tense creates that tense's Conjugaison cards for
+  every verb (decision 62).
+- M8 (new, decision 63): when words are added, sentences that already use a new word
+  link it. The sentences only use the content's nouns and verbs (decision 64), so
+  re-picking them with the new lists does this.
 - M6: À propos / Crédits credits Wiktionary (CC BY-SA 4.0) and Kaikki.org /
   wiktextract (decision 60), with French wording from the owner.
 - M6: À propos / Crédits credits Tatoeba and its licence, CC BY 2.0 FR (decision 61).
   The licence asks for each author to be credited: the sentences table keeps every
   sentence's Tatoeba number and author, so Crédits can list the authors, or the
   drill can name a sentence's author. Which one is the owner's call.
-- M8: picking Tatoeba sentences for the topic categories (names allowed there,
-  decision 61). The script that picked the everyday ones was a one-off outside the
-  repo; done again, it belongs in `tool/` with its tests.
+- M8: picking Tatoeba sentences for the new words and tenses (names allowed outside
+  the everyday categories, decision 61). The script that picked the everyday ones
+  was a one-off outside the repo; done again, it belongs in `tool/` with its tests.
 - M6: `drillSettings.title` ("Réglages – {drill}") doesn't match the spec's
   *Réglages de l'exercice*.
 - M6: for the everyday and Perso categories, only Jamais changes anything (decisions
@@ -588,6 +602,54 @@ document.
       Its downloads stay out of the repo, in `data/tatoeba/`.
     - *Adds to* Content model → Sentence (its credit), Content files, and À propos /
       Crédits; *changes* decision 57 (the sentences are no longer drafted).
+
+### 2026-10-22 (milestone 2, agreed with the owner)
+
+62. **The first content pack is small: the present, 6 verbs and 10 nouns**, so every
+    drill can be built and tried with real data.
+    - *Les verbes essentiels*: être, avoir, aller, faire, dire, finir. *Les
+      essentiels*: homme, femme, jour, chat, chien, soir, voiture, travail, heure,
+      maison. The other 23 nouns and 4 verbs are removed (git keeps them).
+    - **The content says which tenses it teaches**, in `content/tenses.json`
+      (`{"tenses": ["present"]}`). Verbs keep their forms for all four tenses, so a
+      tense is added by listing it and writing its sentences.
+      - The validator asks for a sentence per verb and person in each tense taught
+        only, and refuses a sentence that is a prompt for another tense.
+      - The pack records the tenses (`content_meta`, key `tenses`); content that
+        doesn't say teaches all four.
+      - The importer creates Conjugaison cards only for the tenses taught.
+      - The Tense values stay the four, as the spec has them.
+    - *Changes* Phase 1 → tenses (the present first, the other three in milestone
+      8), Content files (`tenses.json`; the validator rule "at least one sentence per
+      tense × person" becomes per tense taught), and the Conjugaison drill settings
+      (Temps lists only the tenses taught); *changes* decision 57's lists.
+63. **A new milestone 8, before the release pass:** add the passé composé, imparfait
+    and futur simple, and grow the lists to 30 verbs and 100 nouns. The release pass
+    becomes milestone 9.
+    - Phase 1 then ships 30 verbs and 100 nouns in four tenses, instead of the spec's
+      60 verbs and its topic categories. Which categories hold the 100 nouns is for
+      milestone 8.
+    - *Changes* Build plan → Milestones and Content → Phase 1 content; decision 58's
+      "the final milestone" is now milestone 8, and decision 13's milestone 8 (the
+      repo files) is now 9.
+64. **A sentence uses only the content's nouns and verbs**, conjugated in a tense it
+    teaches; the lists grow as words are added.
+    - Other words (adjectives, adverbs, pronouns, prepositions) are free.
+    - An infinitive is allowed when it isn't part of a verb construction: after a
+      preposition (*J’ai du travail à finir*), never straight after a conjugated verb
+      (*je vais finir* is the futur proche; also *faire* + infinitive, *être en
+      train de*, *venir de*).
+    - **Tatoeba sentences must have been written in French**, not translated:
+      Tatoeba records which is which, and 70% of the earlier picks were translations
+      from English that no French speaker would say that way. Native speakers only,
+      as before.
+    - Also: *ne…pas* in full, no idiom whose meaning isn't its words' (*Il a du
+      chien*), no names, 3 to 10 words; a sentence with a subordinate clause ranks
+      lower. Where none fits, Claude Code drafts one, and the owner supplies any it
+      isn't sure of.
+    - `tool/dictionary_check.dart` checks the rule from Wiktionary's parts of speech,
+      so it advises rather than fails.
+    - *Changes* decision 61 (written in French only) and Content → sentences.
 
 ### Notes
 

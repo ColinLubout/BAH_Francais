@@ -66,6 +66,20 @@ void main() {
     }
   });
 
+  test('a verb has Conjugaison cards only in the tenses taught', () async {
+    final db = await databaseWith(fixture);
+    final dao = CardsDao(db);
+    await dao.createCards(
+      at: created,
+      verbIds: ['v.cc'],
+      tenses: [Tense.present, Tense.futurSimple],
+    );
+    expect((await dao.cards(DrillType.conjugation)).map((c) => c.tense), [
+      Tense.present,
+      Tense.futurSimple,
+    ]);
+  });
+
   test('an item has one card per drill, and a verb one per tense', () async {
     final (:dao, db: _, session: _) = await setUpCards();
     expect(

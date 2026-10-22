@@ -1,11 +1,43 @@
 {
   "sentences": [
     {
-      "id": "s.tatoeba.11580394",
-      "text": "Chaque mot que tu dis est un mensonge.",
+      "id": "s.tatoeba.2846508",
+      "text": "Je ne dis pas non.",
       "credit": {
-        "tatoeba": 11580394,
-        "author": "Aiji"
+        "tatoeba": 2846508,
+        "author": "nimfeo"
+      },
+      "verbs": [
+        {
+          "verb": "v.dire",
+          "tense": "present",
+          "person": "1s",
+          "answer": "dis"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.4920722",
+      "text": "Qu’est-ce que je me dis ?",
+      "credit": {
+        "tatoeba": 4920722,
+        "author": "mkac"
+      },
+      "verbs": [
+        {
+          "verb": "v.dire",
+          "tense": "present",
+          "person": "1s",
+          "answer": "dis"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.4525459",
+      "text": "Pourquoi ne me dis-tu pas que je suis belle ?",
+      "credit": {
+        "tatoeba": 4525459,
+        "author": "Amastan"
       },
       "verbs": [
         {
@@ -13,126 +45,6 @@
           "tense": "present",
           "person": "2s",
           "answer": "dis"
-        }
-      ],
-      "nouns": [
-        {
-          "noun": "n.mot",
-          "word": "mot"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.2174674",
-      "text": "Tu dis que c’est toi qui as écrit ce livre ?",
-      "credit": {
-        "tatoeba": 2174674,
-        "author": "Sisyphe"
-      },
-      "verbs": [
-        {
-          "verb": "v.dire",
-          "tense": "present",
-          "person": "2s",
-          "answer": "dis"
-        },
-        {
-          "verb": "v.etre",
-          "tense": "present",
-          "person": "3s",
-          "answer": "est"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.7141555",
-      "text": "Nous disons toutes les deux la vérité.",
-      "credit": {
-        "tatoeba": 7141555,
-        "author": "Aiji"
-      },
-      "verbs": [
-        {
-          "verb": "v.dire",
-          "tense": "present",
-          "person": "1p",
-          "answer": "disons"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.8823577",
-      "text": "Ils peuvent comprendre tout ce que nous disons.",
-      "credit": {
-        "tatoeba": 8823577,
-        "author": "Aiji"
-      },
-      "verbs": [
-        {
-          "verb": "v.dire",
-          "tense": "present",
-          "person": "1p",
-          "answer": "disons"
-        },
-        {
-          "verb": "v.pouvoir",
-          "tense": "present",
-          "person": "3p",
-          "answer": "peuvent"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.13326546",
-      "text": "Il peut comprendre tout ce que vous dites.",
-      "credit": {
-        "tatoeba": 13326546,
-        "author": "genes1s"
-      },
-      "verbs": [
-        {
-          "verb": "v.dire",
-          "tense": "present",
-          "person": "2p",
-          "answer": "dites"
-        },
-        {
-          "verb": "v.pouvoir",
-          "tense": "present",
-          "person": "3s",
-          "answer": "peut"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.5821268",
-      "text": "Pourquoi vous dites cela ?",
-      "credit": {
-        "tatoeba": 5821268,
-        "author": "EvaFranska"
-      },
-      "verbs": [
-        {
-          "verb": "v.dire",
-          "tense": "present",
-          "person": "2p",
-          "answer": "dites"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.338258",
-      "text": "Ils disent que je suis une vieille femme.",
-      "credit": {
-        "tatoeba": 338258,
-        "author": "sysko"
-      },
-      "verbs": [
-        {
-          "verb": "v.dire",
-          "tense": "present",
-          "person": "3p",
-          "answer": "disent"
         },
         {
           "verb": "v.etre",
@@ -140,65 +52,37 @@
           "person": "1s",
           "answer": "suis"
         }
-      ],
-      "nouns": [
-        {
-          "noun": "n.femme",
-          "word": "femme"
-        }
       ]
     },
     {
-      "id": "s.tatoeba.5645493",
-      "text": "Ils ne disent jamais rien concernant leur famille.",
+      "id": "s.tatoeba.6541315",
+      "text": "Pourquoi ne dis-tu rien ?",
       "credit": {
-        "tatoeba": 5645493,
-        "author": "narnar"
+        "tatoeba": 6541315,
+        "author": "felix63"
       },
       "verbs": [
         {
           "verb": "v.dire",
           "tense": "present",
-          "person": "3p",
-          "answer": "disent"
-        }
-      ],
-      "nouns": [
-        {
-          "noun": "n.famille",
-          "word": "famille"
+          "person": "2s",
+          "answer": "dis"
         }
       ]
     },
     {
-      "id": "s.tatoeba.1124971",
-      "text": "Désolés pour ce que nous avons dit plus tôt.",
+      "id": "s.tatoeba.8660840",
+      "text": "C’est vraiment vrai ce qu’il dit ?",
       "credit": {
-        "tatoeba": 1124971,
-        "author": "sacredceltic"
+        "tatoeba": 8660840,
+        "author": "Julien_PDC"
       },
       "verbs": [
         {
           "verb": "v.dire",
-          "tense": "passe_compose",
-          "person": "1p",
-          "answer": "avons dit"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.12343074",
-      "text": "C’est ce que nous avons dit.",
-      "credit": {
-        "tatoeba": 12343074,
-        "author": "sacredceltic"
-      },
-      "verbs": [
-        {
-          "verb": "v.dire",
-          "tense": "passe_compose",
-          "person": "1p",
-          "answer": "avons dit"
+          "tense": "present",
+          "person": "3s",
+          "answer": "dit"
         },
         {
           "verb": "v.etre",
@@ -209,422 +93,106 @@
       ]
     },
     {
-      "id": "s.tatoeba.4164884",
-      "text": "Vous avez dit qu’il y avait urgence.",
+      "id": "s.tatoeba.9107074",
+      "text": "Est-ce qu’on le lui dit ?",
       "credit": {
-        "tatoeba": 4164884,
-        "author": "sacredceltic"
+        "tatoeba": 9107074,
+        "author": "felix63"
       },
       "verbs": [
         {
           "verb": "v.dire",
-          "tense": "passe_compose",
-          "person": "2p",
-          "answer": "avez dit"
-        },
-        {
-          "verb": "v.avoir",
-          "tense": "imparfait",
+          "tense": "present",
           "person": "3s",
-          "answer": "avait"
+          "answer": "dit"
         }
       ]
     },
     {
-      "id": "s.tatoeba.428950",
-      "text": "Ce que vous avez dit ne s’applique qu’aux femmes célibataires.",
-      "credit": {
-        "tatoeba": 428950,
-        "author": "Archibald"
-      },
+      "id": "s.dire.pr.1p.01",
+      "text": "Nous disons oui.",
       "verbs": [
         {
           "verb": "v.dire",
-          "tense": "passe_compose",
-          "person": "2p",
-          "answer": "avez dit"
-        }
-      ],
-      "nouns": [
-        {
-          "noun": "n.femme",
-          "word": "femmes"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.11008751",
-      "text": "Je leur disais la même chose.",
-      "credit": {
-        "tatoeba": 11008751,
-        "author": "Rovo"
-      },
-      "verbs": [
-        {
-          "verb": "v.dire",
-          "tense": "imparfait",
-          "person": "1s",
-          "answer": "disais"
-        }
-      ],
-      "nouns": [
-        {
-          "noun": "n.chose",
-          "word": "chose"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.5708119",
-      "text": "Comme je disais, pas de problème.",
-      "credit": {
-        "tatoeba": 5708119,
-        "author": "Aiji"
-      },
-      "verbs": [
-        {
-          "verb": "v.dire",
-          "tense": "imparfait",
-          "person": "1s",
-          "answer": "disais"
-        }
-      ],
-      "nouns": [
-        {
-          "noun": "n.probleme",
-          "word": "problème"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.3566825",
-      "text": "Je croyais tout ce que tu disais.",
-      "credit": {
-        "tatoeba": 3566825,
-        "author": "sacredceltic"
-      },
-      "verbs": [
-        {
-          "verb": "v.dire",
-          "tense": "imparfait",
-          "person": "2s",
-          "answer": "disais"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.5305016",
-      "text": "Tu disais que tu voulais la vérité.",
-      "credit": {
-        "tatoeba": 5305016,
-        "author": "Aiji"
-      },
-      "verbs": [
-        {
-          "verb": "v.dire",
-          "tense": "imparfait",
-          "person": "2s",
-          "answer": "disais"
-        },
-        {
-          "verb": "v.vouloir",
-          "tense": "imparfait",
-          "person": "2s",
-          "answer": "voulais"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.129986",
-      "text": "Quelques personnes seulement comprirent ce qu’il disait.",
-      "credit": {
-        "tatoeba": 129986,
-        "author": "nimfeo"
-      },
-      "verbs": [
-        {
-          "verb": "v.dire",
-          "tense": "imparfait",
-          "person": "3s",
-          "answer": "disait"
-        }
-      ],
-      "nouns": [
-        {
-          "noun": "n.personne",
-          "word": "personnes"
-        }
-      ]
-    },
-    {
-      "id": "s.dire.im.1p.01",
-      "text": "Nous disions bonjour aux voisins chaque matin.",
-      "verbs": [
-        {
-          "verb": "v.dire",
-          "tense": "imparfait",
+          "tense": "present",
           "person": "1p",
-          "answer": "disions"
-        }
-      ],
-      "nouns": [
-        {
-          "noun": "n.matin",
-          "word": "matin"
+          "answer": "disons"
         }
       ]
     },
     {
-      "id": "s.dire.im.1p.02",
-      "text": "Nous lui disions tout quand nous étions petits.",
+      "id": "s.dire.pr.1p.02",
+      "text": "Nous ne disons rien.",
       "verbs": [
         {
           "verb": "v.dire",
-          "tense": "imparfait",
+          "tense": "present",
           "person": "1p",
-          "answer": "disions"
-        },
-        {
-          "verb": "v.etre",
-          "tense": "imparfait",
-          "person": "1p",
-          "answer": "étions"
+          "answer": "disons"
         }
       ]
     },
     {
-      "id": "s.tatoeba.5305018",
-      "text": "Vous disiez que vous vouliez la vérité.",
+      "id": "s.tatoeba.10344237",
+      "text": "Qu’est-ce que vous en dites ?",
       "credit": {
-        "tatoeba": 5305018,
-        "author": "Aiji"
-      },
-      "verbs": [
-        {
-          "verb": "v.dire",
-          "tense": "imparfait",
-          "person": "2p",
-          "answer": "disiez"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.6275600",
-      "text": "Vous disiez la vérité, n’est-ce pas ?",
-      "credit": {
-        "tatoeba": 6275600,
-        "author": "Aiji"
-      },
-      "verbs": [
-        {
-          "verb": "v.dire",
-          "tense": "imparfait",
-          "person": "2p",
-          "answer": "disiez"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.7028841",
-      "text": "Je n’ai pas pu entendre ce qu’elles disaient.",
-      "credit": {
-        "tatoeba": 7028841,
-        "author": "Aiji"
-      },
-      "verbs": [
-        {
-          "verb": "v.dire",
-          "tense": "imparfait",
-          "person": "3p",
-          "answer": "disaient"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.7414392",
-      "text": "Ils disaient qu’ils voulaient de l’argent.",
-      "credit": {
-        "tatoeba": 7414392,
-        "author": "tras"
-      },
-      "verbs": [
-        {
-          "verb": "v.dire",
-          "tense": "imparfait",
-          "person": "3p",
-          "answer": "disaient"
-        },
-        {
-          "verb": "v.vouloir",
-          "tense": "imparfait",
-          "person": "3p",
-          "answer": "voulaient"
-        }
-      ],
-      "nouns": [
-        {
-          "noun": "n.argent",
-          "word": "argent"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.1910354",
-      "text": "Promets-moi que tu ne lui diras pas !",
-      "credit": {
-        "tatoeba": 1910354,
-        "author": "sacredceltic"
-      },
-      "verbs": [
-        {
-          "verb": "v.dire",
-          "tense": "futur_simple",
-          "person": "2s",
-          "answer": "diras"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.8063658",
-      "text": "Promets-moi que tu ne le diras à personne.",
-      "credit": {
-        "tatoeba": 8063658,
-        "author": "Aiji"
-      },
-      "verbs": [
-        {
-          "verb": "v.dire",
-          "tense": "futur_simple",
-          "person": "2s",
-          "answer": "diras"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.130715",
-      "text": "Je pense qu’il ne dira pas oui.",
-      "credit": {
-        "tatoeba": 130715,
-        "author": "Micsmithel"
-      },
-      "verbs": [
-        {
-          "verb": "v.dire",
-          "tense": "futur_simple",
-          "person": "3s",
-          "answer": "dira"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.1385439",
-      "text": "Elle le lui dira lorsqu’elle reviendra.",
-      "credit": {
-        "tatoeba": 1385439,
-        "author": "sacredceltic"
-      },
-      "verbs": [
-        {
-          "verb": "v.dire",
-          "tense": "futur_simple",
-          "person": "3s",
-          "answer": "dira"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.10464150",
-      "text": "Nous ne lui dirons rien.",
-      "credit": {
-        "tatoeba": 10464150,
+        "tatoeba": 10344237,
         "author": "Julien_PDC"
       },
       "verbs": [
         {
           "verb": "v.dire",
-          "tense": "futur_simple",
-          "person": "1p",
-          "answer": "dirons"
+          "tense": "present",
+          "person": "2p",
+          "answer": "dites"
         }
       ]
     },
     {
-      "id": "s.tatoeba.12682888",
-      "text": "Nous ne le dirons à personne.",
+      "id": "s.tatoeba.9949681",
+      "text": "Pourquoi dites-vous non si souvent ?",
       "credit": {
-        "tatoeba": 12682888,
+        "tatoeba": 9949681,
+        "author": "felix63"
+      },
+      "verbs": [
+        {
+          "verb": "v.dire",
+          "tense": "present",
+          "person": "2p",
+          "answer": "dites"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.12660457",
+      "text": "Ils disent tous ça.",
+      "credit": {
+        "tatoeba": 12660457,
         "author": "Olcyx"
       },
       "verbs": [
         {
           "verb": "v.dire",
-          "tense": "futur_simple",
-          "person": "1p",
-          "answer": "dirons"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.10930265",
-      "text": "Vous lui direz que j’ai appelé ?",
-      "credit": {
-        "tatoeba": 10930265,
-        "author": "lbdx"
-      },
-      "verbs": [
-        {
-          "verb": "v.dire",
-          "tense": "futur_simple",
-          "person": "2p",
-          "answer": "direz"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.1910358",
-      "text": "Promettez-moi que vous ne lui direz pas !",
-      "credit": {
-        "tatoeba": 1910358,
-        "author": "sacredceltic"
-      },
-      "verbs": [
-        {
-          "verb": "v.dire",
-          "tense": "futur_simple",
-          "person": "2p",
-          "answer": "direz"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.6939948",
-      "text": "Ils ne te diront pas la vérité.",
-      "credit": {
-        "tatoeba": 6939948,
-        "author": "Aiji"
-      },
-      "verbs": [
-        {
-          "verb": "v.dire",
-          "tense": "futur_simple",
+          "tense": "present",
           "person": "3p",
-          "answer": "diront"
+          "answer": "disent"
         }
       ]
     },
     {
-      "id": "s.tatoeba.6939954",
-      "text": "Elles ne vous diront pas la vérité.",
+      "id": "s.tatoeba.8893152",
+      "text": "Qu’est-ce qu’ils disent ?",
       "credit": {
-        "tatoeba": 6939954,
-        "author": "Aiji"
+        "tatoeba": 8893152,
+        "author": "Julien_PDC"
       },
       "verbs": [
         {
           "verb": "v.dire",
-          "tense": "futur_simple",
+          "tense": "present",
           "person": "3p",
-          "answer": "diront"
+          "answer": "disent"
         }
       ]
     }

@@ -1,390 +1,142 @@
 {
   "sentences": [
     {
-      "id": "s.tatoeba.1419208",
-      "text": "Tu n’as qu’à regarder ce que je fais.",
+      "id": "s.tatoeba.8616930",
+      "text": "J’en fais déjà beaucoup.",
       "credit": {
-        "tatoeba": 1419208,
-        "author": "sacredceltic"
-      },
-      "verbs": [
-        {
-          "verb": "v.faire",
-          "tense": "present",
-          "person": "1s",
-          "answer": "fais"
-        },
-        {
-          "verb": "v.avoir",
-          "tense": "present",
-          "person": "2s",
-          "answer": "as"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.2022030",
-      "text": "Je me fais du souci pour elle.",
-      "credit": {
-        "tatoeba": 2022030,
-        "author": "sacredceltic"
-      },
-      "verbs": [
-        {
-          "verb": "v.faire",
-          "tense": "present",
-          "person": "1s",
-          "answer": "fais"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.373161",
-      "text": "Tu es responsable de ce que tu fais.",
-      "credit": {
-        "tatoeba": 373161,
-        "author": "sysko"
-      },
-      "verbs": [
-        {
-          "verb": "v.faire",
-          "tense": "present",
-          "person": "2s",
-          "answer": "fais"
-        },
-        {
-          "verb": "v.etre",
-          "tense": "present",
-          "person": "2s",
-          "answer": "es"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.9934925",
-      "text": "Tu as mal quand tu fais ça ?",
-      "credit": {
-        "tatoeba": 9934925,
-        "author": "Micsmithel"
-      },
-      "verbs": [
-        {
-          "verb": "v.faire",
-          "tense": "present",
-          "person": "2s",
-          "answer": "fais"
-        },
-        {
-          "verb": "v.avoir",
-          "tense": "present",
-          "person": "2s",
-          "answer": "as"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.4879404",
-      "text": "Nous faisons tout ce que nous pouvons.",
-      "credit": {
-        "tatoeba": 4879404,
-        "author": "sacredceltic"
-      },
-      "verbs": [
-        {
-          "verb": "v.faire",
-          "tense": "present",
-          "person": "1p",
-          "answer": "faisons"
-        },
-        {
-          "verb": "v.pouvoir",
-          "tense": "present",
-          "person": "1p",
-          "answer": "pouvons"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.7815757",
-      "text": "Nous faisons une grave erreur, vous savez.",
-      "credit": {
-        "tatoeba": 7815757,
+        "tatoeba": 8616930,
         "author": "Aiji"
       },
       "verbs": [
         {
           "verb": "v.faire",
           "tense": "present",
-          "person": "1p",
-          "answer": "faisons"
-        },
-        {
-          "verb": "v.savoir",
-          "tense": "present",
-          "person": "2p",
-          "answer": "savez"
+          "person": "1s",
+          "answer": "fais"
         }
       ]
     },
     {
-      "id": "s.tatoeba.4880189",
-      "text": "Vous faites tout ce que vous pouvez.",
+      "id": "s.tatoeba.8620417",
+      "text": "Je ne le fais pas pour toi.",
       "credit": {
-        "tatoeba": 4880189,
-        "author": "sacredceltic"
+        "tatoeba": 8620417,
+        "author": "Aiji"
       },
       "verbs": [
         {
           "verb": "v.faire",
           "tense": "present",
-          "person": "2p",
-          "answer": "faites"
-        },
-        {
-          "verb": "v.pouvoir",
-          "tense": "present",
-          "person": "2p",
-          "answer": "pouvez"
+          "person": "1s",
+          "answer": "fais"
         }
       ]
     },
     {
-      "id": "s.tatoeba.830235",
-      "text": "Qu’est-ce que vous faites avant le petit-déjeuner ?",
+      "id": "s.tatoeba.6483394",
+      "text": "Mais qu’est-ce que tu fais là ?",
       "credit": {
-        "tatoeba": 830235,
-        "author": "RaspaKrusto"
+        "tatoeba": 6483394,
+        "author": "Blabla"
       },
       "verbs": [
         {
           "verb": "v.faire",
           "tense": "present",
-          "person": "2p",
-          "answer": "faites"
+          "person": "2s",
+          "answer": "fais"
         }
       ]
     },
     {
-      "id": "s.tatoeba.1204675",
-      "text": "Ils font grève pour obtenir plus d’argent.",
+      "id": "s.tatoeba.7048270",
+      "text": "Qu’est-ce que tu fais encore debout à cette heure ?",
       "credit": {
-        "tatoeba": 1204675,
-        "author": "sacredceltic"
+        "tatoeba": 7048270,
+        "author": "Aiji"
       },
       "verbs": [
         {
           "verb": "v.faire",
           "tense": "present",
-          "person": "3p",
-          "answer": "font"
+          "person": "2s",
+          "answer": "fais"
         }
       ],
       "nouns": [
         {
-          "noun": "n.argent",
-          "word": "argent"
+          "noun": "n.heure",
+          "word": "heure"
         }
       ]
     },
     {
-      "id": "s.tatoeba.1468688",
-      "text": "Hier soir j’ai fait un cauchemar.",
+      "id": "s.tatoeba.6633683",
+      "text": "Il fait grand jour.",
       "credit": {
-        "tatoeba": 1468688,
-        "author": "sysko"
-      },
-      "verbs": [
-        {
-          "verb": "v.faire",
-          "tense": "passe_compose",
-          "person": "1s",
-          "answer": "ai fait"
-        }
-      ],
-      "nouns": [
-        {
-          "noun": "n.soir",
-          "word": "soir"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.4154442",
-      "text": "J’ai fait une découverte des plus merveilleuses.",
-      "credit": {
-        "tatoeba": 4154442,
-        "author": "Pat91"
-      },
-      "verbs": [
-        {
-          "verb": "v.faire",
-          "tense": "passe_compose",
-          "person": "1s",
-          "answer": "ai fait"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.3446617",
-      "text": "J’apprécie ce que tu as fait pour moi.",
-      "credit": {
-        "tatoeba": 3446617,
+        "tatoeba": 6633683,
         "author": "felix63"
       },
       "verbs": [
         {
           "verb": "v.faire",
-          "tense": "passe_compose",
-          "person": "2s",
-          "answer": "as fait"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.8523",
-      "text": "Jusqu’à présent, nous n’avons fait aucun plan pour les vacances.",
-      "credit": {
-        "tatoeba": 8523,
-        "author": "U2FS"
-      },
-      "verbs": [
-        {
-          "verb": "v.faire",
-          "tense": "passe_compose",
-          "person": "1p",
-          "answer": "avons fait"
-        }
-      ],
-      "nouns": [
-        {
-          "noun": "n.vacances",
-          "word": "vacances"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.2212867",
-      "text": "J’ai vu ce que vous avez fait.",
-      "credit": {
-        "tatoeba": 2212867,
-        "author": "sacredceltic"
-      },
-      "verbs": [
-        {
-          "verb": "v.faire",
-          "tense": "passe_compose",
-          "person": "2p",
-          "answer": "avez fait"
-        },
-        {
-          "verb": "v.voir",
-          "tense": "passe_compose",
-          "person": "1s",
-          "answer": "ai vu"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.8543158",
-      "text": "Elle sait ce que vous avez fait.",
-      "credit": {
-        "tatoeba": 8543158,
-        "author": "Aiji"
-      },
-      "verbs": [
-        {
-          "verb": "v.faire",
-          "tense": "passe_compose",
-          "person": "2p",
-          "answer": "avez fait"
-        },
-        {
-          "verb": "v.savoir",
           "tense": "present",
           "person": "3s",
-          "answer": "sait"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.11237951",
-      "text": "Je le faisais tout le temps.",
-      "credit": {
-        "tatoeba": 11237951,
-        "author": "lbdx"
-      },
-      "verbs": [
-        {
-          "verb": "v.faire",
-          "tense": "imparfait",
-          "person": "1s",
-          "answer": "faisais"
+          "answer": "fait"
         }
       ],
       "nouns": [
         {
-          "noun": "n.temps",
-          "word": "temps"
+          "noun": "n.jour",
+          "word": "jour"
         }
       ]
     },
     {
-      "id": "s.tatoeba.4539911",
-      "text": "Elle est venue voir ce que je faisais.",
+      "id": "s.tatoeba.7770651",
+      "text": "Et maintenant, on fait quoi ?",
       "credit": {
-        "tatoeba": 4539911,
-        "author": "Amastan"
+        "tatoeba": 7770651,
+        "author": "Blabla"
       },
       "verbs": [
         {
           "verb": "v.faire",
-          "tense": "imparfait",
-          "person": "1s",
-          "answer": "faisais"
-        },
-        {
-          "verb": "v.venir",
-          "tense": "passe_compose",
+          "tense": "present",
           "person": "3s",
-          "answer": "est venue"
+          "answer": "fait"
         }
       ]
     },
     {
-      "id": "s.tatoeba.12174324",
-      "text": "Tu aurais dû voir la tête que tu faisais.",
+      "id": "s.tatoeba.5933953",
+      "text": "Pourquoi ne faisons-nous pas cela ?",
       "credit": {
-        "tatoeba": 12174324,
-        "author": "lbdx"
-      },
-      "verbs": [
-        {
-          "verb": "v.faire",
-          "tense": "imparfait",
-          "person": "2s",
-          "answer": "faisais"
-        }
-      ],
-      "nouns": [
-        {
-          "noun": "n.tete",
-          "word": "tête"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.8013820",
-      "text": "Qu’est-ce que tu faisais hier soir ?",
-      "credit": {
-        "tatoeba": 8013820,
+        "tatoeba": 5933953,
         "author": "Aiji"
       },
       "verbs": [
         {
           "verb": "v.faire",
-          "tense": "imparfait",
-          "person": "2s",
-          "answer": "faisais"
+          "tense": "present",
+          "person": "1p",
+          "answer": "faisons"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.6028248",
+      "text": "Qu’est-ce que nous faisons ce soir ?",
+      "credit": {
+        "tatoeba": 6028248,
+        "author": "christian63"
+      },
+      "verbs": [
+        {
+          "verb": "v.faire",
+          "tense": "present",
+          "person": "1p",
+          "answer": "faisons"
         }
       ],
       "nouns": [
@@ -395,302 +147,80 @@
       ]
     },
     {
-      "id": "s.tatoeba.2185742",
-      "text": "Nous ne faisions que nous tenir la main.",
+      "id": "s.tatoeba.3006554",
+      "text": "Qu’est-ce que vous faites ici ?",
       "credit": {
-        "tatoeba": 2185742,
-        "author": "sacredceltic"
+        "tatoeba": 3006554,
+        "author": "Blabla"
       },
       "verbs": [
         {
           "verb": "v.faire",
-          "tense": "imparfait",
-          "person": "1p",
-          "answer": "faisions"
+          "tense": "present",
+          "person": "2p",
+          "answer": "faites"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.8698799",
+      "text": "Vous faites un travail admirable.",
+      "credit": {
+        "tatoeba": 8698799,
+        "author": "Julien_PDC"
+      },
+      "verbs": [
+        {
+          "verb": "v.faire",
+          "tense": "present",
+          "person": "2p",
+          "answer": "faites"
         }
       ],
       "nouns": [
         {
-          "noun": "n.main",
-          "word": "main"
+          "noun": "n.travail",
+          "word": "travail"
         }
       ]
     },
     {
-      "id": "s.tatoeba.4864927",
-      "text": "Nous nous faisions tous du souci.",
-      "credit": {
-        "tatoeba": 4864927,
-        "author": "sacredceltic"
-      },
+      "id": "s.faire.pr.3p.01",
+      "text": "Ils font le travail à la maison.",
       "verbs": [
-        {
-          "verb": "v.faire",
-          "tense": "imparfait",
-          "person": "1p",
-          "answer": "faisions"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.11525270",
-      "text": "Vous faisiez fi de toutes mes idées.",
-      "credit": {
-        "tatoeba": 11525270,
-        "author": "lbdx"
-      },
-      "verbs": [
-        {
-          "verb": "v.faire",
-          "tense": "imparfait",
-          "person": "2p",
-          "answer": "faisiez"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.5599794",
-      "text": "Vous ne faisiez que votre devoir.",
-      "credit": {
-        "tatoeba": 5599794,
-        "author": "Aiji"
-      },
-      "verbs": [
-        {
-          "verb": "v.faire",
-          "tense": "imparfait",
-          "person": "2p",
-          "answer": "faisiez"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.1890394",
-      "text": "Elles ne les font plus ainsi qu’elles les faisaient.",
-      "credit": {
-        "tatoeba": 1890394,
-        "author": "sacredceltic"
-      },
-      "verbs": [
-        {
-          "verb": "v.faire",
-          "tense": "imparfait",
-          "person": "3p",
-          "answer": "faisaient"
-        },
         {
           "verb": "v.faire",
           "tense": "present",
           "person": "3p",
           "answer": "font"
         }
-      ]
-    },
-    {
-      "id": "s.tatoeba.1430304",
-      "text": "Je le ferai en suivant tes instructions.",
-      "credit": {
-        "tatoeba": 1430304,
-        "author": "gillux"
-      },
-      "verbs": [
+      ],
+      "nouns": [
         {
-          "verb": "v.faire",
-          "tense": "futur_simple",
-          "person": "1s",
-          "answer": "ferai"
+          "noun": "n.travail",
+          "word": "travail"
+        },
+        {
+          "noun": "n.maison",
+          "word": "maison"
         }
       ]
     },
     {
-      "id": "s.tatoeba.1990912",
-      "text": "Tu feras tout ce que tu peux.",
-      "credit": {
-        "tatoeba": 1990912,
-        "author": "Amastan"
-      },
+      "id": "s.faire.pr.3p.02",
+      "text": "Que font-elles ce soir ?",
       "verbs": [
         {
           "verb": "v.faire",
-          "tense": "futur_simple",
-          "person": "2s",
-          "answer": "feras"
-        },
-        {
-          "verb": "v.pouvoir",
           "tense": "present",
-          "person": "2s",
-          "answer": "peux"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.4187043",
-      "text": "Tu feras exactement comme je dis.",
-      "credit": {
-        "tatoeba": 4187043,
-        "author": "sacredceltic"
-      },
-      "verbs": [
-        {
-          "verb": "v.faire",
-          "tense": "futur_simple",
-          "person": "2s",
-          "answer": "feras"
-        },
-        {
-          "verb": "v.dire",
-          "tense": "present",
-          "person": "1s",
-          "answer": "dis"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.10074726",
-      "text": "Elle dit qu’elle fera tout ce qu’elle peut.",
-      "credit": {
-        "tatoeba": 10074726,
-        "author": "lbdx"
-      },
-      "verbs": [
-        {
-          "verb": "v.faire",
-          "tense": "futur_simple",
-          "person": "3s",
-          "answer": "fera"
-        },
-        {
-          "verb": "v.dire",
-          "tense": "present",
-          "person": "3s",
-          "answer": "dit"
-        },
-        {
-          "verb": "v.pouvoir",
-          "tense": "present",
-          "person": "3s",
-          "answer": "peut"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.5716623",
-      "text": "J’ai vu qu’il fera beau ce weekend.",
-      "credit": {
-        "tatoeba": 5716623,
-        "author": "Scorpionvenin14"
-      },
-      "verbs": [
-        {
-          "verb": "v.faire",
-          "tense": "futur_simple",
-          "person": "3s",
-          "answer": "fera"
-        },
-        {
-          "verb": "v.voir",
-          "tense": "passe_compose",
-          "person": "1s",
-          "answer": "ai vu"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.1990924",
-      "text": "Nous ferons tout ce que nous pouvons.",
-      "credit": {
-        "tatoeba": 1990924,
-        "author": "Amastan"
-      },
-      "verbs": [
-        {
-          "verb": "v.faire",
-          "tense": "futur_simple",
-          "person": "1p",
-          "answer": "ferons"
-        },
-        {
-          "verb": "v.pouvoir",
-          "tense": "present",
-          "person": "1p",
-          "answer": "pouvons"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.1990927",
-      "text": "Vous ferez tout ce que vous pouvez.",
-      "credit": {
-        "tatoeba": 1990927,
-        "author": "Amastan"
-      },
-      "verbs": [
-        {
-          "verb": "v.faire",
-          "tense": "futur_simple",
-          "person": "2p",
-          "answer": "ferez"
-        },
-        {
-          "verb": "v.pouvoir",
-          "tense": "present",
-          "person": "2p",
-          "answer": "pouvez"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.4187047",
-      "text": "Vous ferez exactement comme je dis.",
-      "credit": {
-        "tatoeba": 4187047,
-        "author": "sacredceltic"
-      },
-      "verbs": [
-        {
-          "verb": "v.faire",
-          "tense": "futur_simple",
-          "person": "2p",
-          "answer": "ferez"
-        },
-        {
-          "verb": "v.dire",
-          "tense": "present",
-          "person": "1s",
-          "answer": "dis"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.1990931",
-      "text": "Ils feront tout ce qu’ils peuvent.",
-      "credit": {
-        "tatoeba": 1990931,
-        "author": "Amastan"
-      },
-      "verbs": [
-        {
-          "verb": "v.faire",
-          "tense": "futur_simple",
           "person": "3p",
-          "answer": "feront"
+          "answer": "font"
         }
-      ]
-    },
-    {
-      "id": "s.tatoeba.1990935",
-      "text": "Elles feront tout ce qu’elles peuvent.",
-      "credit": {
-        "tatoeba": 1990935,
-        "author": "Amastan"
-      },
-      "verbs": [
+      ],
+      "nouns": [
         {
-          "verb": "v.faire",
-          "tense": "futur_simple",
-          "person": "3p",
-          "answer": "feront"
+          "noun": "n.soir",
+          "word": "soir"
         }
       ]
     }

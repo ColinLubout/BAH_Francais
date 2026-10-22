@@ -59,6 +59,15 @@ void main() {
     },
   );
 
+  test('content teaches all four tenses unless it says otherwise', () {
+    expect(const ContentSet().tenses, Tense.values);
+    expect(
+      const ContentSet(tenses: [Tense.imparfait, Tense.present])
+          .toJson()['tenses'],
+      ['present', 'imparfait'],
+    );
+  });
+
   test('a sentence from Tatoeba keeps its number and author', () {
     const sentence = ContentSentence(
       id: 's.tatoeba.42',

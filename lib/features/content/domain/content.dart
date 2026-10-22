@@ -11,6 +11,7 @@ const contentSchemaVersion = 1;
 @immutable
 class ContentSet {
   const ContentSet({
+    this.tenses = Tense.values,
     this.categories = const [],
     this.nouns = const [],
     this.verbs = const [],
@@ -18,6 +19,10 @@ class ContentSet {
     this.images = const [],
   });
 
+  /// The tenses the content teaches: its verbs have Conjugaison cards and
+  /// sentences in these. Verbs keep their forms for the others, so a tense
+  /// is added by listing it and writing its sentences.
+  final List<Tense> tenses;
   final List<ContentCategory> categories;
   final List<ContentNoun> nouns;
   final List<ContentVerb> verbs;
@@ -27,6 +32,10 @@ class ContentSet {
   /// Everything as plain values, each list in a fixed order, so two sets can
   /// be compared whatever order they were read in.
   Map<String, Object?> toJson() => {
+    'tenses': [
+      for (final t in Tense.values)
+        if (tenses.contains(t)) t.id,
+    ],
     'categories': _sortedById(categories, (c) => c.id, (c) => c.toJson()),
     'nouns': _sortedById(nouns, (n) => n.id, (n) => n.toJson()),
     'verbs': _sortedById(verbs, (v) => v.id, (v) => v.toJson()),

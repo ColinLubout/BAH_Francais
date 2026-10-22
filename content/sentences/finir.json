@@ -1,0 +1,240 @@
+{
+  "sentences": [
+    {
+      "id": "s.finir.pr.1s.01",
+      "text": "Je finis le travail ce soir.",
+      "verbs": [
+        {
+          "verb": "v.finir",
+          "tense": "present",
+          "person": "1s",
+          "answer": "finis"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.travail",
+          "word": "travail"
+        },
+        {
+          "noun": "n.soir",
+          "word": "soir"
+        }
+      ]
+    },
+    {
+      "id": "s.finir.pr.1s.02",
+      "text": "Je finis à six heures.",
+      "verbs": [
+        {
+          "verb": "v.finir",
+          "tense": "present",
+          "person": "1s",
+          "answer": "finis"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.heure",
+          "word": "heures"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.13046474",
+      "text": "Tu finis ton travail.",
+      "credit": {
+        "tatoeba": 13046474,
+        "author": "felix63"
+      },
+      "verbs": [
+        {
+          "verb": "v.finir",
+          "tense": "present",
+          "person": "2s",
+          "answer": "finis"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.travail",
+          "word": "travail"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.2302271",
+      "text": "Tu finis à quelle heure ?",
+      "credit": {
+        "tatoeba": 2302271,
+        "author": "sysko"
+      },
+      "verbs": [
+        {
+          "verb": "v.finir",
+          "tense": "present",
+          "person": "2s",
+          "answer": "finis"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.heure",
+          "word": "heure"
+        }
+      ]
+    },
+    {
+      "id": "s.finir.pr.3s.01",
+      "text": "Elle finit son travail à la maison.",
+      "verbs": [
+        {
+          "verb": "v.finir",
+          "tense": "present",
+          "person": "3s",
+          "answer": "finit"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.travail",
+          "word": "travail"
+        },
+        {
+          "noun": "n.maison",
+          "word": "maison"
+        }
+      ]
+    },
+    {
+      "id": "s.finir.pr.3s.02",
+      "text": "Il finit tard le soir.",
+      "verbs": [
+        {
+          "verb": "v.finir",
+          "tense": "present",
+          "person": "3s",
+          "answer": "finit"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.soir",
+          "word": "soir"
+        }
+      ]
+    },
+    {
+      "id": "s.finir.pr.1p.01",
+      "text": "Nous finissons le travail ensemble.",
+      "verbs": [
+        {
+          "verb": "v.finir",
+          "tense": "present",
+          "person": "1p",
+          "answer": "finissons"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.travail",
+          "word": "travail"
+        }
+      ]
+    },
+    {
+      "id": "s.finir.pr.1p.02",
+      "text": "Nous finissons à cinq heures.",
+      "verbs": [
+        {
+          "verb": "v.finir",
+          "tense": "present",
+          "person": "1p",
+          "answer": "finissons"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.heure",
+          "word": "heures"
+        }
+      ]
+    },
+    {
+      "id": "s.finir.pr.2p.01",
+      "text": "Vous finissez à quelle heure ?",
+      "verbs": [
+        {
+          "verb": "v.finir",
+          "tense": "present",
+          "person": "2p",
+          "answer": "finissez"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.heure",
+          "word": "heure"
+        }
+      ]
+    },
+    {
+      "id": "s.finir.pr.2p.02",
+      "text": "Vous finissez tard ce soir ?",
+      "verbs": [
+        {
+          "verb": "v.finir",
+          "tense": "present",
+          "person": "2p",
+          "answer": "finissez"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.soir",
+          "word": "soir"
+        }
+      ]
+    },
+    {
+      "id": "s.finir.pr.3p.01",
+      "text": "Ils finissent le travail ce soir.",
+      "verbs": [
+        {
+          "verb": "v.finir",
+          "tense": "present",
+          "person": "3p",
+          "answer": "finissent"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.travail",
+          "word": "travail"
+        },
+        {
+          "noun": "n.soir",
+          "word": "soir"
+        }
+      ]
+    },
+    {
+      "id": "s.finir.pr.3p.02",
+      "text": "Les hommes finissent tard.",
+      "verbs": [
+        {
+          "verb": "v.finir",
+          "tense": "present",
+          "person": "3p",
+          "answer": "finissent"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.homme",
+          "word": "hommes"
+        }
+      ]
+    }
+  ]
+}

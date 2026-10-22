@@ -26,6 +26,7 @@ ContentFiles edited(String path, void Function(Json json) change) {
   }
 
   return ContentFiles(
+    tenses: apply(sample.tenses!),
     verbCategories: apply(sample.verbCategories!),
     nouns: [for (final f in sample.nouns) apply(f)],
     verbs: [for (final f in sample.verbs) apply(f)],
@@ -36,6 +37,7 @@ ContentFiles edited(String path, void Function(Json json) change) {
 
 /// The sample with the image at [path] replaced by [svg].
 ContentFiles withImage(String path, String svg) => ContentFiles(
+  tenses: sample.tenses,
   verbCategories: sample.verbCategories,
   nouns: sample.nouns,
   verbs: sample.verbs,
@@ -83,6 +85,7 @@ void expectAnError(ContentFiles files, List<String> fragments) => expect(
   contains(allOf([for (final f in fragments) contains(f)])),
 );
 
+const tensesFile = 'tenses.json';
 const cuisine = 'nouns/cuisine.json';
 const animaux = 'nouns/animaux.json';
 const essentiels = 'nouns/essentiels.json';
@@ -133,6 +136,7 @@ void main() {
       );
       expect(verbs['v.se-lever']!.pronominal, isTrue);
       expect(verbs['v.aller']!.auxiliary, Auxiliary.etre);
+      expect(content.tenses, Tense.values);
       final everyday = content.categories.where((c) => c.everyday);
       expect(everyday.map((c) => c.id), {
         'cat.essentiels',
@@ -175,6 +179,7 @@ void main() {
   group('JSON and the schema', () {
     test('a file that is not JSON', () {
       final files = ContentFiles(
+        tenses: sample.tenses,
         verbCategories: sample.verbCategories,
         nouns: [const SourceFile(cuisine, '{"category": ')],
       );
@@ -306,6 +311,72 @@ void main() {
     });
   });
 
+  group('the tenses taught', () {
+    void dropFutur(Json json) =>
+        json['tenses'] = ['present', 'passe_compose', 'imparfait'];
+
+    test('tenses.json is required', () {
+      final files = ContentFiles(
+        verbCategories: sample.verbCategories,
+        nouns: sample.nouns,
+        verbs: sample.verbs,
+        sentences: sample.sentences,
+        images: sample.images,
+      );
+      expectError(files, ['tenses.json', 'is missing']);
+    });
+
+    test('a tense is one of the four', () {
+      expectError(
+        edited(tensesFile, (j) => j['tenses'] = ['present', 'futur']),
+        [tensesFile, '/tenses/1'],
+      );
+    });
+
+    test('a sentence can’t be a prompt for a tense not taught', () {
+      final errors = errorsOf(edited(tensesFile, dropFutur));
+      expect(errors, isNotEmpty);
+      expect(errors, everyElement(contains('doesn’t teach the futur_simple')));
+    });
+
+    test('a verb needs sentences in the tenses taught only', () {
+      final files = edited(tensesFile, dropFutur);
+      bool futurOnly(Json s) =>
+          s['nouns'] == null &&
+          (s['verbs']! as List).cast<Json>().every(
+            (v) => v['tense'] == 'futur_simple',
+          );
+      final withoutFutur = ContentFiles(
+        tenses: files.tenses,
+        verbCategories: files.verbCategories,
+        nouns: files.nouns,
+        verbs: files.verbs,
+        sentences: [
+          for (final f in files.sentences)
+            SourceFile(
+              f.path,
+              jsonEncode({
+                'sentences': [
+                  for (final s
+                      in ((jsonDecode(f.text) as Json)['sentences']! as List)
+                          .cast<Json>())
+                    if (!futurOnly(s)) s,
+                ],
+              }),
+            ),
+        ],
+        images: files.images,
+      );
+      final report = validateContent(withoutFutur, schemas);
+      expect(report.errors, isEmpty);
+      expect(report.content.tenses, [
+        Tense.present,
+        Tense.passeCompose,
+        Tense.imparfait,
+      ]);
+    });
+  });
+
   group('every id is unique', () {
     test('nouns', () {
       // Files are read in name order: the second use is the error.
@@ -339,6 +410,7 @@ void main() {
         (j) => noun(j, 'n.chat')['images'] = ['chien-1.svg'],
       );
       final withFile = ContentFiles(
+        tenses: files.tenses,
         verbCategories: files.verbCategories,
         nouns: files.nouns,
         verbs: files.verbs,
@@ -696,6 +768,7 @@ void main() {
 
     test('an image is UTF-8 text', () {
       final files = ContentFiles(
+        tenses: sample.tenses,
         verbCategories: sample.verbCategories,
         nouns: sample.nouns,
         verbs: sample.verbs,

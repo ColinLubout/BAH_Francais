@@ -80,7 +80,8 @@ Future<void> main(List<String> args) async {
 
   stdout
     ..writeln(
-      'Checked $dir: ${content.categories.length} categories, '
+      'Checked $dir, teaching ${content.tenses.map((t) => t.id).join(', ')}: '
+      '${content.categories.length} categories, '
       '${content.nouns.length} nouns, ${content.verbs.length} verbs, '
       '${content.sentences.length} sentences, ${content.images.length} images.',
     )
