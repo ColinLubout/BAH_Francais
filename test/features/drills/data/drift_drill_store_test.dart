@@ -10,7 +10,7 @@ import 'package:bah_francais/features/drills/domain/queue/queue_settings.dart';
 import 'package:bah_francais/features/drills/domain/rating.dart';
 import 'package:bah_francais/features/drills/domain/scheduling.dart';
 import 'package:bah_francais/features/drills/domain/session/drill_session.dart';
-import 'package:bah_francais/features/drills/domain/session/vocabulary_item.dart';
+import 'package:bah_francais/features/drills/domain/session/noun_item.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../../helpers/content_fixture.dart';
@@ -62,7 +62,7 @@ void main() {
     'a Vocabulaire item: answer, images in order, definition, examples',
     () async {
       final db = await withCards();
-      final item = await DriftDrillStore(db).vocabularyItem('n.aa');
+      final item = await DriftDrillStore(db).nounItem('n.aa');
       expect(item.nounId, 'n.aa');
       expect(item.answer.word, 'aa');
       expect(item.answer.gender, Gender.feminine);
@@ -78,12 +78,45 @@ void main() {
         ExampleSentence('three aa bbs', highlight: Span(6, 8)),
       ]);
 
-      final bb = await DriftDrillStore(db).vocabularyItem('n.bb');
+      final bb = await DriftDrillStore(db).nounItem('n.bb');
       expect(bb.answer.pluralOnly, isTrue);
       expect(bb.imageIds, isEmpty);
       expect(bb.definition, isNull);
     },
   );
+
+  test("a noun's gloss and ending hint, for the Genre drill", () async {
+    final db = await withCards();
+    final item = await DriftDrillStore(db).nounItem('n.aa');
+    expect(item.gloss, 'aa gloss');
+    expect(item.endingHint, 'aa hint');
+  });
+
+  test('a Conjugaison item: the verb and its sentences in one tense', () async {
+    final db = await withCards();
+    final store = DriftDrillStore(db);
+    final present = await store.conjugationItem('v.cc', Tense.present);
+    expect(present.infinitive, 'cc');
+    expect(present.tense, Tense.present);
+    expect(present.hAspire, isTrue);
+    expect(present.sentences, hasLength(1));
+    final one = present.sentences.single;
+    expect(one.id, 's.one');
+    expect(one.text, 'one cc present 1s aa');
+    expect(one.person, Person.firstSingular);
+    expect(one.answer, 'cc present 1s');
+    expect(one.alternatives, ['cc alt present']);
+    expect(one.aroundBlank, ('one ', ' aa'));
+
+    final compound = await store.conjugationItem('v.cc', Tense.passeCompose);
+    final two = compound.sentences.single;
+    expect(two.before, 'la');
+    expect(two.aroundBlank, ('two la ', ''));
+    expect(
+      (await store.conjugationItem('v.cc', Tense.imparfait)).sentences,
+      isEmpty,
+    );
+  });
 
   test(
     'a session over the database saves every answer as it is given',
@@ -113,7 +146,7 @@ void main() {
       expect(sessions.single.correct, 1);
 
       // A Correct answer moved on: the mark is for the card now shown.
-      final shown = (next as CardQuestion).card.item.nounId;
+      final shown = (next as CardQuestion).card.card.itemId;
       final (mark, _) = await session.markKnown();
       final known = await DriftDrillStore(db).cardsOfItem(shown);
       expect(known.every((c) => c.isKnown), isTrue);

@@ -44,17 +44,8 @@ const ciseaux = VocabularyAnswer(
   pluralOnly: true,
 );
 
-Grade vocab(
-  String typed,
-  VocabularyAnswer noun, {
-  bool mandatory = false,
-  bool flagged = false,
-}) => gradeVocabulary(
-  typed: typed,
-  noun: noun,
-  articleMandatory: mandatory,
-  flaggedWhileTyping: flagged,
-);
+Grade vocab(String typed, VocabularyAnswer noun, {bool flagged = false}) =>
+    gradeVocabulary(typed: typed, noun: noun, flaggedWhileTyping: flagged);
 
 Grade conj(
   String typed,
@@ -96,9 +87,8 @@ void main() {
       );
     });
 
-    test('offers Faute de frappe after a wrong tap, never Trop facile', () {
+    test('offers Faute de frappe after a wrong tap', () {
       final right = gradeGender(correct: Gender.both, chosen: Gender.both);
-      expect(right.canMarkTooEasy, isFalse);
       expect(right.canMarkTypo, isFalse);
       final wrong = gradeGender(correct: Gender.both, chosen: Gender.feminine);
       expect(wrong.canMarkTypo, isTrue);
@@ -182,7 +172,6 @@ void main() {
       expect(g.errorType, ErrorType.wrong);
       expect(g.answer, 'sommes allés');
       expect(g.canMarkTypo, isTrue);
-      expect(g.canMarkTooEasy, isFalse);
     });
 
     test('an empty answer is wrong', () {
@@ -199,13 +188,9 @@ void main() {
       }
     });
 
-    test(
-      'a Vocabulary answer shows the noun, with an article if mandatory',
-      () {
-        expect(vocab('chat', chien).answer, 'chien');
-        expect(vocab('chat', chien, mandatory: true).answer, 'un chien');
-      },
-    );
+    test('a Vocabulary answer shows the noun', () {
+      expect(vocab('chat', chien).answer, 'chien');
+    });
   });
 
   group('alternative forms', () {
@@ -223,12 +208,12 @@ void main() {
     });
 
     test('a synonym takes the noun’s gender unless it has its own', () {
-      expect(vocab('une auto', voiture, mandatory: true).rating, Rating.good);
-      expect(vocab('un auto', voiture, mandatory: true).rating, Rating.hard);
+      expect(vocab('une auto', voiture).rating, Rating.good);
+      expect(vocab('un auto', voiture).rating, Rating.hard);
 
-      expect(vocab('un zib', mixed, mandatory: true).rating, Rating.good);
+      expect(vocab('un zib', mixed).rating, Rating.good);
       expect(vocab('le zib', mixed).rating, Rating.good);
-      final g = vocab('une zib', mixed, mandatory: true);
+      final g = vocab('une zib', mixed);
       expect(g.rating, Rating.hard);
       expect(g.errorType, ErrorType.article);
       expect(g.answer, 'un zib');
@@ -246,8 +231,8 @@ void main() {
       expect(vocab('l’voiture', voiture).rating, Rating.hard);
     });
 
-    test('Je ne sais pas shows the noun, not a synonym', () {
-      expect(mixed.displayAnswer(mandatory: true), 'une voiture');
+    test('the Genre correction shows the noun, not a synonym', () {
+      expect(mixed.withIndefiniteArticle(), 'une voiture');
     });
 
     test('an exact match wins over an accent match on another form', () {
@@ -260,7 +245,7 @@ void main() {
     });
   });
 
-  group('articles, when optional (the default)', () {
+  group('articles, which are optional', () {
     test('no article is Good', () {
       expect(vocab('fourchette', fourchette).rating, Rating.good);
     });
@@ -304,71 +289,33 @@ void main() {
     });
   });
 
-  group('articles, when mandatory', () {
-    test('le/la or un/une matching the gender is Good', () {
-      for (final typed in ['la fourchette', 'une fourchette']) {
-        expect(vocab(typed, fourchette, mandatory: true).rating, Rating.good);
-      }
-      for (final typed in ['le chien', 'un chien']) {
-        expect(vocab(typed, chien, mandatory: true).rating, Rating.good);
-      }
-    });
-
-    test('a missing article is Hard, shown with the indefinite article', () {
-      final g = vocab('fourchette', fourchette, mandatory: true);
-      expect(g.rating, Rating.hard);
-      expect(g.errorType, ErrorType.article);
-      expect(g.answer, 'une fourchette');
-      expect(g.errors, [const Span(0, 3)]);
-    });
-
+  group('articles, any typed', () {
     test('the wrong gender is Hard', () {
-      expect(vocab('la chien', chien, mandatory: true).rating, Rating.hard);
-      expect(
-        vocab('un fourchette', fourchette, mandatory: true).rating,
-        Rating.hard,
-      );
+      expect(vocab('la chien', chien).rating, Rating.hard);
+      expect(vocab('un fourchette', fourchette).rating, Rating.hard);
     });
 
     test('a plural article on a singular noun is Hard', () {
-      expect(vocab('les chien', chien, mandatory: true).rating, Rating.hard);
-      expect(vocab('des chien', chien, mandatory: true).rating, Rating.hard);
+      expect(vocab('les chien', chien).rating, Rating.hard);
+      expect(vocab('des chien', chien).rating, Rating.hard);
     });
 
-    test('only un/une for a noun that takes l’, since l’ hides the gender', () {
-      expect(vocab('une école', ecole, mandatory: true).rating, Rating.good);
-      final elided = vocab('l’école', ecole, mandatory: true);
-      expect(elided.rating, Rating.hard);
-      expect(elided.errorType, ErrorType.article);
-      expect(elided.answer, 'une école');
-      expect(elided.errors, [const Span(0, 3)]);
-    });
-
-    test('either gender for a "les deux" noun', () {
-      expect(vocab('un élève', eleve, mandatory: true).rating, Rating.good);
-      expect(vocab('une élève', eleve, mandatory: true).rating, Rating.good);
-      expect(vocab('l’élève', eleve, mandatory: true).rating, Rating.hard);
+    test('either gender for a "les deux" noun, or l’', () {
+      expect(vocab('un élève', eleve).rating, Rating.good);
+      expect(vocab('une élève', eleve).rating, Rating.good);
       expect(vocab('l’élève', eleve).rating, Rating.good);
     });
 
     test('les or des for a plural-only noun', () {
-      expect(
-        vocab('les ciseaux', ciseaux, mandatory: true).rating,
-        Rating.good,
-      );
-      expect(
-        vocab('des ciseaux', ciseaux, mandatory: true).rating,
-        Rating.good,
-      );
-      final singular = vocab('le ciseaux', ciseaux, mandatory: true);
+      expect(vocab('les ciseaux', ciseaux).rating, Rating.good);
+      expect(vocab('des ciseaux', ciseaux).rating, Rating.good);
+      final singular = vocab('le ciseaux', ciseaux);
       expect(singular.rating, Rating.hard);
       expect(singular.answer, 'les ciseaux');
-      final missing = vocab('ciseaux', ciseaux, mandatory: true);
-      expect(missing.answer, 'des ciseaux');
     });
 
     test('wrong article and an accent slip together are Hard', () {
-      final g = vocab('la ecole', ecole, mandatory: true);
+      final g = vocab('la ecole', ecole);
       expect(g.rating, Rating.hard);
       expect(g.errorType, ErrorType.article);
       expect(g.answer, 'une école');
@@ -376,7 +323,7 @@ void main() {
     });
 
     test('an accent slip with the right article is Hard, accent only', () {
-      final g = vocab('une ecole', ecole, mandatory: true);
+      final g = vocab('une ecole', ecole);
       expect(g.rating, Rating.hard);
       expect(g.errorType, ErrorType.accent);
       expect(g.errors, [const Span(4, 5)]);
@@ -388,7 +335,6 @@ void main() {
       final g = conj('sommes allés', 'sommes allés', flagged: true);
       expect(g.rating, Rating.hard);
       expect(g.errorType, ErrorType.none);
-      expect(g.canMarkTooEasy, isFalse);
       expect(g.canMarkTypo, isFalse);
     });
 
@@ -430,16 +376,12 @@ void main() {
       expect(gaveUp.canMarkTypo, isFalse);
     });
 
-    test('Trop facile turns a Correct answer into Easy', () {
-      final g = conj('vais', 'vais').markTooEasy();
+    test('Trop facile, before an answer, is Easy with nothing to show', () {
+      const g = Grade.tooEasy();
       expect(g.rating, Rating.easy);
       expect(g.errorType, ErrorType.none);
-    });
-
-    test('Trop facile is not offered after Presque', () {
-      final almost = conj('me leve', 'me lève');
-      expect(almost.canMarkTooEasy, isFalse);
-      expect(almost.markTooEasy, throwsStateError);
+      expect(g.answer, isNull);
+      expect(g.canMarkTypo, isFalse);
     });
   });
 
@@ -449,15 +391,15 @@ void main() {
       expect(g.rating, Rating.again);
       expect(g.errorType, ErrorType.gaveUp);
       expect(g.answer, 'sommes allés');
-      expect(g.canMarkTooEasy, isFalse);
     });
+  });
 
-    test('shows a Vocabulary answer with its article when mandatory', () {
-      expect(fourchette.displayAnswer(mandatory: true), 'une fourchette');
-      expect(fourchette.displayAnswer(mandatory: false), 'fourchette');
-      expect(ecole.displayAnswer(mandatory: true), 'une école');
-      expect(ciseaux.displayAnswer(mandatory: true), 'des ciseaux');
-    });
+  test('the Genre correction shows the noun with un or une, never l’', () {
+    expect(fourchette.withIndefiniteArticle(), 'une fourchette');
+    expect(chien.withIndefiniteArticle(), 'un chien');
+    expect(ecole.withIndefiniteArticle(), 'une école');
+    expect(eleve.withIndefiniteArticle(), 'un/une élève');
+    expect(ciseaux.withIndefiniteArticle(), 'des ciseaux');
   });
 
   group('Grade', () {

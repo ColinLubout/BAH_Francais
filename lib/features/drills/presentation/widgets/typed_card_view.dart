@@ -3,35 +3,37 @@ import 'dart:math' as math;
 import 'package:bah_francais/core/strings.g.dart';
 import 'package:bah_francais/core/theme/feedback_colors.dart';
 import 'package:bah_francais/features/drills/domain/session/drill_session.dart';
+import 'package:bah_francais/features/drills/domain/session/session_card.dart';
 import 'package:bah_francais/features/drills/presentation/widgets/accent_bar.dart';
 import 'package:bah_francais/features/drills/presentation/widgets/blank_sentence.dart';
 import 'package:bah_francais/features/drills/presentation/widgets/correction.dart';
 import 'package:bah_francais/features/drills/presentation/widgets/live_feedback_controller.dart';
 import 'package:flutter/material.dart';
 
-/// A Vocabulaire card, from its question to its correction (decisions 70
-/// to 72).
+/// A Vocabulaire or Conjugaison card, from its question to its correction
+/// (decisions 70 to 72, 75).
 ///
 /// The question: the prompt, the sentence with the answer box in place of
-/// the noun, *Trop facile* when the word is new, *Je ne sais pas* and
-/// *Valider* side by side, and the accent bar above the keyboard. The
-/// keyboard opens with the card; Enter submits, and an empty answer can't
-/// be.
+/// the word to find, then the [subline]; *Trop facile* when the word is new,
+/// *Je ne sais pas* and *Valider* side by side, and the accent bar above the
+/// keyboard. The keyboard opens with the card; Enter submits, and an empty
+/// answer can't be.
 ///
 /// The correction, after an answer that wasn't Correct: everything stays in
 /// place, the box keeping what was typed, with the result and the answer
 /// under the sentence, and *Faute de frappe* and *Suivant* in place of the
 /// buttons. Keep one per card, so what was typed carries over.
-class VocabularyCardView extends StatefulWidget {
-  const VocabularyCardView({
+class TypedCardView extends StatefulWidget {
+  const TypedCardView({
     required this.card,
-    required this.prompt,
     required this.liveFeedback,
     required this.onSubmit,
     required this.onGiveUp,
     required this.onTooEasy,
     required this.onTypo,
     required this.onNext,
+    this.prompt = const SizedBox.shrink(),
+    this.subline,
     this.feedback,
     this.notice,
     this.controlsKey,
@@ -41,13 +43,16 @@ class VocabularyCardView extends StatefulWidget {
   /// On the buttons and accent bar, so a snackbar can sit above them.
   final Key? controlsKey;
 
-  final VocabularyCard card;
+  final TypedCard card;
 
   /// The correction, once the card is answered.
   final CardFeedback? feedback;
 
-  /// The image or definition, above the sentence.
+  /// Above the sentence: in Vocabulaire, the image or definition.
   final Widget prompt;
+
+  /// Under the sentence: in Conjugaison, the infinitive and the tense.
+  final Widget? subline;
 
   /// Above the card from its question on, so the card doesn't move when
   /// the correction shows: *Tout est à jour*.
@@ -70,10 +75,10 @@ class VocabularyCardView extends StatefulWidget {
   final VoidCallback onNext;
 
   @override
-  State<VocabularyCardView> createState() => _VocabularyCardViewState();
+  State<TypedCardView> createState() => _TypedCardViewState();
 }
 
-class _VocabularyCardViewState extends State<VocabularyCardView> {
+class _TypedCardViewState extends State<TypedCardView> {
   late final LiveFeedbackController _controller = LiveFeedbackController(
     typings: widget.card.typings,
     enabled: widget.liveFeedback,
@@ -120,7 +125,10 @@ class _VocabularyCardViewState extends State<VocabularyCardView> {
   Widget build(BuildContext context) {
     final style = Theme.of(context).textTheme.titleLarge!;
     final scaler = MediaQuery.textScalerOf(context);
-    final (before, after) = widget.card.sentence?.aroundBlank ?? ('', '');
+    final card = widget.card;
+    final after = card.aroundBlank.$2;
+    // In Conjugaison, an elided word follows what is typed (decision 43).
+    final before = card.beforeBlank(_controller.text);
     final feedback = widget.feedback;
     // Wider only as the typing needs.
     final fieldWidth =
@@ -142,7 +150,19 @@ class _VocabularyCardViewState extends State<VocabularyCardView> {
             style: style,
             fieldWidth: fieldWidth,
             holdLine: _answered,
-            footer: feedback == null ? null : Correction(feedback.grade),
+            footer: switch ((widget.subline, feedback)) {
+              (null, null) => null,
+              (final subline, final feedback) => Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  ?subline,
+                  if (feedback != null) ...[
+                    if (subline != null) const SizedBox(height: 16),
+                    Correction(feedback.grade),
+                  ],
+                ],
+              ),
+            },
             // The hint is for screen readers only (decision 71).
             field: Semantics(
               label: Strings.drillAnswerHint,

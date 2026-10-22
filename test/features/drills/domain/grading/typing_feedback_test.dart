@@ -105,13 +105,13 @@ void main() {
       pluralOnly: true,
     );
 
-    test('article optional: the word alone, or with each of its articles', () {
+    test('the word alone, or with each of its articles', () {
       expect(
-        ecole.typings(mandatory: false),
+        ecole.typings(),
         unorderedEquals(['école', 'une école', 'l’école']),
       );
       expect(
-        voiture.typings(mandatory: false),
+        voiture.typings(),
         unorderedEquals([
           'voiture',
           'une voiture',
@@ -121,29 +121,20 @@ void main() {
           'l’auto',
         ]),
       );
-    });
-
-    test('article mandatory: always with one, and never l’', () {
-      expect(ecole.typings(mandatory: true), ['une école']);
       expect(
-        eleve.typings(mandatory: true),
-        unorderedEquals(['un élève', 'une élève']),
+        eleve.typings(),
+        unorderedEquals(['élève', 'un élève', 'une élève', 'l’élève']),
       );
       expect(
-        ciseaux.typings(mandatory: true),
-        unorderedEquals(['les ciseaux', 'des ciseaux']),
+        ciseaux.typings(),
+        unorderedEquals(['ciseaux', 'les ciseaux', 'des ciseaux']),
       );
     });
 
     test('a wrong article goes red as it is typed', () {
-      final forms = ecole.typings(mandatory: false);
+      final forms = ecole.typings();
       expect(typingFeedback('la ', forms).isWrong, isTrue);
       expect(typingFeedback('une é', forms).isWrong, isFalse);
-    });
-
-    test('with the article mandatory, the word alone goes red', () {
-      final forms = ecole.typings(mandatory: true);
-      expect(typingFeedback('éc', forms).isWrong, isTrue);
     });
   });
 }

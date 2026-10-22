@@ -80,6 +80,101 @@ class NoCardsAvailable extends NextStep {
   const NoCardsAvailable();
 }
 
+/// The cards a session serves: one drill's ([SessionQueue]), or all three's
+/// ([MixedQueue]).
+abstract interface class CardQueue {
+  /// What to show now, by [clock].
+  NextStep next(Clock clock);
+
+  /// Records an answer: the card's new state, and the limits it used.
+  void record(ReviewOutcome outcome);
+
+  /// Records an override of an answer already recorded.
+  void recordRegrade(ReviewOutcome regraded);
+
+  /// Updates a card changed outside a review, such as one marked known.
+  void update(DrillCard card);
+}
+
+/// The queue of a mixed session (decision 80): each drill's queue offers its
+/// next card, and the most urgent is shown, the drills taking turns.
+///
+/// Learning steps come first; then due reviews and new cards, each drill
+/// keeping its own rhythm of one new card per four reviews; then free
+/// practice. Among equally urgent cards, the drill shown least recently goes
+/// first, and a card for the word just shown waits a turn, unless nothing
+/// else is left. Each drill keeps its own limits; one that has reached its
+/// daily goal, or has nothing, drops out.
+class MixedQueue implements CardQueue {
+  MixedQueue(this._queues);
+
+  /// Each drill's queue, in the order drills take their first turn.
+  final Map<DrillType, SessionQueue> _queues;
+
+  /// When each drill last had a card shown, counted in cards.
+  final Map<DrillType, int> _shownAt = {};
+  int _shown = 0;
+  String? _lastItemId;
+  bool _inFreePractice = false;
+
+  @override
+  NextStep next(Clock clock) {
+    final offers = <(DrillType, ShowCard)>[];
+    var goalReached = false;
+    for (final MapEntry(key: drill, value: queue) in _queues.entries) {
+      switch (queue.peek(clock)) {
+        case final ShowCard step:
+          offers.add((drill, step));
+        case DailyGoalReached():
+          goalReached = true;
+        case NoCardsAvailable():
+          break;
+      }
+    }
+    if (offers.isEmpty) {
+      return goalReached ? const DailyGoalReached() : const NoCardsAvailable();
+    }
+    final order = [for (final o in offers) o]
+      ..sort((a, b) {
+        final byUrgency = _urgency(a.$2.source) - _urgency(b.$2.source);
+        if (byUrgency != 0) return byUrgency;
+        final byTurn = (_shownAt[a.$1] ?? -1) - (_shownAt[b.$1] ?? -1);
+        if (byTurn != 0) return byTurn;
+        // Sorting isn't stable: drills never shown keep their order.
+        return offers.indexOf(a) - offers.indexOf(b);
+      });
+    final (drill, step) = order.firstWhere(
+      (o) => o.$2.card.itemId != _lastItemId,
+      orElse: () => order.first,
+    );
+    _queues[drill]!.shown(step);
+    _shownAt[drill] = _shown++;
+    _lastItemId = step.card.itemId;
+    final practice = step.source == CardSource.freePractice;
+    final starts = practice && !_inFreePractice;
+    if (practice) _inFreePractice = true;
+    return ShowCard(step.item, step.source, startsFreePractice: starts);
+  }
+
+  @override
+  void record(ReviewOutcome outcome) =>
+      _queues[outcome.after.drill]?.record(outcome);
+
+  @override
+  void recordRegrade(ReviewOutcome regraded) =>
+      _queues[regraded.after.drill]?.recordRegrade(regraded);
+
+  @override
+  void update(DrillCard card) => _queues[card.drill]?.update(card);
+
+  /// Learning steps first, then due reviews and new cards, then practice.
+  static int _urgency(CardSource source) => switch (source) {
+    CardSource.learningStep => 0,
+    CardSource.dueReview || CardSource.newCard => 1,
+    CardSource.freePractice || CardSource.earlyLearningStep => 2,
+  };
+}
+
 /// Decides which card comes next in a session of one drill.
 ///
 /// Cards come in this order:
@@ -98,7 +193,7 @@ class NoCardsAvailable extends NextStep {
 /// Known and retired cards, cards whose categories are all Jamais, and
 /// conjugation cards of a paused tense or verb group are never shown. The
 /// same card is never shown twice in a row while another could be.
-class SessionQueue {
+class SessionQueue implements CardQueue {
   SessionQueue({
     required List<QueueCard> cards,
     required this.settings,
@@ -132,8 +227,17 @@ class SessionQueue {
 
   static const reviewsPerNewCard = 4;
 
-  /// What to show now, by [clock].
+  /// What to show now, by [clock]: [peek], then [shown].
+  @override
   NextStep next(Clock clock) {
+    final step = peek(clock);
+    if (step is ShowCard) shown(step);
+    return step;
+  }
+
+  /// The card this drill would show now, without counting it as shown: the
+  /// mixed session asks each drill before choosing one (decision 80).
+  NextStep peek(Clock clock) {
     final now = clock.nowUtc();
     final utcOffset = clock.utcOffset();
     final day = StudyDay.of(now, utcOffset);
@@ -207,16 +311,21 @@ class SessionQueue {
       ], now),
     ];
     if (practice.isEmpty) return const NoCardsAvailable();
-    final starts = !_inFreePractice;
-    _inFreePractice = true;
     return _show(
       _avoidRepeat(practice),
       CardSource.freePractice,
-      startsFreePractice: starts,
+      startsFreePractice: !_inFreePractice,
     );
   }
 
+  /// [step], from [peek], is on screen.
+  void shown(ShowCard step) {
+    _lastShownId = step.card.id;
+    if (step.source == CardSource.freePractice) _inFreePractice = true;
+  }
+
   /// Records an answer: the card's new state, and the limits it used.
+  @override
   void record(ReviewOutcome outcome) {
     _replace(outcome.after);
     _counts[outcome.studyDay] = _countsFor(outcome.studyDay).adding(outcome);
@@ -231,11 +340,13 @@ class SessionQueue {
     if (outcome.after.id == _drawnNewId) _drawnNewId = null;
   }
 
-  /// Records an override (*Faute de frappe*, *Trop facile*) of an answer
-  /// already recorded: the card changes, the limits don't.
+  /// Records an override (*Faute de frappe*) of an answer already recorded:
+  /// the card changes, the limits don't.
+  @override
   void recordRegrade(ReviewOutcome regraded) => _replace(regraded.after);
 
   /// Updates a card changed outside a review, such as one marked known.
+  @override
   void update(DrillCard card) {
     _replace(card);
     if (card.id == _drawnNewId) _drawnNewId = null;
@@ -279,10 +390,7 @@ class SessionQueue {
     QueueCard item,
     CardSource source, {
     bool startsFreePractice = false,
-  }) {
-    _lastShownId = item.card.id;
-    return ShowCard(item, source, startsFreePractice: startsFreePractice);
-  }
+  }) => ShowCard(item, source, startsFreePractice: startsFreePractice);
 
   /// The first of [ordered], unless it was just shown and another exists.
   QueueCard _avoidRepeat(List<QueueCard> ordered) =>

@@ -41,7 +41,6 @@
     "drillVocabulary": "Vocabulaire",
     "drillConjugation": "Conjugaison",
     "dueCount": "{n} à réviser",
-    "dueNone": "Tout est à jour",
     "reviewList": "Liste de révision",
     "drillSettings": "Réglages de l’exercice",
     "noCategories": "Aucune catégorie choisie",
@@ -55,7 +54,6 @@
     "genderFeminine": "féminin",
     "genderBoth": "les deux",
     "answerHint": "Votre réponse",
-    "answerHintWithArticle": "Votre réponse, avec l’article",
     "infinitive": "Infinitif",
     "tense": "Temps",
     "iKnowIt": "Je le connais",
@@ -74,8 +72,7 @@
     "dailyGoalReached": "Ça suffit pour aujourd’hui.",
     "noCards": "Aucune carte disponible",
     "openSettings": "Ouvrir les réglages",
-    "markedKnown": "Marqué comme connu",
-    "leaveSession": "Terminer la session ?"
+    "markedKnown": "Marqué comme connu"
   },
 
   "sessionSummary": {
@@ -254,8 +251,6 @@
     "weightNormal": "Normal",
     "weightMore": "Plus",
     "showImage": "Afficher l’image",
-    "articleMandatory": "Article obligatoire",
-    "articleMandatoryHelp": "Il faudra écrire l’article avec le mot.",
     "liveFeedback": "Correction en direct",
     "liveFeedbackHelp": "Colore les lettres pendant que vous écrivez.",
     "tenses": "Temps",

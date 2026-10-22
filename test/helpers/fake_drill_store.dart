@@ -1,23 +1,29 @@
 import 'package:bah_francais/core/time/study_day.dart';
+import 'package:bah_francais/features/content/domain/content_types.dart';
 import 'package:bah_francais/features/drills/domain/answer.dart';
 import 'package:bah_francais/features/drills/domain/card.dart';
 import 'package:bah_francais/features/drills/domain/drill_type.dart';
 import 'package:bah_francais/features/drills/domain/queue/queue_card.dart';
 import 'package:bah_francais/features/drills/domain/queue/session_queue.dart';
+import 'package:bah_francais/features/drills/domain/session/conjugation_item.dart';
 import 'package:bah_francais/features/drills/domain/session/drill_store.dart';
-import 'package:bah_francais/features/drills/domain/session/vocabulary_item.dart';
+import 'package:bah_francais/features/drills/domain/session/noun_item.dart';
 
 /// A store in memory that records what the session saves.
 class FakeStore implements DrillStore {
   FakeStore({
     required this.cards,
     this.items = const {},
+    this.verbs = const {},
     this.setup = const DrillQueueSetup(),
     this.counts = const DayCounts(),
   });
 
   final List<DrillCard> cards;
-  final Map<String, VocabularyItem> items;
+  final Map<String, NounItem> items;
+
+  /// Conjugaison items, by verb id and tense.
+  final Map<(String, Tense), ConjugationItem> verbs;
   final DrillQueueSetup setup;
   final DayCounts counts;
 
@@ -68,5 +74,9 @@ class FakeStore implements DrillStore {
       knownCalls.add((cardIds.toList(), at));
 
   @override
-  Future<VocabularyItem> vocabularyItem(String nounId) async => items[nounId]!;
+  Future<NounItem> nounItem(String nounId) async => items[nounId]!;
+
+  @override
+  Future<ConjugationItem> conjugationItem(String verbId, Tense tense) async =>
+      verbs[(verbId, tense)]!;
 }

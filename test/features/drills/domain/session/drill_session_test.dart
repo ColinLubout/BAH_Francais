@@ -13,20 +13,21 @@ import 'package:bah_francais/features/drills/domain/rating.dart';
 import 'package:bah_francais/features/drills/domain/scheduling.dart';
 import 'package:bah_francais/features/drills/domain/session/drill_session.dart';
 import 'package:bah_francais/features/drills/domain/session/drill_store.dart';
-import 'package:bah_francais/features/drills/domain/session/vocabulary_item.dart';
+import 'package:bah_francais/features/drills/domain/session/noun_item.dart';
+import 'package:bah_francais/features/drills/domain/session/session_card.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../../../helpers/fake_clock.dart';
 import '../../../../helpers/fake_drill_store.dart';
 import '../helpers.dart';
 
-const fourchette = VocabularyItem(
+const fourchette = NounItem(
   nounId: 'n.fourchette',
   answer: VocabularyAnswer(word: 'fourchette', gender: Gender.feminine),
   definition: 'def fourchette',
   examples: [ExampleSentence('zz fourchette zz', highlight: Span(3, 13))],
 );
-const ecole = VocabularyItem(
+const ecole = NounItem(
   nounId: 'n.ecole',
   answer: VocabularyAnswer(
     word: 'école',
@@ -52,48 +53,29 @@ Future<(DrillSession, FakeClock)> open(
   return (session, clock);
 }
 
-FakeStore oneNoun({VocabularyItem item = fourchette}) => FakeStore(
+FakeStore oneNoun({NounItem item = fourchette}) => FakeStore(
   cards: [newCard(itemId: item.nounId, id: 1)],
   items: {item.nounId: item},
 );
 
 void main() {
-  test('only the Vocabulaire drill exists so far', () {
-    expect(
-      DrillSession.open(
-        drill: DrillType.gender,
-        store: oneNoun(),
-        clock: FakeClock(noon),
-        scheduler: DrillScheduler(),
-        random: () => 0,
-      ),
-      throwsUnsupportedError,
-    );
-  });
-
   group('the cards', () {
     test('a noun with no image is asked by its definition', () async {
       final (session, _) = await open(oneNoun());
       final view = await session.next();
       expect(view, isA<CardQuestion>());
-      final card = (view as CardQuestion).card;
+      final card = asked(view);
       expect(card.prompt, const DefinitionPrompt('def fourchette'));
       expect(card.card.id, 1);
       expect(card.typings, contains('fourchette'));
-      expect(view.startsFreePractice, isFalse);
+      expect((view as CardQuestion).startsFreePractice, isFalse);
     });
 
     test('a noun with images is asked by one, chosen at random', () async {
       final (first, _) = await open(oneNoun(item: ecole));
-      expect(
-        ((await first.next()) as CardQuestion).card.prompt,
-        const ImagePrompt('i.ecole-1'),
-      );
+      expect(asked(await first.next()).prompt, const ImagePrompt('i.ecole-1'));
       final (last, _) = await open(oneNoun(item: ecole), random: 0.99);
-      expect(
-        ((await last.next()) as CardQuestion).card.prompt,
-        const ImagePrompt('i.ecole-2'),
-      );
+      expect(asked(await last.next()).prompt, const ImagePrompt('i.ecole-2'));
     });
 
     group('the sentence the answer box sits in (decision 70)', () {
@@ -101,7 +83,7 @@ void main() {
       final first = ExampleSentence.of('aa fourchette', 'fourchette');
       final capital = ExampleSentence.of('Fourchette bb', 'Fourchette');
       final synonym = ExampleSentence.of('cc fourch dd', 'fourch');
-      final item = VocabularyItem(
+      final item = NounItem(
         nounId: 'n.fourchette',
         answer: const VocabularyAnswer(
           word: 'fourchette',
@@ -118,18 +100,18 @@ void main() {
 
       test('is chosen at random, and stays for the correction', () async {
         final (session, _) = await open(oneNoun(item: item));
-        final card = ((await session.next()) as CardQuestion).card;
+        final card = asked(await session.next());
         expect(card.sentence, first);
         final view = await session.submit('zz');
-        expect((view as CardFeedback).card.sentence, first);
+        expect(((view as CardFeedback).card as VocabularyCard).sentence, first);
 
         final (last, _) = await open(oneNoun(item: item), random: 0.99);
-        expect(((await last.next()) as CardQuestion).card.sentence, synonym);
+        expect(asked(await last.next()).sentence, synonym);
       });
 
       test('has the article, so the answer needs none', () async {
         final (session, _) = await open(oneNoun(item: item));
-        final card = ((await session.next()) as CardQuestion).card;
+        final card = asked(await session.next());
         expect(card.typings, containsAll(['fourchette', 'la fourchette']));
         final view = await session.giveUp() as CardFeedback;
         expect(view.grade.answer, 'fourchette');
@@ -138,7 +120,7 @@ void main() {
       test('none as it is typed: the box alone', () async {
         final (session, _) = await open(
           oneNoun(
-            item: VocabularyItem(
+            item: NounItem(
               nounId: 'n.fourchette',
               answer: fourchette.answer,
               definition: 'def fourchette',
@@ -146,7 +128,7 @@ void main() {
             ),
           ),
         );
-        final card = ((await session.next()) as CardQuestion).card;
+        final card = asked(await session.next());
         expect(card.sentence, isNull);
       });
     });
@@ -199,13 +181,13 @@ void main() {
           items: const {'n.fourchette': fourchette, 'n.ecole': ecole},
         );
         final (session, clock) = await open(store);
-        final first = (await session.next() as CardQuestion).card;
+        final first = asked(await session.next());
         clock.advance(const Duration(seconds: 4));
         final view = await session.submit(first.item.answer.word);
 
         // No correction: the other card at once (decision 71).
         expect(view, isA<CardQuestion>());
-        expect((view as CardQuestion).card.card.id, isNot(first.card.id));
+        expect(asked(view).card.id, isNot(first.card.id));
         expect(session.summary.correct, 1);
 
         // The session row is written with the first answer, dated its start.
@@ -308,12 +290,12 @@ void main() {
         items: const {'n.fourchette': fourchette, 'n.ecole': ecole},
       );
       final (session, clock) = await open(store);
-      final first = (await session.next() as CardQuestion).card;
+      final first = asked(await session.next());
       expect(first.offersTooEasy, isTrue);
       clock.advance(const Duration(seconds: 2));
       final view = await session.tooEasy();
 
-      expect((view as CardQuestion).card.card.id, isNot(first.card.id));
+      expect(asked(view).card.id, isNot(first.card.id));
       final answer = store.answers.single;
       expect(answer.outcome.rating, Rating.easy);
       expect(answer.outcome.before.state, CardState.newCard);
@@ -330,7 +312,7 @@ void main() {
         items: const {'n.fourchette': fourchette},
       );
       final (session, _) = await open(store);
-      final card = (await session.next() as CardQuestion).card;
+      final card = asked(await session.next());
       expect(card.offersTooEasy, isFalse);
       expect(session.tooEasy, throwsStateError);
       expect(store.answers, isEmpty);
@@ -367,7 +349,7 @@ void main() {
     test("marks the noun's cards in every drill, and moves on", () async {
       final store = twoNouns();
       final (session, clock) = await open(store);
-      final first = (await session.next() as CardQuestion).card;
+      final first = asked(await session.next());
       final (mark, view) = await session.markKnown();
 
       final (ids, at) = store.knownCalls.single;
@@ -381,21 +363,21 @@ void main() {
       expect(at, clock.nowUtc());
       expect(mark.cards, hasLength(ids.length));
       expect(store.answers, isEmpty, reason: 'no grade, no review-log row');
-      final next = (view as CardQuestion).card;
+      final next = asked(view);
       expect(next.item.nounId, isNot(first.item.nounId));
     });
 
     test('a marked card is not served again; Annuler brings it back', () async {
       final store = twoNouns();
       final (session, _) = await open(store);
-      final first = (await session.next() as CardQuestion).card;
+      final first = asked(await session.next());
       final (mark, _) = await session.markKnown();
       await session.giveUp();
       // Only the other noun is left before the marked one is undone.
       final afterMark = await session.next();
       expect(
         afterMark is CardQuestion &&
-            afterMark.card.item.nounId == first.item.nounId,
+            afterMark.card.card.itemId == first.card.itemId,
         isFalse,
       );
 
@@ -436,7 +418,7 @@ void main() {
       expect(session.summary.isEmpty, isTrue);
       expect(session.summary.percentCorrect, 0);
 
-      final first = (await session.next() as CardQuestion).card;
+      final first = asked(await session.next());
       clock.advance(const Duration(seconds: 30));
       await session.submit(first.item.answer.word);
       await session.next();
@@ -489,7 +471,7 @@ void main() {
     });
 
     test('a noun with neither image nor definition cannot be asked', () {
-      const bare = VocabularyItem(
+      const bare = NounItem(
         nounId: 'n.x',
         answer: VocabularyAnswer(word: 'x', gender: Gender.masculine),
       );
@@ -497,3 +479,7 @@ void main() {
     });
   });
 }
+
+/// The Vocabulaire card [view] asks.
+VocabularyCard asked(DrillView view) =>
+    (view as CardQuestion).card as VocabularyCard;

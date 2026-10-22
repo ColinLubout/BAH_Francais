@@ -3,15 +3,23 @@ import 'package:bah_francais/core/theme/app_text_styles.dart';
 import 'package:bah_francais/core/theme/feedback_colors.dart';
 import 'package:bah_francais/features/drills/domain/grading/grade.dart';
 import 'package:bah_francais/features/drills/domain/rating.dart';
+import 'package:bah_francais/features/drills/domain/session/noun_item.dart';
 import 'package:flutter/material.dart';
 
-/// Under the sentence after an answer that wasn't Correct: the result with
+/// Under the card after an answer that wasn't Correct: the result with
 /// an icon as well as colour, and the correct answer with any error
 /// highlighted (decision 71).
 class Correction extends StatelessWidget {
-  const Correction(this.grade, {super.key});
+  const Correction(this.grade, {this.answer, this.below = const [], super.key});
 
   final Grade grade;
+
+  /// The answer to show, when the grade has none: in Genre, the word with
+  /// *un/une*.
+  final String? answer;
+
+  /// Under the answer: in Genre, an example sentence and the *Astuce*.
+  final List<Widget> below;
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +27,63 @@ class Correction extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         _Result(grade.rating),
-        if (grade.answer case final answer?) ...[
+        if (grade.answer ?? answer case final answer?) ...[
           const SizedBox(height: 8),
           _CorrectAnswer(answer, grade),
         ],
+        for (final widget in below) ...[const SizedBox(height: 8), widget],
+      ],
+    );
+  }
+}
+
+/// One of the noun's sentences, with the noun in bold.
+class ExampleText extends StatelessWidget {
+  const ExampleText(this.example, {super.key});
+
+  final ExampleSentence example;
+
+  @override
+  Widget build(BuildContext context) {
+    final text = example.text;
+    final highlight = example.highlight;
+    return Text.rich(
+      TextSpan(
+        children: highlight == null
+            ? [TextSpan(text: text)]
+            : [
+                TextSpan(text: text.substring(0, highlight.start)),
+                TextSpan(
+                  text: text.substring(highlight.start, highlight.end),
+                  style: AppTextStyles.of(context).emphasis,
+                ),
+                TextSpan(text: text.substring(highlight.end)),
+              ],
+      ),
+      textAlign: TextAlign.center,
+      style: Theme.of(context).textTheme.bodyLarge,
+    );
+  }
+}
+
+/// *Astuce*, and the content's ending rule (*-tion → féminin*).
+class TipLine extends StatelessWidget {
+  const TipLine(this.hint, {super.key});
+
+  final String hint;
+
+  @override
+  Widget build(BuildContext context) {
+    final style = Theme.of(context).textTheme.bodyLarge;
+    return Wrap(
+      alignment: WrapAlignment.center,
+      spacing: 8,
+      children: [
+        Text(
+          Strings.drillTip,
+          style: style?.merge(AppTextStyles.of(context).emphasis),
+        ),
+        Text(hint, style: style),
       ],
     );
   }

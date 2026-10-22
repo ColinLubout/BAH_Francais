@@ -12,7 +12,7 @@ import 'package:bah_francais/features/drills/domain/queue/queue_settings.dart';
 import 'package:bah_francais/features/drills/domain/queue/session_queue.dart';
 import 'package:bah_francais/features/drills/domain/rating.dart';
 import 'package:bah_francais/features/drills/domain/session/drill_store.dart';
-import 'package:bah_francais/features/drills/domain/session/vocabulary_item.dart';
+import 'package:bah_francais/features/drills/domain/session/noun_item.dart';
 import 'package:bah_francais/features/drills/presentation/drill_screen.dart';
 import 'package:bah_francais/features/drills/presentation/session_summary_screen.dart';
 import 'package:bah_francais/features/drills/presentation/widgets/accent_bar.dart';
@@ -30,13 +30,13 @@ import '../../../helpers/fake_clock.dart';
 import '../../../helpers/fake_drill_store.dart';
 import '../domain/helpers.dart';
 
-const fourchette = VocabularyItem(
+const fourchette = NounItem(
   nounId: 'n.fourchette',
   answer: VocabularyAnswer(word: 'fourchette', gender: Gender.feminine),
   definition: 'def fourchette',
   examples: [ExampleSentence('zz fourchette zz', highlight: Span(3, 13))],
 );
-const ecole = VocabularyItem(
+const ecole = NounItem(
   nounId: 'n.ecole',
   answer: VocabularyAnswer(
     word: 'école',
@@ -46,7 +46,7 @@ const ecole = VocabularyItem(
   definition: 'def école',
 );
 
-FakeStore store({List<VocabularyItem> items = const [fourchette]}) => FakeStore(
+FakeStore store({List<NounItem> items = const [fourchette]}) => FakeStore(
   cards: [
     for (final (i, item) in items.indexed)
       newCard(itemId: item.nounId, id: i + 1),
@@ -54,12 +54,14 @@ FakeStore store({List<VocabularyItem> items = const [fourchette]}) => FakeStore(
   items: {for (final item in items) item.nounId: item},
 );
 
-/// Opens the Vocabulaire drill from Accueil, on a small phone.
+/// Opens a drill from Accueil, on a small phone: the Vocabulaire tile,
+/// unless [from] says another, or *Commencer*.
 Future<FakeClock> openDrill(
   WidgetTester tester,
   FakeStore store, {
   double textScale = 1,
   List<Override> extra = const [],
+  String from = Strings.homeDrillVocabulary,
 }) async {
   tester.view
     ..devicePixelRatio = 1
@@ -78,7 +80,7 @@ Future<FakeClock> openDrill(
     ),
   );
   await tester.pumpAndSettle();
-  await tester.tap(find.text(Strings.homeDrillVocabulary));
+  await tester.tap(find.text(from));
   await tester.pumpAndSettle();
   return clock;
 }
@@ -138,7 +140,7 @@ void main() {
     testWidgets('asks by an image, whose label never names the word', (
       tester,
     ) async {
-      const withImage = VocabularyItem(
+      const withImage = NounItem(
         nounId: 'n.ecole',
         answer: VocabularyAnswer(word: 'école', gender: Gender.feminine),
         imageIds: ['i.ecole-1'],

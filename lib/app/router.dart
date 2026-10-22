@@ -20,12 +20,15 @@ abstract final class Routes {
   static const stats = '/stats';
   static const settings = '/settings';
 
-  /// A drill, full screen, outside the navigation bar.
-  static String drill(DrillType drill) => '/drill/${drill.name}';
+  /// A drill, full screen, outside the navigation bar; a mixed session when
+  /// [drill] is null.
+  static String drill(DrillType? drill) => '/drill/${drill?.name ?? _mixed}';
 
   /// The drill's session summary, over the drill.
-  static String drillSummary(DrillType drill) =>
+  static String drillSummary(DrillType? drill) =>
       '${Routes.drill(drill)}/summary';
+
+  static const _mixed = 'mixed';
 }
 
 @Riverpod(keepAlive: true)
@@ -96,5 +99,9 @@ GoRouter router(Ref ref) {
   return router;
 }
 
-DrillType _drillOf(GoRouterState state) =>
-    DrillType.values.byName(state.pathParameters['drill']!);
+/// The drill in the path; null for a mixed session.
+DrillType? _drillOf(GoRouterState state) =>
+    switch (state.pathParameters['drill']!) {
+      Routes._mixed => null,
+      final name => DrillType.values.byName(name),
+    };

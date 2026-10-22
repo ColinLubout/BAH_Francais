@@ -1,6 +1,6 @@
 # BAH Français Specification
 
-*Specification for the BAH Français app. Last updated 22 October 2026, with decisions 1–76 from `PROGRESS.md` folded in.*
+*Specification for the BAH Français app. Last updated 22 October 2026, with decisions 1–80 from `PROGRESS.md` folded in.*
 
 This file is the specification and the source of truth. It is kept in the repo and changed only to fold in a decision the project owner has agreed, in the same pull request that records the decision in `PROGRESS.md` (see Build plan → How Claude Code should work).
 
@@ -667,7 +667,10 @@ Phase 1 has three drills: Gender, Vocabulary and Conjugation. They share one car
 
 The home screen (Accueil) has one large **Commencer** button and, below it, three smaller tiles: **Genre**, **Vocabulaire**, **Conjugaison**.
 
-- **Commencer** starts a mixed session. It builds one queue from all three drills, using the order in Spaced Repetition → Session flow, and interleaves drill types so the same word never appears in two drills back to back.
+- **Commencer** starts a mixed session. It builds one queue from all three drills, using the order in Spaced Repetition → Session flow, and interleaves drill types so the same word never appears in two drills back to back:
+  - Each drill offers its next card, by its own Session flow. Learning steps come first; then due reviews and new cards, each drill keeping its own rhythm of one new card per four reviews; then free practice.
+  - Among equally urgent cards, the drill shown least recently goes first, and a card for the word just shown waits a turn, unless nothing else is left.
+  - Each drill keeps its own limits. A drill that has reached its daily goal, or has nothing, drops out; when every drill has, the session shows *Ça suffit pour aujourd’hui.* if any reached its goal, otherwise *Aucune carte disponible*. *Tout est à jour !* shows once, when the session first moves into free practice.
 - A **drill tile** starts a session with that drill only.
 - Under each tile, one line shows how many cards are due today (e.g. *12 à réviser*); when none are, there is no line. No other numbers are on the home screen.
 
@@ -715,7 +718,8 @@ Every drill has a **Je le connais** button so a learner can drop words they alre
 - **Prompt:** the noun without an article (e.g. *table*), always shown. If the item has images and "Afficher l'image" is on (default on), one of its images is also shown, chosen at random on each review. There is no image-only mode: the drill tests gender, not recall of the word.
 - **Answer:** large symbol tiles at the top of the card, as in the layouts: ♀ féminin, ♂ masculin, and ♀♂ les deux. All three are always shown, so the layout never hints at the answer. An unselected symbol is blue on the background; the chosen one sits on a filled teal tile with the symbol in yellow. Each tile has a screen-reader label (*féminin*, *masculin*, *les deux*).
 - **"Les deux"** is only for nouns whose gender follows the person with no change of meaning (un/une élève, un/une enfant). Nouns whose meaning changes with gender (le livre / la livre) are two separate items. Each shows a short French gloss so the prompt is unambiguous.
-- **After an answer:** the Shared drill behaviour applies — a correct answer moves straight on, and *Trop facile* is offered on a new word. A wrong answer's correction shows the word with *un/une* (never *l’*, which hides the gender), an example sentence with the noun in bold, and an optional "Astuce" line if the content has an ending rule (e.g. *-tion → féminin*). How the correction sits on the Gender card is settled with the drill, in milestone 4.
+- **Trop facile** (on a new word) is a text button at the bottom of the card, in the thumb zone: the drill has no answer buttons, since tapping a tile answers.
+- **After an answer:** the Shared drill behaviour applies — a correct answer moves straight on. After a wrong one, nothing above moves: the tiles (the chosen one still filled), the word and the image stay put, and under them come the result with its icon, the word with *un/une* (never *l’*, which hides the gender), an example sentence with the noun in bold, and an optional "Astuce" line if the content has an ending rule (e.g. *-tion → féminin*). *Faute de frappe* and *Suivant* sit at the bottom.
 
 ### Vocabulary drill
 
@@ -891,9 +895,9 @@ Build in the order below, one milestone at a time. Each milestone ends with its 
 | 1 | Domain core, pure Dart: FSRS wrapper, grading and answer normalisation, the queue builder (session flow, daily limits, weighting, known and Jamais exclusions), mastery levels, injectable clock | every acceptance criterion in Spaced Repetition has a passing test; domain coverage ≥ 90%; no Flutter import in the domain layer |
 | 2 | Data layer: Drift tables for cards, logs, sessions, content and images; DAOs and streams; migrations; plus the content validator and pack builder in `tool/`, and the sample content set | the sample pack builds, imports and reads back unchanged; the validator rejects each rule it enforces, with a test per rule |
 | 3 | Vocabulaire drill end to end: card screen, typing rules, accent bar, live feedback, Je ne sais pas, Je le connais, the correction, session summary; the everyday pack bundled and imported on first launch, and the drill's tile on Accueil | an integration test completes a session; a force-close mid-session loses no answered card; widget tests cover each drill state |
-| 4 | Genre and Conjugaison drills, the rest of Accueil, and the mixed session | each drill has the same test coverage as milestone 3; a mixed session interleaves drills and respects each drill's limits |
+| 4 | Genre and Conjugaison drills, the rest of Accueil (but its ⋮ menus, *Liste de révision* link and *Aucune catégorie choisie* state, which come with their screens in milestone 6), and the mixed session | each drill has the same test coverage as milestone 3; a mixed session interleaves drills and respects each drill's limits |
 | 5 | Mots, Fiche mot, Ajouter un mot with the image picker, Verbes, Fiche verbe, Ajouter une phrase | a user-added word appears in both drills; a user-added sentence is used by its card; images are stored, shrunk and rendered |
-| 6 | Liste de révision, Statistiques, Réglages, the three drill settings screens, Welcome, À propos | every setting changes behaviour from the next card; stats match the review log in a test with seeded data |
+| 6 | Liste de révision, Statistiques, Réglages, the three drill settings screens with Accueil's ⋮ menus and links to them, Welcome, À propos | every setting changes behaviour from the next card; stats match the review log in a test with seeded data |
 | 7 | Content updates: manifest, download, checksum, merge rules, the bundled pack after an app update | every merge rule has a test; a failure mid-merge leaves the content untouched; user data is never modified |
 | 8 | Content: the passé composé, imparfait and futur simple, and the lists grown to 30 verbs and 100 nouns (Content → Phase 1 content) | the content teaches all four tenses with 30 verbs and 100 nouns, passes the validator, and the owner has checked it |
 | 9 | Release pass: accessibility (text scaling, screen-reader labels, contrast test), performance (interactive in under a second, steady 60 fps), French text reviewed by a fluent speaker, CONTRIBUTING, issue templates and CHANGELOG, privacy policy published and both stores' privacy forms completed | the release checklist in the README is fully ticked |
