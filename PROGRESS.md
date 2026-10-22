@@ -24,12 +24,14 @@
   - **The accent bar** inserts at the cursor and keeps the keyboard open.
   - ***Je ne sais pas*** and ***Je le connais***: the next card at once, with
     *Annuler* for 5 seconds; a known mark writes no rating and no review-log row.
-  - **After *Valider*** (decision 71): a Correct answer moves straight on, with
-    *Trop facile* offered for 5 seconds the first time a word is answered. Presque,
-    Incorrect and *Je ne sais pas* keep the card in place, the box keeping what was
-    typed, and show the result (an icon as well as a colour) and the answer with
-    its wrong letters marked under the sentence, with *Faute de frappe* (after
-    Incorrect) and *Suivant*.
+  - **After *Valider*** (decision 71): a Correct answer moves straight on.
+    Presque, Incorrect and *Je ne sais pas* keep the card in place, the box keeping
+    what was typed, and show the result (an icon as well as a colour) and the
+    answer with its wrong letters marked under the sentence, with *Faute de
+    frappe* (after Incorrect) and *Suivant*.
+  - ***Trop facile*** (decision 72): above *Je ne sais pas* and *Valider* on a
+    word seen for the first time; it rates the word Easy with no answer typed and
+    moves on.
   - **The session:** milestone 1's queue over the database. *Tout est à jour* once,
     above free practice; *Ça suffit pour aujourd’hui* at the daily goal; *Aucune
     carte disponible* with a way to the settings. Each answer is saved as it is
@@ -92,7 +94,11 @@ None.
 - M4: the Conjugaison drill puts its answer box in its sentence the same way
   (decision 70), with `BlankSentence`, and follows *Valider* the same way
   (decision 71). The Genre drill already moves on after a Correct answer, after a
-  second; whether its corrections also stay in place is for M4.
+  second; whether its corrections also stay in place, and whether a new word
+  there or in Conjugaison has *Trop facile* (decision 72), is for M4.
+- After decision 72, the grading's *Trop facile* after an answer
+  (`Grade.markTooEasy`, `canMarkTooEasy`, from milestone 1) is unused; M4 can
+  remove it if the other drills follow decision 72.
 - M7 and M8: the first-launch import runs on the main isolate. That is quick for
   the 127 KB pack, but the full content may hold the launch for longer; it could
   move to a background isolate.
@@ -800,9 +806,8 @@ document.
       files (the validator rule).
 71. **What follows *Valider***, after the owner tried decision 70 on a phone.
     - **Correct** moves straight on to the next card, with no feedback panel.
-      The first time a word is answered (its card was new), a snackbar *Correct ·
-      Trop facile* stays for 5 seconds; *Trop facile* makes that answer Easy.
-      Later Correct answers offer nothing.
+      ~~The first time a word is answered, a snackbar *Correct · Trop facile*
+      stays for 5 seconds.~~ *Replaced by decision 72.*
     - **Presque and Incorrect** keep the card as it is: the prompt, the sentence
       and the box with what was typed, which can no longer be changed. Under the
       sentence come the result, a word with its icon (*Incorrect*, *Presque*),
@@ -814,12 +819,22 @@ document.
       screen.
     - **The box has no visible hint**: *Votre réponse* is its screen-reader label
       only.
-    - **Snackbars** (this one and *Je le connais*'s *Annuler*) float just above
-      the buttons and accent bar, so the next answer can be given meanwhile, and
-      go after 5 seconds.
+    - **Snackbars** (*Je le connais*'s *Annuler*) float just above the buttons
+      and accent bar, so the next answer can be given meanwhile, and go after 5
+      seconds.
     - *Changes* Activities → Shared drill behaviour (the feedback panel and
-      Advancing), Typing behaviour, and decision 26 (*Trop facile* only after a
-      word's first answer, from a snackbar).
+      Advancing) and Typing behaviour.
+72. ***Trop facile* comes before the answer, on a word seen for the first
+    time**, after the owner tried decision 71.
+    - While a word's card is new, a *Trop facile* button shows above *Je ne sais
+      pas* and *Valider*. It needs no answer: the card is rated Easy, with a
+      review-log row (no text typed, no error), and the next card comes at once.
+      It counts as a correct answer in the session.
+    - Once the word has been answered, or on any later review, there is no *Trop
+      facile*, and nothing is offered after a Correct answer.
+    - *Replaces* decision 26's *Trop facile* (after a Correct answer, in the
+      feedback panel) and decision 71's snackbar; *changes* Activities → Shared
+      drill behaviour (the override buttons).
 
 ### Notes
 
@@ -837,5 +852,5 @@ document.
   flows run on the computer with `flutter test`.
 - In Flutter 3.47, a snackbar with an action stays until it is dismissed
   (`SnackBar.persist` defaults to true when there is one). The drill's snackbars set
-  `persist: false`, so *Annuler* and *Trop facile* go after 5 seconds as the spec
-  says; a test checks it.
+  `persist: false`, so *Annuler* goes after 5 seconds as the spec says; a test
+  checks it.

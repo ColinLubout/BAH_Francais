@@ -120,7 +120,7 @@ void main() {
         final (session, _) = await open(oneNoun(item: item));
         final card = ((await session.next()) as CardQuestion).card;
         expect(card.sentence, first);
-        final (view, _) = await session.submit('zz');
+        final view = await session.submit('zz');
         expect((view as CardFeedback).card.sentence, first);
 
         final (last, _) = await open(oneNoun(item: item), random: 0.99);
@@ -201,7 +201,7 @@ void main() {
         final (session, clock) = await open(store);
         final first = (await session.next() as CardQuestion).card;
         clock.advance(const Duration(seconds: 4));
-        final (view, _) = await session.submit(first.item.answer.word);
+        final view = await session.submit(first.item.answer.word);
 
         // No correction: the other card at once (decision 71).
         expect(view, isA<CardQuestion>());
@@ -224,21 +224,19 @@ void main() {
     test('a letter that went red or orange caps it at Hard', () async {
       final (session, _) = await open(oneNoun());
       await session.next();
-      final (view, offer) = await session.submit('fourchette', capsGrade: true);
+      final view = await session.submit('fourchette', capsGrade: true);
       // Presque stays for its correction, with what was typed.
       expect((view as CardFeedback).grade.rating, Rating.hard);
       expect(view.typed, 'fourchette');
-      expect(offer, isNull);
     });
 
     test('a wrong answer is Again, and offers Faute de frappe', () async {
       final (session, _) = await open(oneNoun());
       await session.next();
-      final (view, offer) = await session.submit('zz');
+      final view = await session.submit('zz');
       expect((view as CardFeedback).grade.rating, Rating.again);
       expect(view.typed, 'zz');
       expect(view.offersTypo, isTrue);
-      expect(offer, isNull);
     });
 
     test('Je ne sais pas is Again, shows the answer, offers nothing', () async {
@@ -301,46 +299,41 @@ void main() {
       expect(session.markTypo, throwsStateError);
     });
 
-    test('Trop facile, offered once moved on, makes it Easy', () async {
-      final store = oneNoun();
+    test('Trop facile: Easy with no answer, and the next card', () async {
+      final store = FakeStore(
+        cards: [
+          newCard(itemId: 'n.fourchette', id: 1),
+          newCard(itemId: 'n.ecole', id: 2),
+        ],
+        items: const {'n.fourchette': fourchette, 'n.ecole': ecole},
+      );
       final (session, clock) = await open(store);
-      await session.next();
-      clock.advance(const Duration(seconds: 3));
-      final (_, offer) = await session.submit('fourchette');
+      final first = (await session.next() as CardQuestion).card;
+      expect(first.offersTooEasy, isTrue);
       clock.advance(const Duration(seconds: 2));
-      await session.tooEasy(offer!);
+      final view = await session.tooEasy();
 
-      final (logId, answer) = store.replaced.single;
-      expect(logId, 101);
+      expect((view as CardQuestion).card.card.id, isNot(first.card.id));
+      final answer = store.answers.single;
       expect(answer.outcome.rating, Rating.easy);
       expect(answer.outcome.before.state, CardState.newCard);
-      expect(answer.typed, 'fourchette');
-      expect(answer.responseTime, const Duration(seconds: 3));
+      expect(answer.errorType, ErrorType.none);
+      expect(answer.typed, isNull);
+      expect(answer.responseTime, const Duration(seconds: 2));
+      expect(session.summary.answered, 1);
       expect(session.summary.correct, 1);
     });
 
-    test('Trop facile only for a word met for the first time', () async {
+    test('Trop facile only for a word seen for the first time', () async {
       final store = FakeStore(
         cards: [reviewCard(due: noon, itemId: 'n.fourchette', id: 1)],
         items: const {'n.fourchette': fourchette},
       );
       final (session, _) = await open(store);
-      await session.next();
-      final (_, offer) = await session.submit('fourchette');
-      expect(offer, isNull);
-    });
-
-    test('a word back on screen meanwhile takes its Easy state', () async {
-      // The only card comes back at once, in free practice.
-      final (session, _) = await open(oneNoun());
-      await session.next();
-      final (view, offer) = await session.submit('fourchette');
-      expect((view as CardQuestion).card.card.id, 1);
-      await session.tooEasy(offer!);
-      final now = (session.view as CardQuestion).card;
-      expect(now.card.state, CardState.review);
-      expect(now.item, view.card.item);
-      expect(now.sentence, view.card.sentence);
+      final card = (await session.next() as CardQuestion).card;
+      expect(card.offersTooEasy, isFalse);
+      expect(session.tooEasy, throwsStateError);
+      expect(store.answers, isEmpty);
     });
 
     test(

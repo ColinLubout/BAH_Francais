@@ -248,7 +248,7 @@ void main() {
 
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pumpAndSettle();
-      expect(find.text(Strings.drillResultCorrect), findsOneWidget);
+      expect(find.text(Strings.drillCardsAnswered(n: 1)), findsOneWidget);
     });
   });
 
@@ -338,49 +338,46 @@ void main() {
       expect(find.text(Strings.drillNext), findsNothing);
       expect(tester.widget<TextField>(field).controller!.text, isEmpty);
       expect(tester.widget<TextField>(field).readOnly, isFalse);
+      expect(find.byType(SnackBar), findsNothing);
     });
 
-    testWidgets('a word met for the first time: Trop facile, for 5 s', (
+    testWidgets('a new word: Trop facile above the buttons, no answer', (
       tester,
     ) async {
       final fake = store(items: [fourchette, ecole]);
       await openDrill(tester, fake);
-      await submit(tester, firstWord());
-      expect(
-        find.widgetWithText(SnackBar, Strings.drillResultCorrect),
-        findsOneWidget,
+      final first = firstWord();
+      final tooEasy = tester.getRect(
+        find.widgetWithText(TextButton, Strings.drillTooEasy),
       );
-      // Above the buttons, so the next word can be answered meanwhile.
-      expect(
-        tester
-            .getRect(
-              find
-                  .descendant(
-                    of: find.byType(SnackBar),
-                    matching: find.byType(Material),
-                  )
-                  .first,
-            )
-            .bottom,
-        lessThanOrEqualTo(
-          tester
-              .getRect(find.widgetWithText(FilledButton, Strings.drillSubmit))
-              .top,
-        ),
-      );
+      for (final button in [
+        find.widgetWithText(TextButton, Strings.drillIDontKnow),
+        find.widgetWithText(FilledButton, Strings.drillSubmit),
+      ]) {
+        expect(tooEasy.bottom, lessThanOrEqualTo(tester.getRect(button).top));
+      }
+
       await tester.tap(find.text(Strings.drillTooEasy));
       await tester.pumpAndSettle();
-      expect(fake.replaced.single.$2.outcome.rating, Rating.easy);
+      final answer = fake.answers.single;
+      expect(answer.outcome.rating, Rating.easy);
+      expect(answer.typed, isNull);
+      expect(find.text(Strings.drillCardsAnswered(n: 1)), findsOneWidget);
+      expect(
+        find.text(first == 'fourchette' ? 'def école' : 'def fourchette'),
+        findsOneWidget,
+      );
+    });
 
-      // The next word's offer goes by itself.
-      await submit(tester, firstWord());
-      expect(find.text(Strings.drillTooEasy), findsOneWidget);
-      await tester.pump(const Duration(seconds: 5));
-      await tester.pumpAndSettle();
+    testWidgets('a new word answered wrong: no more Trop facile', (
+      tester,
+    ) async {
+      await openDrill(tester, store());
+      await submit(tester, 'qq');
       expect(find.text(Strings.drillTooEasy), findsNothing);
     });
 
-    testWidgets('a word answered before: no Trop facile', (tester) async {
+    testWidgets('a word seen before: no Trop facile', (tester) async {
       await openDrill(
         tester,
         FakeStore(
@@ -388,8 +385,7 @@ void main() {
           items: const {'n.fourchette': fourchette},
         ),
       );
-      await submit(tester, 'fourchette');
-      expect(find.byType(SnackBar), findsNothing);
+      expect(find.text(Strings.drillTooEasy), findsNothing);
     });
 
     testWidgets('Incorrect: all stays, the answer under the sentence', (
@@ -494,6 +490,19 @@ void main() {
     expect(fake.knownCalls.single.$2, isNotNull);
     expect(find.text(Strings.drillMarkedKnown), findsOneWidget);
     expect(find.byType(TextField), findsOneWidget);
+    // Above the buttons, so the next word can be answered meanwhile.
+    final snackBar = find.descendant(
+      of: find.byType(SnackBar),
+      matching: find.byType(Material),
+    );
+    expect(
+      tester.getRect(snackBar.first).bottom,
+      lessThanOrEqualTo(
+        tester
+            .getRect(find.widgetWithText(TextButton, Strings.drillTooEasy))
+            .top,
+      ),
+    );
 
     await tester.tap(find.text(Strings.commonUndo));
     await tester.pumpAndSettle();

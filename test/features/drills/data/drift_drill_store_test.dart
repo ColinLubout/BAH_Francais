@@ -101,8 +101,7 @@ void main() {
       );
       final view = await session.next() as CardQuestion;
       clock.advance(const Duration(seconds: 3));
-      final (next, offer) = await session.submit(view.card.item.answer.word);
-      await session.tooEasy(offer!);
+      final next = await session.tooEasy();
 
       final logs = await db.select(db.reviewLogs).get();
       expect(logs.single.rating, Rating.easy);

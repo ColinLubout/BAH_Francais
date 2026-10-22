@@ -33,6 +33,10 @@ class VocabularyCard {
   /// Every way of typing a right answer, for live feedback. The article is
   /// optional: the sentence around the box already has one (decision 70).
   List<String> get typings => item.answer.typings(mandatory: false);
+
+  /// The word is seen for the first time: *Trop facile* is offered, with no
+  /// answer needed (decision 72).
+  bool get offersTooEasy => card.state == CardState.newCard;
 }
 
 /// What the drill screen shows.
@@ -75,25 +79,6 @@ class CardFeedback extends DrillView {
 
   /// *Faute de frappe* is offered after a wrong answer.
   bool get offersTypo => !overridden && grade.canMarkTypo;
-}
-
-/// A Correct answer to a word met for the first time, already behind:
-/// *Trop facile* can still make it Easy, for a few seconds (decision 71).
-@immutable
-class TooEasyOffer {
-  const TooEasyOffer._({
-    required this.grade,
-    required this.outcome,
-    required this.logId,
-    required this.responseTime,
-    required this.typed,
-  });
-
-  final Grade grade;
-  final ReviewOutcome outcome;
-  final int logId;
-  final Duration responseTime;
-  final String typed;
 }
 
 /// The review limit is reached and nothing else is left:
@@ -279,13 +264,9 @@ class DrillSession {
   /// Grades [typed] and saves the answer. [capsGrade] means a letter went
   /// red or orange while typing, which caps the grade at Hard.
   ///
-  /// A Correct answer moves straight on to the next card, with a
-  /// [TooEasyOffer] the first time the word is answered. Any other answer
+  /// A Correct answer moves straight on to the next card; any other answer
   /// shows its correction (decision 71).
-  Future<(DrillView, TooEasyOffer?)> submit(
-    String typed, {
-    bool capsGrade = false,
-  }) async {
+  Future<DrillView> submit(String typed, {bool capsGrade = false}) async {
     final card = _question.card;
     final grade = gradeVocabulary(
       typed: typed,
@@ -293,22 +274,20 @@ class DrillSession {
       articleMandatory: false,
       flaggedWhileTyping: capsGrade,
     );
-    final saved = await _answer(card, grade, typed: typed);
-    if (grade.rating != Rating.good && grade.rating != Rating.easy) {
-      return (_view = CardFeedback(card, grade, typed: typed), null);
+    await _answer(card, grade, typed: typed);
+    if (grade.rating == Rating.good || grade.rating == Rating.easy) {
+      return await next();
     }
-    final firstTime =
-        card.card.state == CardState.newCard && grade.canMarkTooEasy;
-    final offer = firstTime
-        ? TooEasyOffer._(
-            grade: grade,
-            outcome: saved.outcome,
-            logId: saved.logId,
-            responseTime: saved.responseTime,
-            typed: typed,
-          )
-        : null;
-    return (await next(), offer);
+    return _view = CardFeedback(card, grade, typed: typed);
+  }
+
+  /// *Trop facile*, on a word seen for the first time: Easy with no answer
+  /// typed, and the next card at once (decision 72).
+  Future<DrillView> tooEasy() async {
+    final card = _question.card;
+    if (!card.offersTooEasy) throw StateError('Trop facile is not offered');
+    await _answer(card, const Grade.tooEasy());
+    return await next();
   }
 
   /// *Je ne sais pas*: Again, and the answer is shown.
@@ -348,32 +327,6 @@ class DrillSession {
     );
   }
 
-  /// *Trop facile*, from [offer], once the session has moved on: the answer
-  /// is saved again as Easy. If the card is back on screen meanwhile, it is
-  /// answered from its new state.
-  Future<void> tooEasy(TooEasyOffer offer) async {
-    final regraded = await _regrade(
-      offer.outcome,
-      offer.logId,
-      offer.grade.markTooEasy(),
-      responseTime: offer.responseTime,
-      typed: offer.typed,
-    );
-    final view = _view;
-    if (view is CardQuestion && view.card.card.id == regraded.after.id) {
-      final card = view.card;
-      _view = CardQuestion(
-        VocabularyCard(
-          card: regraded.after,
-          item: card.item,
-          prompt: card.prompt,
-          sentence: card.sentence,
-        ),
-        startsFreePractice: view.startsFreePractice,
-      );
-    }
-  }
-
   /// *Je le connais*: the noun's cards in every drill leave practice, with
   /// no grade and no review-log row, and the next card comes at once. Keep
   /// the mark for [undoKnown].
@@ -410,7 +363,7 @@ class DrillSession {
     return time.isNegative ? Duration.zero : time;
   }
 
-  Future<({ReviewOutcome outcome, int logId, Duration responseTime})> _answer(
+  Future<void> _answer(
     VocabularyCard card,
     Grade grade, {
     String? typed,
@@ -427,12 +380,11 @@ class DrillSession {
       at: startedAt,
     );
     _lastAnswerAt = now;
-    final responseTime = _responseTime;
     final logId = await _store.recordAnswer(
       Answer(
         outcome: outcome,
         sessionId: sessionId,
-        responseTime: responseTime,
+        responseTime: _responseTime,
         errorType: grade.errorType,
         typed: typed,
       ),
@@ -442,7 +394,6 @@ class DrillSession {
     _logId = logId;
     _answered++;
     if (grade.rating != Rating.again) _correct++;
-    return (outcome: outcome, logId: logId, responseTime: responseTime);
   }
 
   /// Saves the answer [logId] again with [grade], scheduled again from the

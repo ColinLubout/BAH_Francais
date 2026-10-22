@@ -108,7 +108,7 @@ Future<void> completesASession(WidgetTester tester) async {
   await answer(tester, currentAnswer(tester));
   expect(find.text(Strings.drillCardsAnswered(n: 1)), findsOneWidget);
   expect(find.text(Strings.drillNext), findsNothing);
-  expect(find.text(Strings.drillTooEasy), findsOneWidget);
+  expect(find.byType(SnackBar), findsNothing);
 
   await answer(tester, 'zz');
   expect(find.text(Strings.drillResultIncorrect), findsOneWidget);

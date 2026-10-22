@@ -78,20 +78,6 @@ class _DrillScreenState extends ConsumerState<DrillScreen> {
     context.go(Routes.home);
   }
 
-  /// *Valider*. A Correct answer moves straight on; the first time the word
-  /// is answered, *Trop facile* stays on offer for a few seconds
-  /// (decision 71).
-  Future<void> _submit(String typed, {required bool capsGrade}) async {
-    final controller = ref.read(_provider.notifier);
-    final offer = await controller.submit(typed, capsGrade: capsGrade);
-    if (offer == null || !mounted) return;
-    _snackBar(
-      Strings.drillResultCorrect,
-      action: Strings.drillTooEasy,
-      onAction: () => controller.tooEasy(offer),
-    );
-  }
-
   Future<void> _markKnown() async {
     final controller = ref.read(_provider.notifier);
     final mark = await controller.markKnown();
@@ -108,6 +94,7 @@ class _DrillScreenState extends ConsumerState<DrillScreen> {
 
   /// A snackbar with its one action, for 5 seconds. It floats above the
   /// buttons and accent bar, so the next answer can be given meanwhile.
+  /// *Je le connais*'s *Annuler* is the one there is.
   void _snackBar(
     String message, {
     required String action,
@@ -167,7 +154,8 @@ class _DrillScreenState extends ConsumerState<DrillScreen> {
                     liveFeedback: ref
                         .watch(drillDisplaySettingsProvider(widget.drill))
                         .liveFeedback,
-                    onSubmit: _submit,
+                    onSubmit: controller.submit,
+                    onTooEasy: controller.tooEasy,
                     onGiveUp: controller.giveUp,
                     onTypo: controller.markTypo,
                     onNext: controller.next,

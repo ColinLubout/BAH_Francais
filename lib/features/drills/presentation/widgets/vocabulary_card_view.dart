@@ -10,12 +10,13 @@ import 'package:bah_francais/features/drills/presentation/widgets/live_feedback_
 import 'package:flutter/material.dart';
 
 /// A Vocabulaire card, from its question to its correction (decisions 70
-/// and 71).
+/// to 72).
 ///
 /// The question: the prompt, the sentence with the answer box in place of
-/// the noun, *Je ne sais pas* and *Valider* side by side, and the accent bar
-/// above the keyboard. The keyboard opens with the card; Enter submits, and
-/// an empty answer can't be.
+/// the noun, *Trop facile* when the word is new, *Je ne sais pas* and
+/// *Valider* side by side, and the accent bar above the keyboard. The
+/// keyboard opens with the card; Enter submits, and an empty answer can't
+/// be.
 ///
 /// The correction, after an answer that wasn't Correct: everything stays in
 /// place, the box keeping what was typed, with the result and the answer
@@ -28,6 +29,7 @@ class VocabularyCardView extends StatefulWidget {
     required this.liveFeedback,
     required this.onSubmit,
     required this.onGiveUp,
+    required this.onTooEasy,
     required this.onTypo,
     required this.onNext,
     this.feedback,
@@ -57,6 +59,9 @@ class VocabularyCardView extends StatefulWidget {
   /// [capsGrade]: a letter went red or orange while typing.
   final void Function(String typed, {required bool capsGrade}) onSubmit;
   final VoidCallback onGiveUp;
+
+  /// *Trop facile*, on a word seen for the first time (decision 72).
+  final VoidCallback onTooEasy;
 
   /// *Faute de frappe*.
   final VoidCallback onTypo;
@@ -182,6 +187,20 @@ class _VocabularyCardViewState extends State<VocabularyCardView> {
           key: widget.controlsKey,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            // No answer needed: Easy, and the next word (decision 72).
+            if (!_answered && widget.card.offersTooEasy)
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+                child: Center(
+                  child: TextButton(
+                    onPressed: widget.onTooEasy,
+                    child: const Text(
+                      Strings.drillTooEasy,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+              ),
             _buttons(feedback),
             if (!_answered) AccentBar(controller: _controller),
           ],

@@ -33,26 +33,18 @@ class DrillController extends _$DrillController {
   /// The numbers the summary shows.
   SessionSummary get summary => _session.summary;
 
-  /// Grades [typed]: [capsGrade] when a letter went red or orange. Returns
-  /// the *Trop facile* offer after a word's first Correct answer.
-  Future<TooEasyOffer?> submit(String typed, {required bool capsGrade}) async {
-    TooEasyOffer? offer;
-    await _run(() async {
-      final (view, made) = await _session.submit(typed, capsGrade: capsGrade);
-      offer = made;
-      return view;
-    });
-    return offer;
-  }
+  /// Grades [typed]: [capsGrade] when a letter went red or orange.
+  Future<void> submit(String typed, {required bool capsGrade}) =>
+      _run(() => _session.submit(typed, capsGrade: capsGrade));
+
+  /// *Trop facile*, on a word seen for the first time.
+  Future<void> tooEasy() => _run(_session.tooEasy);
 
   /// *Je ne sais pas*.
   Future<void> giveUp() => _run(_session.giveUp);
 
   /// *Faute de frappe*.
   Future<void> markTypo() => _run(_session.markTypo);
-
-  /// *Trop facile*, from the snackbar after the session has moved on.
-  Future<void> tooEasy(TooEasyOffer offer) => _session.tooEasy(offer);
 
   /// *Suivant*.
   Future<void> next() => _run(_session.next);
