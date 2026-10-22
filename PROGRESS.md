@@ -2,20 +2,22 @@
 
 ## Current milestone: 4 — Genre and Conjugaison drills, Accueil, the mixed session
 
-**Status:** done on branch `milestone-4`. Next: milestone 5.
+**Status:** merged in PR #8; the Genre card's follow-ups (decision 81) on branch
+`milestone-4-followups`. Next: milestone 5.
 
 ### Done
 
 - **Clean-up agreed with the owner:** the Article obligatoire rule and strings, the
   after-answer *Trop facile* and `drill.leaveSession` are gone; a drill tile with
   nothing due shows no line (decision 76).
-- **The Genre drill** (decisions 75, 77 and 78): the three tiles at the top, each
-  with a screen-reader label (*féminin*, *masculin*, *les deux*), then the word with
-  its gloss and one of its images (*Afficher l’image*, on until milestone 6). The
-  right tile moves straight on. A wrong one keeps the card in place: the chosen
-  tile stays filled, and under the image come the result, *Réponse : un/une …*, an
-  example sentence with the noun in bold and the *Astuce*; *Faute de frappe* and
-  *Suivant* sit at the bottom, where *Trop facile* is on a new word.
+- **The Genre drill** (decisions 75, 77, 78 and 81): the word with its gloss and one
+  of its images (*Afficher l’image*, on until milestone 6) in the middle of the
+  screen; near the bottom the three tiles, féminin, les deux, masculin, each with a
+  screen-reader label, filled light with symbols in the screen's colour; under
+  them *Trop facile* on a new word. The right tile moves straight on. A wrong one
+  keeps the card in place: the tile tapped turns teal with a ring, and under the
+  word come the result, *Réponse : un/une …*, an example sentence with the noun in
+  bold and the *Astuce*; *Faute de frappe* and *Suivant* sit at the bottom.
 - **The Conjugaison drill** (decisions 43, 70, 75): a person at random, then one of
   its sentences, with the answer box in place of the verb and the infinitive and
   tense underneath. An elided word before the blank is written in full (*Je ne
@@ -35,8 +37,8 @@
   `NounItem` and `ConjugationItem`, which `DriftDrillStore` reads.
 - **Integration tests:** a full Genre, Conjugaison and mixed session, besides the
   Vocabulaire session and the force-close, on the computer and on an emulator.
-- **The spec** has decisions 1–80 folded in.
-- **Tests:** 716, all passing. Domain coverage is 98.5%.
+- **The spec** has decisions 1–80 folded in (1–82 after the follow-ups).
+- **Tests:** 718, all passing. Domain coverage is 98.5%.
 
 **The milestone's "done when" and its tests:**
 
@@ -57,14 +59,12 @@
 
 ### Open questions
 
-1. **The chosen Genre tile's contrast.** The spec and layouts put a yellow symbol
-   on the teal tile, which measures 1.28:1, under WCAG's 3:1 for a symbol needed to
-   understand the screen. The choice is also shown by the filled tile, and screen
-   readers hear it as selected, so colour isn't the only signal. Keep it as in the
-   layouts, or make the symbol navy on teal (6.8:1), as text on teal already is?
-2. **A mixed session's summary, per drill:** cards answered and % correct are
-   clear; the duration counts the time spent answering that drill's cards, since
-   the drills interleave. Is that what the summary should show?
+1. **Text buttons in the light theme are teal on white**, about 1.9:1, where text
+   needs 4.5:1: *Je le connais*, *Je ne sais pas*, *Faute de frappe*, *Trop
+   facile*, *Terminer*. They take Material's primary colour, and the spec keeps
+   teal as a background ("text on it is navy"). Make them navy, or the brand blue
+   (#5172A1, 4.9:1), in the light theme? The dark theme's teal on navy reads at
+   6.8:1.
 
 ### Spotted for later milestones
 
@@ -326,7 +326,7 @@
 
 ## Decisions
 
-These change or add to `docs/SPEC.md`, which is the spec (decision 74). Decisions 1–80
+These change or add to `docs/SPEC.md`, which is the spec (decision 74). Decisions 1–82
 are folded into it as of 2026-10-22; from now on, each decision is folded in by the
 pull request that records it here.
 
@@ -920,6 +920,30 @@ pull request that records it here.
     disponible*. *Tout est à jour !* shows once, when the session first moves into
     free practice.
     - *Adds to* Activities → Starting a session.
+
+### 2026-10-22 (milestone 4 follow-ups, agreed with the owner)
+
+81. **The Genre card, after the owner tried it:**
+    - **The word in the middle of the screen**, with its gloss and image; the
+      tiles just above *Trop facile*, near the bottom, in the order féminin, les
+      deux, masculin.
+    - **The tiles are filled with a lighter colour than the screen, the symbols
+      in the screen's background colour:** light blue #8FB0DB with navy symbols on
+      the dark theme (5.9:1), the brand blue #5172A1 with white symbols on the
+      light one (4.9:1).
+    - **The tile tapped**, after a wrong answer, turns teal with a navy symbol
+      (6.8:1), and gets a ring, so colour isn't the only sign of it (Design
+      Principles → Accessibility).
+    - After a wrong answer nothing moves: the correction comes under the word,
+      and *Faute de frappe* and *Suivant* take *Trop facile*'s place, under the
+      tiles.
+    - *Replaces* the spec's tiles "at the top of the card … blue on the
+      background; the chosen one … teal … in yellow" and decision 77's layout;
+      settles the yellow-on-teal contrast (1.28:1). *Changes* Color scheme (the
+      yellow is no longer inside a tile).
+82. **A mixed session's summary gives each drill's duration as the time spent
+    answering its cards**, since the drills interleave.
+    - *Adds to* Screens → Résumé de session.
 
 ### Notes
 
