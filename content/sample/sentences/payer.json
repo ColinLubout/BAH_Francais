@@ -1,0 +1,335 @@
+{
+  "sentences": [
+    {
+      "id": "s.payer.pr.1s.01",
+      "text": "Je paie toujours en espèces.",
+      "verbs": [
+        {
+          "verb": "v.payer",
+          "tense": "present",
+          "person": "1s",
+          "answer": "paie",
+          "alternatives": [
+            "paye"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s.payer.pr.2s.01",
+      "text": "Tu paies par carte ?",
+      "verbs": [
+        {
+          "verb": "v.payer",
+          "tense": "present",
+          "person": "2s",
+          "answer": "paies",
+          "alternatives": [
+            "payes"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s.payer.pr.3s.01",
+      "text": "Mon frère paie le loyer au début du mois.",
+      "verbs": [
+        {
+          "verb": "v.payer",
+          "tense": "present",
+          "person": "3s",
+          "answer": "paie",
+          "alternatives": [
+            "paye"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s.payer.pr.1p.01",
+      "text": "Nous payons nos factures en ligne.",
+      "verbs": [
+        {
+          "verb": "v.payer",
+          "tense": "present",
+          "person": "1p",
+          "answer": "payons"
+        }
+      ]
+    },
+    {
+      "id": "s.payer.pr.2p.01",
+      "text": "Vous payez à la caisse, s’il vous plaît.",
+      "verbs": [
+        {
+          "verb": "v.payer",
+          "tense": "present",
+          "person": "2p",
+          "answer": "payez"
+        }
+      ]
+    },
+    {
+      "id": "s.payer.pr.3p.01",
+      "text": "Ils paient leurs impôts en septembre.",
+      "verbs": [
+        {
+          "verb": "v.payer",
+          "tense": "present",
+          "person": "3p",
+          "answer": "paient",
+          "alternatives": [
+            "payent"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s.payer.pc.1s.01",
+      "text": "J’ai payé l’addition hier soir.",
+      "verbs": [
+        {
+          "verb": "v.payer",
+          "tense": "passe_compose",
+          "person": "1s",
+          "answer": "ai payé"
+        }
+      ]
+    },
+    {
+      "id": "s.payer.pc.2s.01",
+      "text": "Tu as payé combien pour ce billet ?",
+      "verbs": [
+        {
+          "verb": "v.payer",
+          "tense": "passe_compose",
+          "person": "2s",
+          "answer": "as payé"
+        }
+      ]
+    },
+    {
+      "id": "s.payer.pc.3s.01",
+      "text": "Elle a payé le taxi.",
+      "verbs": [
+        {
+          "verb": "v.payer",
+          "tense": "passe_compose",
+          "person": "3s",
+          "answer": "a payé"
+        }
+      ]
+    },
+    {
+      "id": "s.payer.pc.1p.01",
+      "text": "Nous avons payé trop cher.",
+      "verbs": [
+        {
+          "verb": "v.payer",
+          "tense": "passe_compose",
+          "person": "1p",
+          "answer": "avons payé"
+        }
+      ]
+    },
+    {
+      "id": "s.payer.pc.2p.01",
+      "text": "Vous avez payé les places de concert ?",
+      "verbs": [
+        {
+          "verb": "v.payer",
+          "tense": "passe_compose",
+          "person": "2p",
+          "answer": "avez payé"
+        }
+      ]
+    },
+    {
+      "id": "s.payer.pc.3p.01",
+      "text": "Mes amis ont payé le dîner.",
+      "verbs": [
+        {
+          "verb": "v.payer",
+          "tense": "passe_compose",
+          "person": "3p",
+          "answer": "ont payé"
+        }
+      ]
+    },
+    {
+      "id": "s.payer.im.1s.01",
+      "text": "Avant, je payais tout en liquide.",
+      "verbs": [
+        {
+          "verb": "v.payer",
+          "tense": "imparfait",
+          "person": "1s",
+          "answer": "payais"
+        }
+      ]
+    },
+    {
+      "id": "s.payer.im.2s.01",
+      "text": "Tu payais ton café au même bar tous les matins.",
+      "verbs": [
+        {
+          "verb": "v.payer",
+          "tense": "imparfait",
+          "person": "2s",
+          "answer": "payais"
+        }
+      ]
+    },
+    {
+      "id": "s.payer.im.3s.01",
+      "text": "Il payait son loyer en retard.",
+      "verbs": [
+        {
+          "verb": "v.payer",
+          "tense": "imparfait",
+          "person": "3s",
+          "answer": "payait"
+        }
+      ]
+    },
+    {
+      "id": "s.payer.im.1p.01",
+      "text": "Nous payions moins cher l’année dernière.",
+      "verbs": [
+        {
+          "verb": "v.payer",
+          "tense": "imparfait",
+          "person": "1p",
+          "answer": "payions"
+        }
+      ]
+    },
+    {
+      "id": "s.payer.im.2p.01",
+      "text": "Vous payiez toujours par chèque.",
+      "verbs": [
+        {
+          "verb": "v.payer",
+          "tense": "imparfait",
+          "person": "2p",
+          "answer": "payiez"
+        }
+      ]
+    },
+    {
+      "id": "s.payer.im.3p.01",
+      "text": "Ils payaient les ouvriers chaque vendredi.",
+      "verbs": [
+        {
+          "verb": "v.payer",
+          "tense": "imparfait",
+          "person": "3p",
+          "answer": "payaient"
+        }
+      ]
+    },
+    {
+      "id": "s.payer.fs.1s.01",
+      "text": "Je paierai la prochaine fois.",
+      "verbs": [
+        {
+          "verb": "v.payer",
+          "tense": "futur_simple",
+          "person": "1s",
+          "answer": "paierai",
+          "alternatives": [
+            "payerai"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s.payer.fs.2s.01",
+      "text": "Tu paieras en arrivant.",
+      "verbs": [
+        {
+          "verb": "v.payer",
+          "tense": "futur_simple",
+          "person": "2s",
+          "answer": "paieras",
+          "alternatives": [
+            "payeras"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s.payer.fs.3s.01",
+      "text": "L’entreprise paiera le voyage.",
+      "verbs": [
+        {
+          "verb": "v.payer",
+          "tense": "futur_simple",
+          "person": "3s",
+          "answer": "paiera",
+          "alternatives": [
+            "payera"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s.payer.fs.1p.01",
+      "text": "Nous paierons en trois fois.",
+      "verbs": [
+        {
+          "verb": "v.payer",
+          "tense": "futur_simple",
+          "person": "1p",
+          "answer": "paierons",
+          "alternatives": [
+            "payerons"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s.payer.fs.2p.01",
+      "text": "Vous paierez à la livraison.",
+      "verbs": [
+        {
+          "verb": "v.payer",
+          "tense": "futur_simple",
+          "person": "2p",
+          "answer": "paierez",
+          "alternatives": [
+            "payerez"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s.payer.fs.3p.01",
+      "text": "Ils paieront demain.",
+      "verbs": [
+        {
+          "verb": "v.payer",
+          "tense": "futur_simple",
+          "person": "3p",
+          "answer": "paieront",
+          "alternatives": [
+            "payeront"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s.payer.pc.1s.02",
+      "text": "Ce livre ? Je l’ai payé dix euros.",
+      "verbs": [
+        {
+          "verb": "v.payer",
+          "tense": "passe_compose",
+          "person": "1s",
+          "answer": "ai payé",
+          "before": "le"
+        }
+      ]
+    }
+  ]
+}

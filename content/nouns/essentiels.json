@@ -1,0 +1,93 @@
+{
+  "category": {
+    "id": "cat.essentiels",
+    "name": "Les essentiels",
+    "kind": "noun",
+    "sort_order": 0,
+    "everyday": true
+  },
+  "nouns": [
+    {
+      "id": "n.jour",
+      "word": "jour",
+      "gender": "m",
+      "level": "debutant",
+      "rank": 2,
+      "definition": "Période de vingt-quatre heures."
+    },
+    {
+      "id": "n.homme",
+      "word": "homme",
+      "gender": "m",
+      "elides": true,
+      "level": "debutant",
+      "rank": 3,
+      "definition": "Personne adulte de sexe masculin."
+    },
+    {
+      "id": "n.femme",
+      "word": "femme",
+      "gender": "f",
+      "level": "debutant",
+      "rank": 6,
+      "definition": "Personne adulte de sexe féminin."
+    },
+    {
+      "id": "n.maison",
+      "word": "maison",
+      "gender": "f",
+      "level": "debutant",
+      "rank": 10,
+      "definition": "Bâtiment où l’on habite."
+    },
+    {
+      "id": "n.heure",
+      "word": "heure",
+      "gender": "f",
+      "elides": true,
+      "level": "debutant",
+      "rank": 11,
+      "definition": "Période de soixante minutes."
+    },
+    {
+      "id": "n.travail",
+      "word": "travail",
+      "gender": "m",
+      "level": "debutant",
+      "rank": 14,
+      "definition": "Activité que l’on fait pour gagner sa vie."
+    },
+    {
+      "id": "n.soir",
+      "word": "soir",
+      "gender": "m",
+      "level": "debutant",
+      "rank": 26,
+      "definition": "Fin de la journée, avant la nuit."
+    },
+    {
+      "id": "n.chat",
+      "word": "chat",
+      "gender": "m",
+      "level": "debutant",
+      "rank": 31,
+      "definition": "Petit animal domestique qui miaule."
+    },
+    {
+      "id": "n.chien",
+      "word": "chien",
+      "gender": "m",
+      "level": "debutant",
+      "rank": 32,
+      "definition": "Animal domestique qui aboie."
+    },
+    {
+      "id": "n.voiture",
+      "word": "voiture",
+      "gender": "f",
+      "level": "debutant",
+      "rank": 33,
+      "definition": "Véhicule à quatre roues, avec un moteur."
+    }
+  ]
+}

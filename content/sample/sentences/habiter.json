@@ -1,0 +1,292 @@
+{
+  "sentences": [
+    {
+      "id": "s.habiter.pr.1s.01",
+      "text": "J’habite à Marseille depuis deux ans.",
+      "verbs": [
+        {
+          "verb": "v.habiter",
+          "tense": "present",
+          "person": "1s",
+          "answer": "habite"
+        }
+      ]
+    },
+    {
+      "id": "s.habiter.pr.2s.01",
+      "text": "Tu habites loin d’ici ?",
+      "verbs": [
+        {
+          "verb": "v.habiter",
+          "tense": "present",
+          "person": "2s",
+          "answer": "habites"
+        }
+      ]
+    },
+    {
+      "id": "s.habiter.pr.3s.01",
+      "text": "Ma sœur habite à la campagne.",
+      "verbs": [
+        {
+          "verb": "v.habiter",
+          "tense": "present",
+          "person": "3s",
+          "answer": "habite"
+        }
+      ]
+    },
+    {
+      "id": "s.habiter.pr.1p.01",
+      "text": "Nous habitons au troisième étage.",
+      "verbs": [
+        {
+          "verb": "v.habiter",
+          "tense": "present",
+          "person": "1p",
+          "answer": "habitons"
+        }
+      ]
+    },
+    {
+      "id": "s.habiter.pr.2p.01",
+      "text": "Vous habitez en ville ?",
+      "verbs": [
+        {
+          "verb": "v.habiter",
+          "tense": "present",
+          "person": "2p",
+          "answer": "habitez"
+        }
+      ]
+    },
+    {
+      "id": "s.habiter.pr.3p.01",
+      "text": "Ils habitent près de la gare.",
+      "verbs": [
+        {
+          "verb": "v.habiter",
+          "tense": "present",
+          "person": "3p",
+          "answer": "habitent"
+        }
+      ]
+    },
+    {
+      "id": "s.habiter.pc.1s.01",
+      "text": "J’ai habité dix ans à Montréal.",
+      "verbs": [
+        {
+          "verb": "v.habiter",
+          "tense": "passe_compose",
+          "person": "1s",
+          "answer": "ai habité"
+        }
+      ]
+    },
+    {
+      "id": "s.habiter.pc.2s.01",
+      "text": "Tu as habité en Espagne, non ?",
+      "verbs": [
+        {
+          "verb": "v.habiter",
+          "tense": "passe_compose",
+          "person": "2s",
+          "answer": "as habité"
+        }
+      ]
+    },
+    {
+      "id": "s.habiter.pc.3s.01",
+      "text": "Elle a habité dans cette rue pendant un an.",
+      "verbs": [
+        {
+          "verb": "v.habiter",
+          "tense": "passe_compose",
+          "person": "3s",
+          "answer": "a habité"
+        }
+      ]
+    },
+    {
+      "id": "s.habiter.pc.1p.01",
+      "text": "Nous avons habité chez nos parents jusqu’à vingt ans.",
+      "verbs": [
+        {
+          "verb": "v.habiter",
+          "tense": "passe_compose",
+          "person": "1p",
+          "answer": "avons habité"
+        }
+      ]
+    },
+    {
+      "id": "s.habiter.pc.2p.01",
+      "text": "Vous avez habité à l’étranger ?",
+      "verbs": [
+        {
+          "verb": "v.habiter",
+          "tense": "passe_compose",
+          "person": "2p",
+          "answer": "avez habité"
+        }
+      ]
+    },
+    {
+      "id": "s.habiter.pc.3p.01",
+      "text": "Ils ont habité ici pendant la guerre.",
+      "verbs": [
+        {
+          "verb": "v.habiter",
+          "tense": "passe_compose",
+          "person": "3p",
+          "answer": "ont habité"
+        }
+      ]
+    },
+    {
+      "id": "s.habiter.im.1s.01",
+      "text": "Quand j’étais enfant, j’habitais près de la mer.",
+      "verbs": [
+        {
+          "verb": "v.habiter",
+          "tense": "imparfait",
+          "person": "1s",
+          "answer": "habitais"
+        }
+      ]
+    },
+    {
+      "id": "s.habiter.im.2s.01",
+      "text": "Tu habitais encore chez tes parents l’année dernière ?",
+      "verbs": [
+        {
+          "verb": "v.habiter",
+          "tense": "imparfait",
+          "person": "2s",
+          "answer": "habitais"
+        }
+      ]
+    },
+    {
+      "id": "s.habiter.im.3s.01",
+      "text": "Mon oncle habitait une grande maison.",
+      "verbs": [
+        {
+          "verb": "v.habiter",
+          "tense": "imparfait",
+          "person": "3s",
+          "answer": "habitait"
+        }
+      ]
+    },
+    {
+      "id": "s.habiter.im.1p.01",
+      "text": "Nous habitions un petit appartement à Paris.",
+      "verbs": [
+        {
+          "verb": "v.habiter",
+          "tense": "imparfait",
+          "person": "1p",
+          "answer": "habitions"
+        }
+      ]
+    },
+    {
+      "id": "s.habiter.im.2p.01",
+      "text": "Vous habitiez à côté de l’école ?",
+      "verbs": [
+        {
+          "verb": "v.habiter",
+          "tense": "imparfait",
+          "person": "2p",
+          "answer": "habitiez"
+        }
+      ]
+    },
+    {
+      "id": "s.habiter.im.3p.01",
+      "text": "Mes grands-parents habitaient à la campagne.",
+      "verbs": [
+        {
+          "verb": "v.habiter",
+          "tense": "imparfait",
+          "person": "3p",
+          "answer": "habitaient"
+        }
+      ]
+    },
+    {
+      "id": "s.habiter.fs.1s.01",
+      "text": "L’année prochaine, j’habiterai à Bordeaux.",
+      "verbs": [
+        {
+          "verb": "v.habiter",
+          "tense": "futur_simple",
+          "person": "1s",
+          "answer": "habiterai"
+        }
+      ]
+    },
+    {
+      "id": "s.habiter.fs.2s.01",
+      "text": "Tu habiteras avec nous cet été ?",
+      "verbs": [
+        {
+          "verb": "v.habiter",
+          "tense": "futur_simple",
+          "person": "2s",
+          "answer": "habiteras"
+        }
+      ]
+    },
+    {
+      "id": "s.habiter.fs.3s.01",
+      "text": "Elle habitera dans le nouveau quartier.",
+      "verbs": [
+        {
+          "verb": "v.habiter",
+          "tense": "futur_simple",
+          "person": "3s",
+          "answer": "habitera"
+        }
+      ]
+    },
+    {
+      "id": "s.habiter.fs.1p.01",
+      "text": "Nous habiterons plus près du travail.",
+      "verbs": [
+        {
+          "verb": "v.habiter",
+          "tense": "futur_simple",
+          "person": "1p",
+          "answer": "habiterons"
+        }
+      ]
+    },
+    {
+      "id": "s.habiter.fs.2p.01",
+      "text": "Vous habiterez au centre-ville ?",
+      "verbs": [
+        {
+          "verb": "v.habiter",
+          "tense": "futur_simple",
+          "person": "2p",
+          "answer": "habiterez"
+        }
+      ]
+    },
+    {
+      "id": "s.habiter.fs.3p.01",
+      "text": "Ils habiteront dans une maison neuve.",
+      "verbs": [
+        {
+          "verb": "v.habiter",
+          "tense": "futur_simple",
+          "person": "3p",
+          "answer": "habiteront"
+        }
+      ]
+    }
+  ]
+}

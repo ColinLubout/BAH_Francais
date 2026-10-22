@@ -1,0 +1,101 @@
+{
+  "category": {
+    "id": "cat.animaux",
+    "name": "Les animaux",
+    "kind": "noun",
+    "sort_order": 3
+  },
+  "nouns": [
+    {
+      "id": "n.chien",
+      "word": "chien",
+      "gender": "m",
+      "level": "debutant",
+      "rank": 300,
+      "images": [
+        "chien-1.svg"
+      ]
+    },
+    {
+      "id": "n.chat",
+      "word": "chat",
+      "gender": "m",
+      "level": "debutant",
+      "rank": 320,
+      "images": [
+        "chat-1.svg"
+      ]
+    },
+    {
+      "id": "n.oiseau",
+      "word": "oiseau",
+      "gender": "m",
+      "elides": true,
+      "level": "debutant",
+      "rank": 800,
+      "definition": "Animal qui a des plumes et des ailes."
+    },
+    {
+      "id": "n.vache",
+      "word": "vache",
+      "gender": "f",
+      "level": "debutant",
+      "rank": 1300,
+      "definition": "Grand animal de la ferme qui donne du lait."
+    },
+    {
+      "id": "n.cheval",
+      "word": "cheval",
+      "gender": "m",
+      "level": "debutant",
+      "rank": 1000,
+      "definition": "Grand animal que l’on peut monter."
+    },
+    {
+      "id": "n.souris",
+      "word": "souris",
+      "gender": "f",
+      "level": "intermediaire",
+      "rank": 1600,
+      "definition": "Petit animal gris qui a peur des chats."
+    },
+    {
+      "id": "n.abeille",
+      "word": "abeille",
+      "gender": "f",
+      "elides": true,
+      "level": "intermediaire",
+      "rank": 2400,
+      "definition": "Insecte qui fabrique le miel."
+    },
+    {
+      "id": "n.hibou",
+      "word": "hibou",
+      "gender": "m",
+      "elides": false,
+      "level": "avance",
+      "rank": 4800,
+      "definition": "Oiseau de nuit aux grands yeux."
+    },
+    {
+      "id": "n.poisson",
+      "word": "poisson",
+      "gender": "m",
+      "level": "debutant",
+      "rank": 900,
+      "definition": "Animal qui vit dans l’eau et qui nage.",
+      "also_in": [
+        "cat.cuisine"
+      ]
+    },
+    {
+      "id": "n.escargot",
+      "word": "escargot",
+      "gender": "m",
+      "elides": true,
+      "level": "avance",
+      "rank": 5200,
+      "definition": "Petit animal lent qui porte sa coquille."
+    }
+  ]
+}

@@ -7,6 +7,9 @@ analyzer:
     - ios/**
     # Generated code: build_runner output and tool/gen_strings.dart output.
     - "**/*.g.dart"
+    - "**/*.drift.dart"
+    # Drift's schema helpers, from `dart run drift_dev make-migrations`.
+    - test/drift/*/generated/**
 
 linter:
   rules:

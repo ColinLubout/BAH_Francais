@@ -1,0 +1,322 @@
+{
+  "sentences": [
+    {
+      "id": "s.tatoeba.4616938",
+      "text": "Je suis un homme fort.",
+      "credit": {
+        "tatoeba": 4616938,
+        "author": "Amastan"
+      },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "articles"
+      ],
+      "verbs": [
+        {
+          "verb": "v.etre",
+          "tense": "present",
+          "person": "1s",
+          "answer": "suis"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.homme",
+          "word": "homme"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.8503690",
+      "text": "Je ne suis pas ton chien.",
+      "credit": {
+        "tatoeba": 8503690,
+        "author": "Aiji"
+      },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "possessives",
+        "negation-ne-pas"
+      ],
+      "verbs": [
+        {
+          "verb": "v.etre",
+          "tense": "present",
+          "person": "1s",
+          "answer": "suis"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.chien",
+          "word": "chien"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.2296831",
+      "text": "Tu es à la maison.",
+      "credit": {
+        "tatoeba": 2296831,
+        "author": "Amastan"
+      },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "articles",
+        "prepositions-place"
+      ],
+      "verbs": [
+        {
+          "verb": "v.etre",
+          "tense": "present",
+          "person": "2s",
+          "answer": "es"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.maison",
+          "word": "maison"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.4616940",
+      "text": "Tu es un homme fort.",
+      "credit": {
+        "tatoeba": 4616940,
+        "author": "Amastan"
+      },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "articles"
+      ],
+      "verbs": [
+        {
+          "verb": "v.etre",
+          "tense": "present",
+          "person": "2s",
+          "answer": "es"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.homme",
+          "word": "homme"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.1082449",
+      "text": "Il est là pour quelques jours.",
+      "credit": {
+        "tatoeba": 1082449,
+        "author": "Julien_PDC"
+      },
+      "level": "A1",
+      "grammar": [
+        "present"
+      ],
+      "verbs": [
+        {
+          "verb": "v.etre",
+          "tense": "present",
+          "person": "3s",
+          "answer": "est"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.jour",
+          "word": "jours"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.1491103",
+      "text": "C’est trop cher pour moi.",
+      "credit": {
+        "tatoeba": 1491103,
+        "author": "martin9"
+      },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "c-est",
+        "stressed-pronouns"
+      ],
+      "verbs": [
+        {
+          "verb": "v.etre",
+          "tense": "present",
+          "person": "3s",
+          "answer": "est"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.2296843",
+      "text": "Nous sommes à la maison.",
+      "credit": {
+        "tatoeba": 2296843,
+        "author": "Amastan"
+      },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "articles",
+        "prepositions-place"
+      ],
+      "verbs": [
+        {
+          "verb": "v.etre",
+          "tense": "present",
+          "person": "1p",
+          "answer": "sommes"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.maison",
+          "word": "maison"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.6669760",
+      "text": "Quel jour sommes-nous ?",
+      "credit": {
+        "tatoeba": 6669760,
+        "author": "felix63"
+      },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "question-words",
+        "question-inversion"
+      ],
+      "verbs": [
+        {
+          "verb": "v.etre",
+          "tense": "present",
+          "person": "1p",
+          "answer": "sommes"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.jour",
+          "word": "jour"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.2296845",
+      "text": "Vous êtes à la maison.",
+      "credit": {
+        "tatoeba": 2296845,
+        "author": "Amastan"
+      },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "articles",
+        "prepositions-place"
+      ],
+      "verbs": [
+        {
+          "verb": "v.etre",
+          "tense": "present",
+          "person": "2p",
+          "answer": "êtes"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.maison",
+          "word": "maison"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.2511708",
+      "text": "Êtes-vous libres ce soir ?",
+      "credit": {
+        "tatoeba": 2511708,
+        "author": "Amastan"
+      },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "demonstratives",
+        "question-inversion"
+      ],
+      "verbs": [
+        {
+          "verb": "v.etre",
+          "tense": "present",
+          "person": "2p",
+          "answer": "Êtes"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.soir",
+          "word": "soir"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.2078709",
+      "text": "Elles sont malades.",
+      "credit": {
+        "tatoeba": 2078709,
+        "author": "Amastan"
+      },
+      "level": "A1",
+      "grammar": [
+        "present"
+      ],
+      "verbs": [
+        {
+          "verb": "v.etre",
+          "tense": "present",
+          "person": "3p",
+          "answer": "sont"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.2296848",
+      "text": "Ils sont à la maison.",
+      "credit": {
+        "tatoeba": 2296848,
+        "author": "Amastan"
+      },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "articles",
+        "prepositions-place"
+      ],
+      "verbs": [
+        {
+          "verb": "v.etre",
+          "tense": "present",
+          "person": "3p",
+          "answer": "sont"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.maison",
+          "word": "maison"
+        }
+      ]
+    }
+  ]
+}

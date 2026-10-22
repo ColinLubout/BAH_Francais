@@ -1,0 +1,46 @@
+{
+  "id": "v.etre",
+  "infinitive": "être",
+  "group": "irr",
+  "auxiliary": "avoir",
+  "pronominal": false,
+  "level": "debutant",
+  "rank": 1,
+  "categories": [
+    "cat.verbes-essentiels"
+  ],
+  "forms": {
+    "present": {
+      "1s": "suis",
+      "2s": "es",
+      "3s": "est",
+      "1p": "sommes",
+      "2p": "êtes",
+      "3p": "sont"
+    },
+    "passe_compose": {
+      "1s": "ai été",
+      "2s": "as été",
+      "3s": "a été",
+      "1p": "avons été",
+      "2p": "avez été",
+      "3p": "ont été"
+    },
+    "imparfait": {
+      "1s": "étais",
+      "2s": "étais",
+      "3s": "était",
+      "1p": "étions",
+      "2p": "étiez",
+      "3p": "étaient"
+    },
+    "futur_simple": {
+      "1s": "serai",
+      "2s": "seras",
+      "3s": "sera",
+      "1p": "serons",
+      "2p": "serez",
+      "3p": "seront"
+    }
+  }
+}

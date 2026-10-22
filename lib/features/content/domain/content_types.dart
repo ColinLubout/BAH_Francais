@@ -39,6 +39,74 @@ enum Tense {
   Tense(this.id);
 
   final String id;
+
+  /// Auxiliary + participle: the participle may agree (*sommes allés*).
+  bool get isCompound => this == passeCompose;
+}
+
+/// A grammatical person. The third persons cover *il / elle / on* and
+/// *ils / elles*: the sentence decides which.
+enum Person {
+  firstSingular('1s'),
+  secondSingular('2s'),
+  thirdSingular('3s'),
+  firstPlural('1p'),
+  secondPlural('2p'),
+  thirdPlural('3p');
+
+  Person(this.id);
+
+  final String id;
+}
+
+/// The auxiliary of a verb's compound tenses.
+enum Auxiliary {
+  avoir('avoir'),
+  etre('etre');
+
+  Auxiliary(this.id);
+
+  final String id;
+}
+
+/// What a category holds.
+enum CategoryKind {
+  noun('noun'),
+  verb('verb');
+
+  CategoryKind(this.id);
+
+  final String id;
+}
+
+/// Where a content row comes from: the content packs, or the user.
+enum ContentSource {
+  official('official'),
+  perso('perso');
+
+  ContentSource(this.id);
+
+  final String id;
+}
+
+/// The format of a stored image.
+enum ImageFormat {
+  svg('svg'),
+  png('png'),
+  jpeg('jpeg');
+
+  ImageFormat(this.id);
+
+  final String id;
+}
+
+/// The value of [T] whose id is [id], as stored in content files and the
+/// database; null if none has it.
+T? byId<T extends Enum>(List<T> values, String id, String Function(T) idOf) {
+  for (final value in values) {
+    if (idOf(value) == id) return value;
+  }
+  return null;
 }
 
 /// A verb's conjugation group.

@@ -39,6 +39,11 @@ jobs:
       - name: Generate code (Riverpod, Drift)
         run: dart run build_runner build
 
+      - name: Content is valid and builds a pack
+        run: |
+          dart run tool/content_build.dart content --out build/content/content-pack.sqlite
+          dart run tool/content_build.dart content/sample --out build/content/sample-pack.sqlite
+
       - name: Format
         run: dart format --output=none --set-exit-if-changed .
 

@@ -1,0 +1,315 @@
+{
+  "sentences": [
+    {
+      "id": "s.tatoeba.7233831",
+      "text": "Je n’ai malheureusement pas de voiture.",
+      "credit": {
+        "tatoeba": 7233831,
+        "author": "felix63"
+      },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "negation-ne-pas"
+      ],
+      "verbs": [
+        {
+          "verb": "v.avoir",
+          "tense": "present",
+          "person": "1s",
+          "answer": "ai"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.voiture",
+          "word": "voiture"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.8317337",
+      "text": "J’ai plusieurs chats chez moi.",
+      "credit": {
+        "tatoeba": 8317337,
+        "author": "Julien_PDC"
+      },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "prepositions-place",
+        "stressed-pronouns"
+      ],
+      "verbs": [
+        {
+          "verb": "v.avoir",
+          "tense": "present",
+          "person": "1s",
+          "answer": "ai"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.chat",
+          "word": "chats"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.4588380",
+      "text": "Tu as une voiture.",
+      "credit": {
+        "tatoeba": 4588380,
+        "author": "Amastan"
+      },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "articles"
+      ],
+      "verbs": [
+        {
+          "verb": "v.avoir",
+          "tense": "present",
+          "person": "2s",
+          "answer": "as"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.voiture",
+          "word": "voiture"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.4591388",
+      "text": "Combien de voitures as-tu ?",
+      "credit": {
+        "tatoeba": 4591388,
+        "author": "Amastan"
+      },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "question-words",
+        "question-inversion"
+      ],
+      "verbs": [
+        {
+          "verb": "v.avoir",
+          "tense": "present",
+          "person": "2s",
+          "answer": "as"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.voiture",
+          "word": "voitures"
+        }
+      ]
+    },
+    {
+      "id": "s.avoir.pr.3s.11",
+      "text": "Il n’a pas de maison !",
+      "level": "A1",
+      "grammar": [
+        "present",
+        "negation-ne-pas"
+      ],
+      "verbs": [
+        {
+          "verb": "v.avoir",
+          "tense": "present",
+          "person": "3s",
+          "answer": "a"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.maison",
+          "word": "maison"
+        }
+      ]
+    },
+    {
+      "id": "s.avoir.pr.3s.12",
+      "text": "Ta femme a une voiture ?",
+      "level": "A1",
+      "grammar": [
+        "present",
+        "articles",
+        "possessives",
+        "question-intonation"
+      ],
+      "verbs": [
+        {
+          "verb": "v.avoir",
+          "tense": "present",
+          "person": "3s",
+          "answer": "a"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.femme",
+          "word": "femme"
+        },
+        {
+          "noun": "n.voiture",
+          "word": "voiture"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.3486651",
+      "text": "Nous avons une voiture.",
+      "credit": {
+        "tatoeba": 3486651,
+        "author": "Aiji"
+      },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "articles"
+      ],
+      "verbs": [
+        {
+          "verb": "v.avoir",
+          "tense": "present",
+          "person": "1p",
+          "answer": "avons"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.voiture",
+          "word": "voiture"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.8245523",
+      "text": "Nous avons deux chiens.",
+      "credit": {
+        "tatoeba": 8245523,
+        "author": "felix63"
+      },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "numbers"
+      ],
+      "verbs": [
+        {
+          "verb": "v.avoir",
+          "tense": "present",
+          "person": "1p",
+          "answer": "avons"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.chien",
+          "word": "chiens"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.2070280",
+      "text": "Vous avez froid.",
+      "credit": {
+        "tatoeba": 2070280,
+        "author": "Amastan"
+      },
+      "level": "A1",
+      "grammar": [
+        "present"
+      ],
+      "verbs": [
+        {
+          "verb": "v.avoir",
+          "tense": "present",
+          "person": "2p",
+          "answer": "avez"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.8441646",
+      "text": "Avez-vous un chat noir ?",
+      "credit": {
+        "tatoeba": 8441646,
+        "author": "felix63"
+      },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "articles",
+        "question-inversion"
+      ],
+      "verbs": [
+        {
+          "verb": "v.avoir",
+          "tense": "present",
+          "person": "2p",
+          "answer": "Avez"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.chat",
+          "word": "chat"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.2070286",
+      "text": "Elles ont froid.",
+      "credit": {
+        "tatoeba": 2070286,
+        "author": "Amastan"
+      },
+      "level": "A1",
+      "grammar": [
+        "present"
+      ],
+      "verbs": [
+        {
+          "verb": "v.avoir",
+          "tense": "present",
+          "person": "3p",
+          "answer": "ont"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.4588406",
+      "text": "Ils ont une voiture.",
+      "credit": {
+        "tatoeba": 4588406,
+        "author": "Amastan"
+      },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "articles"
+      ],
+      "verbs": [
+        {
+          "verb": "v.avoir",
+          "tense": "present",
+          "person": "3p",
+          "answer": "ont"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.voiture",
+          "word": "voiture"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "id": "v.avoir",
+  "infinitive": "avoir",
+  "group": "irr",
+  "auxiliary": "avoir",
+  "pronominal": false,
+  "level": "debutant",
+  "rank": 2,
+  "categories": [
+    "cat.verbes-essentiels"
+  ],
+  "forms": {
+    "present": {
+      "1s": "ai",
+      "2s": "as",
+      "3s": "a",
+      "1p": "avons",
+      "2p": "avez",
+      "3p": "ont"
+    },
+    "passe_compose": {
+      "1s": "ai eu",
+      "2s": "as eu",
+      "3s": "a eu",
+      "1p": "avons eu",
+      "2p": "avez eu",
+      "3p": "ont eu"
+    },
+    "imparfait": {
+      "1s": "avais",
+      "2s": "avais",
+      "3s": "avait",
+      "1p": "avions",
+      "2p": "aviez",
+      "3p": "avaient"
+    },
+    "futur_simple": {
+      "1s": "aurai",
+      "2s": "auras",
+      "3s": "aura",
+      "1p": "aurons",
+      "2p": "aurez",
+      "3p": "auront"
+    }
+  }
+}

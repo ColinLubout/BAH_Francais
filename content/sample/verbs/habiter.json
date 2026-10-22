@@ -1,0 +1,47 @@
+{
+  "id": "v.habiter",
+  "infinitive": "habiter",
+  "group": "er",
+  "auxiliary": "avoir",
+  "pronominal": false,
+  "h_aspire": false,
+  "level": "debutant",
+  "rank": 400,
+  "categories": [
+    "cat.vie-quotidienne"
+  ],
+  "forms": {
+    "present": {
+      "1s": "habite",
+      "2s": "habites",
+      "3s": "habite",
+      "1p": "habitons",
+      "2p": "habitez",
+      "3p": "habitent"
+    },
+    "passe_compose": {
+      "1s": "ai habité",
+      "2s": "as habité",
+      "3s": "a habité",
+      "1p": "avons habité",
+      "2p": "avez habité",
+      "3p": "ont habité"
+    },
+    "imparfait": {
+      "1s": "habitais",
+      "2s": "habitais",
+      "3s": "habitait",
+      "1p": "habitions",
+      "2p": "habitiez",
+      "3p": "habitaient"
+    },
+    "futur_simple": {
+      "1s": "habiterai",
+      "2s": "habiteras",
+      "3s": "habitera",
+      "1p": "habiterons",
+      "2p": "habiterez",
+      "3p": "habiteront"
+    }
+  }
+}

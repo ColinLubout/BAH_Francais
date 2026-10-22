@@ -1,0 +1,46 @@
+{
+  "id": "v.aller",
+  "infinitive": "aller",
+  "group": "irr",
+  "auxiliary": "etre",
+  "pronominal": false,
+  "level": "debutant",
+  "rank": 5,
+  "categories": [
+    "cat.verbes-essentiels"
+  ],
+  "forms": {
+    "present": {
+      "1s": "vais",
+      "2s": "vas",
+      "3s": "va",
+      "1p": "allons",
+      "2p": "allez",
+      "3p": "vont"
+    },
+    "passe_compose": {
+      "1s": "suis allé",
+      "2s": "es allé",
+      "3s": "est allé",
+      "1p": "sommes allé",
+      "2p": "êtes allé",
+      "3p": "sont allé"
+    },
+    "imparfait": {
+      "1s": "allais",
+      "2s": "allais",
+      "3s": "allait",
+      "1p": "allions",
+      "2p": "alliez",
+      "3p": "allaient"
+    },
+    "futur_simple": {
+      "1s": "irai",
+      "2s": "iras",
+      "3s": "ira",
+      "1p": "irons",
+      "2p": "irez",
+      "3p": "iront"
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "id": "v.faire",
+  "infinitive": "faire",
+  "group": "irr",
+  "auxiliary": "avoir",
+  "pronominal": false,
+  "level": "debutant",
+  "rank": 3,
+  "categories": [
+    "cat.verbes-essentiels"
+  ],
+  "forms": {
+    "present": {
+      "1s": "fais",
+      "2s": "fais",
+      "3s": "fait",
+      "1p": "faisons",
+      "2p": "faites",
+      "3p": "font"
+    },
+    "passe_compose": {
+      "1s": "ai fait",
+      "2s": "as fait",
+      "3s": "a fait",
+      "1p": "avons fait",
+      "2p": "avez fait",
+      "3p": "ont fait"
+    },
+    "imparfait": {
+      "1s": "faisais",
+      "2s": "faisais",
+      "3s": "faisait",
+      "1p": "faisions",
+      "2p": "faisiez",
+      "3p": "faisaient"
+    },
+    "futur_simple": {
+      "1s": "ferai",
+      "2s": "feras",
+      "3s": "fera",
+      "1p": "ferons",
+      "2p": "ferez",
+      "3p": "feront"
+    }
+  }
+}

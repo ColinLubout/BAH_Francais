@@ -1,0 +1,46 @@
+{
+  "id": "v.dire",
+  "infinitive": "dire",
+  "group": "irr",
+  "auxiliary": "avoir",
+  "pronominal": false,
+  "level": "debutant",
+  "rank": 4,
+  "categories": [
+    "cat.verbes-essentiels"
+  ],
+  "forms": {
+    "present": {
+      "1s": "dis",
+      "2s": "dis",
+      "3s": "dit",
+      "1p": "disons",
+      "2p": "dites",
+      "3p": "disent"
+    },
+    "passe_compose": {
+      "1s": "ai dit",
+      "2s": "as dit",
+      "3s": "a dit",
+      "1p": "avons dit",
+      "2p": "avez dit",
+      "3p": "ont dit"
+    },
+    "imparfait": {
+      "1s": "disais",
+      "2s": "disais",
+      "3s": "disait",
+      "1p": "disions",
+      "2p": "disiez",
+      "3p": "disaient"
+    },
+    "futur_simple": {
+      "1s": "dirai",
+      "2s": "diras",
+      "3s": "dira",
+      "1p": "dirons",
+      "2p": "direz",
+      "3p": "diront"
+    }
+  }
+}

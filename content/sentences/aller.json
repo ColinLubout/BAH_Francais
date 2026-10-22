@@ -1,0 +1,277 @@
+{
+  "sentences": [
+    {
+      "id": "s.aller.pr.1s.11",
+      "text": "Je vais au travail.",
+      "level": "A1",
+      "grammar": [
+        "present",
+        "contractions",
+        "prepositions-place"
+      ],
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "present",
+          "person": "1s",
+          "answer": "vais"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.travail",
+          "word": "travail"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.7101804",
+      "text": "Je vais un peu mieux.",
+      "credit": {
+        "tatoeba": 7101804,
+        "author": "felix63"
+      },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "articles"
+      ],
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "present",
+          "person": "1s",
+          "answer": "vais"
+        }
+      ]
+    },
+    {
+      "id": "s.aller.pr.2s.11",
+      "text": "Tu vas bien ?",
+      "level": "A1",
+      "grammar": [
+        "present",
+        "question-intonation"
+      ],
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "present",
+          "person": "2s",
+          "answer": "vas"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.4069520",
+      "text": "Tu vas chez toi.",
+      "credit": {
+        "tatoeba": 4069520,
+        "author": "Amastan"
+      },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "prepositions-place",
+        "stressed-pronouns"
+      ],
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "present",
+          "person": "2s",
+          "answer": "vas"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.6307495",
+      "text": "Ma femme ne va pas très bien.",
+      "credit": {
+        "tatoeba": 6307495,
+        "author": "felix63"
+      },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "possessives",
+        "negation-ne-pas"
+      ],
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "present",
+          "person": "3s",
+          "answer": "va"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.femme",
+          "word": "femme"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.8329824",
+      "text": "Il va au travail à sept heures.",
+      "credit": {
+        "tatoeba": 8329824,
+        "author": "felix63"
+      },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "contractions",
+        "numbers",
+        "telling-time",
+        "prepositions-place"
+      ],
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "present",
+          "person": "3s",
+          "answer": "va"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.heure",
+          "word": "heures"
+        },
+        {
+          "noun": "n.travail",
+          "word": "travail"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.7800517",
+      "text": "Où allons-nous ce soir ?",
+      "credit": {
+        "tatoeba": 7800517,
+        "author": "felix63"
+      },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "demonstratives",
+        "question-words",
+        "question-inversion"
+      ],
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "present",
+          "person": "1p",
+          "answer": "allons"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.soir",
+          "word": "soir"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.8814968",
+      "text": "Nous allons ensemble à la maison.",
+      "credit": {
+        "tatoeba": 8814968,
+        "author": "felix63"
+      },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "articles",
+        "prepositions-place"
+      ],
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "present",
+          "person": "1p",
+          "answer": "allons"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.maison",
+          "word": "maison"
+        }
+      ]
+    },
+    {
+      "id": "s.aller.pr.2p.11",
+      "text": "Vous allez seuls.",
+      "level": "A1",
+      "grammar": [
+        "present"
+      ],
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "present",
+          "person": "2p",
+          "answer": "allez"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.10505661",
+      "text": "Où allez-vous comme ça ?",
+      "credit": {
+        "tatoeba": 10505661,
+        "author": "pkill"
+      },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "question-words",
+        "question-inversion"
+      ],
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "present",
+          "person": "2p",
+          "answer": "allez"
+        }
+      ]
+    },
+    {
+      "id": "s.aller.pr.3p.11",
+      "text": "Ils vont seuls.",
+      "level": "A1",
+      "grammar": [
+        "present"
+      ],
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "present",
+          "person": "3p",
+          "answer": "vont"
+        }
+      ]
+    },
+    {
+      "id": "s.aller.pr.3p.12",
+      "text": "Elles vont seules.",
+      "level": "A1",
+      "grammar": [
+        "present"
+      ],
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "present",
+          "person": "3p",
+          "answer": "vont"
+        }
+      ]
+    }
+  ]
+}

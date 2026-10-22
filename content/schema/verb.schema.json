@@ -1,0 +1,93 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "verb.schema.json",
+  "title": "Verb",
+  "description": "One verb and its conjugation: content/verbs/<verb>.json. Its sentences are in content/sentences/.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "infinitive",
+    "group",
+    "auxiliary",
+    "level",
+    "categories",
+    "forms"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^v\\.[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "infinitive": { "$ref": "#/definitions/text" },
+    "group": { "enum": ["er", "ir", "re", "irr"] },
+    "auxiliary": { "enum": ["avoir", "etre"] },
+    "pronominal": { "type": "boolean" },
+    "h_aspire": {
+      "description": "Forms starting with h don't elide what comes before them (je hais). Required when a form starts with h.",
+      "type": "boolean"
+    },
+    "level": { "enum": ["debutant", "intermediaire", "avance"] },
+    "rank": {
+      "description": "Frequency rank, 1 the most common.",
+      "type": "integer",
+      "minimum": 1
+    },
+    "categories": {
+      "description": "Verb categories, from content/verb-categories.json.",
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^cat\\.[a-z0-9]+(-[a-z0-9]+)*$"
+      }
+    },
+    "forms": {
+      "description": "A form per tense and person. Compound tenses give the masculine singular participle (suis allé). Reflexive verbs include the pronoun (me lève).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["present", "passe_compose", "imparfait", "futur_simple"],
+      "properties": {
+        "present": { "$ref": "#/definitions/tenseForms" },
+        "passe_compose": { "$ref": "#/definitions/tenseForms" },
+        "imparfait": { "$ref": "#/definitions/tenseForms" },
+        "futur_simple": { "$ref": "#/definitions/tenseForms" }
+      }
+    }
+  },
+  "definitions": {
+    "text": { "type": "string", "pattern": "\\S" },
+    "alternatives": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/definitions/text" }
+    },
+    "tenseForms": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["1s", "2s", "3s", "1p", "2p", "3p"],
+      "properties": {
+        "1s": { "$ref": "#/definitions/text" },
+        "2s": { "$ref": "#/definitions/text" },
+        "3s": { "$ref": "#/definitions/text" },
+        "1p": { "$ref": "#/definitions/text" },
+        "2p": { "$ref": "#/definitions/text" },
+        "3p": { "$ref": "#/definitions/text" },
+        "alt": {
+          "description": "Other accepted forms, by person (paye beside paie).",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "1s": { "$ref": "#/definitions/alternatives" },
+            "2s": { "$ref": "#/definitions/alternatives" },
+            "3s": { "$ref": "#/definitions/alternatives" },
+            "1p": { "$ref": "#/definitions/alternatives" },
+            "2p": { "$ref": "#/definitions/alternatives" },
+            "3p": { "$ref": "#/definitions/alternatives" }
+          }
+        }
+      }
+    }
+  }
+}

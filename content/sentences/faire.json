@@ -1,0 +1,289 @@
+{
+  "sentences": [
+    {
+      "id": "s.tatoeba.7151248",
+      "text": "Pourquoi je fais ça ?",
+      "credit": {
+        "tatoeba": 7151248,
+        "author": "Aiji"
+      },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "question-words"
+      ],
+      "verbs": [
+        {
+          "verb": "v.faire",
+          "tense": "present",
+          "person": "1s",
+          "answer": "fais"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.8605409",
+      "text": "Qu’est-ce que je fais, maintenant ?",
+      "credit": {
+        "tatoeba": 8605409,
+        "author": "Aiji"
+      },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "question-est-ce-que",
+        "question-words"
+      ],
+      "verbs": [
+        {
+          "verb": "v.faire",
+          "tense": "present",
+          "person": "1s",
+          "answer": "fais"
+        }
+      ]
+    },
+    {
+      "id": "s.faire.pr.2s.11",
+      "text": "Qu’est-ce que tu fais là ?",
+      "level": "A1",
+      "grammar": [
+        "present",
+        "question-est-ce-que",
+        "question-words"
+      ],
+      "verbs": [
+        {
+          "verb": "v.faire",
+          "tense": "present",
+          "person": "2s",
+          "answer": "fais"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.13867517",
+      "text": "Tu fais bien ton travail.",
+      "credit": {
+        "tatoeba": 13867517,
+        "author": "felix63"
+      },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "possessives"
+      ],
+      "verbs": [
+        {
+          "verb": "v.faire",
+          "tense": "present",
+          "person": "2s",
+          "answer": "fais"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.travail",
+          "word": "travail"
+        }
+      ]
+    },
+    {
+      "id": "s.faire.pr.3s.11",
+      "text": "On fait quoi ?",
+      "level": "A1",
+      "grammar": [
+        "present",
+        "question-words"
+      ],
+      "verbs": [
+        {
+          "verb": "v.faire",
+          "tense": "present",
+          "person": "3s",
+          "answer": "fait"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.6633683",
+      "text": "Il fait grand jour.",
+      "credit": {
+        "tatoeba": 6633683,
+        "author": "felix63"
+      },
+      "level": "A1",
+      "grammar": [
+        "present"
+      ],
+      "verbs": [
+        {
+          "verb": "v.faire",
+          "tense": "present",
+          "person": "3s",
+          "answer": "fait"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.jour",
+          "word": "jour"
+        }
+      ]
+    },
+    {
+      "id": "s.faire.pr.1p.01",
+      "text": "Nous faisons le travail à la maison.",
+      "level": "A1",
+      "grammar": [
+        "present",
+        "articles",
+        "prepositions-place"
+      ],
+      "verbs": [
+        {
+          "verb": "v.faire",
+          "tense": "present",
+          "person": "1p",
+          "answer": "faisons"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.travail",
+          "word": "travail"
+        },
+        {
+          "noun": "n.maison",
+          "word": "maison"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.6028248",
+      "text": "Qu’est-ce que nous faisons ce soir ?",
+      "credit": {
+        "tatoeba": 6028248,
+        "author": "christian63"
+      },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "demonstratives",
+        "question-est-ce-que",
+        "question-words"
+      ],
+      "verbs": [
+        {
+          "verb": "v.faire",
+          "tense": "present",
+          "person": "1p",
+          "answer": "faisons"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.soir",
+          "word": "soir"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.3006554",
+      "text": "Qu’est-ce que vous faites ici ?",
+      "credit": {
+        "tatoeba": 3006554,
+        "author": "Blabla"
+      },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "question-est-ce-que",
+        "question-words"
+      ],
+      "verbs": [
+        {
+          "verb": "v.faire",
+          "tense": "present",
+          "person": "2p",
+          "answer": "faites"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.6673585",
+      "text": "Comment faites-vous cela ?",
+      "credit": {
+        "tatoeba": 6673585,
+        "author": "felix63"
+      },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "question-words",
+        "question-inversion"
+      ],
+      "verbs": [
+        {
+          "verb": "v.faire",
+          "tense": "present",
+          "person": "2p",
+          "answer": "faites"
+        }
+      ]
+    },
+    {
+      "id": "s.faire.pr.3p.01",
+      "text": "Ils font le travail à la maison.",
+      "level": "A1",
+      "grammar": [
+        "present",
+        "articles",
+        "prepositions-place"
+      ],
+      "verbs": [
+        {
+          "verb": "v.faire",
+          "tense": "present",
+          "person": "3p",
+          "answer": "font"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.travail",
+          "word": "travail"
+        },
+        {
+          "noun": "n.maison",
+          "word": "maison"
+        }
+      ]
+    },
+    {
+      "id": "s.faire.pr.3p.02",
+      "text": "Que font-elles ce soir ?",
+      "level": "A1",
+      "grammar": [
+        "present",
+        "demonstratives",
+        "question-words",
+        "question-inversion"
+      ],
+      "verbs": [
+        {
+          "verb": "v.faire",
+          "tense": "present",
+          "person": "3p",
+          "answer": "font"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.soir",
+          "word": "soir"
+        }
+      ]
+    }
+  ]
+}

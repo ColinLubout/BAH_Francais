@@ -1,0 +1,120 @@
+{
+  "sentences": [
+    {
+      "id": "s.maison.01",
+      "text": "Ils habitent dans une grande maison.",
+      "nouns": [
+        {
+          "noun": "n.maison",
+          "word": "maison"
+        }
+      ],
+      "verbs": [
+        {
+          "verb": "v.habiter",
+          "tense": "present",
+          "person": "3p",
+          "answer": "habitent"
+        }
+      ]
+    },
+    {
+      "id": "s.homme.01",
+      "text": "Cet homme est mon voisin.",
+      "nouns": [
+        {
+          "noun": "n.homme",
+          "word": "homme"
+        }
+      ]
+    },
+    {
+      "id": "s.enfant.01",
+      "text": "L’enfant joue dans le jardin.",
+      "nouns": [
+        {
+          "noun": "n.enfant",
+          "word": "enfant"
+        }
+      ]
+    },
+    {
+      "id": "s.jour.01",
+      "text": "Quel jour sommes-nous ?",
+      "nouns": [
+        {
+          "noun": "n.jour",
+          "word": "jour"
+        }
+      ]
+    },
+    {
+      "id": "s.eau.01",
+      "text": "Je bois un verre d’eau.",
+      "nouns": [
+        {
+          "noun": "n.eau",
+          "word": "eau"
+        }
+      ]
+    },
+    {
+      "id": "s.heure.01",
+      "text": "Le train part dans une heure.",
+      "nouns": [
+        {
+          "noun": "n.heure",
+          "word": "heure"
+        }
+      ]
+    },
+    {
+      "id": "s.personne.01",
+      "text": "Cette personne est très gentille.",
+      "nouns": [
+        {
+          "noun": "n.personne",
+          "word": "personne"
+        }
+      ]
+    },
+    {
+      "id": "s.lunettes.01",
+      "text": "Je ne trouve plus mes lunettes.",
+      "nouns": [
+        {
+          "noun": "n.lunettes",
+          "word": "lunettes"
+        }
+      ]
+    },
+    {
+      "id": "s.voiture.01",
+      "text": "Nous allons au travail en voiture.",
+      "nouns": [
+        {
+          "noun": "n.voiture",
+          "word": "voiture"
+        }
+      ]
+    },
+    {
+      "id": "s.velo.01",
+      "text": "Elle va à l’école à vélo.",
+      "nouns": [
+        {
+          "noun": "n.velo",
+          "word": "vélo"
+        }
+      ],
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "present",
+          "person": "3s",
+          "answer": "va"
+        }
+      ]
+    }
+  ]
+}

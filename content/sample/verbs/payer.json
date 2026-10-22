@@ -1,0 +1,80 @@
+{
+  "id": "v.payer",
+  "infinitive": "payer",
+  "group": "er",
+  "auxiliary": "avoir",
+  "pronominal": false,
+  "level": "debutant",
+  "rank": 250,
+  "categories": [
+    "cat.vie-quotidienne"
+  ],
+  "forms": {
+    "present": {
+      "1s": "paie",
+      "2s": "paies",
+      "3s": "paie",
+      "1p": "payons",
+      "2p": "payez",
+      "3p": "paient",
+      "alt": {
+        "1s": [
+          "paye"
+        ],
+        "2s": [
+          "payes"
+        ],
+        "3s": [
+          "paye"
+        ],
+        "3p": [
+          "payent"
+        ]
+      }
+    },
+    "passe_compose": {
+      "1s": "ai payé",
+      "2s": "as payé",
+      "3s": "a payé",
+      "1p": "avons payé",
+      "2p": "avez payé",
+      "3p": "ont payé"
+    },
+    "imparfait": {
+      "1s": "payais",
+      "2s": "payais",
+      "3s": "payait",
+      "1p": "payions",
+      "2p": "payiez",
+      "3p": "payaient"
+    },
+    "futur_simple": {
+      "1s": "paierai",
+      "2s": "paieras",
+      "3s": "paiera",
+      "1p": "paierons",
+      "2p": "paierez",
+      "3p": "paieront",
+      "alt": {
+        "1s": [
+          "payerai"
+        ],
+        "2s": [
+          "payeras"
+        ],
+        "3s": [
+          "payera"
+        ],
+        "1p": [
+          "payerons"
+        ],
+        "2p": [
+          "payerez"
+        ],
+        "3p": [
+          "payeront"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "id": "v.se-lever",
+  "infinitive": "se lever",
+  "group": "er",
+  "auxiliary": "etre",
+  "pronominal": true,
+  "level": "intermediaire",
+  "rank": 300,
+  "categories": [
+    "cat.vie-quotidienne"
+  ],
+  "forms": {
+    "present": {
+      "1s": "me lève",
+      "2s": "te lèves",
+      "3s": "se lève",
+      "1p": "nous levons",
+      "2p": "vous levez",
+      "3p": "se lèvent"
+    },
+    "passe_compose": {
+      "1s": "me suis levé",
+      "2s": "t’es levé",
+      "3s": "s’est levé",
+      "1p": "nous sommes levé",
+      "2p": "vous êtes levé",
+      "3p": "se sont levé"
+    },
+    "imparfait": {
+      "1s": "me levais",
+      "2s": "te levais",
+      "3s": "se levait",
+      "1p": "nous levions",
+      "2p": "vous leviez",
+      "3p": "se levaient"
+    },
+    "futur_simple": {
+      "1s": "me lèverai",
+      "2s": "te lèveras",
+      "3s": "se lèvera",
+      "1p": "nous lèverons",
+      "2p": "vous lèverez",
+      "3p": "se lèveront"
+    }
+  }
+}

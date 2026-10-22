@@ -1,0 +1,309 @@
+{
+  "sentences": [
+    {
+      "id": "s.finir.pr.1s.01",
+      "text": "Je finis le travail ce soir.",
+      "level": "A1",
+      "grammar": [
+        "present",
+        "articles",
+        "demonstratives"
+      ],
+      "verbs": [
+        {
+          "verb": "v.finir",
+          "tense": "present",
+          "person": "1s",
+          "answer": "finis"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.travail",
+          "word": "travail"
+        },
+        {
+          "noun": "n.soir",
+          "word": "soir"
+        }
+      ]
+    },
+    {
+      "id": "s.finir.pr.1s.02",
+      "text": "Je finis à six heures.",
+      "level": "A1",
+      "grammar": [
+        "present",
+        "numbers",
+        "telling-time"
+      ],
+      "verbs": [
+        {
+          "verb": "v.finir",
+          "tense": "present",
+          "person": "1s",
+          "answer": "finis"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.heure",
+          "word": "heures"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.13046474",
+      "text": "Tu finis ton travail.",
+      "credit": {
+        "tatoeba": 13046474,
+        "author": "felix63"
+      },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "possessives"
+      ],
+      "verbs": [
+        {
+          "verb": "v.finir",
+          "tense": "present",
+          "person": "2s",
+          "answer": "finis"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.travail",
+          "word": "travail"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.2302271",
+      "text": "Tu finis à quelle heure ?",
+      "credit": {
+        "tatoeba": 2302271,
+        "author": "sysko"
+      },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "telling-time",
+        "question-words"
+      ],
+      "verbs": [
+        {
+          "verb": "v.finir",
+          "tense": "present",
+          "person": "2s",
+          "answer": "finis"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.heure",
+          "word": "heure"
+        }
+      ]
+    },
+    {
+      "id": "s.finir.pr.3s.01",
+      "text": "Elle finit son travail à la maison.",
+      "level": "A1",
+      "grammar": [
+        "present",
+        "articles",
+        "possessives",
+        "prepositions-place"
+      ],
+      "verbs": [
+        {
+          "verb": "v.finir",
+          "tense": "present",
+          "person": "3s",
+          "answer": "finit"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.travail",
+          "word": "travail"
+        },
+        {
+          "noun": "n.maison",
+          "word": "maison"
+        }
+      ]
+    },
+    {
+      "id": "s.finir.pr.3s.02",
+      "text": "Il finit tard le soir.",
+      "level": "A1",
+      "grammar": [
+        "present",
+        "articles"
+      ],
+      "verbs": [
+        {
+          "verb": "v.finir",
+          "tense": "present",
+          "person": "3s",
+          "answer": "finit"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.soir",
+          "word": "soir"
+        }
+      ]
+    },
+    {
+      "id": "s.finir.pr.1p.01",
+      "text": "Nous finissons le travail ensemble.",
+      "level": "A1",
+      "grammar": [
+        "present",
+        "articles"
+      ],
+      "verbs": [
+        {
+          "verb": "v.finir",
+          "tense": "present",
+          "person": "1p",
+          "answer": "finissons"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.travail",
+          "word": "travail"
+        }
+      ]
+    },
+    {
+      "id": "s.finir.pr.1p.02",
+      "text": "Nous finissons à cinq heures.",
+      "level": "A1",
+      "grammar": [
+        "present",
+        "numbers",
+        "telling-time"
+      ],
+      "verbs": [
+        {
+          "verb": "v.finir",
+          "tense": "present",
+          "person": "1p",
+          "answer": "finissons"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.heure",
+          "word": "heures"
+        }
+      ]
+    },
+    {
+      "id": "s.finir.pr.2p.01",
+      "text": "Vous finissez à quelle heure ?",
+      "level": "A1",
+      "grammar": [
+        "present",
+        "telling-time",
+        "question-words"
+      ],
+      "verbs": [
+        {
+          "verb": "v.finir",
+          "tense": "present",
+          "person": "2p",
+          "answer": "finissez"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.heure",
+          "word": "heure"
+        }
+      ]
+    },
+    {
+      "id": "s.finir.pr.2p.02",
+      "text": "Vous finissez tard ce soir ?",
+      "level": "A1",
+      "grammar": [
+        "present",
+        "demonstratives",
+        "question-intonation"
+      ],
+      "verbs": [
+        {
+          "verb": "v.finir",
+          "tense": "present",
+          "person": "2p",
+          "answer": "finissez"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.soir",
+          "word": "soir"
+        }
+      ]
+    },
+    {
+      "id": "s.finir.pr.3p.01",
+      "text": "Ils finissent le travail ce soir.",
+      "level": "A1",
+      "grammar": [
+        "present",
+        "articles",
+        "demonstratives"
+      ],
+      "verbs": [
+        {
+          "verb": "v.finir",
+          "tense": "present",
+          "person": "3p",
+          "answer": "finissent"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.travail",
+          "word": "travail"
+        },
+        {
+          "noun": "n.soir",
+          "word": "soir"
+        }
+      ]
+    },
+    {
+      "id": "s.finir.pr.3p.02",
+      "text": "Les hommes finissent tard.",
+      "level": "A1",
+      "grammar": [
+        "present",
+        "articles"
+      ],
+      "verbs": [
+        {
+          "verb": "v.finir",
+          "tense": "present",
+          "person": "3p",
+          "answer": "finissent"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.homme",
+          "word": "hommes"
+        }
+      ]
+    }
+  ]
+}

@@ -34,7 +34,9 @@ what you built.
   in a widget, and never invent French wording.
 - **Never invent French content** — words, genders, conjugations or example sentences. Only
   `content/sample/` may contain any, clearly marked as samples. The real content comes from
-  the project owner.
+  the project owner. The one exception, agreed with the owner (decision 57 in `PROGRESS.md`),
+  is the everyday categories in `content/`: Claude Code drafts them and the owner checks
+  them before they ship. Run `tool/dictionary_check.dart` on a draft before handing it over.
 - **Tests ship with the code**, in the same PR, never in a later clean-up pass.
 - **Update `PROGRESS.md`** at the end of every session: the milestone, what is done, what is
   left, and any decision taken. Keep a "Decisions" section for anything that changes or adds
@@ -65,6 +67,9 @@ dart format --set-exit-if-changed .
 flutter test --coverage
 flutter test integration_test
 dart run tool/content_build.dart content/sample             # validate + build a content pack
+dart run tool/grammar_tag.dart content                      # tag new sentences with their grammar concepts and level
+dart run drift_dev make-migrations                          # after a schema change: dump it + migration tests
+dart run tool/dictionary_check.dart content                 # check genders, forms and sentence words against Wiktionary (needs data/kaikki/)
 ```
 
 Run `flutter analyze`, the format check and the full test suite before calling anything done.

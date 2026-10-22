@@ -1,0 +1,307 @@
+{
+  "sentences": [
+    {
+      "id": "s.aller.pr.1s.01",
+      "text": "Je vais au marché le samedi.",
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "present",
+          "person": "1s",
+          "answer": "vais"
+        }
+      ]
+    },
+    {
+      "id": "s.aller.pr.2s.01",
+      "text": "Tu vas à l’école à pied ?",
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "present",
+          "person": "2s",
+          "answer": "vas"
+        }
+      ]
+    },
+    {
+      "id": "s.aller.pr.3s.01",
+      "text": "Elle va chez le médecin demain matin.",
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "present",
+          "person": "3s",
+          "answer": "va"
+        }
+      ]
+    },
+    {
+      "id": "s.aller.pr.1p.01",
+      "text": "Nous allons souvent à la plage en été.",
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "present",
+          "person": "1p",
+          "answer": "allons"
+        }
+      ]
+    },
+    {
+      "id": "s.aller.pr.2p.01",
+      "text": "Vous allez bien ?",
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "present",
+          "person": "2p",
+          "answer": "allez"
+        }
+      ]
+    },
+    {
+      "id": "s.aller.pr.3p.01",
+      "text": "Ils vont au cinéma ce soir.",
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "present",
+          "person": "3p",
+          "answer": "vont"
+        }
+      ]
+    },
+    {
+      "id": "s.aller.pc.1s.01",
+      "text": "Hier, je suis allé à la boulangerie.",
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "passe_compose",
+          "person": "1s",
+          "answer": "suis allé",
+          "alternatives": [
+            "suis allée"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s.aller.pc.2s.01",
+      "text": "Tu es allé à Paris l’année dernière ?",
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "passe_compose",
+          "person": "2s",
+          "answer": "es allé",
+          "alternatives": [
+            "es allée"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s.aller.pc.3s.01",
+      "text": "Elle est allée au travail en bus.",
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "passe_compose",
+          "person": "3s",
+          "answer": "est allée"
+        }
+      ]
+    },
+    {
+      "id": "s.aller.pc.1p.01",
+      "text": "Hier, nous sommes allés au cinéma.",
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "passe_compose",
+          "person": "1p",
+          "answer": "sommes allés",
+          "alternatives": [
+            "sommes allées"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s.aller.pc.2p.01",
+      "text": "Mesdames, vous êtes allées à la réunion ?",
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "passe_compose",
+          "person": "2p",
+          "answer": "êtes allées"
+        }
+      ]
+    },
+    {
+      "id": "s.aller.pc.3p.01",
+      "text": "Mes parents sont allés en Italie cet été.",
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "passe_compose",
+          "person": "3p",
+          "answer": "sont allés"
+        }
+      ]
+    },
+    {
+      "id": "s.aller.im.1s.01",
+      "text": "Quand j’étais petit, j’allais chez ma grand-mère le dimanche.",
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "imparfait",
+          "person": "1s",
+          "answer": "allais"
+        }
+      ]
+    },
+    {
+      "id": "s.aller.im.2s.01",
+      "text": "Avant, tu allais au travail en voiture.",
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "imparfait",
+          "person": "2s",
+          "answer": "allais"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.voiture",
+          "word": "voiture"
+        }
+      ]
+    },
+    {
+      "id": "s.aller.im.3s.01",
+      "text": "Il allait à la piscine tous les mercredis.",
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "imparfait",
+          "person": "3s",
+          "answer": "allait"
+        }
+      ]
+    },
+    {
+      "id": "s.aller.im.1p.01",
+      "text": "Nous allions souvent au parc quand il faisait beau.",
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "imparfait",
+          "person": "1p",
+          "answer": "allions"
+        }
+      ]
+    },
+    {
+      "id": "s.aller.im.2p.01",
+      "text": "Vous alliez à l’école ensemble ?",
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "imparfait",
+          "person": "2p",
+          "answer": "alliez"
+        }
+      ]
+    },
+    {
+      "id": "s.aller.im.3p.01",
+      "text": "Elles allaient au marché chaque semaine.",
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "imparfait",
+          "person": "3p",
+          "answer": "allaient"
+        }
+      ]
+    },
+    {
+      "id": "s.aller.fs.1s.01",
+      "text": "Demain, j’irai à la banque.",
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "futur_simple",
+          "person": "1s",
+          "answer": "irai"
+        }
+      ]
+    },
+    {
+      "id": "s.aller.fs.2s.01",
+      "text": "Tu iras voir ce film avec nous ?",
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "futur_simple",
+          "person": "2s",
+          "answer": "iras"
+        }
+      ]
+    },
+    {
+      "id": "s.aller.fs.3s.01",
+      "text": "Elle ira en vacances en août.",
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "futur_simple",
+          "person": "3s",
+          "answer": "ira"
+        }
+      ]
+    },
+    {
+      "id": "s.aller.fs.1p.01",
+      "text": "Nous irons à la montagne l’hiver prochain.",
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "futur_simple",
+          "person": "1p",
+          "answer": "irons"
+        }
+      ]
+    },
+    {
+      "id": "s.aller.fs.2p.01",
+      "text": "Vous irez à la fête samedi ?",
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "futur_simple",
+          "person": "2p",
+          "answer": "irez"
+        }
+      ]
+    },
+    {
+      "id": "s.aller.fs.3p.01",
+      "text": "Ils iront à Lyon en train.",
+      "verbs": [
+        {
+          "verb": "v.aller",
+          "tense": "futur_simple",
+          "person": "3p",
+          "answer": "iront"
+        }
+      ]
+    }
+  ]
+}

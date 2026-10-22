@@ -1,0 +1,46 @@
+{
+  "id": "v.finir",
+  "infinitive": "finir",
+  "group": "ir",
+  "auxiliary": "avoir",
+  "pronominal": false,
+  "level": "debutant",
+  "rank": 6,
+  "categories": [
+    "cat.verbes-essentiels"
+  ],
+  "forms": {
+    "present": {
+      "1s": "finis",
+      "2s": "finis",
+      "3s": "finit",
+      "1p": "finissons",
+      "2p": "finissez",
+      "3p": "finissent"
+    },
+    "passe_compose": {
+      "1s": "ai fini",
+      "2s": "as fini",
+      "3s": "a fini",
+      "1p": "avons fini",
+      "2p": "avez fini",
+      "3p": "ont fini"
+    },
+    "imparfait": {
+      "1s": "finissais",
+      "2s": "finissais",
+      "3s": "finissait",
+      "1p": "finissions",
+      "2p": "finissiez",
+      "3p": "finissaient"
+    },
+    "futur_simple": {
+      "1s": "finirai",
+      "2s": "finiras",
+      "3s": "finira",
+      "1p": "finirons",
+      "2p": "finirez",
+      "3p": "finiront"
+    }
+  }
+}

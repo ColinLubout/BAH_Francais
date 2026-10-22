@@ -1,0 +1,116 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "noun-category.schema.json",
+  "title": "Noun category",
+  "description": "One noun category and its nouns: content/nouns/<category>.json.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["category", "nouns"],
+  "properties": {
+    "category": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "kind", "sort_order"],
+      "properties": {
+        "id": { "$ref": "#/definitions/categoryId" },
+        "name": { "$ref": "#/definitions/text" },
+        "kind": { "const": "noun" },
+        "sort_order": { "type": "integer" },
+        "everyday": {
+          "description": "The universally useful words, whose new cards come before the topics'. At most one noun category.",
+          "type": "boolean"
+        }
+      }
+    },
+    "nouns": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/noun" }
+    }
+  },
+  "definitions": {
+    "text": { "type": "string", "pattern": "\\S" },
+    "categoryId": {
+      "type": "string",
+      "pattern": "^cat\\.[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "gender": { "enum": ["m", "f", "both"] },
+    "noun": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "word", "gender", "level"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^n\\.[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "word": { "$ref": "#/definitions/text" },
+        "gender": { "$ref": "#/definitions/gender" },
+        "elides": {
+          "description": "Takes l’. Required when the word starts with h.",
+          "type": "boolean"
+        },
+        "plural_only": { "type": "boolean" },
+        "level": { "enum": ["debutant", "intermediaire", "avance"] },
+        "rank": {
+          "description": "Frequency rank, 1 the most common.",
+          "type": "integer",
+          "minimum": 1
+        },
+        "definition": { "$ref": "#/definitions/text" },
+        "gloss": { "$ref": "#/definitions/text" },
+        "ending_hint": {
+          "description": "An ending rule shown as Astuce, e.g. -tion → féminin.",
+          "$ref": "#/definitions/text"
+        },
+        "synonyms": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              { "$ref": "#/definitions/text" },
+              {
+                "description": "A synonym whose gender or elision differs from the noun's.",
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["word"],
+                "minProperties": 2,
+                "properties": {
+                  "word": { "$ref": "#/definitions/text" },
+                  "gender": { "$ref": "#/definitions/gender" },
+                  "elides": { "type": "boolean" }
+                }
+              }
+            ]
+          }
+        },
+        "images": {
+          "description": "Files in content/images/<noun id without n.>/, as a name or with a credit.",
+          "type": "array",
+          "items": {
+            "oneOf": [
+              { "$ref": "#/definitions/imageFile" },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["file", "source"],
+                "properties": {
+                  "file": { "$ref": "#/definitions/imageFile" },
+                  "source": { "$ref": "#/definitions/text" }
+                }
+              }
+            ]
+          }
+        },
+        "also_in": {
+          "description": "Other noun categories the noun is in.",
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/definitions/categoryId" }
+        }
+      }
+    },
+    "imageFile": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*\\.svg$"
+    }
+  }
+}
