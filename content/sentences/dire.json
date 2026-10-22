@@ -1,12 +1,13 @@
 {
   "sentences": [
     {
-      "id": "s.tatoeba.2846508",
-      "text": "Je ne dis pas non.",
-      "credit": {
-        "tatoeba": 2846508,
-        "author": "nimfeo"
-      },
+      "id": "s.dire.pr.1s.11",
+      "text": "Je ne dis pas oui !",
+      "level": "A1",
+      "grammar": [
+        "present",
+        "negation-ne-pas"
+      ],
       "verbs": [
         {
           "verb": "v.dire",
@@ -17,12 +18,17 @@
       ]
     },
     {
-      "id": "s.tatoeba.4920722",
-      "text": "Qu’est-ce que je me dis ?",
+      "id": "s.tatoeba.11216046",
+      "text": "Je dis ça pour toi.",
       "credit": {
-        "tatoeba": 4920722,
-        "author": "mkac"
+        "tatoeba": 11216046,
+        "author": "Aiji"
       },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "stressed-pronouns"
+      ],
       "verbs": [
         {
           "verb": "v.dire",
@@ -33,34 +39,36 @@
       ]
     },
     {
-      "id": "s.tatoeba.4525459",
-      "text": "Pourquoi ne me dis-tu pas que je suis belle ?",
-      "credit": {
-        "tatoeba": 4525459,
-        "author": "Amastan"
-      },
+      "id": "s.dire.pr.2s.11",
+      "text": "Tu ne dis pas non ?",
+      "level": "A1",
+      "grammar": [
+        "present",
+        "negation-ne-pas",
+        "question-intonation"
+      ],
       "verbs": [
         {
           "verb": "v.dire",
           "tense": "present",
           "person": "2s",
           "answer": "dis"
-        },
-        {
-          "verb": "v.etre",
-          "tense": "present",
-          "person": "1s",
-          "answer": "suis"
         }
       ]
     },
     {
-      "id": "s.tatoeba.6541315",
-      "text": "Pourquoi ne dis-tu rien ?",
+      "id": "s.tatoeba.6317938",
+      "text": "Pourquoi dis-tu ça ?",
       "credit": {
-        "tatoeba": 6541315,
+        "tatoeba": 6317938,
         "author": "felix63"
       },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "question-words",
+        "question-inversion"
+      ],
       "verbs": [
         {
           "verb": "v.dire",
@@ -71,34 +79,34 @@
       ]
     },
     {
-      "id": "s.tatoeba.8660840",
-      "text": "C’est vraiment vrai ce qu’il dit ?",
-      "credit": {
-        "tatoeba": 8660840,
-        "author": "Julien_PDC"
-      },
+      "id": "s.dire.pr.3s.01",
+      "text": "Elle dit non.",
+      "level": "A1",
+      "grammar": [
+        "present"
+      ],
       "verbs": [
         {
           "verb": "v.dire",
           "tense": "present",
           "person": "3s",
           "answer": "dit"
-        },
-        {
-          "verb": "v.etre",
-          "tense": "present",
-          "person": "3s",
-          "answer": "est"
         }
       ]
     },
     {
-      "id": "s.tatoeba.9107074",
-      "text": "Est-ce qu’on le lui dit ?",
+      "id": "s.tatoeba.8893153",
+      "text": "Qu’est-ce qu’il dit ?",
       "credit": {
-        "tatoeba": 9107074,
-        "author": "felix63"
+        "tatoeba": 8893153,
+        "author": "Julien_PDC"
       },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "question-est-ce-que",
+        "question-words"
+      ],
       "verbs": [
         {
           "verb": "v.dire",
@@ -111,6 +119,10 @@
     {
       "id": "s.dire.pr.1p.01",
       "text": "Nous disons oui.",
+      "level": "A1",
+      "grammar": [
+        "present"
+      ],
       "verbs": [
         {
           "verb": "v.dire",
@@ -122,7 +134,12 @@
     },
     {
       "id": "s.dire.pr.1p.02",
-      "text": "Nous ne disons rien.",
+      "text": "Nous ne disons pas ça.",
+      "level": "A1",
+      "grammar": [
+        "present",
+        "negation-ne-pas"
+      ],
       "verbs": [
         {
           "verb": "v.dire",
@@ -133,12 +150,18 @@
       ]
     },
     {
-      "id": "s.tatoeba.10344237",
-      "text": "Qu’est-ce que vous en dites ?",
+      "id": "s.tatoeba.9107072",
+      "text": "Pourquoi dites-vous cela ?",
       "credit": {
-        "tatoeba": 10344237,
-        "author": "Julien_PDC"
+        "tatoeba": 9107072,
+        "author": "felix63"
       },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "question-words",
+        "question-inversion"
+      ],
       "verbs": [
         {
           "verb": "v.dire",
@@ -155,6 +178,12 @@
         "tatoeba": 9949681,
         "author": "felix63"
       },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "question-words",
+        "question-inversion"
+      ],
       "verbs": [
         {
           "verb": "v.dire",
@@ -171,6 +200,10 @@
         "tatoeba": 12660457,
         "author": "Olcyx"
       },
+      "level": "A1",
+      "grammar": [
+        "present"
+      ],
       "verbs": [
         {
           "verb": "v.dire",
@@ -187,6 +220,12 @@
         "tatoeba": 8893152,
         "author": "Julien_PDC"
       },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "question-est-ce-que",
+        "question-words"
+      ],
       "verbs": [
         {
           "verb": "v.dire",

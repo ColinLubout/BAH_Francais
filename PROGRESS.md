@@ -45,6 +45,10 @@ until this is merged.
   the sentences (decision 64): it flags a noun or verb the content doesn't have, a
   form in a tense it doesn't teach, and an infinitive straight after a conjugated
   verb. The everyday sentences pass.
+- **Grammar levels** (`tool/grammar_tag.dart`, decision 65): the grammar concepts and
+  their CEFR levels in `content/grammar.json`, a detection that tags each sentence
+  with the concepts it uses, and validator rules for the tags and the content's
+  highest level.
 - **Conjugation prompts** (`sentence_prompt.dart`): a sentence with its verb blanked
   and an elided word before it written in full (*J’habite* → *Je ___*), shared by
   the validator and, later, the Conjugaison drill.
@@ -58,16 +62,19 @@ until this is merged.
   - 2026-10-21: the sentences came from Tatoeba (decision 61).
   - 2026-10-22: the owner cut the scope to the present, 6 verbs and 10 nouns
     (decision 62), and found the Tatoeba sentences unnatural: 70% had been
-    translated from English. The sentences are now Tatoeba's written in French and
-    using only the content's nouns and verbs (decision 64): 55, by 11 native
-    speakers, and 14 drafted (*finir*, *ils font*, *nous disons*), two or more for
-    each verb and person and each noun. The 7 nouns and 5 verbs kept are unchanged,
-    so their marks stand; *chat*, *chien*, *voiture* and *finir* are new, and agree
-    with Wiktionary.
+    translated from English. The sentences became Tatoeba's written in French and
+    using only the content's nouns and verbs (decision 64). The 7 nouns and 5 verbs
+    kept are unchanged, so their marks stand; *chat*, *chien*, *voiture* and
+    *finir* are new, and agree with Wiktionary.
+  - 2026-10-22: from the owner's review, sentences carry their grammar concepts
+    and level, and are A1 only (decision 65). 72 sentences: 45 from Tatoeba, 11 of
+    the owner's own wordings, 16 drafted; two or more for each verb and person and
+    each noun. The review page has a Grammar tab, and notes on the marked
+    sentences say what changed.
 - **Sample set** (`content/sample/`): 3 noun categories of 10 nouns, 5 verbs with
   all 24 forms, 151 sentences and 6 placeholder SVGs. Marked as samples; it never
   ships.
-- **Tests:** 523, all passing. Domain coverage is 99.4%; the DAOs, the content store,
+- **Tests:** 562, all passing. Domain coverage is 99.4%; the DAOs, the content store,
   the converters and the prompt logic are fully covered.
 
 **The milestone's "done when" and its tests:**
@@ -80,8 +87,9 @@ until this is merged.
 ### Left for the owner
 
 - Review and merge the `milestone-1-followups` PR, then the `milestone-2` PR.
-- Check the everyday content in `content/` (decisions 57 and 62): the new nouns
-  (*chat*, *chien*, *voiture*) and verb (*finir*), and the 69 sentences.
+- Check the everyday content in `content/` (decisions 57, 62 and 65): the new nouns
+  (*chat*, *chien*, *voiture*) and verb (*finir*), the 72 sentences, and the
+  grammar concepts' levels in `grammar.json`.
 - Add the Codecov upload token as the GitHub Actions secret `CODECOV_TOKEN`, if not
   done yet.
 - Turn on branch protection for `main`, requiring the three CI jobs, if not done yet.
@@ -650,6 +658,29 @@ document.
     - `tool/dictionary_check.dart` checks the rule from Wiktionary's parts of speech,
       so it advises rather than fails.
     - *Changes* decision 61 (written in French only) and Content → sentences.
+65. **Sentences carry their grammar concepts and a CEFR level; the first pack's
+    are A1 only.**
+    - `content/grammar.json` lists the grammar concepts, each at the level (A1 to
+      B2) French courses usually teach it, with an example, drafted by Claude Code
+      for the owner to check (as in decision 57). Its `max_level` is the highest
+      level the content's sentences may reach: A1 for now.
+    - Each sentence lists every concept it uses (`grammar`) and its `level`, that
+      of its hardest concept. The validator checks the concepts exist, the level
+      matches, and nothing is above `max_level`. Content with no `grammar.json`
+      (the sample) has no tags.
+    - `tool/grammar_tag.dart` detects the concepts and writes them into sentences
+      with none. Tags already there are kept, since they may have been corrected
+      by hand; where the detection disagrees, it lists the difference.
+    - From the owner's review: no *y* for a place, no *-t-* inversion, no negation
+      but *ne… pas*, no object pronouns (*le*, *lui*), no *en*, no complex
+      sentences; all are A2 or above. A question by simple inversion (*As-tu un
+      chat ?*) is A1, as the owner's marks showed; after a noun subject (*Ta femme
+      a-t-elle…*) or in the negative, it is A2.
+    - The owner's own wordings from their review notes are sentences in their own
+      right, ahead of Tatoeba's; Claude Code's drafts only fill what is left.
+    - For content only: the app doesn't store or use the levels, in keeping with
+      the spec's "no fixed curriculum, levels, or content unlocking".
+    - *Adds to* Content files (`grammar.json`; a sentence's `level` and `grammar`).
 
 ### Notes
 

@@ -1,18 +1,26 @@
 {
   "sentences": [
     {
-      "id": "s.tatoeba.10464194",
-      "text": "Très bien, j’y vais.",
-      "credit": {
-        "tatoeba": 10464194,
-        "author": "Julien_PDC"
-      },
+      "id": "s.aller.pr.1s.11",
+      "text": "Je vais au travail.",
+      "level": "A1",
+      "grammar": [
+        "present",
+        "contractions",
+        "prepositions-place"
+      ],
       "verbs": [
         {
           "verb": "v.aller",
           "tense": "present",
           "person": "1s",
           "answer": "vais"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.travail",
+          "word": "travail"
         }
       ]
     },
@@ -23,6 +31,11 @@
         "tatoeba": 7101804,
         "author": "felix63"
       },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "articles"
+      ],
       "verbs": [
         {
           "verb": "v.aller",
@@ -33,12 +46,13 @@
       ]
     },
     {
-      "id": "s.tatoeba.4069520",
-      "text": "Tu vas chez toi.",
-      "credit": {
-        "tatoeba": 4069520,
-        "author": "Amastan"
-      },
+      "id": "s.aller.pr.2s.11",
+      "text": "Tu vas bien ?",
+      "level": "A1",
+      "grammar": [
+        "present",
+        "question-intonation"
+      ],
       "verbs": [
         {
           "verb": "v.aller",
@@ -49,12 +63,18 @@
       ]
     },
     {
-      "id": "s.tatoeba.9360151",
-      "text": "Est-ce que tu y vas ?",
+      "id": "s.tatoeba.4069520",
+      "text": "Tu vas chez toi.",
       "credit": {
-        "tatoeba": 9360151,
-        "author": "felix63"
+        "tatoeba": 4069520,
+        "author": "Amastan"
       },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "prepositions-place",
+        "stressed-pronouns"
+      ],
       "verbs": [
         {
           "verb": "v.aller",
@@ -71,6 +91,12 @@
         "tatoeba": 6307495,
         "author": "felix63"
       },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "possessives",
+        "negation-ne-pas"
+      ],
       "verbs": [
         {
           "verb": "v.aller",
@@ -87,24 +113,36 @@
       ]
     },
     {
-      "id": "s.tatoeba.8679574",
-      "text": "Je suis sûr qu’elle va bien.",
+      "id": "s.tatoeba.8329824",
+      "text": "Il va au travail à sept heures.",
       "credit": {
-        "tatoeba": 8679574,
-        "author": "Julien_PDC"
+        "tatoeba": 8329824,
+        "author": "felix63"
       },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "contractions",
+        "numbers",
+        "telling-time",
+        "prepositions-place"
+      ],
       "verbs": [
         {
           "verb": "v.aller",
           "tense": "present",
           "person": "3s",
           "answer": "va"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.heure",
+          "word": "heures"
         },
         {
-          "verb": "v.etre",
-          "tense": "present",
-          "person": "1s",
-          "answer": "suis"
+          "noun": "n.travail",
+          "word": "travail"
         }
       ]
     },
@@ -115,6 +153,13 @@
         "tatoeba": 7800517,
         "author": "felix63"
       },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "demonstratives",
+        "question-words",
+        "question-inversion"
+      ],
       "verbs": [
         {
           "verb": "v.aller",
@@ -137,6 +182,12 @@
         "tatoeba": 8814968,
         "author": "felix63"
       },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "articles",
+        "prepositions-place"
+      ],
       "verbs": [
         {
           "verb": "v.aller",
@@ -153,12 +204,12 @@
       ]
     },
     {
-      "id": "s.tatoeba.4066085",
-      "text": "Vous y allez seuls.",
-      "credit": {
-        "tatoeba": 4066085,
-        "author": "Amastan"
-      },
+      "id": "s.aller.pr.2p.11",
+      "text": "Vous allez seuls.",
+      "level": "A1",
+      "grammar": [
+        "present"
+      ],
       "verbs": [
         {
           "verb": "v.aller",
@@ -169,12 +220,18 @@
       ]
     },
     {
-      "id": "s.tatoeba.4069535",
-      "text": "Vous allez chez vous.",
+      "id": "s.tatoeba.10505661",
+      "text": "Où allez-vous comme ça ?",
       "credit": {
-        "tatoeba": 4069535,
-        "author": "Amastan"
+        "tatoeba": 10505661,
+        "author": "pkill"
       },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "question-words",
+        "question-inversion"
+      ],
       "verbs": [
         {
           "verb": "v.aller",
@@ -185,12 +242,12 @@
       ]
     },
     {
-      "id": "s.tatoeba.4066092",
-      "text": "Ils y vont seuls.",
-      "credit": {
-        "tatoeba": 4066092,
-        "author": "Amastan"
-      },
+      "id": "s.aller.pr.3p.11",
+      "text": "Ils vont seuls.",
+      "level": "A1",
+      "grammar": [
+        "present"
+      ],
       "verbs": [
         {
           "verb": "v.aller",
@@ -201,12 +258,12 @@
       ]
     },
     {
-      "id": "s.tatoeba.4066095",
-      "text": "Elles y vont seules.",
-      "credit": {
-        "tatoeba": 4066095,
-        "author": "Amastan"
-      },
+      "id": "s.aller.pr.3p.12",
+      "text": "Elles vont seules.",
+      "level": "A1",
+      "grammar": [
+        "present"
+      ],
       "verbs": [
         {
           "verb": "v.aller",

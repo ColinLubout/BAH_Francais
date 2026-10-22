@@ -1,28 +1,17 @@
 {
   "sentences": [
     {
-      "id": "s.tatoeba.1893079",
-      "text": "Je ne les ai pas.",
+      "id": "s.tatoeba.7233831",
+      "text": "Je n’ai malheureusement pas de voiture.",
       "credit": {
-        "tatoeba": 1893079,
-        "author": "Amastan"
+        "tatoeba": 7233831,
+        "author": "felix63"
       },
-      "verbs": [
-        {
-          "verb": "v.avoir",
-          "tense": "present",
-          "person": "1s",
-          "answer": "ai"
-        }
-      ]
-    },
-    {
-      "id": "s.tatoeba.8642608",
-      "text": "J’ai trop de travail.",
-      "credit": {
-        "tatoeba": 8642608,
-        "author": "Julien_PDC"
-      },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "negation-ne-pas"
+      ],
       "verbs": [
         {
           "verb": "v.avoir",
@@ -33,8 +22,36 @@
       ],
       "nouns": [
         {
-          "noun": "n.travail",
-          "word": "travail"
+          "noun": "n.voiture",
+          "word": "voiture"
+        }
+      ]
+    },
+    {
+      "id": "s.tatoeba.8317337",
+      "text": "J’ai plusieurs chats chez moi.",
+      "credit": {
+        "tatoeba": 8317337,
+        "author": "Julien_PDC"
+      },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "prepositions-place",
+        "stressed-pronouns"
+      ],
+      "verbs": [
+        {
+          "verb": "v.avoir",
+          "tense": "present",
+          "person": "1s",
+          "answer": "ai"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.chat",
+          "word": "chats"
         }
       ]
     },
@@ -45,6 +62,11 @@
         "tatoeba": 4588380,
         "author": "Amastan"
       },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "articles"
+      ],
       "verbs": [
         {
           "verb": "v.avoir",
@@ -61,34 +83,66 @@
       ]
     },
     {
-      "id": "s.tatoeba.9159779",
-      "text": "As-tu un chat ?",
+      "id": "s.tatoeba.4591388",
+      "text": "Combien de voitures as-tu ?",
       "credit": {
-        "tatoeba": 9159779,
-        "author": "Julien_PDC"
+        "tatoeba": 4591388,
+        "author": "Amastan"
       },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "question-words",
+        "question-inversion"
+      ],
       "verbs": [
         {
           "verb": "v.avoir",
           "tense": "present",
           "person": "2s",
-          "answer": "As"
+          "answer": "as"
         }
       ],
       "nouns": [
         {
-          "noun": "n.chat",
-          "word": "chat"
+          "noun": "n.voiture",
+          "word": "voitures"
         }
       ]
     },
     {
-      "id": "s.tatoeba.4469398",
-      "text": "Ta femme a-t-elle sa propre voiture ?",
-      "credit": {
-        "tatoeba": 4469398,
-        "author": "Amastan"
-      },
+      "id": "s.avoir.pr.3s.11",
+      "text": "Il n’a pas de maison !",
+      "level": "A1",
+      "grammar": [
+        "present",
+        "negation-ne-pas"
+      ],
+      "verbs": [
+        {
+          "verb": "v.avoir",
+          "tense": "present",
+          "person": "3s",
+          "answer": "a"
+        }
+      ],
+      "nouns": [
+        {
+          "noun": "n.maison",
+          "word": "maison"
+        }
+      ]
+    },
+    {
+      "id": "s.avoir.pr.3s.12",
+      "text": "Ta femme a une voiture ?",
+      "level": "A1",
+      "grammar": [
+        "present",
+        "articles",
+        "possessives",
+        "question-intonation"
+      ],
       "verbs": [
         {
           "verb": "v.avoir",
@@ -109,34 +163,17 @@
       ]
     },
     {
-      "id": "s.tatoeba.6055433",
-      "text": "Il n’a plus de maison !",
-      "credit": {
-        "tatoeba": 6055433,
-        "author": "verdakoro"
-      },
-      "verbs": [
-        {
-          "verb": "v.avoir",
-          "tense": "present",
-          "person": "3s",
-          "answer": "a"
-        }
-      ],
-      "nouns": [
-        {
-          "noun": "n.maison",
-          "word": "maison"
-        }
-      ]
-    },
-    {
       "id": "s.tatoeba.3486651",
       "text": "Nous avons une voiture.",
       "credit": {
         "tatoeba": 3486651,
         "author": "Aiji"
       },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "articles"
+      ],
       "verbs": [
         {
           "verb": "v.avoir",
@@ -159,6 +196,11 @@
         "tatoeba": 8245523,
         "author": "felix63"
       },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "numbers"
+      ],
       "verbs": [
         {
           "verb": "v.avoir",
@@ -175,24 +217,22 @@
       ]
     },
     {
-      "id": "s.tatoeba.4588401",
-      "text": "Vous avez une voiture.",
+      "id": "s.tatoeba.2070280",
+      "text": "Vous avez froid.",
       "credit": {
-        "tatoeba": 4588401,
+        "tatoeba": 2070280,
         "author": "Amastan"
       },
+      "level": "A1",
+      "grammar": [
+        "present"
+      ],
       "verbs": [
         {
           "verb": "v.avoir",
           "tense": "present",
           "person": "2p",
           "answer": "avez"
-        }
-      ],
-      "nouns": [
-        {
-          "noun": "n.voiture",
-          "word": "voiture"
         }
       ]
     },
@@ -203,6 +243,12 @@
         "tatoeba": 8441646,
         "author": "felix63"
       },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "articles",
+        "question-inversion"
+      ],
       "verbs": [
         {
           "verb": "v.avoir",
@@ -219,12 +265,16 @@
       ]
     },
     {
-      "id": "s.tatoeba.2070284",
-      "text": "Ils ont froid.",
+      "id": "s.tatoeba.2070286",
+      "text": "Elles ont froid.",
       "credit": {
-        "tatoeba": 2070284,
+        "tatoeba": 2070286,
         "author": "Amastan"
       },
+      "level": "A1",
+      "grammar": [
+        "present"
+      ],
       "verbs": [
         {
           "verb": "v.avoir",
@@ -235,12 +285,17 @@
       ]
     },
     {
-      "id": "s.tatoeba.4588409",
-      "text": "Elles ont une voiture.",
+      "id": "s.tatoeba.4588406",
+      "text": "Ils ont une voiture.",
       "credit": {
-        "tatoeba": 4588409,
+        "tatoeba": 4588406,
         "author": "Amastan"
       },
+      "level": "A1",
+      "grammar": [
+        "present",
+        "articles"
+      ],
       "verbs": [
         {
           "verb": "v.avoir",

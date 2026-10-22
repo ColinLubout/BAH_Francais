@@ -1,5 +1,6 @@
 // The real content in content/: so far the everyday categories.
 
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:bah_francais/features/content/domain/content_types.dart';
@@ -22,6 +23,21 @@ void main() {
 
   test('it teaches the present only (decision 62)', () {
     expect(content.tenses, [Tense.present]);
+  });
+
+  test('every sentence is A1, the content’s max_level, with its grammar '
+      'concepts (decision 65)', () {
+    final grammar =
+        jsonDecode(File('content/grammar.json').readAsStringSync()) as Map;
+    expect(grammar['max_level'], 'A1');
+    for (final file in Directory('content/sentences').listSync()) {
+      final json = jsonDecode((file as File).readAsStringSync()) as Map;
+      for (final s
+          in (json['sentences'] as List).cast<Map<String, Object?>>()) {
+        expect(s['level'], 'A1', reason: '${s['id']}');
+        expect(s['grammar'], isNotEmpty, reason: '${s['id']}');
+      }
+    }
   });
 
   test('it has an everyday category of 10 nouns and one of 6 verbs', () {

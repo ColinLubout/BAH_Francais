@@ -377,6 +377,130 @@ void main() {
     });
   });
 
+  group('grammar levels', () {
+    String catalogue({String maxLevel = 'A1', bool repeat = false}) =>
+        jsonEncode({
+          'max_level': maxLevel,
+          'concepts': [
+            {'id': 'present', 'level': 'A1', 'name': 'Le présent'},
+            {'id': 'pronoun-y', 'level': 'A2', 'name': 'Le pronom y'},
+            if (repeat) {'id': 'present', 'level': 'A2', 'name': 'Encore'},
+          ],
+        });
+
+    /// The sample with a grammar.json, every sentence tagged present at A1,
+    /// and then [change] made to s.aller.pr.1s.01.
+    ContentFiles graded({
+      String? grammar,
+      void Function(Json sentence)? change,
+    }) {
+      Json tagged(Json sentence) {
+        final s = {
+          ...sentence,
+          'level': 'A1',
+          'grammar': ['present'],
+        };
+        if (s['id'] == 's.aller.pr.1s.01') change?.call(s);
+        return s;
+      }
+
+      return ContentFiles(
+        tenses: sample.tenses,
+        grammar: SourceFile('grammar.json', grammar ?? catalogue()),
+        verbCategories: sample.verbCategories,
+        nouns: sample.nouns,
+        verbs: sample.verbs,
+        sentences: [
+          for (final f in sample.sentences)
+            SourceFile(
+              f.path,
+              jsonEncode({
+                'sentences': [
+                  for (final s
+                      in ((jsonDecode(f.text) as Json)['sentences']! as List)
+                          .cast<Json>())
+                    tagged(s),
+                ],
+              }),
+            ),
+        ],
+        images: sample.images,
+      );
+    }
+
+    test('every sentence tagged, within max_level, is valid', () {
+      expect(errorsOf(graded()), isEmpty);
+    });
+
+    test('with a grammar.json, every sentence needs its tags', () {
+      final files = ContentFiles(
+        tenses: sample.tenses,
+        grammar: SourceFile('grammar.json', catalogue()),
+        verbCategories: sample.verbCategories,
+        nouns: sample.nouns,
+        verbs: sample.verbs,
+        sentences: sample.sentences,
+        images: sample.images,
+      );
+      expectAnError(files, [allerSentences, 'needs its grammar concepts']);
+    });
+
+    test('tags with no grammar.json to define them', () {
+      expectError(
+        editedSentence(allerSentences, 's.aller.pr.1s.01', (s) {
+          s['level'] = 'A1';
+          s['grammar'] = ['present'];
+        }),
+        [allerSentences, 'no grammar.json'],
+      );
+    });
+
+    test('a concept grammar.json doesn’t have', () {
+      expectError(
+        graded(change: (s) => s['grammar'] = ['present', 'futur-lointain']),
+        ['no grammar concept futur-lointain'],
+      );
+    });
+
+    test('a level that isn’t the hardest concept’s', () {
+      expectAnError(
+        graded(change: (s) => s['grammar'] = ['present', 'pronoun-y']),
+        ['is level A1, but its hardest concept is A2 (pronoun-y)'],
+      );
+    });
+
+    test('a sentence above the content’s max_level', () {
+      void a2(Json s) {
+        s['level'] = 'A2';
+        s['grammar'] = ['pronoun-y'];
+      }
+
+      expectError(graded(change: a2), ['is A2, above the content’s A1']);
+      expect(
+        errorsOf(
+          graded(
+            grammar: catalogue(maxLevel: 'A2'),
+            change: a2,
+          ),
+        ),
+        isEmpty,
+      );
+    });
+
+    test('concept ids are unique', () {
+      expectAnError(graded(grammar: catalogue(repeat: true)), [
+        'concept id present is already used',
+      ]);
+    });
+
+    test('a level is A1, A2, B1 or B2', () {
+      expectAnError(graded(change: (s) => s['level'] = 'C1'), [
+        allerSentences,
+        'level',
+      ]);
+    });
+  });
+
   group('every id is unique', () {
     test('nouns', () {
       // Files are read in name order: the second use is the error.

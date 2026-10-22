@@ -5,6 +5,10 @@ The words, verbs and sentences the app teaches, as JSON files that
 
 - `tenses.json`: the tenses the content teaches. Verbs keep all 24 forms, but
   only these tenses get Conjugaison cards and need sentences.
+- `grammar.json`: the grammar concepts sentences are tagged with, each at the
+  CEFR level (A1 to B2) courses usually teach it, and `max_level`, the highest
+  level the sentences may reach. Each sentence lists its concepts (`grammar`)
+  and its `level`, that of its hardest concept.
 - `verb-categories.json`: every verb category.
 - `nouns/<category>.json`: one noun category and its nouns.
 - `verbs/<verb>.json`: one verb and its 24 forms.
@@ -21,6 +25,13 @@ Validate the content and build its pack (from the repo root):
 
 ```bash
 dart run tool/content_build.dart content
+```
+
+Tag new sentences with their grammar concepts and level first. Tags already
+in a file are kept, and where the detection disagrees with them it says so:
+
+```bash
+dart run tool/grammar_tag.dart content
 ```
 
 ## Checking against Wiktionary
@@ -71,12 +82,13 @@ the definitions are written for this app.
 ## Status
 
 **Draft, not yet checked.** A small first pack (decision 62 in `PROGRESS.md`):
-the present only, with the everyday categories *Les essentiels* (10 nouns) and
-*Les verbes essentiels* (6 verbs), drafted by Claude Code for the owner to check
-(decision 57). Their 69 sentences are from Tatoeba, except 14 drafted for the
-verb forms Tatoeba has no suitable sentence for (decisions 61 and 64). Every
-word, gender, form and sentence, and every link from a sentence to a verb or
-noun, must be checked by a fluent French speaker before it ships.
+the present only, A1 grammar only (decision 65), with the everyday categories
+*Les essentiels* (10 nouns) and *Les verbes essentiels* (6 verbs), drafted by
+Claude Code for the owner to check (decision 57). Of their 72 sentences, 45 are
+from Tatoeba, 11 are the owner's own wordings, and 16 were drafted for the verb
+forms nothing else fits (decisions 61, 64 and 65). Every word, gender, form and
+sentence, every link from a sentence to a verb or noun, and every grammar level
+must be checked by a fluent French speaker before it ships.
 
 - The nouns have definitions and no images yet.
 - `rank` orders the words within the everyday set, most useful first. It is an

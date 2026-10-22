@@ -12,6 +12,9 @@
 /// - a noun starting with *h* states `elides`, and a verb with a form
 ///   starting with *h* states `h_aspire` (and no other verb does);
 /// - `tenses.json` lists the tenses the content teaches;
+/// - with a `grammar.json`, every sentence lists the grammar concepts it uses
+///   and its level, the level of its hardest concept, no higher than the
+///   content's `max_level`;
 /// - every noun has a sentence, and every verb a sentence per person in each
 ///   tense taught; no sentence is a prompt for a tense that isn't;
 /// - a sentence is written in full, with no `___`;
@@ -36,6 +39,7 @@ import 'package:bah_francais/features/drills/domain/grading/normalise.dart';
 import 'package:json_schema/json_schema.dart';
 
 import 'content_files.dart';
+import 'grammar.dart';
 import 'svg_rules.dart';
 
 /// A problem in a content file.
@@ -110,8 +114,17 @@ class _Validation {
   /// needs, and which it may have, is unknown.
   bool tensesUnread = false;
 
+  /// The grammar concepts from `grammar.json` by id, and the highest level
+  /// sentences may reach; null when the content has no `grammar.json`.
+  Map<String, GrammarConcept>? concepts;
+  CefrLevel maxLevel = CefrLevel.b2;
+
+  /// Whether `grammar.json` was refused: sentences' tags can't be checked.
+  bool grammarUnread = false;
+
   ContentReport run() {
     _readTenses();
+    _readGrammar();
     if (files.verbCategories case final file?) _readVerbCategories(file);
     files.nouns.forEach(_readNounFile);
     files.verbs.forEach(_readVerb);
@@ -217,6 +230,69 @@ class _Validation {
       for (final t in Tense.values)
         if (ids.contains(t.id)) t,
     ];
+  }
+
+  void _readGrammar() {
+    final file = files.grammar;
+    if (file == null) return;
+    final json = _decode(file, schemas.grammar);
+    if (json == null) {
+      grammarUnread = true;
+      return;
+    }
+    maxLevel = CefrLevel.of(json['max_level']! as String)!;
+    final byId = <String, GrammarConcept>{};
+    for (final c in conceptsFromJson(json)) {
+      if (byId.containsKey(c.id)) {
+        _error(file.path, c.id, 'concept id ${c.id} is already used');
+      }
+      byId[c.id] = c;
+    }
+    concepts = byId;
+  }
+
+  /// A sentence's grammar tags name concepts that exist, and its level is
+  /// that of the hardest, within the content's `max_level`.
+  void _checkGrammar(_Parsed<ContentSentence> parsed) {
+    void error(String message) => _error(parsed.file, parsed.value.id, message);
+    final tags = _strings(parsed.json['grammar']);
+    final level = parsed.json['level'] as String?;
+    final byId = concepts;
+    if (byId == null) {
+      if (!grammarUnread && (tags.isNotEmpty || level != null)) {
+        error('has grammar tags, but there is no grammar.json to define them');
+      }
+      return;
+    }
+    if (tags.isEmpty || level == null) {
+      error(
+        'needs its grammar concepts and level: run '
+        'dart run tool/grammar_tag.dart',
+      );
+      return;
+    }
+    final unknown = [
+      for (final t in tags)
+        if (!byId.containsKey(t)) t,
+    ];
+    if (unknown.isNotEmpty) {
+      error('no grammar concept ${unknown.join(', ')} in grammar.json');
+      return;
+    }
+    final hardest = levelOf(tags, byId);
+    if (level != hardest.id) {
+      error(
+        'is level $level, but its hardest concept is ${hardest.id} '
+        '(${[for (final t in tags)
+          if (byId[t]!.level == hardest) t].join(', ')})',
+      );
+    }
+    if (hardest.index > maxLevel.index) {
+      error(
+        'is ${hardest.id}, above the content’s ${maxLevel.id} (grammar.json '
+        'max_level)',
+      );
+    }
   }
 
   void _readVerbCategories(SourceFile file) {
@@ -459,6 +535,7 @@ class _Validation {
     for (final parsed in sentences) {
       final s = parsed.value;
       void error(String message) => _error(parsed.file, s.id, message);
+      _checkGrammar(parsed);
 
       if (s.text.contains('_')) {
         error(

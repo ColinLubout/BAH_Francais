@@ -41,6 +41,17 @@
           "minItems": 1,
           "items": { "$ref": "#/definitions/noun" }
         },
+        "level": {
+          "description": "The CEFR level of the hardest grammar concept the sentence uses (content/grammar.json).",
+          "enum": ["A1", "A2", "B1", "B2"]
+        },
+        "grammar": {
+          "description": "Every grammar concept the sentence uses, by its id in content/grammar.json.",
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" }
+        },
         "credit": {
           "description": "A sentence from Tatoeba (CC BY 2.0 FR): its number there and its author, who must be credited.",
           "type": "object",

@@ -20,6 +20,7 @@ class SourceFile {
 class ContentFiles {
   const ContentFiles({
     this.tenses,
+    this.grammar,
     this.verbCategories,
     this.nouns = const [],
     this.verbs = const [],
@@ -27,7 +28,8 @@ class ContentFiles {
     this.images = const {},
   });
 
-  /// Reads `tenses.json`, `verb-categories.json`, `nouns/*.json`,
+  /// Reads `tenses.json`, `grammar.json`, `verb-categories.json`,
+  /// `nouns/*.json`,
   /// `verbs/*.json`, `sentences/*.json` and the files under `images/` in
   /// [root]. Anything else there (such as a `sample/` or `schema/` folder) is
   /// not content.
@@ -60,6 +62,7 @@ class ContentFiles {
     final imagesDir = Directory(p.join(root.path, 'images'));
     return ContentFiles(
       tenses: file('tenses.json'),
+      grammar: file('grammar.json'),
       verbCategories: file('verb-categories.json'),
       nouns: jsonFiles('nouns'),
       verbs: jsonFiles('verbs'),
@@ -75,6 +78,10 @@ class ContentFiles {
   /// `tenses.json`, if there is one: the tenses the content teaches.
   final SourceFile? tenses;
 
+  /// `grammar.json`, if there is one: the grammar concepts sentences are
+  /// tagged with, and the highest level they may reach.
+  final SourceFile? grammar;
+
   /// `verb-categories.json`, if there is one.
   final SourceFile? verbCategories;
   final List<SourceFile> nouns;
@@ -89,6 +96,7 @@ class ContentFiles {
 class ContentSchemas {
   const ContentSchemas({
     required this.tenses,
+    required this.grammar,
     required this.nounCategory,
     required this.verb,
     required this.verbCategories,
@@ -101,6 +109,7 @@ class ContentSchemas {
         JsonSchema.create(File(p.join(dir.path, name)).readAsStringSync());
     return ContentSchemas(
       tenses: schema('tenses.schema.json'),
+      grammar: schema('grammar.schema.json'),
       nounCategory: schema('noun-category.schema.json'),
       verb: schema('verb.schema.json'),
       verbCategories: schema('verb-categories.schema.json'),
@@ -109,6 +118,7 @@ class ContentSchemas {
   }
 
   final JsonSchema tenses;
+  final JsonSchema grammar;
   final JsonSchema nounCategory;
   final JsonSchema verb;
   final JsonSchema verbCategories;
