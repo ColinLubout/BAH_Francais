@@ -2,9 +2,8 @@
 
 ## Current milestone: 2 — Data layer
 
-**Status:** built on branch `milestone-2`, waiting for the owner's review. The branch
-starts from `milestone-1-followups`, so merge that PR first. Milestone 3 doesn't start
-until this is merged.
+**Status:** done, and merged in PR #5 after the milestone 1 follow-ups (PR #4). Next:
+milestone 3, once the open questions below are answered.
 
 ### Done
 
@@ -90,7 +89,6 @@ until this is merged.
 
 ### Left for the owner
 
-- Review and merge the `milestone-1-followups` PR, then the `milestone-2` PR.
 - Add the Codecov upload token as the GitHub Actions secret `CODECOV_TOKEN`, if not
   done yet.
 - Turn on branch protection for `main`, requiring the three CI jobs, if not done yet.
@@ -151,9 +149,7 @@ until this is merged.
   40 and 41): Moins, Normal and Plus all behave the same. Their weight setting may
   need to be just on or Jamais.
 
-## Milestone 1 follow-ups
-
-On branch `milestone-1-followups`, waiting for the owner's review.
+## Milestone 1 follow-ups (merged, PR #4)
 
 - **Synonyms with their own gender and elision** (decision 42): the Vocabulaire drill
   accepts each synonym with its own articles.
