@@ -1,14 +1,10 @@
 // The nouns here are the spec's examples (fourchette, école) with their real
 // gender and elision; the sentences are made-up tokens around them.
 
-import 'package:bah_francais/core/time/study_day.dart';
 import 'package:bah_francais/features/content/domain/content_types.dart';
-import 'package:bah_francais/features/drills/domain/answer.dart';
-import 'package:bah_francais/features/drills/domain/card.dart';
 import 'package:bah_francais/features/drills/domain/drill_type.dart';
 import 'package:bah_francais/features/drills/domain/grading/answer_forms.dart';
 import 'package:bah_francais/features/drills/domain/grading/grade.dart';
-import 'package:bah_francais/features/drills/domain/queue/queue_card.dart';
 import 'package:bah_francais/features/drills/domain/queue/queue_settings.dart';
 import 'package:bah_francais/features/drills/domain/queue/session_queue.dart';
 import 'package:bah_francais/features/drills/domain/rating.dart';
@@ -19,6 +15,7 @@ import 'package:bah_francais/features/drills/domain/session/vocabulary_item.dart
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../../../helpers/fake_clock.dart';
+import '../../../../helpers/fake_drill_store.dart';
 import '../helpers.dart';
 
 const fourchette = VocabularyItem(
@@ -36,70 +33,6 @@ const ecole = VocabularyItem(
   ),
   imageIds: ['i.ecole-1', 'i.ecole-2'],
 );
-
-/// A store in memory that records what the session saves.
-class FakeStore implements DrillStore {
-  FakeStore({
-    required this.cards,
-    this.items = const {},
-    this.setup = const DrillQueueSetup(),
-    this.counts = const DayCounts(),
-  });
-
-  final List<DrillCard> cards;
-  final Map<String, VocabularyItem> items;
-  final DrillQueueSetup setup;
-  final DayCounts counts;
-
-  final sessionsStarted = <DateTime>[];
-  final answers = <Answer>[];
-  final replaced = <(int, Answer)>[];
-  final knownCalls = <(List<int>, DateTime?)>[];
-
-  @override
-  Future<List<QueueCard>> queueCards(DrillType drill) async => [
-    for (final c in cards)
-      if (c.drill == drill) QueueCard(card: c),
-  ];
-
-  @override
-  Future<DrillQueueSetup> queueSetup(DrillType drill) async => setup;
-
-  @override
-  Future<DayCounts> dayCounts(DrillType drill, StudyDay day) async => counts;
-
-  @override
-  Future<int> startSession({
-    required DrillType? drill,
-    required DateTime at,
-  }) async {
-    sessionsStarted.add(at);
-    return 7;
-  }
-
-  @override
-  Future<int> recordAnswer(Answer answer) async {
-    answers.add(answer);
-    return 100 + answers.length;
-  }
-
-  @override
-  Future<void> replaceAnswer(int logId, Answer answer) async =>
-      replaced.add((logId, answer));
-
-  @override
-  Future<List<DrillCard>> cardsOfItem(String itemId) async => [
-    for (final c in cards)
-      if (c.itemId == itemId) c,
-  ];
-
-  @override
-  Future<void> setKnownAt(Iterable<int> cardIds, DateTime? at) async =>
-      knownCalls.add((cardIds.toList(), at));
-
-  @override
-  Future<VocabularyItem> vocabularyItem(String nounId) async => items[nounId]!;
-}
 
 /// A session over [store], at noon in Paris.
 Future<(DrillSession, FakeClock)> open(
@@ -293,7 +226,7 @@ void main() {
       await session.submit('zz');
       expect(session.summary.correct, 0);
 
-      final view = await session.override() as CardFeedback;
+      final view = await session.overrideGrade() as CardFeedback;
       expect(view.grade.rating, Rating.hard);
       expect(view.grade.errorType, ErrorType.typoOverride);
       expect(view.overridden, isTrue);
@@ -304,7 +237,7 @@ void main() {
       expect(answer.outcome.rating, Rating.hard);
       expect(answer.typed, 'zz');
       expect(session.summary.correct, 1);
-      expect(session.override, throwsStateError);
+      expect(session.overrideGrade, throwsStateError);
     });
 
     test('Trop facile makes it Easy', () async {
@@ -312,7 +245,7 @@ void main() {
       final (session, _) = await open(store);
       await session.next();
       await session.submit('fourchette');
-      final view = await session.override() as CardFeedback;
+      final view = await session.overrideGrade() as CardFeedback;
       expect(view.grade.rating, Rating.easy);
       expect(store.replaced.single.$2.outcome.rating, Rating.easy);
       expect(session.summary.correct, 1);
@@ -323,9 +256,9 @@ void main() {
       () async {
         final (session, _) = await open(oneNoun());
         await session.next();
-        expect(session.override, throwsStateError);
+        expect(session.overrideGrade, throwsStateError);
         await session.giveUp();
-        expect(session.override, throwsStateError);
+        expect(session.overrideGrade, throwsStateError);
       },
     );
   });

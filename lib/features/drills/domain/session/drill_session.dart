@@ -152,17 +152,12 @@ class DrillSession {
     if (drill != DrillType.vocabulary) {
       throw UnsupportedError('Only the Vocabulaire drill exists so far');
     }
-    final today = StudyDay.today(clock);
-    final cards = await store.queueCards(drill);
-    final setup = await store.queueSetup(drill);
-    final counts = await store.dayCounts(drill, today);
-    final queue = SessionQueue(
-      cards: cards,
-      settings: setup.settings,
-      countsOn: (day) => day == today ? counts : const DayCounts(),
+    final queue = await queueFor(
+      drill,
+      store: store,
+      clock: clock,
       scheduler: scheduler,
       random: random,
-      everydayCategoryIds: setup.everydayCategoryIds,
     );
     return DrillSession._(
       drill: drill,
@@ -173,6 +168,30 @@ class DrillSession {
       queue: queue,
       articleMandatory: articleMandatory,
       startedAt: clock.nowUtc(),
+    );
+  }
+
+  /// [drill]'s queue as it stands now: its cards, settings, everyday
+  /// categories, and what today's answers have used of the limits. Accueil
+  /// reads its due count from it.
+  static Future<SessionQueue> queueFor(
+    DrillType drill, {
+    required DrillStore store,
+    required Clock clock,
+    required DrillScheduler scheduler,
+    required double Function() random,
+  }) async {
+    final today = StudyDay.today(clock);
+    final cards = await store.queueCards(drill);
+    final setup = await store.queueSetup(drill);
+    final counts = await store.dayCounts(drill, today);
+    return SessionQueue(
+      cards: cards,
+      settings: setup.settings,
+      countsOn: (day) => day == today ? counts : const DayCounts(),
+      scheduler: scheduler,
+      random: random,
+      everydayCategoryIds: setup.everydayCategoryIds,
     );
   }
 
@@ -268,7 +287,7 @@ class DrillSession {
 
   /// *Faute de frappe* after a wrong answer, or *Trop facile* after a correct
   /// one: the answer is saved again with the new grade.
-  Future<DrillView> override() async {
+  Future<DrillView> overrideGrade() async {
     final feedback = _view;
     final outcome = _outcome;
     final logId = _logId;

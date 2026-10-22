@@ -1,4 +1,7 @@
 import 'package:bah_francais/app/shell.dart';
+import 'package:bah_francais/features/drills/domain/drill_type.dart';
+import 'package:bah_francais/features/drills/presentation/drill_screen.dart';
+import 'package:bah_francais/features/drills/presentation/session_summary_screen.dart';
 import 'package:bah_francais/features/home/presentation/home_screen.dart';
 import 'package:bah_francais/features/settings/presentation/settings_screen.dart';
 import 'package:bah_francais/features/stats/presentation/stats_screen.dart';
@@ -16,6 +19,13 @@ abstract final class Routes {
   static const verbs = '/verbs';
   static const stats = '/stats';
   static const settings = '/settings';
+
+  /// A drill, full screen, outside the navigation bar.
+  static String drill(DrillType drill) => '/drill/${drill.name}';
+
+  /// The drill's session summary, over the drill.
+  static String drillSummary(DrillType drill) =>
+      '${Routes.drill(drill)}/summary';
 }
 
 @Riverpod(keepAlive: true)
@@ -69,8 +79,22 @@ GoRouter router(Ref ref) {
           ),
         ],
       ),
+      GoRoute(
+        path: '/drill/:drill',
+        builder: (context, state) => DrillScreen(drill: _drillOf(state)),
+        routes: [
+          GoRoute(
+            path: 'summary',
+            builder: (context, state) =>
+                SessionSummaryScreen(drill: _drillOf(state)),
+          ),
+        ],
+      ),
     ],
   );
   ref.onDispose(router.dispose);
   return router;
 }
+
+DrillType _drillOf(GoRouterState state) =>
+    DrillType.values.byName(state.pathParameters['drill']!);

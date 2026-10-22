@@ -14,6 +14,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../helpers/app_overrides.dart';
+import '../helpers/fake_clock.dart';
+import '../helpers/fake_drill_store.dart';
+
 /// Pumps the app on a small phone screen (360 × 640).
 Future<void> pumpApp(
   WidgetTester tester, {
@@ -30,7 +34,15 @@ Future<void> pumpApp(
   addTearDown(tester.view.reset);
   addTearDown(tester.platformDispatcher.clearAllTestValues);
 
-  await tester.pumpWidget(const ProviderScope(child: BahApp()));
+  await tester.pumpWidget(
+    ProviderScope(
+      overrides: drillOverrides(
+        store: FakeStore(cards: const []),
+        clock: FakeClock(DateTime.utc(2026, 10, 22, 10)),
+      ),
+      child: const BahApp(),
+    ),
+  );
   await tester.pumpAndSettle();
 }
 
@@ -44,23 +56,22 @@ const Map<String, Type> destinations = {
 
 void main() {
   for (final brightness in Brightness.values) {
-    testWidgets(
-      'launches to an empty Accueil in the ${brightness.name} theme',
-      (tester) async {
-        await pumpApp(tester, brightness: brightness);
+    testWidgets('launches to Accueil in the ${brightness.name} theme', (
+      tester,
+    ) async {
+      await pumpApp(tester, brightness: brightness);
 
-        expect(find.byType(HomeScreen), findsOneWidget);
-        final bar = tester.widget<NavigationBar>(find.byType(NavigationBar));
-        expect(bar.selectedIndex, 0);
+      expect(find.byType(HomeScreen), findsOneWidget);
+      final bar = tester.widget<NavigationBar>(find.byType(NavigationBar));
+      expect(bar.selectedIndex, 0);
 
-        final theme = Theme.of(tester.element(find.byType(HomeScreen)));
-        expect(theme.brightness, brightness);
-        expect(
-          theme.colorScheme.surface,
-          brightness == Brightness.dark ? BrandColors.navy : BrandColors.white,
-        );
-      },
-    );
+      final theme = Theme.of(tester.element(find.byType(HomeScreen)));
+      expect(theme.brightness, brightness);
+      expect(
+        theme.colorScheme.surface,
+        brightness == Brightness.dark ? BrandColors.navy : BrandColors.white,
+      );
+    });
   }
 
   testWidgets('the bar shows the five destinations in order', (tester) async {

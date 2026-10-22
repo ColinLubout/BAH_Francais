@@ -357,6 +357,14 @@ class ContentStore {
     return {for (final c in rows) c.id};
   }
 
+  /// The image [id], or null if there is none.
+  Future<ContentImage?> image(String id) async {
+    final row = await (_db.select(
+      _tables.images,
+    )..where((i) => i.id.equals(id))).getSingleOrNull();
+    return row == null ? null : _image(row);
+  }
+
   /// [itemId]'s images, in the order they were added.
   Future<List<ContentImage>> images(String itemId) async {
     final rows =
