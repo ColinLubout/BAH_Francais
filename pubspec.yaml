@@ -16,6 +16,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_riverpod: ^3.4.3
+  flutter_svg: ^2.2.0
   go_router: ^18.0.1
   meta: ^1.19.0
   riverpod_annotation: ^4.0.7
@@ -28,12 +29,14 @@ dev_dependencies:
   flutter_native_splash: ^2.4.8
   flutter_test:
     sdk: flutter
+  integration_test:
+    sdk: flutter
   json_schema: ^5.2.2
   mocktail: ^1.0.5
   path: ^1.9.1
   riverpod_generator: ^4.0.9
   very_good_analysis: ^11.0.0
-  xml: ^7.1.0
+  xml: ^7.0.0
 
 flutter:
   uses-material-design: true
@@ -42,6 +45,9 @@ flutter:
     # Registered with the licence page at start-up (see lib/app/licences.dart).
     - assets/fonts/OFL.txt
     - assets/licences/py-fsrs.txt
+    # The content pack every build ships with, imported on the first launch.
+    # Built from content/ (see content/README.md); a test checks it matches.
+    - assets/content/content-pack.sqlite
 
   # Bundled, never fetched at runtime, so the app stays offline.
   # Only these three weights exist: the theme never asks for any other.

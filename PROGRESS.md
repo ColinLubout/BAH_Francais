@@ -1,11 +1,142 @@
 # Progress
 
-## Current milestone: 2 — Data layer
+## Current milestone: 3 — Vocabulaire drill
 
-**Status:** done, and merged in PR #5 after the milestone 1 follow-ups (PR #4). Next:
-milestone 3, once the open questions below are answered.
+**Status:** done on branch `milestone-3`, not pushed yet. Next: milestone 4.
 
 ### Done
+
+- **The Vocabulaire drill, end to end** (`lib/features/drills/`), opened from its
+  tile on Accueil (decision 69).
+  - **The card:** an image (whose screen-reader label is *Image à nommer*, never the
+    word) or the definition, whichever the noun has, picked at random. The answer
+    field opens with the keyboard, without autocorrect or suggestions; *Valider*
+    (decision 68) or Enter submits.
+  - **The answer box in a sentence** (decision 70, after the owner tried the drill
+    on a phone): the box takes the noun's place in one of its sentences, near the
+    middle of the screen, with the words around it on its line, or on the lines
+    above and below when they don't fit. The definition is in smaller text, and *Je ne sais pas* and
+    *Valider* sit side by side.
+  - **Live feedback** as the user types: right letters green and underlined, accent
+    slips orange with a dotted underline, and every letter red with a ✗ once one is
+    wrong. A letter that went red or orange caps the grade at Hard even once
+    corrected (decision 67).
+  - **The accent bar** inserts at the cursor and keeps the keyboard open.
+  - ***Je ne sais pas*** and ***Je le connais***: the next card at once, with
+    *Annuler* for 5 seconds; a known mark writes no rating and no review-log row.
+  - **After *Valider*** (decision 71): a Correct answer moves straight on.
+    Presque, Incorrect and *Je ne sais pas* keep the card in place, the box keeping
+    what was typed, and show the result (an icon as well as a colour) and the
+    answer with its wrong letters marked under the sentence, with *Faute de
+    frappe* (after Incorrect) and *Suivant*.
+  - ***Trop facile*** (decision 72): above *Je ne sais pas* and *Valider* on a
+    word seen for the first time; it rates the word Easy with no answer typed and
+    moves on.
+  - **The session:** milestone 1's queue over the database. *Tout est à jour* once,
+    above free practice; *Ça suffit pour aujourd’hui* at the daily goal; *Aucune
+    carte disponible* with a way to the settings. Each answer is saved as it is
+    given (decision 52). × or back goes to the summary, or straight to Accueil
+    with nothing answered. After 30 minutes away the session closes.
+  - **The summary:** cards answered, % correct and time; *Continuer* or *Terminer*.
+- **The bundled pack** (decision 58): `assets/content/content-pack.sqlite`, the
+  checked content built as version 1, is imported on first launch, while Accueil's
+  tile says *Préparation du contenu…*. A test fails if it no longer matches
+  `content/`, and gives the command that rebuilds it (also in `content/README.md`).
+- **Layers:** the letter colours (`typing_feedback.dart`) and the session flow
+  (`DrillSession`, over a `DrillStore` interface) are pure Dart in the domain;
+  `DriftDrillStore` implements the store in the data layer; a Riverpod
+  `DrillController` drives the screen.
+- **Integration tests** (`integration_test/`): a full session, and a force-close
+  after two answers, both on a real database file with the bundled pack. The same
+  flows run on the computer in the normal test suite (`test/integration/`), and on
+  an Android emulator in a new CI job. Both pass on a Pixel 8 emulator (Android 14).
+- **Tests:** 670, all passing. Domain coverage is 98.3%.
+
+**The milestone's "done when" and its tests:**
+
+| Check | Tests |
+| --- | --- |
+| An integration test completes a session | `integration_test/drill_session_test.dart` and `test/integration/drill_session_flows_test.dart`: completes a Vocabulaire session |
+| A force-close mid-session loses no answered card | The same files: a force-close mid-session loses no answered card |
+| Widget tests cover each drill state | `drill_screen_test.dart`: a card, live feedback, the feedback panel, *Je le connais*, free practice, the daily goal, no card, leaving and the summary, accessibility; `home_screen_test.dart`: the tile |
+
+## Ongoing
+
+### Left for the owner
+
+- Add the Codecov upload token as the GitHub Actions secret `CODECOV_TOKEN`, if not
+  done yet.
+- Once the new CI job *Integration tests (Android emulator)* has passed on the
+  milestone 3 PR, add it to the checks `main` requires.
+- Supply the real logo and app icon (files and sizes in `assets/branding/README.md`).
+
+### Open questions
+
+None.
+
+### Spotted for later milestones
+
+- `drill.leaveSession` ("Terminer la session ?") is unused: the spec has × go
+  straight to the summary, with no confirmation. It can be removed from the
+  strings, unless the owner wants a confirmation after all.
+- M6: *Aucune carte disponible* offers *Ouvrir les réglages*, which opens Réglages
+  until the drill settings screens exist.
+- M6: the drill already reads the live-feedback setting
+  (`drillDisplaySettingsProvider`); until the settings exist, it is on.
+- After decision 70, Article obligatoire is unused: the strings
+  `drillSettings.articleMandatory`, `drillSettings.articleMandatoryHelp` and
+  `drill.answerHintWithArticle`, and the mandatory-article rule in the grading
+  (`gradeVocabulary`'s `articleMandatory`, from milestone 1). They can go once the
+  owner has folded the decision into the spec.
+- M4: the Conjugaison drill puts its answer box in its sentence the same way
+  (decision 70), with `BlankSentence`, and follows *Valider* the same way
+  (decision 71). The Genre drill already moves on after a Correct answer, after a
+  second; whether its corrections also stay in place, and whether a new word
+  there or in Conjugaison has *Trop facile* (decision 72), is for M4.
+- After decision 72, the grading's *Trop facile* after an answer
+  (`Grade.markTooEasy`, `canMarkTooEasy`, from milestone 1) is unused; M4 can
+  remove it if the other drills follow decision 72.
+- M7 and M8: the first-launch import runs on the main isolate. That is quick for
+  the 127 KB pack, but the full content may hold the launch for longer; it could
+  move to a background isolate.
+- M4: the Conjugaison prompt comes from `conjugationPrompt` (decision 59), and the
+  word before the blank changes as the user types (decision 43).
+- M4: a sentence accepts its own alternatives only. The sample repeats a form's
+  alternatives on each of its sentences (*paie* / *paye*); the drill could add them
+  by itself.
+- M5: *Ajouter une phrase* and the *Phrase d’exemple* of *Ajouter un mot* now store a
+  sentence in full with its link (decision 59): the blank the user leaves is
+  filled with the answer, eliding the word before it where French does.
+- M4: the selected gender tile puts a yellow symbol on teal, which measures 1.28:1,
+  under the 3:1 minimum for meaningful graphics.
+- M5: compound forms are stored with the masculine singular participle for every
+  person, as the spec says (*sommes allé*). The Fiche verbe may need to show them
+  differently.
+- M5: form validation errors use Material's red, but the spec keeps red for wrong
+  answers only.
+- M6: the Conjugaison settings' *Temps* lists only the tenses the content teaches
+  (decision 62); with the present alone, the setting has nothing to choose.
+- M7: a content update that adds a tense creates that tense's Conjugaison cards for
+  every verb (decision 62).
+- M8 (new, decision 63): when words are added, sentences that already use a new word
+  link it. The sentences only use the content's nouns and verbs (decision 64), so
+  re-picking them with the new lists does this.
+- M6: À propos / Crédits credits Wiktionary (CC BY-SA 4.0) and Kaikki.org /
+  wiktextract (decision 60), with French wording from the owner.
+- M6: À propos / Crédits credits Tatoeba and its licence, CC BY 2.0 FR (decision 61).
+  The licence asks for each author to be credited: the sentences table keeps every
+  sentence's Tatoeba number and author, so Crédits can list the authors, or the
+  drill can name a sentence's author. Which one is the owner's call.
+- M8: picking Tatoeba sentences for the new words and tenses (names allowed outside
+  the everyday categories, decision 61). The script that picked the everyday ones
+  was a one-off outside the repo; done again, it belongs in `tool/` with its tests.
+- M6: `drillSettings.title` ("Réglages – {drill}") doesn't match the spec's
+  *Réglages de l'exercice*.
+- M6: for the everyday and Perso categories, only Jamais changes anything (decisions
+  40 and 41): Moins, Normal and Plus all behave the same. Their weight setting may
+  need to be just on or Jamais.
+
+## Milestone 2 — Data layer (merged, PR #5)
 
 - **Tables** (Drift, schema version 1): the content tables of Content → Content
   model, each with `source` and `retired`; Image; Card, ReviewLog and Session;
@@ -87,68 +218,6 @@ milestone 3, once the open questions below are answered.
 | The sample pack builds, imports and reads back unchanged | `sample_pack_test.dart` |
 | The validator rejects each rule it enforces, with a test per rule | `content_validator_test.dart` (schema and rules), `svg_rules_test.dart` (SVG rules) |
 
-### Left for the owner
-
-- Add the Codecov upload token as the GitHub Actions secret `CODECOV_TOKEN`, if not
-  done yet.
-- Turn on branch protection for `main`, requiring the three CI jobs, if not done yet.
-- Supply the real logo and app icon (files and sizes in `assets/branding/README.md`).
-- Answer the open questions below before milestone 3.
-
-### Open questions
-
-1. **Wording for the goal-reached message.** When the daily review limit is reached,
-   the drill tells the user they've reached today's goal and to take a break until
-   tomorrow (decision 27). It needs a new key in `strings_fr.json`, for example
-   `drill.dailyGoalReached`, with French you write. It's needed for milestone 3.
-2. **The result word for an exact answer capped at Hard.** An exactly right answer
-   graded Hard because a letter went red or orange while typing: does the feedback
-   panel say *Correct* or *Presque*? Grading gives Hard with no error, and the panel
-   (milestone 3) needs the word.
-
-### Spotted for later milestones
-
-- M3: bundle the everyday pack and import it on first launch with
-  `ContentImporter` (decision 58).
-- M3: `drill.leaveSession` ("Terminer la session ?") implies a confirmation dialog, but
-  the spec says × goes straight to the summary.
-- M4: the Conjugaison prompt comes from `conjugationPrompt` (decision 59), and the
-  word before the blank changes as the user types (decision 43).
-- M4: a sentence accepts its own alternatives only. The sample repeats a form's
-  alternatives on each of its sentences (*paie* / *paye*); the drill could add them
-  by itself.
-- M5: *Ajouter une phrase* and the *Phrase d’exemple* of *Ajouter un mot* now store a
-  sentence in full with its link (decision 59): the blank the user leaves is
-  filled with the answer, eliding the word before it where French does.
-- M4: the selected gender tile puts a yellow symbol on teal, which measures 1.28:1,
-  under the 3:1 minimum for meaningful graphics.
-- M5: compound forms are stored with the masculine singular participle for every
-  person, as the spec says (*sommes allé*). The Fiche verbe may need to show them
-  differently.
-- M5: form validation errors use Material's red, but the spec keeps red for wrong
-  answers only.
-- M6: the Conjugaison settings' *Temps* lists only the tenses the content teaches
-  (decision 62); with the present alone, the setting has nothing to choose.
-- M7: a content update that adds a tense creates that tense's Conjugaison cards for
-  every verb (decision 62).
-- M8 (new, decision 63): when words are added, sentences that already use a new word
-  link it. The sentences only use the content's nouns and verbs (decision 64), so
-  re-picking them with the new lists does this.
-- M6: À propos / Crédits credits Wiktionary (CC BY-SA 4.0) and Kaikki.org /
-  wiktextract (decision 60), with French wording from the owner.
-- M6: À propos / Crédits credits Tatoeba and its licence, CC BY 2.0 FR (decision 61).
-  The licence asks for each author to be credited: the sentences table keeps every
-  sentence's Tatoeba number and author, so Crédits can list the authors, or the
-  drill can name a sentence's author. Which one is the owner's call.
-- M8: picking Tatoeba sentences for the new words and tenses (names allowed outside
-  the everyday categories, decision 61). The script that picked the everyday ones
-  was a one-off outside the repo; done again, it belongs in `tool/` with its tests.
-- M6: `drillSettings.title` ("Réglages – {drill}") doesn't match the spec's
-  *Réglages de l'exercice*.
-- M6: for the everyday and Perso categories, only Jamais changes anything (decisions
-  40 and 41): Moins, Normal and Plus all behave the same. Their weight setting may
-  need to be just on or Jamais.
-
 ## Milestone 1 follow-ups (merged, PR #4)
 
 - **Synonyms with their own gender and elision** (decision 42): the Vocabulaire drill
@@ -206,7 +275,7 @@ milestone 3, once the open questions below are answered.
 | Time-zone change, daylight saving, clock going back | `study_day_test.dart` and `session_queue_test.dart`: clock and time zone |
 | Grading: exact, accents, wrong article, alternatives, apostrophes, red-letter cap | `grading_test.dart`, `normalise_test.dart` |
 | All scheduling works offline | `domain_purity_test.dart`: the domain can't reach the network |
-| Force-closing mid-session loses no answered card | Milestone 3. It needs the database (M2) and the drill screen (M3), and the build plan puts it in M3. |
+| Force-closing mid-session loses no answered card | Milestone 3: `integration_test/flows.dart`, run by `drill_session_test.dart` there and in `test/integration/` |
 | All user-facing text in French except Welcome | The strings generator (M0) and each screen's widget tests |
 
 ## Milestone 0 — Project setup (merged, PR #1)
@@ -679,6 +748,95 @@ document.
       the spec's "no fixed curriculum, levels, or content unlocking".
     - *Adds to* Content files (`grammar.json`; a sentence's `level` and `grammar`).
 
+### 2026-10-22 (for milestone 3, agreed with the owner)
+
+66. **The goal-reached message** (decision 27) is *Ça suffit pour aujourd’hui.*,
+    the owner's wording, in `strings_fr.json` as `drill.dailyGoalReached`.
+    - *Adds to* the strings.
+67. **An exact answer capped at Hard says *Presque*.** When a letter went red or
+    orange while typing, the answer is graded Hard even if the final answer is exact,
+    and the feedback panel shows *Presque*, as for any Hard.
+    - *Adds to* Grading → the feedback panel's result word.
+
+### 2026-10-22 (milestone 3, agreed with the owner)
+
+68. **Wordings:** the submit button is *Valider* (`drill.submit`), and the prompt
+    image's screen-reader label is *Image à nommer* (`accessibility.promptImage`),
+    both the owner's. The summary's % correct is written `{n} %`
+    (`sessionSummary.percent`), with French's space before the sign.
+    - *Adds to* the strings.
+69. **The Vocabulaire tile on Accueil comes in milestone 3**, so the drill can be
+    opened and tried on a phone. It shows how many cards are due, or *Tout est à
+    jour*. The rest of Accueil, the other drills' tiles and the mixed session, stays
+    in milestone 4.
+    - *Changes* Build plan → milestones 3 and 4.
+70. **The answer box sits in a sentence**, after the owner tried the drill on a
+    phone.
+    - **The sentence:** one of the noun's sentences, chosen at random on each
+      review, with the box in place of the noun. Only sentences with the noun as
+      it is typed count (*chat*, not *chats*; a synonym counts too); the
+      validator requires every noun to have one. It stays on screen for the
+      correction (decision 71).
+    - **The layout:** the box's line holds as many of the words around it as fit
+      across the screen, and is centred. When they don't all fit, the words are
+      taken from whichever side of the box is shorter, so the box stays as near
+      the middle as it can; the rest wrap onto lines above and below, centred.
+      The box's line is in the middle of the space under the prompt when there is
+      room, lower when the prompt and the lines above need it, and the card
+      scrolls when it is all too tall. *? ! : ;* stay on the line of the word
+      before them.
+    - **The box** is as wide for every word, so it never hints at the word's
+      length: about five letters of the sentence's font, and room for the ✗. It
+      widens as the typing needs. The ✗ shows inside the box, at its end. It is
+      empty: *Votre réponse* is its screen-reader label only (decision 71).
+    - **The article:** the box takes the noun alone, since the sentence has its
+      article. An article typed anyway is graded as before (right, or Hard if
+      wrong). **Article obligatoire leaves the Vocabulaire settings**: the
+      sentence shows the article, and the Genre drill tests the gender.
+    - **The prompt:** the image, or the definition in body text (smaller than the
+      sentence), above the sentence.
+    - ***Je ne sais pas* and *Valider* are side by side**, *Valider* on the right.
+    - The Conjugaison drill (milestone 4) uses the same layout for its blank.
+    - *Changes* Activities → Vocabulary drill (the prompt, and Article
+      obligatoire), Drill settings (Article obligatoire), Typing behaviour (*Je ne
+      sais pas* "under the field", and the ✗ "beside the field"), and Content
+      files (the validator rule).
+71. **What follows *Valider***, after the owner tried decision 70 on a phone.
+    - **Correct** moves straight on to the next card, with no feedback panel.
+      ~~The first time a word is answered, a snackbar *Correct · Trop facile*
+      stays for 5 seconds.~~ *Replaced by decision 72.*
+    - **Presque and Incorrect** keep the card as it is: the prompt, the sentence
+      and the box with what was typed, which can no longer be changed. Under the
+      sentence come the result, a word with its icon (*Incorrect*, *Presque*),
+      and *Réponse : …* with the wrong letters marked. *Faute de frappe* (after
+      Incorrect only) and *Suivant* take the places of *Je ne sais pas* and
+      *Valider*. The keyboard closes, and the box doesn't move. *Je ne sais pas*
+      does the same, the box left as it was.
+    - **No separate example sentence**: the question's sentence is already on
+      screen.
+    - **The box has no visible hint**: *Votre réponse* is its screen-reader label
+      only.
+    - **Snackbars** (*Je le connais*'s *Annuler*) float just above the buttons
+      and accent bar, so the next answer can be given meanwhile, and go after 5
+      seconds.
+    - *Changes* Activities → Shared drill behaviour (the feedback panel and
+      Advancing) and Typing behaviour.
+72. ***Trop facile* comes before the answer, on a word seen for the first
+    time**, after the owner tried decision 71.
+    - While a word's card is new, a *Trop facile* button shows above *Je ne sais
+      pas* and *Valider*. It needs no answer: the card is rated Easy, with a
+      review-log row (no text typed, no error), and the next card comes at once.
+      It counts as a correct answer in the session.
+    - Once the word has been answered, or on any later review, there is no *Trop
+      facile*, and nothing is offered after a Correct answer.
+    - *Replaces* decision 26's *Trop facile* (after a Correct answer, in the
+      feedback panel) and decision 71's snackbar; *changes* Activities → Shared
+      drill behaviour (the override buttons).
+73. **Card counts have a singular**, the owner's wording: *{n} carte* for 0 and
+    1, *{n} cartes* from 2 (`drill.cardsAnswered` in the drill's top bar, and
+    `reviewList.cardCount` for milestone 6), as decision 10's plural keys.
+    - *Adds to* the strings.
+
 ### Notes
 
 - `build_runner` 2.16 no longer has `--delete-conflicting-outputs`. The CLAUDE.md
@@ -686,3 +844,14 @@ document.
 - `sqlite3` stays at 3.6.0 for now: on this Windows machine, Application Control
   blocks the SQLite library that 3.7.1 downloads, which breaks the tests and the
   content tool. CI on Linux would be fine with either.
+- The bundled pack is committed as built (127 KB), so the app builds without
+  running the content tool first. Its version stays 1 until milestone 7 brings
+  content updates.
+- `xml` is held at 7.0.x, since `flutter_svg`, which draws the noun images, needs it.
+- `flutter test integration_test` needs a phone or an emulator: start one with
+  `flutter emulators --launch <id>` and pass `-d <device>`. With none, the same
+  flows run on the computer with `flutter test`.
+- In Flutter 3.47, a snackbar with an action stays until it is dismissed
+  (`SnackBar.persist` defaults to true when there is one). The drill's snackbars set
+  `persist: false`, so *Annuler* goes after 5 seconds as the spec says; a test
+  checks it.

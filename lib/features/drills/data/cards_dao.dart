@@ -3,41 +3,13 @@ import 'package:bah_francais/core/time/study_day.dart';
 import 'package:bah_francais/features/content/data/content_tables.drift.dart';
 import 'package:bah_francais/features/content/domain/content_types.dart';
 import 'package:bah_francais/features/drills/data/drill_tables.drift.dart';
+import 'package:bah_francais/features/drills/domain/answer.dart';
 import 'package:bah_francais/features/drills/domain/card.dart';
 import 'package:bah_francais/features/drills/domain/drill_type.dart';
-import 'package:bah_francais/features/drills/domain/grading/grade.dart';
 import 'package:bah_francais/features/drills/domain/queue/queue_card.dart';
 import 'package:bah_francais/features/drills/domain/queue/session_queue.dart';
 import 'package:bah_francais/features/drills/domain/rating.dart';
-import 'package:bah_francais/features/drills/domain/scheduling.dart';
 import 'package:drift/drift.dart';
-import 'package:meta/meta.dart';
-
-/// An answer as the review log records it.
-@immutable
-class Answer {
-  const Answer({
-    required this.outcome,
-    required this.sessionId,
-    required this.responseTime,
-    required this.errorType,
-    this.typed,
-  });
-
-  final ReviewOutcome outcome;
-  final int sessionId;
-
-  /// From the prompt appearing to the answer being submitted.
-  final Duration responseTime;
-  final ErrorType errorType;
-
-  /// What the user typed, or the gender they chose; null for *Je ne sais
-  /// pas*.
-  final String? typed;
-
-  /// Counted as correct in the session: anything but Again.
-  bool get correct => outcome.rating != Rating.again;
-}
 
 /// The cards, and the answers that move them on.
 class CardsDao {
@@ -81,6 +53,15 @@ class CardsDao {
 
   Stream<List<DrillCard>> watchCards(DrillType drill) =>
       _ofDrill(drill).watch();
+
+  /// Every card of the item [itemId], in every drill: a noun's Genre and
+  /// Vocabulaire cards, a verb's card per tense.
+  Future<List<DrillCard>> cardsOfItem(String itemId) =>
+      (_db.select(_db.cards)
+            ..where((c) => c.itemId.equals(itemId))
+            ..orderBy([(c) => OrderingTerm(expression: c.id)]))
+          .map(_card)
+          .get();
 
   /// Every card of [drill], with what the queue needs to know about its
   /// item: categories, level, rank, Perso, retired and verb group.

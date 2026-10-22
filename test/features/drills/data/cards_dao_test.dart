@@ -4,6 +4,7 @@ import 'package:bah_francais/features/content/data/content_tables.drift.dart';
 import 'package:bah_francais/features/content/domain/content_types.dart';
 import 'package:bah_francais/features/drills/data/cards_dao.dart';
 import 'package:bah_francais/features/drills/data/sessions_dao.dart';
+import 'package:bah_francais/features/drills/domain/answer.dart';
 import 'package:bah_francais/features/drills/domain/card.dart';
 import 'package:bah_francais/features/drills/domain/drill_type.dart';
 import 'package:bah_francais/features/drills/domain/grading/grade.dart';

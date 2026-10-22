@@ -62,6 +62,15 @@ class Grade {
       errors = const [],
       tooEasyOffered = false;
 
+  /// *Trop facile* on a word seen for the first time, with no answer typed:
+  /// Easy (decision 72).
+  const Grade.tooEasy()
+    : rating = Rating.easy,
+      errorType = ErrorType.none,
+      answer = null,
+      errors = const [],
+      tooEasyOffered = false;
+
   final Rating rating;
   final ErrorType errorType;
 

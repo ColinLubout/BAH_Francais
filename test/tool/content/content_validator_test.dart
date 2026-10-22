@@ -556,12 +556,14 @@ void main() {
   });
 
   group('a noun is written without its article', () {
+    // A changed word is no longer in the noun's sentences as it is typed,
+    // which is an error of its own.
     test('the noun', () {
-      expectError(
+      expectAnError(
         edited(cuisine, (j) => noun(j, 'n.couteau')['word'] = 'le couteau'),
         ['n.couteau', '"le couteau" starts with an article'],
       );
-      expectError(
+      expectAnError(
         edited(cuisine, (j) => noun(j, 'n.assiette')['word'] = 'l’assiette'),
         ['"l’assiette" starts with an article'],
       );
@@ -582,7 +584,7 @@ void main() {
       expect(
         errorsOf(
           edited(cuisine, (j) => noun(j, 'n.couteau')['word'] = 'lecouteau'),
-        ),
+        ).where((e) => e.contains('article')),
         isEmpty,
       );
     });
@@ -696,6 +698,19 @@ void main() {
         [cuisine, 'n.couteau', 'no sentence uses it as an example'],
       );
     });
+
+    test('a noun, as it is typed, for the Vocabulaire drill to blank', () {
+      expectError(
+        editedSentence(cuisineSentences, 's.couteau.01', (s) {
+          s['text'] = 'Passe-moi les couteaux, s’il te plaît.';
+          (s['nouns']! as List).first = {
+            'noun': 'n.couteau',
+            'word': 'couteaux',
+          };
+        }),
+        [cuisine, 'n.couteau', 'no sentence has it as it is typed'],
+      );
+    });
   });
 
   group('sentences', () {
@@ -762,11 +777,17 @@ void main() {
     });
 
     test('hold a noun’s word exactly once, as whole words', () {
-      expectSentenceError(
-        cuisineSentences,
-        's.couteau.01',
-        (s) => firstNoun(s)['word'] = 'couteaux',
-        ['"couteaux" (n.couteau) is not in the text exactly once'],
+      expectAnError(
+        editedSentence(
+          cuisineSentences,
+          's.couteau.01',
+          (s) => firstNoun(s)['word'] = 'couteaux',
+        ),
+        [
+          cuisineSentences,
+          's.couteau.01',
+          '"couteaux" (n.couteau) is not in the text exactly once',
+        ],
       );
     });
 

@@ -103,8 +103,9 @@ abstract final class Strings {
   /// Préparation du contenu…
   static const homePreparingContent = 'Préparation du contenu…';
 
-  /// {n} cartes
-  static String drillCardsAnswered({required int n}) => '$n cartes';
+  /// {n} carte · {n} cartes
+  static String drillCardsAnswered({required int n}) =>
+      n.abs() < 2 ? '$n carte' : '$n cartes';
 
   /// masculin
   static const drillGenderMasculine = 'masculin';
@@ -132,6 +133,9 @@ abstract final class Strings {
 
   /// Je ne sais pas
   static const drillIDontKnow = 'Je ne sais pas';
+
+  /// Valider
+  static const drillSubmit = 'Valider';
 
   /// Suivant
   static const drillNext = 'Suivant';
@@ -165,6 +169,9 @@ abstract final class Strings {
   static const drillFreePractice =
       'Vous pouvez continuer avec les cartes les plus fragiles.';
 
+  /// Ça suffit pour aujourd’hui.
+  static const drillDailyGoalReached = 'Ça suffit pour aujourd’hui.';
+
   /// Aucune carte disponible
   static const drillNoCards = 'Aucune carte disponible';
 
@@ -185,6 +192,9 @@ abstract final class Strings {
 
   /// Réponses correctes
   static const sessionSummaryAccuracy = 'Réponses correctes';
+
+  /// {n} %
+  static String sessionSummaryPercent({required int n}) => '$n %';
 
   /// Durée
   static const sessionSummaryDuration = 'Durée';
@@ -210,8 +220,9 @@ abstract final class Strings {
   /// Rien ici pour l’instant
   static const reviewListEmptyGroup = 'Rien ici pour l’instant';
 
-  /// {n} cartes
-  static String reviewListCardCount({required int n}) => '$n cartes';
+  /// {n} carte · {n} cartes
+  static String reviewListCardCount({required int n}) =>
+      n.abs() < 2 ? '$n carte' : '$n cartes';
 
   /// Mots
   static const wordsTitle = 'Mots';
@@ -702,6 +713,9 @@ abstract final class Strings {
   /// Illustration du mot {word}
   static String accessibilityWordImage({required String word}) =>
       'Illustration du mot $word';
+
+  /// Image à nommer
+  static const accessibilityPromptImage = 'Image à nommer';
 
   /// Réponse correcte
   static const accessibilityAnswerCorrect = 'Réponse correcte';

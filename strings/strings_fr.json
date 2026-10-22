@@ -49,7 +49,8 @@
   },
 
   "drill": {
-    "cardsAnswered": "{n} cartes",
+    "cardsAnswered_one": "{n} carte",
+    "cardsAnswered_other": "{n} cartes",
     "genderMasculine": "masculin",
     "genderFeminine": "féminin",
     "genderBoth": "les deux",
@@ -59,6 +60,7 @@
     "tense": "Temps",
     "iKnowIt": "Je le connais",
     "iDontKnow": "Je ne sais pas",
+    "submit": "Valider",
     "next": "Suivant",
     "resultCorrect": "Correct",
     "resultAlmost": "Presque",
@@ -69,6 +71,7 @@
     "tip": "Astuce",
     "allCaughtUp": "Tout est à jour !",
     "freePractice": "Vous pouvez continuer avec les cartes les plus fragiles.",
+    "dailyGoalReached": "Ça suffit pour aujourd’hui.",
     "noCards": "Aucune carte disponible",
     "openSettings": "Ouvrir les réglages",
     "markedKnown": "Marqué comme connu",
@@ -79,6 +82,7 @@
     "title": "Résumé de session",
     "cardsAnswered": "Cartes répondues",
     "accuracy": "Réponses correctes",
+    "percent": "{n} %",
     "duration": "Durée",
     "finish": "Terminer",
     "resume": "Continuer"
@@ -90,7 +94,8 @@
     "atRisk": "À risque",
     "hardWords": "Mots difficiles",
     "emptyGroup": "Rien ici pour l’instant",
-    "cardCount": "{n} cartes"
+    "cardCount_one": "{n} carte",
+    "cardCount_other": "{n} cartes"
   },
 
   "words": {
@@ -292,6 +297,7 @@
     "chooseFeminine": "féminin",
     "chooseBoth": "les deux",
     "wordImage": "Illustration du mot {word}",
+    "promptImage": "Image à nommer",
     "answerCorrect": "Réponse correcte",
     "answerAlmost": "Réponse presque correcte",
     "answerIncorrect": "Réponse incorrecte",

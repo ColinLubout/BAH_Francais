@@ -14,7 +14,9 @@ The words, verbs and sentences the app teaches, as JSON files that
 - `verbs/<verb>.json`: one verb and its 24 forms.
 - `sentences/<name>.json`: sentences in plain French, each listing the verbs it
   is a Conjugaison prompt for and the nouns it is an example of. One sentence can
-  serve several. Which file a sentence is in doesn't matter to the app.
+  serve several. Which file a sentence is in doesn't matter to the app. Every
+  noun needs at least one sentence with it as it is typed (*chat*, not
+  *chats*): the Vocabulaire drill puts its answer box there.
 - `images/<noun id without n.>/`: a noun's SVG images.
 - `schema/`: the JSON Schema of each kind of file. The validator checks the
   files against them first, then the rules beyond them (see
@@ -25,6 +27,13 @@ Validate the content and build its pack (from the repo root):
 
 ```bash
 dart run tool/content_build.dart content
+```
+
+The app bundles this pack and imports it on first launch. After changing the
+content, rebuild the bundled copy, or a test fails:
+
+```bash
+dart run tool/content_build.dart content --version 1 --out assets/content/content-pack.sqlite
 ```
 
 Tag new sentences with their grammar concepts and level first. Tags already
