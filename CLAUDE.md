@@ -7,12 +7,12 @@ drills with spaced repetition. Offline, no accounts, no tracking, no streaks.
 what you are about to build before you build it. If the spec and this file ever disagree,
 the spec wins — and say so, so it can be fixed.
 
-**Never edit `docs/SPEC.md`.** It is exported from a document the project owner maintains, and
-any edit here is lost on the next export. When the spec is wrong, incomplete, or does not fit
-what the code needs, stop and say so. Record what you propose under "Decisions" in
-`PROGRESS.md` and wait for the owner to confirm; they fold it into the document and re-export.
-Never change the specified behaviour on your own and never rewrite the requirement to match
-what you built.
+**`docs/SPEC.md` lives in the repo, and changes only with the owner's agreement**
+(decision 74). When the spec is wrong, incomplete, or does not fit what the code needs, stop
+and say so. Propose a change and wait for the owner to confirm. Once they do, record it under
+"Decisions" in `PROGRESS.md` and fold it into `docs/SPEC.md` in the same pull request. Never
+change the specified behaviour on your own and never rewrite the requirement to match what
+you built.
 
 ## Before you start a session
 
@@ -25,7 +25,8 @@ what you built.
 - **One milestone per branch and pull request**, with its tests. Do not start the next
   milestone in the same PR.
 - **Ask instead of guessing.** If the spec does not answer something, stop and ask. Write the
-  answer into `PROGRESS.md` when you get it. Never invent a behaviour and carry on.
+  answer into `PROGRESS.md` and the spec when you get it. Never invent a behaviour and carry
+  on.
 - **Build only what the spec describes.** No extra features, screens, settings, animations or
   engagement mechanics, however small or obviously useful they seem.
 - **All user-facing text comes from `strings/`.** `strings/strings_fr.json` holds the app's
@@ -40,8 +41,8 @@ what you built.
 - **Tests ship with the code**, in the same PR, never in a later clean-up pass.
 - **Update `PROGRESS.md`** at the end of every session: the milestone, what is done, what is
   left, and any decision taken. Keep a "Decisions" section for anything that changes or adds
-  to the spec, each entry dated, with what was agreed and why — that section is what the
-  owner folds back into the specification.
+  to the spec, each entry dated, with what was agreed and why, and fold each one into
+  `docs/SPEC.md` in the same pull request.
 
 ## Architecture
 
@@ -53,8 +54,8 @@ Feature-first folders. Inside a feature, three layers:
 - `presentation/` — widgets and Riverpod providers. No business logic here.
 
 Riverpod is also the dependency injection: no service locator. Routing is go_router.
-Persistence is Drift over SQLite. Scheduling uses the `fsrs` package, not a hand-written
-algorithm.
+Persistence is Drift over SQLite. Scheduling is a port of py-fsrs 6.3.2, verified against
+py-fsrs's own tests (decision 20), not the out-of-date `fsrs` package.
 
 ## Commands
 
