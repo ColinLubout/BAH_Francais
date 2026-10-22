@@ -81,14 +81,14 @@ the definitions are written for this app.
 
 ## Status
 
-**Draft, not yet checked.** A small first pack (decision 62 in `PROGRESS.md`):
-the present only, A1 grammar only (decision 65), with the everyday categories
-*Les essentiels* (10 nouns) and *Les verbes essentiels* (6 verbs), drafted by
-Claude Code for the owner to check (decision 57). Of their 72 sentences, 45 are
-from Tatoeba, 11 are the owner's own wordings, and 16 were drafted for the verb
-forms nothing else fits (decisions 61, 64 and 65). Every word, gender, form and
-sentence, every link from a sentence to a verb or noun, and every grammar level
-must be checked by a fluent French speaker before it ships.
+**Checked by the owner on 2026-10-22.** A small first pack (decision 62 in
+`PROGRESS.md`): the present only, A1 grammar only (decision 65), with the
+everyday categories *Les essentiels* (10 nouns) and *Les verbes essentiels* (6
+verbs), drafted by Claude Code (decision 57). Of their 72 sentences, 45 are from
+Tatoeba, 11 are the owner's own wordings, and 16 were drafted for the verb forms
+nothing else fits (decisions 61, 64 and 65). Every word, gender, form, sentence,
+link and grammar level was checked by the owner; anything added or changed is
+checked again before it ships.
 
 - The nouns have definitions and no images yet.
 - `rank` orders the words within the everyday set, most useful first. It is an

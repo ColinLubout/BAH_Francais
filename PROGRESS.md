@@ -71,6 +71,10 @@ until this is merged.
     the owner's own wordings, 16 drafted; two or more for each verb and person and
     each noun. The review page has a Grammar tab, and notes on the marked
     sentences say what changed.
+  - 2026-10-22: **the owner checked everything**: the 10 nouns, 6 verbs, 72
+    sentences and 64 grammar concepts are all marked right, each on its current
+    version. The grammar levels stand as drafted (*que* clauses A2, pronominal
+    verbs A1).
 - **Sample set** (`content/sample/`): 3 noun categories of 10 nouns, 5 verbs with
   all 24 forms, 151 sentences and 6 placeholder SVGs. Marked as samples; it never
   ships.
@@ -87,9 +91,6 @@ until this is merged.
 ### Left for the owner
 
 - Review and merge the `milestone-1-followups` PR, then the `milestone-2` PR.
-- Check the everyday content in `content/` (decisions 57, 62 and 65): the new nouns
-  (*chat*, *chien*, *voiture*) and verb (*finir*), the 72 sentences, and the
-  grammar concepts' levels in `grammar.json`.
 - Add the Codecov upload token as the GitHub Actions secret `CODECOV_TOKEN`, if not
   done yet.
 - Turn on branch protection for `main`, requiring the three CI jobs, if not done yet.
