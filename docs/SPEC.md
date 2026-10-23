@@ -1,6 +1,6 @@
 # BAH Français Specification
 
-*Specification for the BAH Français app. Last updated 22 October 2026, with decisions 1–80 from `PROGRESS.md` folded in.*
+*Specification for the BAH Français app. Last updated 22 October 2026, with decisions 1–82 from `PROGRESS.md` folded in.*
 
 This file is the specification and the source of truth. It is kept in the repo and changed only to fold in a decision the project owner has agreed, in the same pull request that records the decision in `PROGRESS.md` (see Build plan → How Claude Code should work).
 
@@ -542,7 +542,7 @@ One screen layout, with the prompt and answer area specific to each drill (see A
 
 Shown when the user taps × or a Review List session runs out.
 
-- Cards answered, % correct, duration. In a mixed session, the same three numbers per drill underneath. % correct counts every answer but Again as correct (see Data model → Session).
+- Cards answered, % correct, duration. In a mixed session, the same three numbers per drill underneath, a drill's duration being the time spent answering its cards. % correct counts every answer but Again as correct (see Data model → Session).
 - **Terminer** → Accueil. **Continuer** → back into the same session.
 - If no card was answered, there is no summary and no Session row is saved; × goes straight to Accueil.
 
@@ -716,10 +716,11 @@ Every drill has a **Je le connais** button so a learner can drop words they alre
 ### Gender drill
 
 - **Prompt:** the noun without an article (e.g. *table*), always shown. If the item has images and "Afficher l'image" is on (default on), one of its images is also shown, chosen at random on each review. There is no image-only mode: the drill tests gender, not recall of the word.
-- **Answer:** large symbol tiles at the top of the card, as in the layouts: ♀ féminin, ♂ masculin, and ♀♂ les deux. All three are always shown, so the layout never hints at the answer. An unselected symbol is blue on the background; the chosen one sits on a filled teal tile with the symbol in yellow. Each tile has a screen-reader label (*féminin*, *masculin*, *les deux*).
+- **Layout:** the noun, with its gloss and image, in the middle of the screen; the tiles near the bottom, just above *Trop facile*.
+- **Answer:** three large symbol tiles, in this order: ♀ féminin, ♀♂ les deux, ♂ masculin. All three are always shown, so the layout never hints at the answer. Each is filled with a lighter colour than the screen, its symbol in the screen's background colour: light blue #8FB0DB with navy symbols on the dark theme, the brand blue #5172A1 with white symbols on the light one. Each tile has a screen-reader label (*féminin*, *les deux*, *masculin*).
 - **"Les deux"** is only for nouns whose gender follows the person with no change of meaning (un/une élève, un/une enfant). Nouns whose meaning changes with gender (le livre / la livre) are two separate items. Each shows a short French gloss so the prompt is unambiguous.
-- **Trop facile** (on a new word) is a text button at the bottom of the card, in the thumb zone: the drill has no answer buttons, since tapping a tile answers.
-- **After an answer:** the Shared drill behaviour applies — a correct answer moves straight on. After a wrong one, nothing above moves: the tiles (the chosen one still filled), the word and the image stay put, and under them come the result with its icon, the word with *un/une* (never *l’*, which hides the gender), an example sentence with the noun in bold, and an optional "Astuce" line if the content has an ending rule (e.g. *-tion → féminin*). *Faute de frappe* and *Suivant* sit at the bottom.
+- **Trop facile** (on a new word) is a text button at the bottom of the card, in the thumb zone, under the tiles: the drill has no answer buttons, since tapping a tile answers.
+- **After an answer:** the Shared drill behaviour applies — a correct answer moves straight on. After a wrong one, nothing moves: the word and its image stay where they are, and under them come the result with its icon, the word with *un/une* (never *l’*, which hides the gender), an example sentence with the noun in bold, and an optional "Astuce" line if the content has an ending rule (e.g. *-tion → féminin*). The tile tapped turns teal with a navy symbol and gets a ring, so colour isn't the only sign of it. *Faute de frappe* and *Suivant* take *Trop facile*'s place, under the tiles.
 
 ### Vocabulary drill
 
@@ -831,8 +832,8 @@ Three brand colours, from the Layouts document: teal for actions, yellow for the
 | Colour | Hex | Role | Text on it |
 | --- | --- | --- | --- |
 | Turquoise | #6EC9C8 | primary: the main button (Continuer), the selected answer tile, filled indicators | **Navy #14334C** (6.8:1). Never white, which fails at 1.9:1 |
-| Jaune | #FACD3F | the symbol or label inside a selected tile, and small highlights | navy (8.6:1); never yellow text on white (1.5:1) |
-| Bleu | #5172A1 | unselected answer symbols, secondary icons, links | white (4.9:1); as text it needs a light background |
+| Jaune | #FACD3F | small highlights | navy (8.6:1); never yellow text on white (1.5:1) |
+| Bleu | #5172A1 | the Genre tiles (light theme), secondary icons, links | white (4.9:1); as text it needs a light background |
 | Navy | #14334C | the dark theme's background, and text on teal or yellow | white text on it reads at 13:1 |
 
 - **Light theme:** plain white background, with no gradient anywhere, matching the dark theme's plain navy. Text is navy.
@@ -848,7 +849,7 @@ Three brand colours, from the Layouts document: teal for actions, yellow for the
 
 - **Contrast:** feedback colours measure 5.4:1 to 5.5:1 on white and 5.9:1 to 7.1:1 on the navy background, meeting WCAG AA. A widget test checks every text and background pair in both themes.
 - **Keeping feedback distinct:** the brand yellow is never used near the answer field, so it can't be confused with the orange *accent only* colour. No red or green outside answer feedback, so red always means a wrong answer.
-- **Never colour alone:** feedback always carries its cue from Activities (solid underline, dotted underline, ✗ icon, result word), and a selected answer tile is marked by its filled shape, not only by colour.
+- **Never colour alone:** feedback always carries its cue from Activities (solid underline, dotted underline, ✗ icon, result word), and a Genre tile tapped is marked by a ring, not only by its colour.
 
 ### Logo, icon and splash
 

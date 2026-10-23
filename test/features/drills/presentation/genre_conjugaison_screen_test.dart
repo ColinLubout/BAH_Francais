@@ -111,10 +111,73 @@ void main() {
       expect(find.byType(TextField), findsNothing);
       expect(find.text(Strings.drillSubmit), findsNothing);
       expect(find.text(Strings.drillIDontKnow), findsNothing);
-      // Tiles sit at the top, above the word.
+    });
+
+    testWidgets('the word in the middle, the tiles above Trop facile', (
+      tester,
+    ) async {
+      await screen.openDrill(
+        tester,
+        genderStore(),
+        from: Strings.homeDrillGender,
+      );
+      // The word's block in the middle of the space above the tiles.
+      final word = tester.getRect(find.text('table'));
+      final gloss = tester.getRect(find.text('gloss table'));
+      final space = tester.getRect(find.byType(CentredLine));
       expect(
-        tester.getRect(tile(Strings.drillGenderMasculine)).bottom,
-        lessThan(tester.getRect(find.text('table')).top),
+        (word.top + gloss.bottom) / 2,
+        moreOrLessEquals(space.center.dy, epsilon: 1),
+      );
+      // Then féminin, les deux, masculin, side by side, just above
+      // Trop facile.
+      final tiles = [
+        for (final label in [
+          Strings.drillGenderFeminine,
+          Strings.drillGenderBoth,
+          Strings.drillGenderMasculine,
+        ])
+          tester.getRect(tile(label)),
+      ];
+      expect(tiles[0].right, lessThan(tiles[1].left));
+      expect(tiles[1].right, lessThan(tiles[2].left));
+      expect(tiles[0].top, greaterThan(space.bottom - 1));
+      expect(
+        tester.getRect(find.text(Strings.drillTooEasy)).top,
+        greaterThan(tiles[0].bottom),
+      );
+    });
+
+    testWidgets('tiles: lighter than the screen, symbols its colour', (
+      tester,
+    ) async {
+      await screen.openDrill(
+        tester,
+        genderStore(),
+        from: Strings.homeDrillGender,
+      );
+      final colors = Theme.of(tester.element(find.text('table'))).colorScheme;
+      Material fill(String label) => tester.widget<Material>(
+        find.descendant(of: tile(label), matching: find.byType(Material)).first,
+      );
+      Icon symbol(String label) => tester.widget<Icon>(
+        find.descendant(of: tile(label), matching: find.byType(Icon)).first,
+      );
+      expect(fill(Strings.drillGenderFeminine).color, colors.secondary);
+      expect(symbol(Strings.drillGenderFeminine).color, colors.surface);
+
+      // The one tapped turns teal, with a navy symbol and a ring.
+      await tester.tap(tile(Strings.drillGenderMasculine));
+      await tester.pumpAndSettle();
+      final chosen = fill(Strings.drillGenderMasculine);
+      expect(chosen.color, colors.primary);
+      expect(symbol(Strings.drillGenderMasculine).color, colors.onPrimary);
+      final shape = chosen.shape! as RoundedRectangleBorder;
+      expect(shape.side.width, greaterThan(0));
+      expect(
+        (fill(Strings.drillGenderFeminine).shape! as RoundedRectangleBorder)
+            .side,
+        BorderSide.none,
       );
     });
 

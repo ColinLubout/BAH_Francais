@@ -21,10 +21,8 @@ double textWidth(String text, TextStyle style, TextScaler scaler) {
 /// The box's line holds as many of the words around it as fit across the
 /// width, taken on whichever side is shorter so the box stays as near the
 /// middle as it can, and is centred; the rest wrap onto lines above and
-/// below. The box's line is as near the middle of the height as the header
-/// and the lines above allow. When everything is taller than the space, it
-/// scrolls.
-class BlankSentence extends StatefulWidget {
+/// below. The box's line is placed by [CentredLine].
+class BlankSentence extends StatelessWidget {
   const BlankSentence({
     required this.header,
     required this.before,
@@ -60,37 +58,16 @@ class BlankSentence extends StatefulWidget {
   /// keyboard closes when the correction shows.
   final bool holdLine;
 
-  @override
-  State<BlankSentence> createState() => _BlankSentenceState();
-}
-
-class _BlankSentenceState extends State<BlankSentence> {
-  static const _padding = 16.0;
-
   /// The gap between the box and a word that touches it.
   static const _touching = 2.0;
 
-  /// The height the box's line is centred in, kept while
-  /// [BlankSentence.holdLine].
-  double? _height;
-
   @override
   Widget build(BuildContext context) {
-    final BlankSentence(
-      :header,
-      :before,
-      :after,
-      :style,
-      :field,
-      :fieldWidth,
-      :footer,
-      :holdLine,
-    ) = widget;
     final scaler = MediaQuery.textScalerOf(context);
     double measure(String text) => textWidth(text, style, scaler);
     return LayoutBuilder(
       builder: (context, constraints) {
-        final width = constraints.maxWidth - 2 * _padding;
+        final width = constraints.maxWidth - 2 * CentredLine.padding;
         final box = math.min(fieldWidth, width);
         // A space between the box and the words beside it, unless they
         // touch, as after *l’* or before a full stop.
@@ -110,41 +87,95 @@ class _BlankSentenceState extends State<BlankSentence> {
             : Text(text, textAlign: TextAlign.center, style: style);
         Widget beside(String text) =>
             Text(text, style: style, maxLines: 1, softWrap: false);
-        return SingleChildScrollView(
-          padding: const EdgeInsets.all(_padding),
-          child: _CentredLineLayout(
-            height: switch (_height) {
-              final held? when holdLine => held,
-              _ => _height = constraints.maxHeight - 2 * _padding,
-            },
-            gap: _padding,
+        return CentredLine(
+          header: header,
+          above: lines(above),
+          line: Row(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.baseline,
+            textBaseline: TextBaseline.alphabetic,
             children: [
-              header,
-              lines(above),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.baseline,
-                textBaseline: TextBaseline.alphabetic,
-                children: [
-                  if (left.isNotEmpty) ...[
-                    beside(left),
-                    SizedBox(width: gapBefore),
-                  ],
-                  SizedBox(width: box, child: field),
-                  if (right.isNotEmpty) ...[
-                    SizedBox(width: gapAfter),
-                    beside(right),
-                  ],
-                ],
-              ),
-              lines(below),
-              footer ?? const SizedBox.shrink(),
+              if (left.isNotEmpty) ...[
+                beside(left),
+                SizedBox(width: gapBefore),
+              ],
+              SizedBox(width: box, child: field),
+              if (right.isNotEmpty) ...[
+                SizedBox(width: gapAfter),
+                beside(right),
+              ],
             ],
           ),
+          below: lines(below),
+          footer: footer,
+          holdLine: holdLine,
         );
       },
     );
   }
+}
+
+/// A [line] as near the middle of the space as a [header] and the lines
+/// [above] it allow, with the lines [below] it and a [footer] under it,
+/// which never moves the line; each centred across the width. When it is
+/// all taller than the space, it scrolls.
+///
+/// The Vocabulaire and Conjugaison box's line, and the Genre word (decision
+/// 81).
+class CentredLine extends StatefulWidget {
+  const CentredLine({
+    required this.line,
+    this.header,
+    this.above,
+    this.below,
+    this.footer,
+    this.holdLine = false,
+    super.key,
+  });
+
+  final Widget line;
+  final Widget? header;
+  final Widget? above;
+  final Widget? below;
+
+  /// Under the rest, without moving the line: the correction.
+  final Widget? footer;
+
+  /// Keeps the line where it is, though the space changes: the space under
+  /// it changes when the correction shows.
+  final bool holdLine;
+
+  /// Around it all, and under the header.
+  static const padding = 16.0;
+
+  @override
+  State<CentredLine> createState() => _CentredLineState();
+}
+
+class _CentredLineState extends State<CentredLine> {
+  /// The height the line is centred in, kept while [CentredLine.holdLine].
+  double? _height;
+
+  @override
+  Widget build(BuildContext context) => LayoutBuilder(
+    builder: (context, constraints) => SingleChildScrollView(
+      padding: const EdgeInsets.all(CentredLine.padding),
+      child: _CentredLineLayout(
+        height: switch (_height) {
+          final held? when widget.holdLine => held,
+          _ => _height = constraints.maxHeight - 2 * CentredLine.padding,
+        },
+        gap: CentredLine.padding,
+        children: [
+          widget.header ?? const SizedBox.shrink(),
+          widget.above ?? const SizedBox.shrink(),
+          widget.line,
+          widget.below ?? const SizedBox.shrink(),
+          widget.footer ?? const SizedBox.shrink(),
+        ],
+      ),
+    ),
+  );
 }
 
 /// The words of [text]. The punctuation French puts a space before (*?*,
